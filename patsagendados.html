@@ -1,0 +1,748 @@
+<style type="text/css">
+    @media print,
+    screen {
+        .hidden-print {
+            display: none !important;
+        }
+    }
+
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 1;
+        padding-top: 100px;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        overflow-y: initial;
+        background-color: rgb(117, 249, 77);
+        background-color: rgba(0, 0, 0, 0.6);
+    }
+
+    .modal_content {
+        background-color: #fefefe;
+        margin: auto;
+        padding: 10px;
+        border: 1px solid #888;
+        width: 660px;
+        height: 300px;
+        overflow-y: auto;
+        border-radius: 10px;
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    }
+
+    .btn_verde {
+        background: #47cf73;
+        border: 1px solid #47cf73;
+        border-radius: 6px;
+        box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
+        box-sizing: border-box;
+        color: #FFFFFF;
+        cursor: pointer;
+        display: inline-block;
+        font-family: nunito, roboto, proxima-nova, "proxima nova", sans-serif;
+        font-size: 30px;
+        font-weight: 800;
+        line-height: 16px;
+        min-height: 40px;
+        outline: 0;
+        padding: 22px 24px;
+        text-align: center;
+        text-rendering: geometricprecision;
+        text-transform: none;
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+        vertical-align: middle;
+    }
+
+    .btn_verde:hover {
+        background-color: initial;
+        background-position: 0 0;
+        color: #47cf73;
+    }
+
+    .btn_verde1 {
+        background: #47cf73;
+        border: 1px solid #47cf73;
+        border-radius: 6px;
+        box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
+        box-sizing: border-box;
+        color: #FFFFFF;
+        cursor: pointer;
+        display: inline-block;
+        font-family: nunito, roboto, proxima-nova, "proxima nova", sans-serif;
+        font-size: 40px;
+        font-weight: 800;
+        line-height: 16px;
+        min-height: 40px;
+        outline: 0;
+        padding: 12px 14px;
+        text-align: center;
+        text-rendering: geometricprecision;
+        text-transform: none;
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+        vertical-align: middle;
+    }
+
+    .btn_verde1:hover {
+        background-color: initial;
+        background-position: 0 0;
+        color: #47cf73;
+    }
+
+    .btn_azul {
+        background: #453cc5;
+        border: 1px solid #453cc5;
+        border-radius: 6px;
+        box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
+        box-sizing: border-box;
+        color: #FFFFFF;
+        cursor: pointer;
+        display: inline-block;
+        font-family: nunito, roboto, proxima-nova, "proxima nova", sans-serif;
+        font-size: 30px;
+        font-weight: 800;
+        line-height: 16px;
+        min-height: 40px;
+        outline: 0;
+        padding: 12px 14px;
+        text-align: center;
+        text-rendering: geometricprecision;
+        text-transform: none;
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+        vertical-align: middle;
+    }
+
+    .btn_azul:hover {
+        background-color: initial;
+        background-position: 0 0;
+        color: #453cc5;
+    }
+
+
+    .btn_vermelho {
+        background: #ff3c41;
+        border: 1px solid #ff3c41;
+        border-radius: 6px;
+        box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
+        box-sizing: border-box;
+        color: #FFFFFF;
+        cursor: pointer;
+        display: inline-block;
+        font-family: nunito, roboto, proxima-nova, "proxima nova", sans-serif;
+        font-size: 30px;
+        font-weight: 800;
+        line-height: 16px;
+        min-height: 40px;
+        outline: 0;
+        padding: 22px 24px;
+        text-align: center;
+        text-rendering: geometricprecision;
+        text-transform: none;
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+        vertical-align: middle;
+    }
+
+    .btn_vermelho:hover {
+        background-color: initial;
+        background-position: 0 0;
+        color: #ff3c41;
+    }
+
+    .btn_gray {
+        background: #bebdbd;
+        border: 1px solid #bebdbd;
+        border-radius: 6px;
+        box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
+        box-sizing: border-box;
+        color: #FFFFFF;
+        cursor: pointer;
+        display: inline-block;
+        font-family: nunito, roboto, proxima-nova, "proxima nova", sans-serif;
+        font-size: 30px;
+        font-weight: 800;
+        line-height: 16px;
+        min-height: 40px;
+        outline: 0;
+        padding: 12px 14px;
+        text-align: center;
+        text-rendering: geometricprecision;
+        text-transform: none;
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+        vertical-align: middle;
+        width: 7.5rem;
+
+    }
+
+    .btn_gray:hover {
+        background-color: initial;
+        background-position: 0 0;
+        color: #bebdbd;
+    }
+
+    .box {
+
+        background: #eeeff3;
+        border-radius: 10px;
+        box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+        margin-bottom: 2rem;
+
+    }
+
+    .input {
+        width: 100%;
+        height: 3rem;
+        border-radius: 8px;
+        box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+        border: none;
+        outline-color: #4086d1;
+        margin-bottom: 2rem;
+    }
+
+    .caixa {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 5rem;
+    }
+
+    h3 {
+        font-weight: bold;
+        font-size: 2.5rem;
+        margin-top: 2rem;
+        margin-bottom: 2rem;
+        text-align: left;
+
+    }
+
+    .tabela {
+        margin: 1rem;
+    }
+
+    .btns {
+        margin-top: 2rem;
+        display: flex;
+    }
+
+    #inp_qtt {
+        border-radius: 8px;
+    }
+
+
+    .btn {
+        display: flex;
+
+    }
+
+    .accordion {
+        background-color: #eee;
+        color: #444;
+        cursor: pointer;
+        padding: 18px;
+        width: 100%;
+        text-align: left;
+        border: none;
+        outline: none;
+        transition: 0.4s;
+        border-radius: 8px;
+        margin-bottom: 1.5rem;
+    }
+
+    .active,
+    .accordion:hover {
+        background-color: #ccc;
+    }
+
+    /* Style the accordion panel. Note: hidden by default */
+    .panel {
+        padding: 0 18px;
+        background-color: white;
+        display: none;
+        overflow: hidden;
+    }
+</style>
+<div class="main">
+    <div style="display: flex; align-items: baseline;">
+        <h3>&nbsp;PATS Agendados</h3>
+
+        <div id="divSearching" style="display: none;">
+            <div class="alert alert-dark" role="alert"><i class="fa fa-spinner fa-spin"></i>&nbsp;A procurar
+                resultados...</div>
+        </div>
+    </div>
+    <input class="input" id="filterInput" onkeyup="filterTable()" placeholder="Cliente" type="text" />
+    <div style="align-items: center; display: flex; justify-content: space-between; margin-top: 1rem;"><select
+            class="input" id="dropColors" onchange="filterTableColors()" style="width:45%">
+            <option style="background-color: #FFFFFF;" value="#FFFFFF">Todos</option>
+            <option style="background-color: #67cfef;" value="#67cfef">Hoje</option>
+            <option style="background-color: #f9f183;" value="#f9f183">Amanh&atilde;</option>
+            <option style="background-color: #f9c59f;" value="#f9c59f">2 a 5 dias</option>
+            <option style="background-color: #fe8484;" value="#fe8484">Ultrapassado</option>
+            <option style="background-color: #78ea7f;" value="#78ea7f">No Prazo</option>
+        </select> <input class="input" id="inputDate" onchange="filterTableDate()" style="width:45%" type="date" />
+    </div>
+
+    <div id="pats">&nbsp;</div>
+</div>
+<script>
+    window.onload = function onLoadFunction() {
+        $("#OptionsRecordDropDown").hide();
+        $(".headerZone").hide();
+        $(".navbar").hide();
+        var elements = document.querySelectorAll('.row.hidden-print');
+        for (var i = 0; i < elements.length; i++) {
+            elements[i].style.display = 'none';
+        }
+
+        getDados()
+    }
+
+
+
+
+    function getDados() {
+        var params = {};
+        document.getElementById("divSearching").style.display = "block"
+        //var varMyQuery = "select *,cast(cast(round(qttprod*conversao,0) as int) as varchar(15)) as tabuasproduzidas from (Select biof.ref,biof.bistamp,biof.qtt,cast(cast(isnull((select sum(qtt) from bi where bi.obistamp=biof.bistamp and bi.ndos=13 and producao=1),0) as int) as varchar(15)) as qttprod, biof.obrano,st.conversao,biof.nome,biof.no,biof.design,varsrolaria.valor,isnull(u_mserrada.qtt,0) as fator, varsnome.valor as linha,cast(cast(round(biof.qtt*st.conversao,0) as int) as varchar(15)) as tabuasnecessarias from bi biof inner join u_liglinhaof on biof.obrano=u_liglinhaof.obrano and biof.ndos=7 left join st on st.ref=biof.ref inner join u_vars varsnome on varsnome.id=u_liglinhaof.idlinha inner join u_vars varsrolaria on left(varsrolaria.var,7)= left(varsnome.var,7) and varsrolaria.var like 'linha%RL' left join u_mserrada on u_mserrada.ref=varsrolaria.valor and u_mserrada.ststamp=st.ststamp) as t"
+        var varMyQuery = ` select  color, nome , cast(nopat as char) as nopat,  dt_marcacao as marcacao , convert(char,ldata,104) as dataLimite, quem_pediu , tlf_quempediu ,  Lugar_furo as lugar1, Freguesia_furo as lugar2 , Concelho_furo as lugar3, u_titulo , tecnico , u_durtrab , u_urgencia ,  left(cast(lat_furo as char),9) as lat, left(cast(long_furo as char),9) as long       
+	
+	from 
+	(
+		select 
+		pa.pdata,
+                  pa.ldata,
+                  pa.u_titulo,
+		datediff(day, pa.pdata, getdate())  as diaspat, 
+		pa.nopat, 
+		isnull(furos.U_NQDRELE, '') as n_furo, 
+		isnull(furos.Lugar, '') as Lugar_furo, 
+		isnull(furos.Freguesia, '') as Freguesia_furo, 
+		isnull(furos.Concelho, '') as Concelho_furo, 
+		isnull(furos.Latitude, 0.000000000000) as Lat_furo, 
+		isnull(furos.Longitude, 0.000000000000) as Long_furo, 
+		isnull(furos.Profundidade, '') as Profundidade, 
+		
+		pa.pquem as quem_pediu, 
+		pa.u_quemtlf as tlf_quempediu, 
+                pa.u_urgencia, 
+		
+		pa.no, 
+		pa.estab, 
+		case when pa.no = 3165 then 'FURAGUA - ' + pa.u_nmclfura else pa.nome end as nome,
+		pa.u_nmclfura as cli_furagua, 
+		
+		pa.agno as n_entidade, 
+		pa.agnome as entidade, 
+		pa.telefone, 
+		
+		cast (cast (isnull(mh.data,'19000101') as date) as varchar)+' '+isnull(mh.hora,'00:00') as dt_marcacao, 
+		isnull(mh.hora, '') as hini_marcacao, 
+		isnull(mh.u_avisocli, cast(0 as bit)) as avisocli, 
+		isnull(mh.mhstamp, '') as mhstamp,
+                isnull(mh.u_avisocli, cast(0 as bit)) as u_avisocli,
+		isnull(mh.u_ajudan1, cast(0 as bit)) as u_ajudan1,
+		isnull(mh.u_ajudan2, cast(0 as bit)) as u_ajudan2,
+		isnull(mh.u_ajudan3, cast(0 as bit)) as u_ajudan3,
+		isnull(mh.u_equip1, '') as u_equip1,
+		isnull(mh.u_equip2, '') as u_equip2,
+		isnull(mh.u_equip3, '') as u_equip3,
+		isnull(mh.u_viatura1, '') as u_viatura1,
+		isnull(mh.u_viatura2, '') as u_viatura2,
+		isnull(mh.u_viatura3, '') as u_viatura3,
+		
+		isnull(ag.morada, '') as morada,  
+		isnull(ag.local, '') as local, 
+		isnull(ag.codpost, '') as codpost, 
+		
+		pa.morada as morada_cli, 
+		pa.local as local_cli, 
+		pa.codpost as codpost_cli,  
+
+		pa.marca, 
+		pa.maquina as modelo, 
+		pa.serie, 
+		pa.mastamp, 
+		--pa.resumo, 
+		cast(pa.problema as char(200)) as problema, 
+		cast(pa.solucao as char(200)) as trab_efetuar, 
+		pa.u_durtrab, 
+		pa.pquem, 
+		pa.status, 
+		pa.tipo as tipoequip, 
+		pa.ptipo, 
+		
+		isnull(mh.tecnnm, '') as tecnico, 
+		
+		/*****
+		cast(
+			isnull((
+				select 
+				replace(
+					replace(
+							(
+							select U_MHTEC.TECNNM 
+							from U_MHTEC 
+							where u_mhtec.mhstamp=mh.mhstamp
+							FOR XML PATH('') 
+							), '<TECNNM>', ''), '</TECNNM>','; ')
+			), '')
+		as char(200)) as tecn_adic, 
+		******/
+		
+		cast('' as char(150)) as tecn_adic, 
+		
+		(case when datediff(day, getdate(), isnull(mh.data, cast('19000101' as date))) = 0 
+		/** data de Hoje - azul */ 
+		then 16776960        
+		else	
+
+			(case when datediff(day, getdate(), isnull(mh.data, cast('19000101' as date))) = 1 
+			/** data de amanha - amarelo */ 
+			then 65535        
+			else
+		
+				(case when datediff(day, getdate(), isnull(mh.data, cast('19000101' as date))) between 2 and 5 
+				/** Faltam 2 a 5 dias para data agendamento - Laranja */ 
+				then 5483007 
+				else 
+					(case when isnull(mh.data, cast('19000101' as date)) < getdate()  
+					/** Data Agendamento ultrapassada - Vermelho */ 
+					then 8421631 
+					/** verde */ 
+					else 6215524 
+					end)
+				end)
+			end)
+		end) as color, 
+		
+		pa.pastamp, 
+		
+		emp.empnome, 
+		emp.empmorada, 
+		emp.emplocal, 
+		emp.empcodpost, 
+		cast(emp.emptelefones as char(200)) as emptelefones  
+		
+		from pa left join mh on pa.nopat=mh.nopat 
+		left join ag on pa.agno=ag.no 
+		
+		left join 
+		/*** Furos ***/
+		(
+			select bo.U_NQDRELE, 
+			bo3.U_LUGAR as Lugar, 
+			bo3.U_FREGUE as Freguesia, 
+			bo3.U_CONCE as Concelho, 
+			bo3.u_lat as Latitude, 
+			bo3.u_lon as Longitude, 
+			bo3.u_pfinal as Profundidade, 
+			bo.bostamp 
+			from bo inner join bo3 on bo.bostamp=bo3.bo3stamp 
+			where 
+			/** Sondalis Furo(61) **/
+			bo.ndos=61 
+			
+			union all
+			
+			select bo.U_NQDRELE, 
+			bo3.U_LUGAR as Lugar, 
+			bo3.U_FREGUE as Freguesia, 
+			bo3.U_CONCE as Concelho, 
+			bo3.u_lat as Latitude, 
+			bo3.u_lon as Longitude, 
+			bo3.u_pfinal as Profundidade, 
+			bo.bostamp 
+			from [furagua].dbo.bo inner join [furagua].dbo.bo3 on bo.bostamp=bo3.bo3stamp 
+			where 
+			/** Furagua Furo(54) **/
+			bo.ndos=54 
+			
+		) as furos on pa.U_bostpfur=furos.bostamp 
+		
+		left join 
+			
+		/* Dados da empresa */ 
+		(
+			select 
+			e1.NOMECOMP as empnome, 
+			e1.morada as empmorada, 
+			e1.local as emplocal, 
+			e1.codpost as empcodpost, 
+			'Telef.: '+rtrim(e1.telefone)+'   |   Email: '+rtrim(e1.email)+'   |   '+rtrim(e1.url) as emptelefones
+			from e1 where e1.estab=0
+		) as emp on 1=1 
+		
+		
+		where 
+                 
+
+			
+	    pa.status='Agendado'
+        and mh.u_fconta=0
+	) as dados 
+	order by 
+        isnull(dados.dt_marcacao, cast('19000101' as date)), isnull(dados.hini_marcacao, '')`
+
+
+
+
+
+
+
+        params.id = 'selecttojson'
+        params.select = varMyQuery
+
+        $.ajax({
+            type: 'POST',
+            url: '../api/code/run',
+            async: true,
+            data: JSON.stringify(params),
+            contentType: 'application/json',
+
+            success: function (result, textStatus, jqXHR) {
+
+                var varjson = JSON.parse(result);
+                console.log(varjson);
+
+                var arDados = varjson.Dados
+
+                document.getElementById("pats").innerHTML = ''
+
+                for (var i = 0; i < arDados.length; ++i) {
+
+                    var dataLimite = $.trim(arDados[i].dataLimite)
+                    var lat = $.trim(arDados[i].lat)
+                    var long = $.trim(arDados[i].long)
+                    var lugar1 = $.trim(arDados[i].lugar1)
+                    var lugar2 = $.trim(arDados[i].lugar2)
+                    var lugar3 = $.trim(arDados[i].lugar3)
+                    var marcacao = $.trim(arDados[i].marcacao)
+                    var nome = $.trim(arDados[i].nome)
+                    var nopat = $.trim(arDados[i].nopat)
+                    var quem_pediu = $.trim(arDados[i].quem_pediu)
+                    var tecnico = $.trim(arDados[i].tecnico)
+                    var tlf_quempediu = $.trim(arDados[i].tlf_quempediu)
+                    var u_durtrab = $.trim(arDados[i].u_durtrab)
+                    var u_titulo = $.trim(arDados[i].u_titulo)
+                    var u_urgencia = $.trim(arDados[i].u_urgencia)
+                    var color = $.trim(arDados[i].color)
+                    switch (color) {
+                        case '16776960':
+                            color = '#67cfef';
+                            break;
+                        case '65535 ':
+                            color = '#f9f183';
+                            break;
+                        case '5483007':
+                            color = '#f9c59f';
+                            break;
+                        case '8421631':
+                            color = '#fe8484';
+                            break;
+                        case '6215524':
+                            color = '#78ea7f';
+                            break;
+
+                        default:
+                            break;
+                    }
+
+                    var pat = `
+                    <button type="button" style="background-color:`+ color + `;" class="accordion"><label>` + nome + `</label> <br /> <span>` + marcacao + `</span></button>
+                    <div class="panel">
+                        <div class="box" >
+                            <div style="display: flex; flex-direction: column;">
+                                
+                                <div style="display: flex; justify-content: space-between; align-items: flex-end;">
+                                    <div style="display: flex; flex-direction: column;margin-right: 1rem;"><label>NºPat:</label> <input
+                                            class="input" disabled="disabled" id="lb_pat" style=" display:inline;" type="text" value="`+ nopat + `" />
+                                    </div>
+
+                                    <div style="display: flex; flex-direction: column;margin-right: 1rem;"><label>Data Marc:</label> <input
+                                            class="input" disabled="disabled" id="lb_posto" style=" display:inline;" type="text" value="`+ marcacao + `" />
+                                    </div>
+
+                                    <div style="display: flex;  flex-direction: column;"><label>Data Limite:</label> <input class="input"
+                                            disabled="disabled" id="lb_dataLimite" style=" display:inline;" type="text" value="`+ dataLimite + `" /></div>
+                                </div>
+
+                                <div style="display: flex; justify-content: space-between;">
+                                    <div style="display: flex; flex-direction: column;margin-right: 1rem;"><label>Contacto:</label> <input
+                                            class="input" disabled="disabled" id="lb_contacto" style=" display:inline;" type="text"
+                                            value="`+ tlf_quempediu + `" /></div>
+
+                                    <div style="display: flex; flex-direction: column;"><label>Quem Pediu:</label> <input class="input"
+                                            disabled="disabled" id="lb_pediu" style=" display:inline;" type="text" value="`+ quem_pediu + `" /></div>
+                                </div>
+
+                                <div style="display: flex; flex-direction: column;"><label>Sitio:</label> <input class="input"
+                                        disabled="disabled" id="lb_sitio" style=" display:inline;" type="text" value="`+ lugar1 + ` | ` + lugar2 + ` | ` + lugar3 + `" /></div>
+
+                                <div style="display: flex; flex-direction: column;"><label>Titulo:</label> <input class="input"
+                                        disabled="disabled" id="lb_titulo" style=" display:inline;" type="text" value="`+ u_titulo + `" /></div>
+
+                                <div style="display: flex; justify-content: space-between;">
+                                    <div style="display: flex; flex-direction: column;margin-right: 1rem;"><label>Tecnico:</label> <input
+                                            class="input" disabled="disabled" id="lb_tec" style=" display:inline;" type="text" value="`+ tecnico + `" />
+                                    </div>
+
+                                    <div style="display: flex; flex-direction: column;margin-right: 1rem;"><label>Duracao:</label> <input
+                                            class="input" disabled="disabled" id="lb_duracao" style=" display:inline;" type="text"
+                                            value="`+ u_durtrab + `" /></div>
+
+                                    <div style="display: flex; flex-direction: column;"><label>Urgencia:</label> <input class="input"
+                                            disabled="disabled" id="lb_urg" style=" display:inline;" type="text" value="`+ u_urgencia + `" /></div>
+                                </div>
+
+                                <div style="display: flex; flex-direction: column;"><label>Coordenadas:</label>
+
+                                    <div style="display: flex; justify-content: space-between;">
+                                        <div style="display: flex; flex-direction: column;margin-right: 1rem;"><label>Lat:</label> <input
+                                                class="input" disabled="disabled" id="lb_lat" style=" display:inline;" type="text"
+                                                value="`+ lat + `" /></div>
+
+                                        <div style="display: flex; flex-direction: column;"><label>Long:</label> <input class="input"
+                                                disabled="disabled" id="lb_long" style=" display:inline;" type="text" value="`+ long + `" /></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>`
+
+                    document.getElementById("pats").innerHTML += pat
+
+
+                }
+
+                eventListenerAccordions()
+                document.getElementById("divSearching").style.display = "none"
+
+            }
+
+
+
+
+        })
+
+    }
+
+    function filterTable() {
+
+        var input, filter, table, i, txtValue;
+        input = document.querySelector('#filterInput').value
+        filter = input.toUpperCase();
+        table = document.getElementById("pats").querySelectorAll("button")
+        for (i = 0; i < table.length; i++) {
+            button = table[i];
+            if (button) {
+                txtValue = button.children[0].innerText || button.children[0].textContent
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    button.style.display = "";
+                } else {
+                    button.style.display = "none";
+                }
+            }
+        }
+    }
+
+    function filterTableDate() {
+
+        var input, filter, table, i, txtValue;
+        input = document.getElementById("inputDate").value
+        filter = input.toUpperCase();
+        table = document.getElementById("pats").querySelectorAll("button")
+        for (i = 0; i < table.length; i++) {
+            button = table[i];
+            if (button) {
+                txtValue = button.children[2].innerText || button.children[2].textContent
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    button.style.display = "";
+                } else {
+                    button.style.display = "none";
+                }
+            }
+        }
+    }
+
+
+    function filterTableColors() {
+        var input, filter, table, i, txtValue;
+        input = document.getElementById("dropColors").value
+        table = document.getElementById("pats").querySelectorAll("button")
+        if (input != "#FFFFFF") {
+            filter = toRGB(input)
+            for (i = 0; i < table.length; i++) {
+                button = table[i];
+                if (button) {
+                    txtValue = button.style.backgroundColor
+                    if (txtValue.indexOf(filter) > -1) {
+                        button.style.display = "";
+                    } else {
+                        button.style.display = "none";
+                    }
+                }
+            }
+        } else {
+            for (i = 0; i < table.length; i++) {
+                button = table[i];
+                button.style.display = "";
+            }
+        }
+    }
+    const toRGB = (color) => {
+        const { style } = new Option();
+        style.color = color;
+        return style.color;
+    }
+
+
+
+    function eventListenerAccordions() {
+        var acc = document.getElementsByClassName("accordion");
+        var i;
+
+        for (i = 0; i < acc.length; i++) {
+            acc[i].addEventListener("click", function () {
+                /* Toggle between adding and removing the "active" class,
+                to highlight the button that controls the panel */
+                this.classList.toggle("active");
+
+                /* Toggle between hiding and showing the active panel */
+                var panel = this.nextElementSibling;
+                if (panel.style.display === "block") {
+                    panel.style.display = "none";
+                } else {
+                    panel.style.display = "block";
+                }
+            });
+        }
+    }
+
+
+    function apagarConjuntoOF(linhaid) {
+        var link = "../programs/gensel.aspx?cscript=deleteOfs&ref=" + linhaid
+        // $.ajax({
+        //     type: "GET",
+        //     url: link,
+        //     data: JSON.stringify({}),
+        //     async: false,
+        //     cache: false,
+        //     contentType: 'application/json'
+        // })
+        // .done(function (result, textStatus, jqXHR) {
+        //     getDados()
+        // })
+    }
+
+</script>

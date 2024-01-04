@@ -1,0 +1,5085 @@
+<link href="https://cdn.jsdelivr.net/gh/bbbootstrap/libraries@main/choices.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/gh/bbbootstrap/libraries@main/choices.min.js"></script>
+<script src="https://code.highcharts.com/gantt/highcharts-gantt.js"></script>
+<script src="https://code.highcharts.com/gantt/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/gantt/modules/accessibility.js"></script>
+<script src="https://code.highcharts.com/modules/stock.js"></script>
+<script src="https://blacklabel.github.io/custom_events/js/customEvents.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/tom-select@2.2.2/dist/css/tom-select.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/tom-select@2.2.2/dist/js/tom-select.complete.min.js"></script>
+<style type="text/css">
+	#main-container {
+		padding-top: 10px;
+	}
+
+	.inline {
+		display: inline;
+	}
+
+	.show {
+		display: block;
+	}
+
+	.hide {
+		display: none;
+	}
+
+	table {
+		font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+			Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
+			sans-serif;
+		border-collapse: collapse;
+		width: 100%;
+	}
+
+	thead tr th {
+		background-color: #fafafa;
+	}
+
+	thead tr th:first-child {
+		border-left: 1px solid #dddddd;
+	}
+
+	thead tr th:last-child {
+		border-right: 1px solid #dddddd;
+	}
+
+	thead tr:first-child th {
+		border-top: 1px solid #dddddd;
+		padding-top: 8px;
+		cursor: pointer;
+	}
+
+	thead tr:first-child th div {
+		display: flex;
+		flex-wrap: nowrap;
+		justify-content: space-between;
+	}
+
+	thead tr:last-child th {
+		border-bottom: 1px solid #dddddd;
+	}
+
+	thead tr,
+	thead th {
+		text-align: left;
+		padding-left: 8px;
+		padding-right: 8px;
+		color: #757575;
+		font-weight: normal;
+	}
+
+	tbody tr,
+	tbody td {
+		text-align: left;
+		font-weight: normal;
+
+		border: 1px solid #dddddd;
+	}
+
+	tbody tr:hover {
+		background-color: #cfd8dc55;
+	}
+
+	.column-filter,
+	.column-vars-filter {
+		/* width: 100%;
+			background-color: #fafafa;
+			border: 0px solid #cccccc;
+			border-bottom: 1px solid #cccccc;
+			margin-bottom: 12px;
+			font-weight: normal;
+			padding: 5px;
+			color: #999999; */
+		width: 100%;
+		height: 5rem;
+		border-radius: 10px;
+		box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+		border: none;
+		outline-color: #4086d1
+	}
+
+	.column-filter:focus,
+	.column-filter-date:focus,
+	.column-vars-filter:focus,
+	.column-vars-filter-date:focus {
+		outline: none;
+	}
+
+	.column-filterObras,
+	.column-vars-filterObras {
+		/* width: 100%;
+			background-color: #fafafa;
+			border: 0px solid #cccccc;
+			border-bottom: 1px solid #cccccc;
+			margin-bottom: 12px;
+			font-weight: normal;
+			padding: 5px;
+			color: #999999; */
+		width: 100%;
+		height: 5rem;
+		border-radius: 10px;
+		box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+		border: none;
+		outline-color: #4086d1
+	}
+
+	.column-filterObras:focus,
+	.column-filter-dateObras:focus,
+	.column-vars-filterObras:focus,
+	.column-vars-filter-dateObras:focus {
+		outline: none;
+	}
+
+	.column-filterPendentes,
+	.column-vars-filterPendentes {
+		/* width: 100%;
+			background-color: #fafafa;
+			border: 0px solid #cccccc;
+			border-bottom: 1px solid #cccccc;
+			margin-bottom: 12px;
+			font-weight: normal;
+			padding: 5px;
+			color: #999999; */
+		width: 100%;
+		height: 5rem;
+		border-radius: 10px;
+		box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+		border: none;
+		outline-color: #4086d1
+	}
+
+	.column-filterPendentes:focus,
+	.column-filter-datePendentes:focus,
+	.column-vars-filterPendentes:focus,
+	.column-vars-filter-datePendentes:focus {
+		outline: none;
+	}
+
+	.input-date {
+		/* width: 100%;
+			position: relative;
+			background-color: #fafafa;
+			border: 0px solid #cccccc;
+			border-bottom: 1px solid #cccccc;
+			margin-bottom: 12px;
+			font-weight: normal;
+			padding: 5px;
+			color: #999999; */
+		width: 100%;
+		height: 5rem;
+		border-radius: 10px;
+		box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+		border: none;
+		outline-color: #4086d1
+	}
+
+	.input {
+		width: 100%;
+		height: 5rem;
+		border-radius: 10px;
+		box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+		border: none;
+		outline-color: #4086d1
+	}
+
+	.column-filter-date {
+		/* background-color: #fafafa;
+			border: 0px solid #cccccc;
+			color: #999999;
+			padding: 0px; */
+		width: 100%;
+		height: 5rem;
+		border-radius: 10px;
+		box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+		border: none;
+		outline-color: #4086d1
+	}
+
+	.btn-no-background {
+		background-color: transparent;
+		color: #999999;
+		background-repeat: no-repeat;
+		border: none;
+		cursor: pointer;
+		overflow: hidden;
+		outline: none;
+		position: absolute;
+		right: 0;
+	}
+
+	.btn-no-background:hover {
+		color: #757575;
+	}
+
+	.dropdown-datafilter-content {
+		display: none;
+		position: absolute;
+		right: 0;
+		background-color: #ffffff;
+		box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.5);
+		z-index: 1;
+		padding: 15px;
+	}
+
+	.input-daterange {
+		display: flex;
+		flex-wrap: nowrap;
+		justify-content: space-between;
+	}
+
+	.dropdown-datafilter-content span {
+		background-color: transparent;
+		border: none;
+	}
+
+	.input-daterange label {
+		font-size: 12px;
+		color: #808080;
+	}
+
+	.input-daterange input {
+		font-size: 12px;
+		font-weight: 500;
+		border: 1px solid #a7b1c288;
+		color: #808080;
+		border-radius: 5px;
+		max-width: 115px;
+	}
+
+	.datefilters-buttongroup button {
+		display: block;
+		width: 100%;
+		border-radius: 5px;
+		background-color: none;
+		border: 1px solid #a7b1c288;
+		font-weight: 500;
+		padding: 5px;
+		color: #808080;
+		align-self: center;
+		margin-top: 10px;
+	}
+
+	.datefilters-buttongroup>div {
+		width: 100%;
+		display: flex;
+	}
+
+	.datefilters-buttongroup>div>button {
+		display: inline;
+	}
+
+	::placeholder {
+		/* Chrome, Firefox, Opera, Safari 10.1+ */
+		color: #cccccc;
+		opacity: 1;
+		/* Firefox */
+	}
+
+	:-ms-input-placeholder {
+		/* Internet Explorer 10-11 */
+		color: #cccccc;
+	}
+
+	::-ms-input-placeholder {
+		/* Microsoft Edge */
+		color: #cccccc;
+	}
+
+	.modal-input-container {
+		display: none;
+		position: fixed;
+		z-index: 1;
+		padding-top: 100px;
+		left: 0;
+		top: 0;
+		width: 100%;
+		height: 100%;
+		overflow: auto;
+		overflow-y: initial;
+		background-color: rgb(0, 0, 0);
+		background-color: rgba(0, 0, 0, 0.6);
+	}
+
+	.modal-content {
+		background-color: #fefefe;
+		margin: auto;
+		padding: 20px;
+		border: 1px solid #888;
+		width: 40%;
+		overflow-y: auto;
+	}
+
+	.btn_verde {
+		background: #47cf73;
+		border: 1px solid #47cf73;
+		border-radius: 6px;
+		box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
+		box-sizing: border-box;
+		color: #ffffff;
+		cursor: pointer;
+		display: inline-block;
+		font-family: nunito, roboto, proxima-nova, "proxima nova", sans-serif;
+		font-size: 16px;
+		font-weight: 800;
+		line-height: 16px;
+		min-height: 40px;
+		outline: 0;
+		padding: 12px 14px;
+		text-align: center;
+		text-rendering: geometricprecision;
+		text-transform: none;
+		user-select: none;
+		-webkit-user-select: none;
+		touch-action: manipulation;
+		vertical-align: middle;
+	}
+
+	.btn_verde:hover {
+		background-color: initial;
+		background-position: 0 0;
+		color: #47cf73;
+	}
+
+	.btn_azul {
+		background: #506ce8;
+		border: 1px solid #506ce8;
+		border-radius: 6px;
+		box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
+		box-sizing: border-box;
+		color: #ffffff;
+		cursor: pointer;
+		display: inline-block;
+		font-family: nunito, roboto, proxima-nova, "proxima nova", sans-serif;
+		font-size: 16px;
+		font-weight: 800;
+		line-height: 16px;
+		min-height: 40px;
+		outline: 0;
+		padding: 12px 14px;
+		text-align: center;
+		text-rendering: geometricprecision;
+		text-transform: none;
+		user-select: none;
+		-webkit-user-select: none;
+		touch-action: manipulation;
+		vertical-align: middle;
+	}
+
+	.btn_azul1 {
+		background: #506ce8;
+		border: 1px solid #506ce8;
+		border-radius: 6px;
+		box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
+		box-sizing: border-box;
+		color: #ffffff;
+		cursor: pointer;
+		display: inline-block;
+		font-family: nunito, roboto, proxima-nova, "proxima nova", sans-serif;
+		font-size: 16px;
+		font-weight: 800;
+		line-height: 16px;
+		min-height: 40px;
+		outline: 0;
+		padding: 12px 14px;
+		text-align: center;
+		text-rendering: geometricprecision;
+		text-transform: none;
+		user-select: none;
+		-webkit-user-select: none;
+		touch-action: manipulation;
+		vertical-align: middle;
+	}
+
+	.btn_azul:hover {
+		background-color: initial;
+		background-position: 0 0;
+		color: #506ce8;
+	}
+
+	.btn_vermelho {
+
+		background: #ff3c41;
+		border: 1px solid #ff3c41;
+		border-radius: 6px;
+		box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
+		box-sizing: border-box;
+		color: #FFFFFF;
+		cursor: pointer;
+		display: inline-block;
+		font-family: nunito, roboto, proxima-nova, "proxima nova", sans-serif;
+		font-size: 16px;
+		font-weight: 800;
+		line-height: 16px;
+		min-height: 40px;
+		outline: 0;
+		padding: 12px 14px;
+		text-align: center;
+		text-rendering: geometricprecision;
+		text-transform: none;
+		user-select: none;
+		-webkit-user-select: none;
+		touch-action: manipulation;
+		vertical-align: middle;
+
+
+	}
+
+	.btn_vermelho:hover {
+		background-color: initial;
+		background-position: 0 0;
+		color: #ff3c41;
+
+	}
+
+	.btn_azulesc {
+		background: #1e2d84;
+		border: 1px solid #1e2d84;
+		border-radius: 6px;
+		box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
+		box-sizing: border-box;
+		color: #ffffff;
+		cursor: pointer;
+		display: inline-block;
+		font-family: nunito, roboto, proxima-nova, "proxima nova", sans-serif;
+		font-size: 16px;
+		font-weight: 800;
+		line-height: 16px;
+		min-height: 40px;
+		outline: 0;
+		padding: 12px 14px;
+		text-align: center;
+		text-rendering: geometricprecision;
+		text-transform: none;
+		user-select: none;
+		-webkit-user-select: none;
+		touch-action: manipulation;
+		vertical-align: middle;
+	}
+
+	.btn_azulesc:hover {
+		background-color: initial;
+		background-position: 0 0;
+		color: #1e2d84;
+	}
+
+	tfoot tr td {
+		background-color: #fafafa;
+		border: 1px solid #dddddd;
+		padding: 5px;
+		text-align: right;
+	}
+
+	#footer-span,
+	#footer-span * {
+		font-size: 14px;
+		font-weight: normal !important;
+	}
+
+	#footer-span>* {
+		margin-left: 10px;
+		text-align: center;
+	}
+
+	#footer-span input[type="number"] {
+		width: 35px;
+		border: 1px solid #dddddd;
+		text-align: center;
+	}
+
+	input::-webkit-outer-spin-button,
+	input::-webkit-inner-spin-button {
+		-webkit-appearance: none;
+		margin: 0;
+	}
+
+	/* Firefox */
+	input[type="number"] {
+		-moz-appearance: textfield;
+		appearance: textfield;
+	}
+
+	#toolbar-right {
+		display: flex;
+		justify-content: flex-end;
+		padding-bottom: 20px;
+	}
+
+	#toolbar-right button {
+		border-radius: 5px;
+		font-weight: 500;
+		padding-top: 10px;
+		padding-bottom: 10px;
+	}
+
+	.modal-content1 {
+		height: 23rem;
+		background-color: #fefefe;
+		margin: auto;
+		padding: 20px;
+		border: 1px solid #888;
+		width: 50%;
+		overflow-y: auto;
+		border-radius: 10px;
+	}
+
+	.botoes {
+		display: flex;
+		justify-content: end;
+	}
+
+	.horas_botoes {
+		display: flex;
+		justify-content: space-between;
+	}
+
+	b {
+		color: #1e2d84;
+	}
+
+	select {
+		width: 100%;
+		height: 5rem;
+		border-radius: 8px;
+		box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+		border: none;
+		outline-color: #4086d1;
+		margin-bottom: 1rem;
+	}
+
+	.datas {
+		display: flex;
+		justify-content: space-around;
+	}
+
+	.data_final {
+		display: flex;
+		flex-direction: column;
+	}
+
+	.x {
+		font-size: 14px;
+		padding: 4px;
+	}
+
+	.chk {
+		margin-top: 2rem;
+	}
+
+	.footer {
+		display: flex;
+		align-items: center;
+		justify-content: flex-end;
+	}
+
+	.close {
+		cursor: pointer;
+	}
+
+	/* Style the tab */
+	.tab {
+		border-radius: 8px;
+		overflow: hidden;
+		border: 1px solid #ccc;
+		background-color: #f1f1f1;
+	}
+
+	/* Style the buttons inside the tab */
+	.tab button {
+		background-color: inherit;
+		float: left;
+		border: none;
+		outline: none;
+		cursor: pointer;
+		padding: 14px 16px;
+		transition: 0.3s;
+		font-size: 17px;
+	}
+
+	/* Change background color of buttons on hover */
+	.tab button:hover {
+		background-color: #ddd;
+	}
+
+	/* Create an active/current tablink class */
+	.tab button.active {
+		background-color: #ccc;
+	}
+
+	/* Style the tab content */
+	.tabcontent {
+		display: none;
+		border-radius: 8px;
+		padding: 6px 12px;
+		border: 1px solid #ccc;
+		border-top: none;
+	}
+
+	#container,
+	#button-container {
+		margin: 1em auto;
+	}
+
+	/* .choices__input.choices__input--cloned{
+		width: 100%!important;
+	} */
+	#ts-control {
+		font-size: 18px !important;
+	}
+
+	#ts-dropdown.single {
+		font-size: 18px !important;
+	}
+
+	.ts-control {
+		border: none;
+	}
+
+
+	.ts-dropdown,
+	.ts-control,
+	.ts-control input {
+		font-size: 16px;
+	}
+
+	.ts-dropdown-content {
+		max-height: 300px;
+	}
+
+	a:visited {
+		color: aliceblue;
+	}
+</style>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+<div style="margin: 2rem;">
+	<h1 style="text-align: center; font-weight: bold; margin-bottom: 3rem;">Monitor de Equipamentos</h1>
+
+	<div class="tab" style="margin-top: 3rem; display: flex; justify-content: space-between;align-items: center;">
+		<div><button class="tablinks" id="btn_obras" onclick="openTabs(event, 'Obras')"
+				type="button"><b>Obras</b></button><button class="tablinks" id="btn_equipamento"
+				onclick="openTabs(event, 'Equipamentos')" type="button"><b>Equipamento</b></button><button
+				class="tablinks" id="btn_agendamento" onclick="openTabs(event, 'Agendamento')"
+				type="button"><b>Agendamento</b></button><button class="tablinks" id="btn_pendentes"
+				onclick="openTabs(event, 'Pendentes')" type="button"><b>Pendentes</b></button></div>
+
+		<div><a class="btn_azul" href="../programs/gensel.aspx?eusql=1" style="margin-right: 1rem;" target="_blank"
+				title="Mapas de Faturação"><i aria-hidden="true" class="fa fa-print"></i>&nbsp;Mapas de
+				Fatura&ccedil;&atilde;o</a></div>
+	</div>
+
+	<div class="tabcontent" id="Obras">
+		<div style="margin-bottom: 2rem;margin-top: 1rem;"><button class="btn_verde" onclick="openModalCriarObras()"
+				type="button">&nbsp;Criar Obra</button></div>
+
+		<div id="grid-container">
+			<table data-currentpage="1" data-ordercolumn="codigo" data-ordertype="DESC" data-pagesize="10"
+				data-totalpages="1" data-totalrecords="10" id="DataGridObras">
+				<thead>
+					<tr id="tableHeaderObras">
+						<th data-column="codigo" data-order="desc" scope="col" style="font-size: 16px;"><b>C&Oacute;D.
+								DE OBRA &amp; DESCRI&Ccedil;&Atilde;O</b><span></span></th>
+						<th data-column="nome" data-order="desc" scope="col" style="font-size: 16px;">
+							<b>CLIENTE</b><span></span>
+						</th>
+						<th data-column="local" data-order="desc" scope="col" style="font-size: 16px;">
+							<b>LOCAL</b><span></span>
+						</th>
+						<th data-column="email" data-order="desc" scope="col" style="font-size: 16px;"><b>CONTACTO
+								1</b><span></span></th>
+						<th data-column="email2" data-order="desc" scope="col" style="font-size: 16px;"><b>CONTACTO
+								2</b><span></span></th>
+						<th>&nbsp;</th>
+						<th style="width: 10%;">&nbsp;</th>
+						<th>&nbsp;</th>
+					</tr>
+					<tr id="filtrosObras" onkeypress="handleEnterKey(event)">
+						<th><input class="column-filterObras" oninput="checkCharsObras(this)" placeholder="Filtrar..."
+								type="text" /></th>
+						<th>
+							<div id="filterClienteObras">&nbsp;</div>
+						</th>
+						<th><input class="column-filterObras" oninput="checkCharsObras(this)" placeholder="Filtrar..."
+								type="text" /></th>
+						<th><input class="column-filterObras" oninput="checkCharsObras(this)" placeholder="Filtrar..."
+								type="text" /></th>
+						<th><input class="column-filterObras" oninput="checkCharsObras(this)" placeholder="Filtrar..."
+								type="text" /></th>
+						<th>&nbsp;</th>
+						<th>&nbsp;</th>
+						<th>&nbsp;</th>
+					</tr>
+				</thead>
+				<tbody id="tableBodyObras">
+				</tbody>
+				<tfoot>
+					<tr>
+						<td colspan="100">
+							<div class="footer" onkeypress="handleEnterKey(event)" style="margin-top: 1rem;"><span
+									id="footer-span"><span><span><input id="pageSizeObras"
+												onchange="changePageSizeObras()" type="number" value="10" /> </span> por
+										p&aacute;gina </span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button
+										class="btn_azulesc" onclick="pageGoToObras('first')" type="button"><i
+											aria-hidden="true" class="fa fa-step-backward  fa-2xl"></i></button><button
+										class="btn_verde" onclick="pageGoToObras('previous')" type="button"><i
+											aria-hidden="true" class="fa fa-chevron-left"></i></button> <span> <span
+											id="currentPageObras">1</span> de <span id="totalPagesObras">1</span>
+										p&aacute;ginas </span><button class="btn_verde" onclick="pageGoToObras('next')"
+										type="button"><i aria-hidden="true"
+											class="fa fa-chevron-right"></i></button><button class="btn_azulesc"
+										onclick="pageGoToObras('last')" type="button"><i aria-hidden="true"
+											class="fa fa-step-forward fa-2xl"></i></button> </span></div>
+						</td>
+					</tr>
+				</tfoot>
+			</table>
+		</div>
+	</div>
+
+	<div class="tabcontent" id="Equipamentos">
+		<div style="margin-bottom: 2rem;margin-top: 1rem;"><a class="btn_verde" onclick="mostrarboxCreate()"
+				style="margin-right: 1.5rem;" type="button">&nbsp;Criar Equipamento </a><a class="btn_verde"
+				onclick="mostrarboxGestorPrecos()" type="button">&nbsp;Gestor de Pre&ccedil;os </a></div>
+
+		<div id="grid-container">
+			<table data-currentpage="1" data-ordercolumn="codigo" data-ordertype="ASC" data-pagesize="10"
+				data-totalpages="1" data-totalrecords="10" id="DataGrid">
+				<thead>
+					<tr id="tableHeader">
+						<th data-column="tipo" data-order="desc" scope="col" style="font-size: 16px;">
+							<b>TIPO</b><span></span>
+						</th>
+						<th data-column="subtipo" data-order="desc" scope="col" style="font-size: 16px;">
+							<b>SUBTIPO</b><span></span>
+						</th>
+						<th data-column="codigo" data-order="desc" scope="col" style="font-size: 16px;"><b>C&Oacute;D.
+								DE EQUIPAMENTO</b><span></span></th>
+						<th data-column="descricao" data-order="desc" scope="col" style="font-size: 16px; width: 12%;">
+							<b>DESCRI&Ccedil;&Atilde;O</b><span></span>
+						</th>
+						<th data-column="nome" data-order="desc" scope="col" style="font-size: 16px; width: 12%;">
+							<b>CLIENTE</b><span></span>
+						</th>
+						<th data-column="descricao" data-order="desc" scope="col" style="font-size: 16px;"><b>LOCAL
+								ATUAL</b><span></span></th>
+						<th style="width: 4%;">&nbsp;</th>
+						<th style="width: 9%;">&nbsp;</th>
+						<th style="width: 4%;">&nbsp;</th>
+						<th style="width: 4%;">&nbsp;</th>
+						<th style="width: 4%;">&nbsp;</th>
+					</tr>
+					<tr id="filtros" onkeypress="handleEnterKey(event)">
+						<th>
+							<div id="filterTipoEqp">&nbsp;</div>
+						</th>
+						<th>
+							<div id="filterSubtipoEqp">&nbsp;</div>
+						</th>
+						<th><input class="column-filter" oninput="checkCharsEqp(this)" placeholder="Filtrar..."
+								type="text" /></th>
+						<th><input class="column-filter" oninput="checkCharsEqp(this)" placeholder="Filtrar..."
+								type="text" /></th>
+						<th><input class="column-filter" oninput="checkCharsEqp(this)" placeholder="Filtrar..."
+								type="text" /></th>
+						<th><input class="column-filter" oninput="checkCharsEqp(this)" placeholder="Filtrar..."
+								type="text" /></th>
+						<th>&nbsp;</th>
+						<th>&nbsp;</th>
+						<th>&nbsp;</th>
+						<th>&nbsp;</th>
+						<th>&nbsp;</th>
+					</tr>
+				</thead>
+				<tbody id="tableBody">
+				</tbody>
+				<tfoot>
+					<tr>
+						<td colspan="100">
+							<div class="footer" onkeypress="handleEnterKey(event)" style="margin-top: 1rem;"><span
+									id="footer-span"><span><span><input id="pageSize" onchange="changePageSize()"
+												type="number" value="10" /></span> por p&aacute;gina </span>
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button class="btn_azulesc"
+										onclick="pageGoTo('first')" type="button"><i aria-hidden="true"
+											class="fa fa-step-backward  fa-2xl"></i></button><button class="btn_verde"
+										onclick="pageGoTo('previous')" type="button"><i aria-hidden="true"
+											class="fa fa-chevron-left"></i></button> <span><span
+											id="currentPage">1</span> de <span id="totalPages">1</span>
+										p&aacute;ginas</span><button class="btn_verde" onclick="pageGoTo('next')"
+										type="button"><i aria-hidden="true"
+											class="fa fa-chevron-right"></i></button><button class="btn_azulesc"
+										onclick="pageGoTo('last')" type="button"><i aria-hidden="true"
+											class="fa fa-step-forward fa-2xl"></i></button> </span></div>
+						</td>
+					</tr>
+				</tfoot>
+			</table>
+		</div>
+	</div>
+
+	<div class="tabcontent" id="Agendamento">
+		<div><a class="btn_verde" onclick="mostrarboxAgendamento()" style="margin-bottom: 2rem;margin-top: 1rem;"
+				type="button">&nbsp;Criar Agendamento</a></div>
+
+		<div style="display: flex;align-items:center; justify-content: space-between;">
+			<div
+				style="display: flex;flex-direction: column; align-items: baseline; background-color: #f1f1f1;border-radius:8px; padding: 2rem;    border: 1px solid #ccc;">
+				<label style="margin-right: 1.5rem;">N&uacute;mero de dias: </label>
+
+				<div style="display: flex; align-items: center; justify-content: space-between;"><button
+						class="btn_azul" onclick="mudarGanttDias(7)" style="margin-right: 1rem;" type="button">1
+						Semana</button><button class="btn_azul" onclick="mudarGanttDias(30)" style="margin-right: 1rem;"
+						type="button">1 M&ecirc;s</button><button class="btn_azul" onclick="mudarGanttDias(91)"
+						style="margin-right: 1rem;" type="button">3 Meses</button><button class="btn_azul"
+						onclick="mudarGanttDias(182)" style="margin-right: 1rem;" type="button">6 Meses</button><button
+						class="btn_azul" onclick="mudarGanttDias(365)" style="margin-right: 1rem;" type="button">1
+						Ano</button></div>
+			</div>
+
+			<div
+				style="display: flex;flex-direction: column; align-items: baseline; background-color: #f1f1f1;border-radius:8px; padding: 1.2rem;    border: 1px solid #ccc;">
+				<label style="margin-right: 1.5rem;">Tipo de equipamento a filtrar: </label> <select
+					id="tipoEquipamento" onchange="filtraSubtipoEGantt(diasGantt)" style="width: 300px;"></select>
+			</div>
+
+			<div
+				style="display: flex;flex-direction: column; align-items: baseline; background-color: #f1f1f1;border-radius:8px; padding: 1.2rem;    border: 1px solid #ccc;">
+				<label style="margin-right: 1.5rem;">Sub-Tipo de equipamento a filtrar: </label> <select
+					id="subtipoEquipamento" onchange="enableGantt(diasGantt)" style="width: 300px;"></select>
+			</div>
+		</div>
+
+		<div id="container" style="width: fit-content; height: fit-content;">&nbsp;</div>
+	</div>
+
+	<div class="tabcontent" id="Pendentes">
+		<div style="margin-bottom: 2rem;margin-top: 1rem;"><button class="btn_azul" onclick="mudarValorDias(8)"
+				style="margin-right: 1.5rem;" type="button">Ver 8 Dias</button><button class="btn_azul"
+				onclick="mudarValorDias(0)" type="button">Ver todos dias</button></div>
+
+		<div id="grid-container">
+			<table data-currentpage="1" data-ordercolumn="data" data-ordertype="ASC" data-pagesize="10"
+				data-totalpages="1" data-totalrecords="10" id="DataGridPendentes">
+				<thead>
+					<tr id="tableHeaderPendentes">
+						<th data-column="recursocod" data-order="desc" scope="col" style="font-size: 16px;">
+							<b>C&Oacute;D. DE EQUIPAMENTO &amp; DESCRI&Ccedil;&Atilde;O</b><span></span>
+						</th>
+						<th data-column="data" data-order="desc" scope="col" style="font-size: 16px;">
+							<b>DATA</b><span></span>
+						</th>
+						<th data-column="acao" data-order="desc" scope="col" style="font-size: 16px;">
+							<b>A&Ccedil;&Atilde;O</b><span></span>
+						</th>
+						<th data-column="obra" data-order="desc" scope="col" style="font-size: 16px;">
+							<b>OBRA</b><span></span>
+						</th>
+						<th>&nbsp;</th>
+					</tr>
+					<tr id="filtrosPendentes" onkeypress="handleEnterKey(event)">
+						<th><input class="column-filterPendentes" oninput="checkCharsPendentes(this)"
+								placeholder="Filtrar..." type="text" /></th>
+						<th>&nbsp;</th>
+						<th><select class="input" id="filterAcao" onchange="getPendentes(data8DiasDepois)"></select>
+						</th>
+						<th><select class="input" id="filterObraPendentes"
+								onchange="getPendentes(data8DiasDepois)"></select></th>
+						<th>&nbsp;</th>
+					</tr>
+				</thead>
+				<tbody id="tableBodyPendentes">
+				</tbody>
+				<tfoot>
+					<tr>
+						<td colspan="100">
+							<div class="footer" onkeypress="handleEnterKey(event)" style="margin-top: 1rem;"><span
+									id="footer-span"><span><span><input id="pageSizePendentes"
+												onchange="changePageSizePendentes()" type="number" value="10" />
+										</span>&nbsp;por p&aacute;gina</span>
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button class="btn_azulesc"
+										onclick="pageGoToPendentes('first')" type="button"><i aria-hidden="true"
+											class="fa fa-step-backward  fa-2xl"></i></button><button class="btn_verde"
+										onclick="pageGoToPendentes('previous')" type="button"><i aria-hidden="true"
+											class="fa fa-chevron-left"></i></button> <span> <span
+											id="currentPagePendentes">1 </span> de <span
+											id="totalPagesPendentes">1</span> p&aacute;ginas</span><button
+										class="btn_verde" onclick="pageGoToPendentes('next')" type="button"><i
+											aria-hidden="true" class="fa fa-chevron-right"></i></button><button
+										class="btn_azulesc" onclick="pageGoToPendentes('last')" type="button"><i
+											aria-hidden="true" class="fa fa-step-forward fa-2xl"></i></button> </span>
+							</div>
+						</td>
+					</tr>
+				</tfoot>
+			</table>
+		</div>
+	</div>
+</div>
+
+<div class="modal-input-container" id="modal-input">
+	<div class="modal-content"><span class="close" id="close" onclick="fechabox()">&times;</span>
+
+		<div style="margin: 2rem;">
+			<p style="margin-bottom: 1rem; margin-top: 1rem; font-size: 25px; color: #1e2d84; font-weight: bold;"><label
+					id="label-titulo">Inserir movimento de equipamento</label></p>
+
+			<div id="detalhesFinais" style="margin-bottom: 1rem;">
+				<div style="display:flex; align-items: center; justify-content: space-between; width: 100%;">
+					<div style="display:flex; flex-direction: column; width: 47%;">
+						<label>Cliente</label>
+						<input class="input" id="clienteEqp" readonly="readonly" style="margin-bottom: 1.5rem;"
+							type="text" value="0" />
+					</div>
+					<div style="display:flex; flex-direction: column; width: 47%;">
+						<label>Obra</label>
+						<input class="input" id="obraEqp" readonly="readonly" style="margin-bottom: 1.5rem;" type="text"
+							value="0" />
+					</div>
+					<label id="clienteEquipsMov" style="display: none;"></label>
+
+				</div>
+
+				<div style="display:flex; align-items: center; justify-content: space-between; width: 100%;">
+					<div style="display:flex; flex-direction: column;width: 47%;"><label>Tipo do equipamento</label>
+						<input class="input" id="tipoEqpFin" readonly="readonly" style="margin-bottom: 1.5rem;"
+							type="text" />
+					</div>
+					<div style="display:flex; flex-direction: column; width: 47%;"><label>Sub-Tipo do
+							equipamento</label> <input class="input" id="subtipoEqpFin" readonly="readonly"
+							style="margin-bottom: 1.5rem;" type="text" /></div>
+
+
+				</div>
+
+				<div style="display:flex; align-items: center; justify-content: space-between; width: 100%;">
+					<div style="display:flex; flex-direction: column; width: 47%;">
+						<label>C&oacute;digo do equipamento</label>
+						<input class="input" id="codEqpFin" readonly="readonly" style="margin-bottom: 1.5rem;"
+							type="text" />
+					</div>
+					<div style="display:flex; flex-direction: column; width: 47%;">
+						<label>Descri&ccedil;&atilde;o do Eqp.</label>
+						<input class="input" id="descEqpFin" readonly="readonly" style="margin-bottom: 1.5rem;"
+							type="text" />
+					</div>
+				</div>
+
+			</div>
+			<div class="data_final" id="div-dfin" style="margin-bottom: 1rem">
+				<label id="label-dtfimEqpmov"></label>
+				<input class="input" id="datafim2" name="dfim" type="date" />
+			</div>
+			<div class="obra" id="div-clientes" style="margin-bottom: 1rem;">&nbsp;</div>
+
+			<div class="obra" id="div-obras" style="margin-bottom: 1rem; height: 350px; overflow:overlay;">&nbsp;</div>
+
+
+			<button class="btn_azul" id="buttonAlterarMovimEqp" onclick="insereEquipamentoMovim(this.value)"
+				style="margin-left: auto; text-align: center; float: right; margin-bottom: 1rem;" type="button"
+				value="">&nbsp;Inserir</button>
+		</div>
+	</div>
+</div>
+
+<div class="modal-input-container" id="modal-add">
+	<div class="modal-content"><span class="close" id="close" onclick="fechaboxCreate()">&times;</span>
+
+		<div style="margin: 2rem;">
+			<h1 id="label-titulo" style="color: #1e2d84; text-align: center; font-weight: bold; margin-bottom: 2.5rem;">
+				Criar Equipamento</h1>
+
+			<div class="codigo" id="div-codigo" style="display: flex; flex-direction: column; margin-bottom: 1rem;">
+				<label id="label-codigo">C&oacute;digo</label> <input class="input" data-language="pt" id="nome-codigo"
+					name="ncod" type="text" />
+			</div>
+
+			<div class="descricao" id="div-descricao"
+				style="display: flex; flex-direction: column; margin-bottom: 1rem;"><label
+					id="label-codigo">Descri&ccedil;&atilde;o</label> <input class="input" data-language="pt"
+					id="nome-descricao" name="ndesc" type="text" /></div>
+
+			<div class="tipo" id="div-tipo" style="margin-bottom: 1rem;">&nbsp;</div>
+
+			<div class="novoTipo" id="div-novoTipo" style="display: none; margin-bottom: 2rem;"><label
+					id="label-novoTipo">Novo Tipo</label> <input class="input" data-language="pt" id="nome-novoTipo"
+					name="nnvTipo" type="text" /></div>
+
+			<div class="subtipo" id="div-subtipo" style="margin-bottom: 1rem;">&nbsp;</div>
+
+			<div class="novosubTipo" id="div-novosubTipo" style="display: none; margin-bottom: 2rem;"><label
+					id="label-novosubTipo">Novo Sub Tipo</label> <input class="input" data-language="pt"
+					id="nome-novosubTipo" name="nnvsubTipo" type="text" /></div>
+
+			<div style="display: flex; flex-direction: column; margin-bottom: 1rem;"><label
+					id="label-codigo">Pre&ccedil;o</label> <input class="input" data-language="pt" id="precoEquipamento"
+					name="precoEqp" type="text" /></div>
+			<br />
+			<button class="btn_verde" id="buttonGuardar" onclick="insereEquipamento(this.value)"
+				style="margin-left: auto; text-align: center; width: fit-content; float: right; margin-bottom: 1rem;"
+				type="button" value="">&nbsp;Criar Equipamento</button>
+		</div>
+	</div>
+</div>
+
+<div class="modal-input-container" id="modal-editEquipamento">
+	<div class="modal-content"><span class="close" id="close" onclick="fechaboxEditEquipamento()">&times;</span>
+
+		<div style="margin: 2rem;">
+			<h1 id="label-titulo" style="color: #1e2d84; text-align: center; font-weight: bold; margin-bottom: 2.5rem;">
+				Editar Equipamento</h1>
+
+			<div class="codigo" id="div-codigo" style="display: flex; flex-direction: column; margin-bottom: 1rem;">
+				<label id="label-codigo">C&oacute;digo</label> <input class="input" data-language="pt" id="nome-codigoE"
+					name="ncod" type="text" />
+			</div>
+
+			<div class="descricao" id="div-descricao"
+				style="display: flex; flex-direction: column; margin-bottom: 1rem;"><label
+					id="label-descricao">Descri&ccedil;&atilde;o</label> <input class="input" data-language="pt"
+					id="nome-descricaoE" name="ndesc" type="text" /></div>
+
+			<div class="tipo" id="div-tipoE">&nbsp;</div>
+
+			<div class="novoTipo" id="div-novoTipoE" style="display: none; margin-bottom: 1rem;"><label
+					id="label-novoTipo">Novo Tipo</label> <input class="input" data-language="pt" id="nome-novoTipoE"
+					name="nnvTipo" type="text" /></div>
+
+			<div class="subtipo" id="div-subtipoE" style="margin-bottom: 1rem;">&nbsp;</div>
+
+			<div class="novosubTipo" id="div-novosubTipoE" style="display: none; margin-bottom: 2rem;"><label
+					id="label-novosubTipo">Novo Sub-Tipo</label> <input class="input" data-language="pt"
+					id="nome-novosubTipoE" name="nnvsubTipo" type="text" /></div>
+			&nbsp;
+
+			<div id="divEditarEquip">&nbsp;</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal-input-container" id="modal-obras">
+	<div class="modal-content" style="width: 50%"><span class="close" id="close"
+			onclick="fechaboxObras()">&times;</span>
+
+		<div style="margin: 2rem;">
+			<h1 id="label-titulo" style="color: #1e2d84; text-align: center; font-weight: bold; margin-bottom: 2.5rem;">
+				Alterar Obra</h1>
+
+			<div style="display:flex; align-items: center; justify-content: space-between; width: 100%; ">
+				<div style="display:flex; flex-direction: column; width: 47%;margin-bottom: 1.5rem;"><label>No</label>
+					<input class="input" id="noObraEdit" name="noObra" type="text" />
+				</div>
+
+				<div style="display:flex; flex-direction: column; width: 47%;margin-bottom: 1.5rem;"><label>Nome</label>
+					<input class="input" id="nomeObraEdit" name="nomeObra" type="text" />
+				</div>
+			</div>
+
+			<div style="display:flex; align-items: center; justify-content: space-between; width: 100%;">
+				<div style="display:flex; flex-direction: column; width: 47%;margin-bottom: 1.5rem;">
+					<label>C&oacute;digo</label> <input class="input" id="codObraEdit" name="codObra" type="text" />
+				</div>
+
+				<div style="display:flex; flex-direction: column; width: 47%;margin-bottom: 1.5rem;">
+					<label>Descri&ccedil;&atilde;o</label> <input class="input" id="descObraEdit" name="descObra"
+						type="text" />
+				</div>
+			</div>
+			<label>Local</label> <input class="input" id="localObraEdit" name="localObra" style="margin-bottom: 1.5rem;"
+				type="text" />
+			<div id="div-email1" style="display: flex; flex-direction: column; margin-bottom: 1.5rem;"><label
+					id="label-em1">Contactos 1 a adicionar</label>
+
+				<h3 style="margin-left: 0px !important; text-transform: none;">Separar os e-mails por <b
+						style="font-size: 20px; color: black;">;</b></h3>
+				<textarea class="input" data-language="pt" id="nome-email1" name="nem1"
+					type="text"> &nbsp; &nbsp;</textarea>
+			</div>
+
+			<div id="div-email2" style="display: flex; flex-direction: column; margin-bottom: 1.5rem;"><label
+					id="label-em2">Contactos 2 a adicionar</label>
+
+				<h3 style="margin-left: 0px !important; text-transform: none;">Separar os e-mails por <b
+						style="font-size: 20px; color: black;">;</b></h3>
+				<textarea class="input" data-language="pt" id="nome-email2" name="nem2"
+					type="text"> &nbsp; &nbsp;</textarea>
+			</div>
+
+			<div id="botao_Alterar">&nbsp;</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal-input-container" id="modal-agendamento">
+	<div class="modal-content" style="width:60%"><span class="close" id="close"
+			onclick="fechaboxAgendamento()">&times;</span> <label id="planeamId" style="display: none;"></label>
+
+		<div style="margin: 2rem;">
+			<h1 id="label-titulo-agendamento"
+				style="color: #1e2d84; text-align: center; font-weight: bold; margin-bottom: 2rem;">Adicionar
+				Agendamento</h1>
+
+			<div style="display: flex; justify-content: space-between; align-items: start;">
+				<div style="display: flex; flex-direction: column; width: 45%;"><label>Cliente</label>
+
+					<div class="row d-flex justify-content-center mt-100" id="clienteSelect">&nbsp;</div>
+					<label style="margin-top: 2rem;">Obra</label>
+
+					<div class="row d-flex justify-content-center mt-100" id="obrasSelect">&nbsp;</div>
+
+					<div class="data-inicial" id="div-dinic" style="margin-top: 2rem;"><label id="label-dtini">Data
+							Inicial</label> <input class="input" data-language="pt" data-original-title="Data Inicial"
+							data-tooltip="true" id="datainiAgend" name="dini" type="date" /></div>
+
+					<div class="data_final" id="div-dfin" style="margin-top: 2rem;"><label id="label-dtfim">Data
+							final</label> <input class="input" data-language="pt" data-original-title="Data Final"
+							data-tooltip="true" id="datafimAgend" name="dfim" type="date" /></div>
+				</div>
+
+				<div style="display: flex; flex-direction: column; width: 45%;"><label>Tipo</label>
+
+					<div class="row d-flex justify-content-center mt-100" id="tipoSelectDiv">&nbsp;</div>
+					<label style="margin-top: 2rem;">Sub-Tipo</label>
+
+					<div class="row d-flex justify-content-center mt-100" id="subtipoSelectDiv">&nbsp;</div>
+					<label style="margin-top: 2rem;">Descri&ccedil;&atilde;o e C&oacute;digo do equipamento</label>
+
+					<div class="row d-flex justify-content-center mt-100" id="equipsDescCodSelect">&nbsp;</div>
+				</div>
+			</div>
+			<br />
+			<button class="btn_verde" id="buttonGuardar" onclick="insereAgendamento()"
+				style="margin-left: auto; text-align: center; width: fit-content; float: right; margin-bottom: 1rem;"
+				type="button" value="">&nbsp;Criar Agendamento</button>
+		</div>
+	</div>
+</div>
+
+<div class="modal-input-container" id="modal-agendamento-edit">
+	<div class="modal-content" style="width: fit-content;"><span class="close" id="close"
+			onclick="fechaboxAgendamentoEdit()">&times;</span> <label id="planeamId" style="display: none;"></label>
+
+		<div style="margin: 2rem;">
+			<h1 id="label-titulo-agendamento"
+				style="color: #1e2d84; text-align: center; font-weight: bold; margin-bottom: 2.5rem;">Editar Agendamento
+			</h1>
+			<label>Cliente</label>
+
+			<div class="row d-flex justify-content-center mt-100" id="clienteSelectE">&nbsp;</div>
+			<label>Obra</label>
+
+			<div class="row d-flex justify-content-center mt-100" id="obrasSelectE">&nbsp;</div>
+			<label>Tipo</label>
+
+			<div class="row d-flex justify-content-center mt-100" id="tipoSelectEDiv">&nbsp;</div>
+			<label>Sub-Tipo</label>
+
+			<div class="row d-flex justify-content-center mt-100" id="subtipoSelectEDiv">&nbsp;</div>
+			<label style="margin-top: 1rem;">Descri&ccedil;&atilde;o e C&oacute;digo do equipamento</label>
+
+			<div class="row d-flex justify-content-center mt-100" id="equipsDescCodSelectE">&nbsp;</div>
+
+			<div class="data-inicial" id="div-dinic" style="margin-top: 2rem;"><label id="label-dtini">Data
+					Inicial</label> <input class="input" data-language="pt" data-original-title="Data Inicial"
+					data-tooltip="true" id="datainiAgendE" name="dini" type="date" /></div>
+
+			<div class="data_final" id="div-dfinE" style="margin-top: 2rem;"><label id="label-dtfim">Data final</label>
+				<input class="input" data-language="pt" data-original-title="Data Final" data-tooltip="true"
+					id="datafimAgendE" name="dfim" type="date" />
+			</div>
+			&nbsp;
+
+			<div id="apagarAgendamentoDiv">&nbsp;</div>
+			<button class="btn_verde" id="buttonGuardar" onclick="insereAgendamentoEdit()"
+				style="margin-left: auto; text-align: center; width: fit-content; float: right; margin-bottom: 1rem;"
+				type="button" value="">&nbsp;Editar Agendamento</button>
+		</div>
+	</div>
+</div>
+
+<div class="modal-input-container" id="modal-pendentes">
+	<div class="modal-content" style="width: 30%"><span class="close" id="close"
+			onclick="fechaboxPendentes()">&times;</span>
+
+		<div style="margin: 2rem;">
+			<h1 id="label-titulo" style="color: #1e2d84; text-align: center; font-weight: bold; margin-bottom: 2.5rem;">
+				Adicionar Movimento Real</h1>
+			<label>Obra</label> <input class="input" id="obraPend" name="obraPend" readonly="readonly"
+				style="margin-bottom: 1.5rem;" type="text" /> <label>C&oacute;digo do equipamento</label> <input
+				class="input" id="codPend" name="codPend" readonly="readonly" style="margin-bottom: 1.5rem;"
+				type="text" /> <label>A&ccedil;&atilde;o</label> <input class="input" id="acaoPend" name="descPend"
+				readonly="readonly" style="margin-bottom: 1.5rem;" type="text" /> <label>Data</label>
+
+			<div class="data-inicial" id="div-dinic" style="margin-bottom: 1rem;"><input class="input"
+					data-language="pt" data-tooltip="true" id="dataPendente" name="dpen" type="date" /></div>
+			&nbsp;
+
+			<div id="divPendente">&nbsp;</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal-input-container" id="modal-gestorPrecos">
+	<div class="modal-content" style="width: 40%;"><span class="close" id="close"
+			onclick="fechaboxGestorPrecos()">&times;</span>
+
+		<div style="margin: 2rem;">
+			<h1 id="label-titulo" style="color: #1e2d84; text-align: center; font-weight: bold; margin-bottom: 2.5rem;">
+				Gestor Pre&ccedil;os</h1>
+
+			<table class="table table-striped" style="margin-top:10px">
+				<thead class="thead-dark">
+					<tr>
+						<th scope="col">Tipo equipamento</th>
+						<th scope="col">Sub-Tipo equipamento</th>
+						<th scope="col" style="width: 25%;">Pre&ccedil;o Atual</th>
+						<th scope="col">&nbsp;</th>
+						<th scope="col">&nbsp;</th>
+					</tr>
+					<tr id="filtrosObras" onkeypress="handleEnterKey(event)">
+						<th>
+							<div id="tipoEqpPrecos">&nbsp;</div>
+						</th>
+						<th>&nbsp;</th>
+						<th>&nbsp;</th>
+						<th>&nbsp;</th>
+						<th>&nbsp;</th>
+					</tr>
+				</thead>
+				<tbody id="tbodyGestorPrecos">
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+
+<div class="modal-input-container" id="modal-gestorPrecos-editar">
+	<div class="modal-content" style="width: 25%;"><span class="close" id="close"
+			onclick="fechaboxGestorPrecosEdit()">&times;</span>
+
+		<div style="margin: 2rem;">
+			<h1 id="label-titulo" style="color: #1e2d84; text-align: center; font-weight: bold; margin-bottom: 2.5rem;">
+				Editar Pre&ccedil;o</h1>
+			<br />
+			<label id="labelEquipEditar"></label><br />
+			<br />
+			<label>Novo pre&ccedil;o (&euro;)</label> <input class="input" id="novoPreco" type="number" />
+			<div id="botaoConfirmarEditar" style="margin-top: 10px;">&nbsp;</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal-input-container" id="modal-gestorPrecos-historico">
+	<div class="modal-content" style="width: 60%;"><span class="close" id="close"
+			onclick="fechaboxGestorPrecosHist()">&times;</span>
+
+		<div style="margin: 2rem;">
+			<h1 id="label-titulo" style="color: #1e2d84; text-align: center; font-weight: bold; margin-bottom: 2.5rem;">
+				Hist&oacute;rico dos Pre&ccedil;os</h1>
+
+			<table class="table table-striped" style="margin-top:10px">
+				<thead class="thead-dark">
+					<tr>
+						<th scope="col">Tipo equipamento</th>
+						<th scope="col">SubTipo equipamento</th>
+						<th scope="col">Data Inicial</th>
+						<th scope="col">Data Final</th>
+						<th scope="col">Pre&ccedil;o Atual</th>
+						<th scope="col">&nbsp;</th>
+					</tr>
+				</thead>
+				<tbody id="tbodyGestorPrecosHistorico">
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+
+<div class="modal-input-container" id="modalCriarObras">
+	<div class="modal-content" style="width: 60%;"><span class="close" id="close"
+			onclick="closeModalCriarObras()">&times;</span>
+
+		<div style="margin: 2rem;">
+			<h1 id="label-titulo" style="color: #1e2d84; text-align: center; font-weight: bold; margin-bottom: 2.5rem;">
+				Criar Obra</h1>
+
+			<div style="display: flex; justify-content: space-between; width: 100%;align-items: center;">
+				<div style="display: flex; flex-direction: column; width: 47%;"><label>Cliente</label>
+
+					<div id="clienteObrasCreateDiv" style="margin-bottom: 1.5rem;">&nbsp;</div>
+				</div>
+
+				<div style="display: flex; flex-direction: column; width: 47%;"><label>C&oacute;digo da Obra</label>
+					<input class="input" id="codObraCreate" name="codObra" style="margin-bottom: 1.5rem;" type="text" />
+				</div>
+			</div>
+
+			<div style="display: flex; justify-content: space-between; width: 100%;align-items: center;">
+				<div style="display: flex; flex-direction: column; width: 47%;"><label>Descri&ccedil;&atilde;o da
+						Obra</label> <input class="input" id="descObraCreate" name="descObra"
+						style="margin-bottom: 1.5rem;" type="text" /></div>
+
+				<div style="display: flex; flex-direction: column; width: 47%;"><label>Local</label> <input
+						class="input" id="localObraCreate" name="localObra" style="margin-bottom: 1.5rem;"
+						type="text" /></div>
+			</div>
+
+			<div id="div-email1" style="display: flex; flex-direction: column; margin-bottom: 1.5rem;"><label
+					id="label-em1">Contactos 1 a adicionar</label>
+
+				<h3 style="margin-left: 0px !important; text-transform: none;">Separar os e-mails por <b
+						style="font-size: 20px; color: black;">;</b></h3>
+				<textarea class="input" data-language="pt" id="nome-email1Create" name="nem1"
+					type="text"> &nbsp; &nbsp;</textarea>
+			</div>
+
+			<div id="div-email2" style="display: flex; flex-direction: column; margin-bottom: 1.5rem;"><label
+					id="label-em2">Contactos 2 a adicionar</label>
+
+				<h3 style="margin-left: 0px !important; text-transform: none;">Separar os e-mails por <b
+						style="font-size: 20px; color: black;">;</b></h3>
+				<textarea class="input" data-language="pt" id="nome-email2Create" name="nem2"
+					type="text"> &nbsp; &nbsp;</textarea>
+			</div>
+			<button class="btn_verde" onclick="createObra()" style="float: right;" type="button">&nbsp;Guardar
+				Obra</button>
+		</div>
+	</div>
+</div>
+
+<p><iframe hidden="" src="/path/cache"></iframe>
+	<script>
+		//vai ter o equipamento que foi clicado para alterar
+		var equipamento
+
+		//limpa cache
+		if (!location.hash) {
+			location.hash = "#reloading";
+			location.reload(true);
+		} else {
+			location.hash = "#reloaded";
+		}
+		var buscarDados = 0;
+		var buscarObras = 0;
+		var buscarPendentes = 0;
+		var data8DiasDepois = 0;
+		var diasGantt = 7;
+		var ganttAtivo = false;
+
+		window.onload = function onLoadFunction() {
+			$(".headerZone").hide();
+			$(".dropdown-toggle btn btn-default btn-sm").hide();
+			$("#OptionsRecordDropDown").hide();
+			$(".navbar").hide();
+			document.getElementById('btn_obras').click();
+			caches.keys().then((list) => list.map((key) => caches.delete(key)));
+			loadGantt(diasGantt);
+			fillSelectBoxes(data8DiasDepois);
+			fillClienteObras();
+			fillClienteTipo();
+			fillClienteSubtipo();
+			filtraSubtipoEGantt(diasGantt);
+		};
+
+		function filtraSubtipoEGantt(diasGantt) {
+			let filtersubTipoEqpSel = document.getElementById("subtipoEquipamento");
+			let tipo = document.getElementById("tipoEquipamento").value;
+			params = {};
+			varMyQuery = `select distinct subtipo
+							from u_eqp
+							where tipo like '%${tipo}%'`;
+			params.id = "xmltoquery";
+			params.select = varMyQuery;
+			$.ajax({
+				type: "POST",
+				url: "../api/code/run",
+				async: true,
+				data: JSON.stringify(params),
+				contentType: "application/json",
+			}).done(function (result, textStatus, jqXHR) {
+				try {
+					//console.log(result);
+					resposta = JSON.parse(result);
+				} catch {
+					resposta = JSON.parse('{"Dados":[]}');
+				}
+				let options = ""
+				options += '<option value="" selected>TODOS</option>'
+				for (let index = 0; index < resposta.Dados.length; index++) {
+					options += '<option value="' + resposta.Dados[index].subtipo + '">' + resposta.Dados[index].subtipo + '</option>'
+				}
+				filtersubTipoEqpSel.innerHTML = options;
+			});
+			loadGantt(diasGantt);
+		}
+
+		function fillClienteObras() {
+			document.getElementById("filterClienteObras").innerHTML = "";
+			var params = {};
+			var varMyQuery = `select distinct nome, no
+								from u_obras`;
+			params.id = "xmltoquery";
+			params.select = varMyQuery;
+			$.ajax({
+				type: "POST",
+				url: "../api/code/run",
+				async: true,
+				data: JSON.stringify(params),
+				contentType: "application/json",
+			}).done(function (result, textStatus, jqXHR) {
+				try {
+					//console.log(result);
+					resposta = JSON.parse(result);
+				} catch {
+					resposta = JSON.parse('{"Dados":[]}');
+				}
+				let options = "";
+				options += '<select id="filterClienteObrasSelect" onchange="getObras()"><option value="" selected>TODOS</option>'
+				for (let index = 0; index < resposta.Dados.length; index++) {
+					options += '<option value="' + resposta.Dados[index].no + '">' + resposta.Dados[index].nome + '</option>'
+				}
+				document.getElementById("filterClienteObras").innerHTML = options + "</select>";
+			});
+		}
+		function fillClienteTipo() {
+			document.getElementById("filterTipoEqp").innerHTML = "";
+			var params = {};
+			var varMyQuery = `select distinct tipo
+								from u_eqp`;
+			params.id = "xmltoquery";
+			params.select = varMyQuery;
+			$.ajax({
+				type: "POST",
+				url: "../api/code/run",
+				async: true,
+				data: JSON.stringify(params),
+				contentType: "application/json",
+			}).done(function (result, textStatus, jqXHR) {
+				try {
+					//console.log(result);
+					resposta = JSON.parse(result);
+				} catch {
+					resposta = JSON.parse('{"Dados":[]}');
+				}
+				let options = "";
+				options += '<select id="filterTipoEqpSelect" onchange="fillClienteSubtipo()"><option value="" selected>TODOS</option>'
+				for (let index = 0; index < resposta.Dados.length; index++) {
+					options += '<option value="' + resposta.Dados[index].tipo + '">' + resposta.Dados[index].tipo + '</option>'
+				}
+				document.getElementById("filterTipoEqp").innerHTML = options + "</select>";
+			});
+		}
+
+		function fillClienteSubtipo() {
+			getEquip();
+			document.getElementById("filterSubtipoEqp").innerHTML = "";
+			if (document.getElementById("filterTipoEqpSelect") == null) {
+				var tipo = "";
+			} else {
+				var tipo = document.getElementById("filterTipoEqpSelect").value;
+			}
+			var params = {};
+			var varMyQuery = `select distinct subtipo
+								from u_eqp
+								where tipo like '%${tipo}%'`;
+			params.id = "xmltoquery";
+			params.select = varMyQuery;
+			$.ajax({
+				type: "POST",
+				url: "../api/code/run",
+				async: true,
+				data: JSON.stringify(params),
+				contentType: "application/json",
+			}).done(function (result, textStatus, jqXHR) {
+				try {
+					//console.log(result);
+					resposta = JSON.parse(result);
+				} catch {
+					resposta = JSON.parse('{"Dados":[]}');
+				}
+				let options = "";
+				options += '<select id="filterSubtipoEqpSelect" onchange="getEquip()"><option value="" selected>TODOS</option>'
+				for (let index = 0; index < resposta.Dados.length; index++) {
+					options += '<option value="' + resposta.Dados[index].subtipo + '">' + resposta.Dados[index].subtipo + '</option>'
+				}
+				document.getElementById("filterSubtipoEqp").innerHTML = options + "</select>";
+			});
+		}
+
+		//Add event listener for the filter inputs
+		document.addEventListener("DOMContentLoaded", function () {
+			var filterInputs = document.getElementsByClassName("column-filter");
+			for (var i = 0; i < filterInputs.length; i++) {
+				filterInputs[i].addEventListener("change", filterTable);
+			}
+			var filterInputsVars =
+				document.getElementsByClassName("column-vars-filter");
+			for (var i = 0; i < filterInputsVars.length; i++) {
+				filterInputsVars[i].addEventListener("change", filterTable);
+			}
+		});
+
+		//Order the table
+		let tableHeader = document.getElementById("tableHeader");
+		let headers = tableHeader.getElementsByTagName("th");
+		for (let i = 0; i < headers.length; i++) {
+			headers[i].addEventListener("click", function () {
+				var column = $(this).data("column");
+				var order = $(this).data("order");
+				let dataGrid = document.getElementById("DataGrid");
+
+				if (order == "desc") {
+					$(this).data("order", "asc");
+					dataGrid.dataset.ordercolumn = column;
+					dataGrid.dataset.ordertype = "ASC";
+				} else {
+					$(this).data("order", "desc");
+					dataGrid.dataset.ordercolumn = column;
+					dataGrid.dataset.ordertype = "DESC";
+				}
+				// neste for está o -1 porque o último th da tabela é apenas um spacer, e ele atrofiava porque não tinha valores
+				// caso se adicionar novas colunas mudar isto (-1 no for) accordingly
+				for (let j = 0; j < headers.length - 1; j++) {
+					if (headers[j].getElementsByTagName("span")[0] != undefined) {
+						headers[j].getElementsByTagName("span")[0].innerHTML = "";
+					}
+				}
+				this.getElementsByTagName("span")[0].innerHTML = order == "desc" ? "&#9650" : "&#9660";
+				getEquip();
+			});
+		}
+
+		getEquip();
+
+		//Add event listener for the filter inputs
+		document.addEventListener("DOMContentLoaded", function () {
+			var filterInputsObras = document.getElementsByClassName("column-filterObras");
+			for (var i = 0; i < filterInputsObras.length; i++) {
+				filterInputsObras[i].addEventListener("change", filterTableObras);
+			}
+			var filterInputsVarsObras =
+				document.getElementsByClassName("column-vars-filterObras");
+			for (var i = 0; i < filterInputsVarsObras.length; i++) {
+				filterInputsVarsObras[i].addEventListener("change", filterTableObras);
+			}
+		});
+
+		//Order the table
+		let tableHeaderObras = document.getElementById("tableHeaderObras");
+		let headersObras = tableHeaderObras.getElementsByTagName("th");
+		for (let i = 0; i < headersObras.length; i++) {
+			headersObras[i].addEventListener("click", function () {
+				var column = $(this).data("column");
+				var order = $(this).data("order");
+				let dataGrid = document.getElementById("DataGridObras");
+
+				if (order == "desc") {
+					$(this).data("order", "asc");
+					dataGrid.dataset.ordercolumn = column;
+					dataGrid.dataset.ordertype = "ASC";
+				} else {
+					$(this).data("order", "desc");
+					dataGrid.dataset.ordercolumn = column;
+					dataGrid.dataset.ordertype = "DESC";
+				}
+				// neste for está o -1 porque o último th da tabela é apenas um spacer, e ele atrofiava porque não tinha valores
+				// caso se adicionar novas colunas mudar isto (-1 no for) accordingly
+				for (let j = 0; j < headersObras.length - 1; j++) {
+					if (headersObras[j].getElementsByTagName("span")[0] != undefined) {
+						headersObras[j].getElementsByTagName("span")[0].innerHTML = "";
+					}
+				}
+				this.getElementsByTagName("span")[0].innerHTML = order == "desc" ? "&#9650" : "&#9660";
+				getObras();
+			});
+		}
+		getObras();
+
+		//Add event listener for the filter inputs
+		document.addEventListener("DOMContentLoaded", function () {
+			var filterInputsPendentes = document.getElementsByClassName("column-filterPendentes");
+			for (var i = 0; i < filterInputsPendentes.length; i++) {
+				filterInputsPendentes[i].addEventListener("change", filterTablePendentes);
+			}
+			var filterInputsVarsPendentes =
+				document.getElementsByClassName("column-vars-filterPendentes");
+			for (var i = 0; i < filterInputsVarsPendentes.length; i++) {
+				filterInputsVarsPendentes[i].addEventListener("change", filterTablePendentes);
+			}
+		});
+
+		//Order the table
+		let tableHeaderPendentes = document.getElementById("tableHeaderPendentes");
+		let headersPendentes = tableHeaderPendentes.getElementsByTagName("th");
+		for (let i = 0; i < headersPendentes.length; i++) {
+			headersPendentes[i].addEventListener("click", function () {
+				var column = $(this).data("column");
+				var order = $(this).data("order");
+				let dataGrid = document.getElementById("DataGridPendentes");
+
+				if (order == "desc") {
+					$(this).data("order", "asc");
+					dataGrid.dataset.ordercolumn = column;
+					dataGrid.dataset.ordertype = "ASC";
+				} else {
+					$(this).data("order", "desc");
+					dataGrid.dataset.ordercolumn = column;
+					dataGrid.dataset.ordertype = "DESC";
+				}
+				// neste for está o -1 porque o último th da tabela é apenas um spacer, e ele atrofiava porque não tinha valores
+				// caso se adicionar novas colunas mudar isto (-1 no for) accordingly
+				for (let j = 0; j < headersPendentes.length - 1; j++) {
+					if (headersPendentes[j].getElementsByTagName("span")[0] != undefined) {
+						headersPendentes[j].getElementsByTagName("span")[0].innerHTML = "";
+					}
+				}
+				this.getElementsByTagName("span")[0].innerHTML = order == "desc" ? "&#9650" : "&#9660";
+				getPendentes(data8DiasDepois);
+			});
+		}
+
+		getPendentes(data8DiasDepois);
+
+		function mudarGanttDias(valorDias) {
+			if (valorDias == 7) {
+				diasGantt = 7;
+				loadGantt(diasGantt);
+			} else if (valorDias == 30) {
+				diasGantt = 30;
+				loadGantt(diasGantt);
+			} else if (valorDias == 91) {
+				diasGantt = 91;
+				loadGantt(diasGantt);
+			} else if (valorDias == 182) {
+				diasGantt = 182;
+				loadGantt(diasGantt);
+			} else if (valorDias == 365) {
+				diasGantt = 365;
+				loadGantt(diasGantt);
+			}
+		}
+
+		function enableGantt(diasGantt) {
+			ganttAtivo = true;
+			loadGantt(diasGantt);
+		}
+
+		function agendamentoPreenchidoObra(nome, descricao) {
+			document.getElementById("modal-agendamento").style.display = "block";
+			buildSelectClienteObras();
+			buildSelectEquips();
+			buildSelectTipo();
+			buildSelectSubtipo();
+			document.getElementById("clientesDropdown").tomselect.setValue(nome.trim());
+			buildSelectObras();
+			let select = document.getElementById('tiposObras').tomselect.setValue(descricao.trim());
+		}
+
+		function agendamentoPreenchidoEquip(id, tipo, subtipo) {
+			document.getElementById("modal-agendamento").style.display = "block";
+			buildSelectClienteObras();
+			buildSelectTipo();
+			buildSelectSubtipo();
+			buildSelectEquips();
+			let select = document.getElementById('tipoSelect').tomselect.setValue(tipo.trim());
+			select = document.getElementById('subtipoSelect').tomselect.setValue(subtipo.trim());
+			select = document.getElementById('codDescEquip').tomselect.setValue(id.trim());
+
+		}
+
+		function checkCharsObras(element) {
+			const filterValue = element.value;
+			if (filterValue.length >= 3) {
+				getObras();
+			}
+			if (filterValue == "") {
+				getObras();
+			}
+		}
+
+		function checkCharsEqp(element) {
+			const filterValue = element.value;
+			if (filterValue.length >= 3) {
+				getEquip();
+			}
+			if (filterValue == "") {
+				getEquip();
+			}
+		}
+
+		function checkCharsPendentes(element) {
+			const filterValue = element.value;
+			if (filterValue.length >= 3) {
+				getPendentes(data8DiasDepois)
+
+			}
+			if (filterValue == "") {
+				getPendentes(data8DiasDepois)
+			}
+
+		}
+
+		function createObra() {
+			let select = document.getElementById("clienteObrasCreate");
+			let no = select.value;
+			let nome = select.options[select.selectedIndex].text;
+			let codigo = document.getElementById("codObraCreate").value;
+			let descricao = document.getElementById("descObraCreate").value;
+			let local = document.getElementById("localObraCreate").value;
+			let email1 = document.getElementById("nome-email1Create").value;
+			let email2 = document.getElementById("nome-email2Create").value;
+			var params = {};
+			varMyQuery = `select * from u_obras where codigo = '${codigo}' and no = '${no}'`;
+			params.id = "xmltoquery";
+			params.select = varMyQuery;
+			var flag = false;
+			$.ajax({
+				type: "POST",
+				url: "../api/code/run",
+				async: false,
+				data: JSON.stringify(params),
+				contentType: "application/json",
+			}).done(function (result, textStatus, jqXHR) {
+				try {
+					resposta = JSON.parse(result);
+				} catch {
+					resposta = JSON.parse('{"Dados":[]}');
+				}
+				if (resposta.Dados.length > 0) {
+					flag = true;
+				}
+			});
+			if (flag) {
+				alert("Já existe uma obra com esse código!");
+				return;
+			}
+			//Tirar todos os espaços desnecessários que vêm do JavaScript
+			var aux = email1.replace(/\s+/g, ' ').trim();
+			var aux1 = email2.replace(/\s+/g, ' ').trim();
+			params = {};
+			$.ajax({
+				type: "GET",
+				url:
+					"../programs/gensel.aspx?cscript=criaObra&no=" + no +
+					"&nome=" + nome +
+					"&codigo=" + codigo +
+					"&descricao=" + descricao +
+					"&local=" + local +
+					"&email1=" + aux +
+					"&email2=" + aux1,
+				data: JSON.stringify(params),
+				async: false,
+				contentType: "application/json",
+				success: function (response) {
+					//Fechar a modal
+					closeModalCriarObras();
+					//Atualizar a tabela
+					getObras();
+					document.getElementById("noObraCreate").value = "";
+					document.getElementById("nomeObraCreate").value = "";
+					document.getElementById("codObraCreate").value = "";
+					document.getElementById("descObraCreate").value = "";
+					document.getElementById("localObraCreate").value = "";
+					document.getElementById("nome-email1Create").value = "";
+					document.getElementById("nome-email2Create").value = "";
+				},
+				error: function (response) {
+					alert("Erro a encontrar arVend por favor tente de novo!");
+				},
+			});
+
+		}
+
+		function fillSelectBoxes(valorDias) {
+			//Tipos Equipamentos e Tipos Agendamento
+			let filterTipoEqpSel = document.getElementById("tipoEquipamento");
+			params = {};
+			varMyQuery = `select distinct tipo
+							from u_eqp`;
+			params.id = "xmltoquery";
+			params.select = varMyQuery;
+			$.ajax({
+				type: "POST",
+				url: "../api/code/run",
+				async: true,
+				data: JSON.stringify(params),
+				contentType: "application/json",
+			}).done(function (result, textStatus, jqXHR) {
+				try {
+					//console.log(result);
+					resposta = JSON.parse(result);
+				} catch {
+					resposta = JSON.parse('{"Dados":[]}');
+				}
+				let options = ""
+				options += '<option value="" selected>TODOS</option>'
+				for (let index = 0; index < resposta.Dados.length; index++) {
+					options += '<option value="' + resposta.Dados[index].tipo + '">' + resposta.Dados[index].tipo + '</option>'
+				}
+				filterTipoEqpSel.innerHTML = options;
+			});
+			// Create a Date object for today
+			const today = new Date();
+
+			// Add 8 days to the current date
+			today.setDate(today.getDate() + 8);
+
+			// Format the date as "YYYY-MM-DD"
+			const year = today.getFullYear();
+			const month = (today.getMonth() + 1).toString().padStart(2, '0'); // Month is zero-based, so add 1
+			const day = today.getDate().toString().padStart(2, '0');
+
+			const eightDaysAfterToday = `${year}-${month}-${day}`;
+
+			//Ação dos Pendentes
+			let filterAcao = document.getElementById("filterAcao");
+			let options = ""
+			options += '<option value="" selected>TODOS</option>'
+			options += '<option value="Entrega">Entrega</option>'
+			options += '<option value="Recolha">Recolha</option>'
+			filterAcao.innerHTML = options;
+			//Obra Pendentes
+			let filtroObraPendentes = document.getElementById("filterObraPendentes");
+			params = {};
+			varMyQuery = `declare @data8Dias date = '` + eightDaysAfterToday + `'
+						SELECT *
+						FROM  (SELECT u_planeam.obra
+							FROM   u_planeam
+							WHERE  NOT EXISTS (SELECT id
+												FROM   u_eqpmov
+												WHERE  u_eqpmov.planeamid = u_planeam.id
+														AND u_eqpmov.FIM = '1900-01-01')
+							UNION ALL
+							SELECT u_planeam.obra
+							FROM   u_planeam
+							WHERE  NOT EXISTS (SELECT id
+												FROM   u_eqpmov
+												WHERE  u_eqpmov.planeamid = u_planeam.id
+														AND u_eqpmov.FIM != '1900-01-01')) AS tabela1 `;
+			params.id = "xmltoquery";
+			params.select = varMyQuery;
+			$.ajax({
+				type: "POST",
+				url: "../api/code/run",
+				async: true,
+				data: JSON.stringify(params),
+				contentType: "application/json",
+			}).done(function (result, textStatus, jqXHR) {
+				try {
+					resposta = JSON.parse(result);
+				} catch {
+					resposta = JSON.parse('{"Dados":[]}');
+				}
+				let options = ""
+				options += '<option value="" selected>TODOS</option>'
+				for (let index = 0; index < resposta.Dados.length; index++) {
+					options += '<option value="' + resposta.Dados[index].obra + '">' + resposta.Dados[index].obra + '</option>'
+				}
+				filtroObraPendentes.innerHTML = options;
+			});
+		}
+
+		function mudarValorDias(dias) {
+			data8DiasDepois = dias;
+			getPendentes(data8DiasDepois);
+		}
+
+		function openModalCriarObras() {
+			document.getElementById("modalCriarObras").style.display = "block";
+			document.getElementById("clienteObrasCreateDiv").innerHTML = "";
+			var params = {};
+			varMyQuery = `select distinct no, nome
+								from u_obras`;
+			params.id = "xmltoquery";
+			params.select = varMyQuery;
+			$.ajax({
+				type: "POST",
+				url: "../api/code/run",
+				async: true,
+				data: JSON.stringify(params),
+				contentType: "application/json",
+			}).done(function (result, textStatus, jqXHR) {
+				try {
+					resposta = JSON.parse(result);
+				} catch {
+					resposta = JSON.parse('{"Dados":[]}');
+				}
+				let options = ""
+				options += "<option value=\"\"></option>"
+				var stringInic = "<select class=\"input\" id=\"clienteObrasCreate\" placeholder=\"Selecione o cliente\" value=\"\">"
+				for (let index = 0; index < resposta.Dados.length; index++) {
+					options += '<option value="' + resposta.Dados[index].no + '">' + resposta.Dados[index].nome + '</option>'
+				}
+				document.getElementById("clienteObrasCreateDiv").innerHTML = stringInic + options;
+				new TomSelect("#clienteObrasCreate", {
+					create: false,
+					sortField: {
+						field: "text",
+						direction: "asc"
+					},
+					maxItems: 1,
+					closeAfterSelect: true
+				});
+			});
+		}
+
+		function closeModalCriarObras() {
+			document.getElementById("modalCriarObras").style.display = "none";
+		}
+
+		function filterTable() {
+			changePage(1);
+		}
+
+		function filterTableObras() {
+			changePageObras(1);
+		}
+
+		function filterTablePendentes() {
+			changePagePendentes(1);
+		}
+
+		function getPendentes(valorDias) {
+			let dataGrid = document.getElementById("DataGridPendentes");
+			const columnFilter = document.getElementsByClassName("column-filterPendentes");
+			const numberColumns = document.getElementById("DataGridPendentes").rows[0].cells.length;
+			const filterCodDescSel = document.getElementById("filterCodDescPendentes");
+			var nomeFilter = columnFilter[0].value;
+			nomeFilter = nomeFilter.trim();
+			const filterAcaoSel = document.getElementById("filterAcao");
+			//se o select ainda não deu load
+			if (filterAcaoSel.selectedIndex == -1) {
+				var acaoFilter = "";
+			} else {
+				var acaoFilter = filterAcaoSel.options[filterAcaoSel.selectedIndex].value;
+				acaoFilter = acaoFilter.trim();
+			}
+			const filterObraSel = document.getElementById("filterObraPendentes");
+			//se o select ainda não deu load
+			if (filterObraSel.selectedIndex == -1) {
+				var obraFilter = "";
+			} else {
+				var obraFilter = filterObraSel.options[filterObraSel.selectedIndex].value;
+				obraFilter = obraFilter.trim();
+			}
+			//Get order
+			let orderColumn = dataGrid.dataset.ordercolumn;
+			let orderType = dataGrid.dataset.ordertype;
+			//Get Grid Attributes
+			let currentPage = dataGrid.dataset.currentpage;
+			let pageSize = dataGrid.dataset.pagesize;
+
+			var offset = (currentPage - 1) * pageSize;
+			var paginacao = "";
+			if (buscarPendentes != 0) {
+				paginacao =
+					`   OFFSET ` + offset.toString() +
+					` ROWS FETCH NEXT ` + pageSize.toString() + ` ROWS ONLY`;
+			}
+
+			const pendentes = [];
+			let params = {};
+			const queryString = window.location.search;
+			const urlParams = new URLSearchParams(queryString);
+			const posto = urlParams.get("posto");
+			// Create a Date object for today
+			const today = new Date();
+
+			// Add 8 days to the current date
+			today.setDate(today.getDate() + 8);
+
+			// Format the date as "YYYY-MM-DD"
+			const year = today.getFullYear();
+			const month = (today.getMonth() + 1).toString().padStart(2, '0'); // Month is zero-based, so add 1
+			const day = today.getDate().toString().padStart(2, '0');
+
+			const eightDaysAfterToday = `${year}-${month}-${day}`;
+			var stringAcum;
+			if (valorDias == 0) {
+				stringAcum = "";
+			} else {
+				stringAcum = "AND data < @data8Dias ";
+			}
+			let varMyQuery = `declare @data8Dias date = '` + eightDaysAfterToday + `'
+								select 
+									* 
+								from
+									( 
+										select 
+											u_planeam.id 
+											, u_planeam.recursonome 
+											, u_planeam.recursocod 
+											, cast (u_planeam.inicio as date) as data 
+											, 'Entrega' as acao, u_planeam.obra 
+											,(select TOP 1 descricao from u_obras where codigo = u_planeam.obra ) as descObra
+
+										from 
+											u_planeam 
+										where 
+											not exists (Select id from u_eqpmov where u_eqpmov.planeamId = u_planeam.id ) 
+
+										union all 
+
+										select 
+											u_eqpmov.planeamId 
+											, u_eqp.Descricao
+											, u_eqp.codigo
+											, cast (isnull(u_planeam.fim, getdate()) as date) as data 
+											, 'Recolha' as acao 
+											, u_eqpmov.obra 
+											, (select TOP 1 descricao from u_obras where codigo = u_eqpmov.obra ) as descObra
+										from 
+											u_eqpmov 
+											left join u_eqp on u_eqp.id=u_eqpmov.eqpid
+											left join u_planeam on u_planeam.id=u_eqpmov.planeamId
+										where 
+											u_eqpmov.FIM = '19000101' 
+									) as tabela1 
+									WHERE (recursonome LIKE '%` + nomeFilter + `%' or recursocod LIKE '%` + nomeFilter + `%')
+									AND acao LIKE '%` + acaoFilter + `%'
+									AND obra LIKE '%` + obraFilter + `%' `
+				+ stringAcum +
+				`order by ` + orderColumn + ` ` + orderType + ' ' + paginacao;
+			//console.log(varMyQuery);
+			params.id = "xmltoquery";
+			params.select = varMyQuery;
+			$.ajax({
+				type: "POST",
+				url: "../api/code/run",
+				async: true,
+				data: JSON.stringify(params),
+				contentType: "application/json",
+			}).done(function (result, textStatus, jqXHR) {
+				try {
+					//console.log(result);
+					resposta = JSON.parse(result);
+				} catch {
+					return false
+				}
+				if (buscarPendentes == 0) {
+					buscarPendentes = parseInt(resposta.Dados.length);
+					return getPendentes(data8DiasDepois);
+				} else {
+					let totalRecords = buscarPendentes;
+					let totalPages = Math.ceil(totalRecords / pageSize);
+					if (totalRecords > 0) {
+						document.getElementById("totalPagesPendentes").innerHTML = totalPages;
+						for (var i = 0; i < resposta.Dados.length; ++i) {
+							pendentes.push(resposta.Dados[i]);
+						}
+						buildPendentes(pendentes);
+					} else {
+						document.getElementById("totalPagesPendentes").innerHTML = 1;
+					}
+					dataGrid.dataset.totalrecords = totalRecords;
+					dataGrid.dataset.totalpages = totalPages;
+				}
+			});
+		}
+
+		function getObras() {
+			const dataGrid = document.getElementById("DataGridObras");
+			const columnFilter = document.getElementsByClassName("column-filterObras");
+			const numberColumns = document.getElementById("DataGridObras").rows[0].cells.length;
+			const descricaoFilter = columnFilter[0].value;
+			//const clienteFilter = columnFilter[1].value;
+			const localFilter = columnFilter[1].value;
+			const contacto1Filter = columnFilter[2].value;
+			const contacto2Filter = columnFilter[3].value;
+			if (document.getElementById("filterClienteObrasSelect") != null) {
+				clienteFilter = document.getElementById("filterClienteObrasSelect").value;
+			} else {
+				clienteFilter = "";
+			}
+
+
+			//Get order
+			const orderColumn = dataGrid.dataset.ordercolumn;
+			const orderType = dataGrid.dataset.ordertype;
+			//Get Grid Attributes
+			const currentPage = dataGrid.dataset.currentpage;
+			const pageSize = dataGrid.dataset.pagesize;
+
+			var offset = (currentPage - 1) * pageSize;
+			var paginacao = "";
+			if (buscarObras != 0) {
+				paginacao =
+					`   OFFSET ` + offset.toString() +
+					` ROWS FETCH NEXT ` + pageSize.toString() + ` ROWS ONLY`;
+			}
+
+			const obras = [];
+			let params = {};
+			const queryString = window.location.search;
+			const urlParams = new URLSearchParams(queryString);
+			const posto = urlParams.get("posto");
+			const varMyQuery =
+				`select *, 
+						case when 
+							exists (select u_planeam.id from u_planeam left join u_eqpmov on u_eqpmov.planeamId=u_planeam.id 
+							where u_planeam.obra=u_obras.codigo and u_eqpmov.id is null)
+							or
+							exists (select id from u_eqpmov where u_eqpmov.obra=u_obras.codigo and u_eqpmov.fim='19000101')
+							then 1 else 0 end as eliminar
+					from u_obras
+					WHERE (descricao LIKE '%` + descricaoFilter + `%' or codigo LIKE '%` + descricaoFilter + `%')
+					AND local LIKE '%` + localFilter + `%'
+					AND email LIKE '%` + contacto1Filter + `%'
+					AND email2 LIKE '%` + contacto2Filter + `%'
+					AND no LIKE '%` + clienteFilter + `%'
+					ORDER BY ` + orderColumn + ` ` + orderType + ', id' + paginacao;
+			//console.log(varMyQuery);
+			params.id = "xmltoquery";
+			params.select = varMyQuery;
+			$.ajax({
+				type: "POST",
+				url: "../api/code/run",
+				async: true,
+				data: JSON.stringify(params),
+				contentType: "application/json",
+			}).done(function (result, textStatus, jqXHR) {
+				try {
+					//console.log(result);
+					resposta = JSON.parse(result);
+				} catch {
+					resposta = JSON.parse('{"Dados":[]}');
+				}
+				if (buscarObras == 0 && resposta.Dados.length > 0) {
+					buscarObras = parseInt(resposta.Dados.length);
+					return getObras();
+				} else {
+					const totalRecords = buscarObras;
+					buscarObras = 0;
+					const totalPages = Math.ceil(totalRecords / pageSize);
+					if (totalRecords > 0) {
+						document.getElementById("totalPagesObras").innerHTML = totalPages;
+						for (var i = 0; i < resposta.Dados.length; ++i) {
+							obras.push(resposta.Dados[i]);
+						}
+					} else {
+						document.getElementById("totalPagesObras").innerHTML = 1;
+					}
+					dataGrid.dataset.totalrecords = totalRecords;
+					dataGrid.dataset.totalpages = totalPages;
+					buildObras(obras);
+
+				}
+			});
+		}
+
+		async function getEquip() {
+			let dataGrid = document.getElementById("DataGrid");
+			const columnFilter = document.getElementsByClassName("column-filter");
+			const numberColumns = document.getElementById("DataGrid").rows[0].cells.length;
+			if (document.getElementById("filterTipoEqpSelect") != null) {
+				var tipoFilter = document.getElementById("filterTipoEqpSelect").value;
+			} else {
+				var tipoFilter = "";
+			}
+			if (document.getElementById("filterSubtipoEqpSelect") != null) {
+				var subtipoFilter = document.getElementById("filterSubtipoEqpSelect").value;
+			} else {
+				var subtipoFilter = "";
+			}
+			let codigoFilter = columnFilter[0].value;
+			let descricaoFilter = columnFilter[1].value
+			let clienteFilter = columnFilter[2].value;
+			let localAtual = columnFilter[3].value;
+
+			//Get order
+			let orderColumn = dataGrid.dataset.ordercolumn;
+			let orderType = dataGrid.dataset.ordertype;
+			//Get Grid Attributes
+			let currentPage = dataGrid.dataset.currentpage;
+			let pageSize = dataGrid.dataset.pagesize;
+
+			var offset = (currentPage - 1) * pageSize;
+			var paginacao = "";
+			if (buscarDados != 0) {
+				paginacao =
+					` OFFSET ` + offset.toString() +
+					` ROWS FETCH NEXT ` + pageSize.toString() + ` ROWS ONLY`;
+			}
+
+			const tempos = [];
+			let params = {};
+			const queryString = window.location.search;
+			const urlParams = new URLSearchParams(queryString);
+			const posto = urlParams.get("posto");
+			let varMyQuery =
+				`WITH CTE AS (
+						SELECT u_eqp.id,
+							u_eqp.codigo,
+							u_eqp.descricao,
+							u_eqp.tipo,
+							u_eqp.subtipo,
+							CASE WHEN u_eqpmov.id IS NULL then '' else u_eqpmov.obra end as obraatual,
+							CASE WHEN u_eqpmov.id IS NULL THEN 'Envio' ELSE 'Recolha' END as proximotipo,
+							CASE
+								WHEN u_eqpmov.id IS NOT NULL THEN u_eqpmov.obra
+								WHEN u_eqpmov.id IS NULL AND u_planeam.id IS NOT NULL THEN u_planeam.obra
+								ELSE ''
+							END AS proximaobra,
+							CASE
+								WHEN u_eqpmov.id IS NOT NULL THEN isnull(CAST(planomov.fim AS DATE), '19000101')
+								WHEN u_eqpmov.id IS NULL AND u_planeam.id IS NOT NULL THEN CAST(u_planeam.inicio AS DATE)     
+								ELSE '19000101'
+							END AS data,
+							u_obras.nome
+						FROM 
+							u_eqp
+							LEFT JOIN u_eqpmov ON u_eqpmov.id = (SELECT MAX(id) FROM u_eqpmov WHERE u_eqpmov.eqpID = u_eqp.id and cast(u_eqpmov.fim as date) = '19000101')
+							LEFT JOIN u_planeam as planomov on u_eqpmov.planeamId=planomov.id
+							LEFT JOIN u_planeam ON u_planeam.Id = (select min(firstplano.id) from u_planeam as firstplano where firstplano.eqpId=u_eqp.id)
+							LEFT JOIN u_obras ON u_eqpmov.obra = u_obras.codigo and u_eqpmov.no=u_obras.no
+						)
+						SELECT id,
+							codigo,
+							descricao,
+							tipo,
+							subtipo,
+							proximotipo,
+							obraatual,
+							proximaobra,
+							isnull((select top 1 descricao from u_obras where codigo = obraatual), '') as descObraatual,
+							isnull((select top 1 descricao from u_obras where codigo = proximaobra), '') as descproximaobra,
+							data,
+							CASE
+								WHEN EXISTS (
+									SELECT u_planeam.id
+									FROM u_planeam
+										LEFT JOIN u_eqpmov ON u_eqpmov.planeamId = u_planeam.id
+									WHERE u_planeam.recursonome = CTE.descricao
+										AND u_eqpmov.id IS NULL
+								)
+								OR EXISTS (
+									SELECT id
+									FROM u_eqpmov
+									WHERE u_eqpmov.eqpid = CTE.id
+										AND u_eqpmov.fim = '1900-01-01'
+								) THEN 1
+								ELSE 0
+							END AS eliminar,
+							nome
+						FROM CTE
+						WHERE
+						codigo LIKE '%` + codigoFilter + `%'
+						AND descricao LIKE '%` + descricaoFilter + `%' 
+						AND tipo LIKE '%` + tipoFilter + `%'
+						AND subtipo LIKE '%` + subtipoFilter + `%'
+						AND (obraatual LIKE '%` + localAtual + `%' or isnull((select top 1 descricao from u_obras where codigo = obraatual), '') LIKE '%` + localAtual + `%')
+						AND (nome LIKE '%` + clienteFilter + `%' or nome is null)
+						ORDER BY ` + orderColumn + ` ` + orderType + paginacao;
+			//console.log(varMyQuery);
+			params.id = "xmltoquery";
+			params.select = varMyQuery;
+			$.ajax({
+				type: "POST",
+				url: "../api/code/run",
+				async: true,
+				data: JSON.stringify(params),
+				contentType: "application/json",
+			}).done(function (result, textStatus, jqXHR) {
+				try {
+					//console.log(result);
+					resposta = JSON.parse(result);
+				} catch {
+					resposta = JSON.parse('{"Dados":[]}');
+				}
+				if (buscarDados == 0 && resposta.Dados.length > 0) {
+					buscarDados = parseInt(resposta.Dados.length);
+					return getEquip();
+				} else {
+					let totalRecords = buscarDados;
+					buscarDados = 0;
+					let totalPages = Math.ceil(totalRecords / pageSize);
+					if (totalRecords > 0) {
+						document.getElementById("totalPages").innerHTML = totalPages;
+						for (var i = 0; i < resposta.Dados.length; ++i) {
+							tempos.push(resposta.Dados[i]);
+						}
+					} else {
+						document.getElementById("totalPages").innerHTML = 1;
+					}
+					dataGrid.dataset.totalrecords = totalRecords;
+					dataGrid.dataset.totalpages = totalPages;
+					buildTable(tempos);
+				}
+			});
+		}
+
+		function buildTable(data) {
+			let tBody = document.getElementById("tableBody");
+			tBody.innerHTML = "";
+			for (var i = 0; i < data.length; i++) {
+				let row = "";
+				let date = data[i].data
+				if (date == "") {
+					date = "01/01/1900 00:00:00"
+				}
+				let [day, month, year] = date.split('/');
+				year = year.split(' ')[0];
+				let dateObject;
+				dateObject = new Date(year, month - 1, day);
+				const currentDate = new Date()
+				dataDefault = new Date(1900, 0, 1);
+
+				//Atribuído a Obra
+				if (data[i].proximaobra != "") {
+					row += "<tr style=\"background-color:#fffdd0;;\">"; //laranja
+				}
+				//Disponível
+				else if (data[i].proximaobra = "") {
+					row += "<tr style=\"background-color:#e6f9de;\">"; //verde
+					//se a próxima data tá vazia	
+				}
+				//Se a próxima data é antes de hoje
+				else if (data[i].descObraatual == 'Avariado' || data[i].descObraatual == 'Em Manutenção') {
+					row += "<tr style=\"background-color:#f9dfde;\">"; //vermelho
+				}
+				else {
+					row += "<tr>"; //branco
+				}
+				row += '<td style="font-size:16px;padding:8px">&nbsp;' + data[i].tipo + "</td>";
+				row += '<td style="font-size:16px;padding:8px">&nbsp;' + data[i].subtipo + "</td>";
+				row += '<td style="font-size:16px;padding:8px">&nbsp;' + data[i].codigo + "</td>";
+				row += '<td style="font-size:16px;padding:8px">&nbsp;' + data[i].descricao + "</td>";
+				row += '<td style="font-size:16px;padding:8px">&nbsp;' + data[i].nome + "</td>";
+				if (data[i].obraatual == "") {
+					row += '<td style="font-size:16px;padding:8px">&nbsp;Estaleiro</td>';
+				} else {
+					row += '<td style="font-size:16px;padding:8px">&nbsp;' + data[i].obraatual + " - " + data[i].descObraatual + "</td>";
+				}
+
+
+				row += '<td style="font-size: 16px;  text-align: center;"><button id="btnAlterar" type="button" onclick="alterarRegisto('
+				//se não tiver data de inicio, data de inicio ou fim, vão aparecer outros icones
+				if (data[i].proximotipo != "Envio") {
+					row += data[i].id +
+						')" class= "btn_azul" style="text-align: center;"><i class="fa fa-arrow-left" aria-hidden="true"></i></button>&nbsp; </div></td>';
+					//caso se tiver ambas as datas alteradas mas a data final é menor que a data de hoje (ou seja, a máquina está no estaleiro)
+				} else {
+					row += data[i].id +
+						')" class= "btn_azul" style="text-align: center;"><i class="fa fa-arrow-right"></i></button>&nbsp; </div></td>';
+				}
+				row += '<td style="font-size: 16px;  text-align: center;">'
+					+ '<button id="btnAgendar" type="button" onclick="agendamentoPreenchidoEquip(\'' + data[i].id + '\', \'' + data[i].tipo + '\', \'' + data[i].subtipo + '\')" class="btn_verde" style="text-align: center;">AGENDAR</button>'
+					+ '</td>';
+				row += '<td style="font-size: 16px;  text-align: center;">'
+					+ `<button id="btnAgendar" type="button" onclick="navegaAgendamento(\'` + data[i].tipo + `\', \'` + data[i].subtipo + `\')" class="btn_azul1" style="text-align: center;"><svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><style>svg{fill:#ffffff}</style><path d="M32 32c17.7 0 32 14.3 32 32V400c0 8.8 7.2 16 16 16H480c17.7 0 32 14.3 32 32s-14.3 32-32 32H80c-44.2 0-80-35.8-80-80V64C0 46.3 14.3 32 32 32zm96 96c0-17.7 14.3-32 32-32l96 0c17.7 0 32 14.3 32 32s-14.3 32-32 32H160c-17.7 0-32-14.3-32-32zm96 64H352c17.7 0 32 14.3 32 32s-14.3 32-32 32H224c-17.7 0-32-14.3-32-32s14.3-32 32-32zm160 96h64c17.7 0 32 14.3 32 32s-14.3 32-32 32H384c-17.7 0-32-14.3-32-32s14.3-32 32-32z"/></svg></button>`
+					+ '</td>';
+				row += '<td style="font-size: 16px;  text-align: center;">'
+					+ '<button type="button" onclick="mostraBoxEditarEquip(\'' + data[i].id + '\')" class="btn_azul" style="text-align: center;"><i class="fa fa-pencil"></i></button>'
+					+ '</td>';
+				if (data[i].eliminar == "0") {
+					row += '<td style="font-size: 16px;  text-align: center;">'
+						+ '<button type="button" onclick="apagarEquipamento(\'' + data[i].id + '\')" class="btn_vermelho" style="text-align: center;"><i class="fa fa-trash"></i></button>'
+						+ '</td>';
+				} else if (data[i].descObraatual != '') {
+					row += '<td style="font-size: 16px;  text-align: center;">'
+						+ '<button type="button" onclick="apagarMovimentoEquipamento(\'' + data[i].id + '\')" class="btn_azul" style="text-align: center;"><i class="fa fa-trash"></i></button>'
+						+ '</td>';
+				} else {
+					row += '<td style="font-size: 16px;  text-align: center;"></td>';
+				}
+				row += "</tr>";
+
+				tBody.innerHTML += row;
+			}
+		}
+
+		function apagarMovimentoEquipamento(eqpid) {
+			var params = {}
+			$.ajax({
+				type: "GET",
+				url:
+					"../programs/gensel.aspx?cscript=deleteEqpMovimento&eqpid=" + eqpid,
+				data: JSON.stringify(params),
+				async: false,
+				contentType: "application/json",
+				success: function (response) {
+					getEquip();
+				},
+				error: function (response) {
+					//alert("Erro a encontrar arVend por favor tente de novo!");
+				},
+			});
+		}
+
+		function buildObras(data) {
+			let tBody = document.getElementById("tableBodyObras");
+			tBody.innerHTML = "";
+			let row = "";
+			for (var i = 0; i < data.length; i++) {
+				row += '<td  style=" font-size:16px;padding:8px">' + data[i].codigo + " - " + data[i].descricao + "</td>";
+				row += '<td style=" font-size:16px; padding:8px">' + data[i].nome + "</td>";
+				row += '<td style=" font-size:16px; padding:8px">' + data[i].local + "</td>";
+				row += '<td style=" font-size:16px;padding:8px">' + data[i].email + "</td>";
+				row += '<td style=" font-size:16px;padding:8px">' + data[i].email2 + "</td>";
+				row += '<td style="display:none; font-size:16px; ">' + data[i].id + "</td>";
+				row += '<td style="font-size: 16px; padding: 8px; text-align: center;">'
+					+ '<button id="btnAlterar" type="button" onclick="abrirModalObras(' + data[i].id + ')" class="btn_azul" style="text-align: center;"><i class="fa fa-pencil"></i></button>'
+					+ '</td>'
+				row += '<td style="font-size: 16px; padding: 8px; text-align: center;">'
+					+ '<button id="btnAgendar" type="button" onclick="agendamentoPreenchidoObra(\'' + data[i].nome + '\', \'' + data[i].codigo + '\')" class="btn_verde" style="text-align: center;">AGENDAR</button>'
+					+ '</td>';
+				if (data[i].eliminar == "0") {
+					row += '<td style="font-size: 16px; padding: 8px; text-align: center;">'
+						+ '<button id="btnAgendar" type="button" onclick="apagarObra(\'' + data[i].id + '\')" class="btn_vermelho" style="text-align: center;"><i class="fa fa-trash"></i></button>'
+						+ '</td>';
+				}
+
+
+				row += "</tr>";
+			}
+			tBody.innerHTML += row;
+		}
+
+
+
+		function navegaAgendamento(tipo, subtipo) {
+			document.getElementById('btn_agendamento').click();
+			document.getElementById("tipoEquipamento").value = tipo;
+			document.getElementById("subtipoEquipamento").value = subtipo;
+			enableGantt(diasGantt);
+		}
+
+		function buildPendentes(data) {
+			let tBody = document.getElementById("tableBodyPendentes");
+			tBody.innerHTML = "";
+			let row = "";
+			const now = new Date();
+			var now8Days = new Date();
+			now8Days.setDate(now.getDate() + 8);
+			//verde: background-color: #e6f9de;
+			//amarelo: background-color:  #f9f7de;
+			//vermelho: background-color:#f9dfde;
+			for (var i = 0; i < data.length; i++) {
+				const string = data[i].data.slice(0, 10).split('/');
+				var string1 = string[1] + "/" + string[0] + "/" + string[2];
+				const dataFormatada = new Date(Date.parse(string1));
+				if (dataFormatada.getTime() < now.getTime()) {
+					row += "<tr style=\"background-color:#f9dfde;\">";
+				} else if (dataFormatada.getTime() > now.getTime() && now8Days.getTime() > dataFormatada.getTime()) {
+					row += "<tr style=\"background-color:#f9f7de;\">";
+				} else if (dataFormatada.getTime() > now.getTime()) {
+					row += "<tr style=\"background-color:#e6f9de;\">";
+				}
+				row += '<td style=" font-size:16px;padding:8px">&nbsp;' + data[i].recursocod + " - " + data[i].recursonome + '</td>';
+				row += '<td style=" font-size:16px;padding:8px">&nbsp;' + data[i].data.slice(0, 10) + "</td>";
+				row += '<td style=" font-size:16px; padding:8px">&nbsp;' + data[i].acao + "</td>";
+				row += '<td style=" font-size:16px;padding:8px">&nbsp;' + data[i].obra + " - " + data[i].descObra + "</td>";
+				row += '<td style="font-size: 16px; padding: 8px; display: flex;">&nbsp; '
+					+ '<button id="btnAlterar" type="button" onclick="abrirModalPendentes(JSON.parse(\''
+					+ JSON.stringify(data[i]).replace(/'/g, '&apos;').replace(/"/g, '&quot;') + '\'))"'
+					+ 'class="btn_azul" style="float: right;"><i class= ' + (data[i].acao == 'Recolha' ? '"fa fa-arrow-left"' : '"fa fa-arrow-right"') + '></i></button>&nbsp;'
+					+ '</td>';
+				row += "</tr>";
+			}
+			tBody.innerHTML += row;
+		}
+
+		function apagarEquipamento(id) {
+			var params = {}
+			$.ajax({
+				type: "GET",
+				url:
+					"../programs/gensel.aspx?cscript=apagaEqp&id=" + id,
+				data: JSON.stringify(params),
+				async: false,
+				contentType: "application/json",
+				success: function (response) {
+					getEquip();
+				},
+				error: function (response) {
+					//alert("Erro a encontrar arVend por favor tente de novo!");
+				},
+			});
+		}
+
+		function apagarObra(id) {
+			var params = {}
+			$.ajax({
+				type: "GET",
+				url:
+					"../programs/gensel.aspx?cscript=apagaObra&id=" + id,
+				data: JSON.stringify(params),
+				async: false,
+				contentType: "application/json",
+				success: function (response) {
+					getObras();
+				},
+				error: function (response) {
+					//alert("Erro a encontrar arVend por favor tente de novo!");
+				},
+			});
+
+		}
+
+		function abrirModalPendentes(data) {
+			document.getElementById("modal-pendentes").style.display = "block";
+			let obra = document.getElementById("obraPend").value = data.obra.trim() + " - " + data.descObra.trim();
+			let cod = document.getElementById("codPend").value = data.recursocod.trim();
+			let acao = document.getElementById("acaoPend").value = data.acao.trim();
+			var diaMesAno = data.data.trim();
+
+			const string = diaMesAno.split('/');
+			string[2] = string[2].split(' ');
+			var string1 = string[2][0] + "-" + string[1] + "-" + string[0];
+			var dateObject = new Date(string[2][0], string[1], string[0]);
+			var currentDate = new Date();
+			var date = "";
+			if (dateObject.getTime() > currentDate.getTime()) {
+				var month = (currentDate.getMonth() + 1).toString().padStart(2, '0');
+				var day = currentDate.getDate().toString().padStart(2, '0');
+				date = currentDate.getFullYear() + "-" + month + "-" + day;
+			} else if (dateObject.getTime() < currentDate.getTime()) {
+				var month = (dateObject.getMonth() + 1).toString().padStart(2, '0');
+				var day = dateObject.getDate().toString().padStart(2, '0');
+				date = dateObject.getFullYear() + "-" + month + "-" + day;
+			}
+			document.getElementById("dataPendente").value = date;
+			document.getElementById("divPendente").innerHTML = '<button class="btn_verde" id="buttonAlterarObra" onclick="insertMovimReal(JSON.parse(\''
+				+ JSON.stringify(data).replace(/'/g, '&apos;').replace(/"/g, '&quot;') + '\'))" style="'
+				+ 'margin-left: auto; '
+				+ 'text-align: center;'
+				+ 'width: fit-content;'
+				+ 'float: right;'
+				+ 'margin-bottom: 1rem;" type="button">'
+				+ '<i class="fa fa-check"></i>'
+				+ '&nbsp;Inserir movimento'
+				+ '</button>';
+		}
+
+		function insertMovimReal(data) {
+			let eqpid;
+			let obra = data.obra.trim();
+			let data1 = document.getElementById("dataPendente").value;
+
+			//Tem que se inserir na tabela u_eqpmov esta tem os atributos: eqpid, data, tipomov, obra, planeamId
+			//primeiro tem que se buscar o id do equipamento, faz-se o select com o codigo do recurso
+			var params = {};
+			var myQuery = `SELECT id
+						FROM u_eqp
+						WHERE codigo = '` + data.recursocod.trim() + `'`;
+			params.id = "SELECTtoJSON";
+			params.select = myQuery;
+			$.ajax({
+				type: "POST",
+				url: "../api/code/run",
+				async: false,
+				data: JSON.stringify(params),
+				contentType: "application/json",
+			}).done(function (result, textStatus, jqXHR) {
+				var resposta = JSON.parse(result);
+				equipamento = resposta.Dados;
+				eqpid = equipamento[0].id;
+			}).error(function (response) {
+				alert("Erro a encontrar DadosJSON por favor tente de novo!");
+			});
+			var novo = 1;
+			var eqpmovid = 0;
+			if (data.acao.trim() == 'Entrega') {
+				novo = 1;
+			}
+			if (data.acao.trim() == 'Recolha') {
+				novo = 0;
+			}
+			params = {};
+			myQuery = `SELECT id
+						FROM u_eqpmov
+						WHERE planeamId = '` + data.id + `'`;
+			params.id = "SELECTtoJSON";
+			params.select = myQuery;
+			$.ajax({
+				type: "POST",
+				url: "../api/code/run",
+				async: false,
+				data: JSON.stringify(params),
+				contentType: "application/json",
+			}).done(function (result, textStatus, jqXHR) {
+				try {
+					var resposta = JSON.parse(result);
+				} catch {
+					resposta = JSON.parse("{\"Dados\":[]}");
+				}
+				var DadosJSON = resposta.Dados;
+				if (DadosJSON.length > 0) {
+					eqpmovid = DadosJSON[0].id;
+				}
+			}).error(function (response) {
+				alert("Erro a encontrar DadosJSON por favor tente de novo!");
+			});
+			params = {}
+			$.ajax({
+				type: "GET",
+				url:
+					"../programs/gensel.aspx?cscript=insertEquipMov&eqpid=" + eqpid +
+					"&data=" + data1 +
+					"&obra=" + obra +
+					"&novo=" + novo +
+					"&eqpmovid=" + eqpmovid +
+					"&planeamId=" + data.id,
+				data: JSON.stringify(params),
+				contentType: "application/json",
+				success: function (response) { },
+				error: function (response) {
+					//alert("Erro a encontrar arVend por favor tente de novo!");
+				},
+			});
+			params = {};
+			myQuery = `SELECT email, email2
+						FROM u_obras
+						WHERE codigo = '` + obra + `'`;
+			params.id = "SELECTtoJSON";
+			params.select = myQuery;
+			var email;
+			var email2;
+			$.ajax({
+				type: "POST",
+				url: "../api/code/run",
+				async: false,
+				data: JSON.stringify(params),
+				contentType: "application/json",
+			}).done(function (result, textStatus, jqXHR) {
+				try {
+					resposta = JSON.parse(result);
+				} catch {
+					resposta = JSON.parse('{"Dados":[]}');
+				}
+				if (resposta.Dados.length == 0) {
+					email = "";
+					email2 = "";
+				} else {
+					for (var i = 0; i < resposta.Dados.length; i++) {
+						email = resposta.Dados[i].email;
+						email2 = resposta.Dados[i].email2;
+					}
+				}
+			}).error(function (response) {
+				alert("Erro a encontrar DadosJSON por favor tente de novo!");
+			});
+			if (email != "" || email2 != "") {
+				var var3 = email;
+				if (email != "") {
+					if (!email.endsWith(";")) {
+						var3 += ";";
+					}
+				}
+				var3 += email2;
+				var3 = var3.trim();
+				email = var3;
+				var emailArray = email.split(";");
+				emailArray.forEach(element => {
+					if (element != "") {
+						var parts = data1.split("-");
+						var year = parts[0];
+						var month = parts[1];
+						var day = parts[2];
+						var formattedDate = day + "/" + month + "/" + year;
+						let recursonome = data.recursonome.trim();
+						var body = `<html>
+											<body>
+												<div style="width: 30%;">
+													<table class="table table-striped">
+														<tbody>
+															<tr>
+																<td style="font-weight: bold;background-color: #999; color: #FFFFFF;border-radius: 8px; width: 40%;">Equipamento</td>
+																<td style="margin-left: 2rem;">` + recursonome + `</td>
+															</tr>
+															<tr>
+																<td style="font-weight: bold;background-color: #999; color: #FFFFFF;border-radius: 8px;width: 40%;">Ação</td>
+																<td style="margin-left: 2rem;">Entrega em Obra</td>
+															</tr>
+															<tr>
+																<td style="font-weight: bold;background-color: #999; color: #FFFFFF;border-radius: 8px;width: 40%;">Obra</td>
+																<td style="margin-left: 2rem;">` + obra + `</td>
+															</tr>
+															<tr>
+																<td style="font-weight: bold;background-color: #999; color: #FFFFFF;border-radius: 8px;width: 40%;">Data</td>
+																<td style="margin-left: 2rem;">` + formattedDate + `</td>
+															</tr>
+														</tbody>
+													</table>
+												</div>
+											</body>
+										</html>`;
+						var encodedBody = encodeURIComponent(body);
+						params = {};
+						$.ajax({
+							type: "GET",
+							url:
+								"../programs/gensel.aspx?cscript=sendEmails&destinatarios=" + element +
+								"&assunto=Movimento na Obra " + obra +
+								"&body=" + encodedBody,
+							data: JSON.stringify(params),
+							async: false,
+							contentType: "application/json",
+							success: function (response) {
+								alert("Movimento lançado com sucesso!");
+								fechaboxPendentes();
+								getPendentes(data8DiasDepois);
+								fillSelectBoxes(data8DiasDepois)
+							},
+							error: function (response) {
+								alert("Erro a encontrar arVend por favor tente de novo!");
+							},
+						});
+					}
+				});
+			}
+
+		}
+
+		function fechaboxPendentes() {
+			document.getElementById("modal-pendentes").style.display = "none";
+		}
+
+		function abrirModalObras(id) {
+			document.getElementById("modal-obras").style.display = "block";
+			var params = {};
+			var myQuery = `SELECT *
+							FROM u_obras
+							WHERE id = ` + id;
+			params.id = "SELECTtoJSON";
+			params.select = myQuery;
+			$.ajax({
+				type: "POST",
+				url: "../api/code/run",
+				async: false,
+				data: JSON.stringify(params),
+				contentType: "application/json",
+			})
+				.done(function (result, textStatus, jqXHR) {
+					var resposta = JSON.parse(result);
+					equipamento = resposta.Dados;
+					var no = equipamento[0].no;
+					var nome = equipamento[0].nome;
+					var codigo = equipamento[0].codigo;
+					var descricao = equipamento[0].descricao;
+					var local = equipamento[0].local;
+					var email = equipamento[0].email;
+					var email2 = equipamento[0].email2;
+					document.getElementById("noObraEdit").value = no;
+					document.getElementById("nomeObraEdit").value = nome;
+					document.getElementById("codObraEdit").value = codigo;
+					document.getElementById("descObraEdit").value = descricao;
+					document.getElementById("localObraEdit").value = local;
+					document.getElementById("nome-email1").value = email;
+					document.getElementById("nome-email2").value = email2;
+					document.getElementById("botao_Alterar").innerHTML = '<button class="btn_verde" id="buttonAlterarObra" onclick="alterarObra(' + equipamento[0].id + ')" style="'
+						+ 'margin-left: auto; '
+						+ 'text-align: center;'
+						+ 'width: fit-content;'
+						+ 'float: right;'
+						+ 'margin-bottom: 1rem;" type="button">'
+						+ '<i class="fa fa-check"></i>'
+						+ '&nbsp;Alterar obra'
+						+ '</button>'
+				})
+				.error(function (response) {
+					alert("Erro a encontrar DadosJSON por favor tente de novo!");
+				});
+		}
+
+		function fechaboxObras() {
+			document.getElementById("modal-obras").style.display = "none";
+		}
+
+		function alterarObra(id) {
+			var no = document.getElementById("noObraEdit").value;
+			var nome = document.getElementById("nomeObraEdit").value;
+			var codigo = document.getElementById("codObraEdit").value;
+			var descricao = document.getElementById("descObraEdit").value;
+			var local = document.getElementById("localObraEdit").value;
+			var email = document.getElementById("nome-email1").value;
+			var email2 = document.getElementById("nome-email2").value;
+			//Tirar todos os espaços desnecessários que vêm do JavaScript
+			var aux = email.replace(/\s+/g, ' ').trim();
+			var aux1 = email2.replace(/\s+/g, ' ').trim();
+			var params = {};
+			$.ajax({
+				type: 'GET',
+				url: '../programs/gensel.aspx?cscript=updateObras&no=' + no +
+					'&nome=' + nome +
+					'&codigo=' + codigo +
+					'&descricao=' + descricao +
+					'&local=' + local +
+					'&email=' + aux +
+					"&email2=" + aux1 +
+					"&id=" + id,
+				data: JSON.stringify(params),
+				async: false,
+				contentType: 'application/json',
+				success: function (response) {
+					var aux = document.getElementById("nome-email1").value = "";
+					var aux1 = document.getElementById("nome-email2").value = "";
+					fechaboxObras();
+					getObras();
+				},
+				error: function (response) {
+					alert("Erro a encontrar arVend por favor tente de novo!")
+					console.log(response);
+					console.log(response.error);
+				}
+			});
+		}
+
+		function alterarRegisto(id) {
+			mostrarbox();
+			getEquipId(id);
+		}
+
+		function getClienteObra() {
+			document.getElementById("div-clientes").innerHTML = "";
+			var params = {};
+			varMyQuery = `select distinct(nome), no
+							from u_obras`;
+			params.id = "xmltoquery";
+			params.select = varMyQuery;
+			$.ajax({
+				type: "POST",
+				url: "../api/code/run",
+				async: true,
+				data: JSON.stringify(params),
+				contentType: "application/json",
+			}).done(function (result, textStatus, jqXHR) {
+				try {
+					resposta = JSON.parse(result);
+				} catch {
+					resposta = JSON.parse('{"Dados":[]}');
+				}
+				let options = ""
+				options += "<option value=\"\"></option>"
+				var stringInic = "<label>Cliente</label>";
+				stringInic += "<select class=\"input\" onchange=\"getObrasCliente()\" id=\"clienteEquips\" placeholder=\"Selecione o cliente\" value=\"\">"
+				for (let index = 0; index < resposta.Dados.length; index++) {
+					options += '<option value="' + resposta.Dados[index].no + '">' + resposta.Dados[index].nome + '</option>'
+				}
+				document.getElementById("div-clientes").innerHTML = stringInic + options;
+				new TomSelect("#clienteEquips", {
+					create: false,
+					sortField: {
+						field: "text",
+						direction: "asc"
+					},
+					maxItems: 1,
+					closeAfterSelect: true
+				});
+			});
+		}
+
+		function getObrasCliente() {
+			document.getElementById("div-obras").innerHTML = "";
+			var no;
+			if (document.getElementById("clienteEquips") == null) {
+				no = "";
+			} else {
+				no = document.getElementById("clienteEquips")[document.getElementById("clienteEquips").selectedIndex].value;
+			}
+			var params = {};
+			var omeuselect = `select *
+							from u_obras where no like '%`+ no + `%'`;
+			params.id = 'SELECTtoJSON';
+			params.select = omeuselect;
+			$.ajax({
+				type: 'POST',
+				url: '../api/code/run',
+				async: false,
+				data: JSON.stringify(params),
+				contentType: 'application/json'
+			}).done(function (result, textStatus, jqXHR) {
+				try {
+					var resposta = JSON.parse(result);
+				} catch {
+					resposta = JSON.parse("{\"Dados\":[]}");
+				}
+				var DadosJSON = resposta.Dados
+				let escolhas = "";
+				escolhas += "<option value=\"\"></option>"
+				var stringInic = "<label>Obra</label>";
+				stringInic += "<select class=\"input\" id=\"obrasEquip\" placeholder=\"Selecione a obra\" value=\"\">";
+				for (var i = 0; i < DadosJSON.length; ++i) {
+					var codigo = $.trim(DadosJSON[i].codigo);
+					escolhas += "<option value=" + codigo + ">" + $.trim(DadosJSON[i].codigo) + " - " + $.trim(DadosJSON[i].descricao) + "</option>"
+				}
+				document.getElementById("div-obras").innerHTML += stringInic + escolhas + "</select>";
+				new TomSelect("#obrasEquip", {
+					create: false,
+					sortField: {
+						field: "text",
+						direction: "asc"
+					},
+					maxItems: 1,
+					closeAfterSelect: true
+				});
+			}).error(function (response) {
+				alert("Erro a encontrar DadosJSON por favor tente de novo!")
+				console.log(response);
+				console.log(response.error);
+			})
+		}
+
+		//Vai buscar as informações sobre o equipamento específico que selecionou
+		function getEquipId(id) {
+			var params = {};
+			var myQuery =
+				`select top 1 codigo,
+				u_eqp.id as id,
+				descricao,
+				u_eqp.tipo as Tipo,
+				u_eqp.subtipo,
+				isnull(u_eqpmov.obra, 'Estaleiro') as obra,
+				isnull(u_eqpmov.inicio, '19000101') as Inicio,
+				isnull(u_eqpmov.fim, '19000101') as Fim,
+				CASE
+					WHEN u_eqpmov.id IS NOT NULL THEN isnull(CAST(planomov.fim AS DATE), '19000101')
+					WHEN u_eqpmov.id IS NULL
+					AND u_planeam.id IS NOT NULL THEN CAST(u_planeam.inicio AS DATE)
+					ELSE '19000101'
+				END AS data,
+			(
+					select top 1 codigo
+					from u_obras
+					where codigo = CASE
+							WHEN u_eqpmov.id IS NOT NULL THEN u_eqpmov.obra
+							WHEN u_eqpmov.id IS NULL AND u_planeam.id IS NOT NULL THEN u_planeam.obra
+							ELSE ''
+						END
+				) as codObra,
+			(
+					select top 1 descricao
+					from u_obras
+					where codigo = CASE
+							WHEN u_eqpmov.id IS NOT NULL THEN u_eqpmov.obra
+							WHEN u_eqpmov.id IS NULL AND u_planeam.id IS NOT NULL THEN u_planeam.obra
+							ELSE ''
+						END               
+				) as descObra,
+				ISNULL(u_eqpmov.no, u_planeam.no) AS cliente,
+				(select  top 1 nome from u_obras where u_obras.no = ISNULL(u_eqpmov.no, u_planeam.no)) as clienteNome,
+				u_planeam.inicio as planeamInicio
+			FROM u_eqp
+				left join u_eqpmov on u_eqpmov.eqpid = u_eqp.id
+				LEFT JOIN u_planeam as planomov on u_eqpmov.planeamId = planomov.id
+				LEFT JOIN u_planeam ON u_planeam.Id = (
+					select min(firstplano.id)
+					from u_planeam as firstplano
+					where firstplano.eqpId = u_eqp.id
+				)
+				WHERE  u_eqp.id = ` + id + `
+				order by u_eqpmov.id desc`;
+
+			params.id = "SELECTtoJSON";
+			params.select = myQuery;
+			$.ajax({
+				type: "POST",
+				url: "../api/code/run",
+				async: false,
+				data: JSON.stringify(params),
+				contentType: "application/json",
+			})
+				.done(function (result, textStatus, jqXHR) {
+					var resposta = JSON.parse(result);
+					equipamento = resposta.Dados;
+					var inicio = $.trim(equipamento[0].Inicio);
+					var fim = $.trim(equipamento[0].Fim);
+					var proximadata = equipamento[0].data;
+					var valorDefaultData = "01/01/1900 00:00:00";
+					var cliente = equipamento[0].cliente;
+					//caso o utilizador ainda não tenha inserido data de inicio
+					if (inicio == valorDefaultData && fim == valorDefaultData && proximadata == valorDefaultData) {
+						// Create a new Date object
+						var currentDate = new Date();
+
+						// Get the individual components of the date (year, month, day)
+						var year = currentDate.getFullYear();
+						var month = currentDate.getMonth() + 1; // Note: Months are zero-based, so we add 1
+						var day = currentDate.getDate();
+
+						// Format the date as YYYY-MM-DD
+						var formattedDate = year + '-' + (month < 10 ? '0' : '') + month + '-' + (day < 10 ? '0' : '') + day;
+
+						// Display the formatted date
+						document.getElementById("datafim2").value = formattedDate;
+
+						document.getElementById("clienteEquipsMov").value = cliente;
+						askInicDate();
+					} else if (inicio != valorDefaultData && fim == valorDefaultData) {
+						askEndDate();
+						var codObra = equipamento[0].codObra;
+						var descObra = equipamento[0].descObra;
+						var codigo = equipamento[0].codigo;
+						var descricao = equipamento[0].descricao;
+						var tipo = equipamento[0].Tipo;
+						var subtipo = equipamento[0].subtipo;
+						var clienteNome = equipamento[0].clienteNome;
+						proximadata = proximadata.split(" ")[0];
+						proximadata = proximadata.split("/");
+						var day = parseInt(proximadata[0], 10);
+						var month = parseInt(proximadata[1], 10) - 1; // Months in JavaScript's Date are 0-indexed
+						var year = parseInt(proximadata[2], 10);
+						var dateObject = new Date(year, month, day);
+						var currentDate = new Date();
+						if (year == (currentDate.getFullYear() + 5)) {
+							year = parseInt(proximadata[2], 10) - 5;
+						} else {
+							year = parseInt(proximadata[2], 10);
+						}
+						var date = "";
+						if (dateObject.getTime() > currentDate.getTime()) {
+							var month = (currentDate.getMonth() + 1).toString().padStart(2, '0');
+							var day = currentDate.getDate().toString().padStart(2, '0');
+							date = currentDate.getFullYear() + "-" + month + "-" + day;
+						} else if (dateObject.getTime() < currentDate.getTime()) {
+							var month = (dateObject.getMonth() + 1).toString().padStart(2, '0 ');
+							var day = dateObject.getDate().toString().padStart(2, '0');
+							date = dateObject.getFullYear() + "-" + month + "-" + day;
+						}
+						//mudar o texto do input da obra
+						document.getElementById("clienteEquipsMov").value = cliente;
+						document.getElementById("clienteEqp").value = clienteNome;
+						document.getElementById("obraEqp").value = codObra + " - " + descObra;
+						document.getElementById("codEqpFin").value = codigo;
+						document.getElementById("descEqpFin").value = descricao;
+						document.getElementById("tipoEqpFin").value = tipo;
+						document.getElementById("subtipoEqpFin").value = subtipo;
+						document.getElementById("datafim2").value = date;
+						document.getElementById("label-dtfimEqpmov").innerText = "Data de Recolha";
+					} else if (proximadata != valorDefaultData && inicio == valorDefaultData && fim == valorDefaultData) {
+						askEndDate();
+						var codObra = equipamento[0].codObra;
+						var descObra = equipamento[0].descObra;
+						var codigo = equipamento[0].codigo;
+						var descricao = equipamento[0].descricao;
+						var tipo = equipamento[0].Tipo;
+						var subtipo = equipamento[0].subtipo;
+						var clienteNome = equipamento[0].clienteNome;
+						var planeamInicio = equipamento[0].planeamInicio;
+						proximadata = proximadata.split(" ")[0];
+						proximadata = proximadata.split("/");
+						var day = parseInt(proximadata[0], 10);
+						var month = parseInt(proximadata[1], 10) - 1; // Months in JavaScript's Date are 0-indexed
+						var year = parseInt(proximadata[2], 10);
+						var dateObject = new Date(year, month, day);
+						var currentDate = new Date();
+						var date = "";
+						if (dateObject.getTime() > currentDate.getTime()) {
+							var month = (currentDate.getMonth() + 1).toString().padStart(2, '0');
+							var day = currentDate.getDate().toString().padStart(2, '0');
+							date = currentDate.getFullYear() + "-" + month + "-" + day;
+						} else if (dateObject.getTime() < currentDate.getTime()) {
+							var month = (dateObject.getMonth() + 1).toString().padStart(2, '0');
+							var day = dateObject.getDate().toString().padStart(2, '0');
+							date = dateObject.getFullYear() + "-" + month + "-" + day;
+						}
+						document.getElementById("datafim2").value = date;
+						document.getElementById("clienteEqp").value = clienteNome;
+						document.getElementById("clienteEquipsMov").value = cliente;
+						document.getElementById("obraEqp").value = codObra + " - " + descObra;
+						document.getElementById("codEqpFin").value = codigo;
+						document.getElementById("descEqpFin").value = descricao;
+						document.getElementById("tipoEqpFin").value = tipo;
+						document.getElementById("subtipoEqpFin").value = subtipo;
+						document.getElementById("label-dtfimEqpmov").innerText = "Data de Entrega";
+						document.getElementById("buttonAlterarMovimEqp").textContent = "Enviar ";
+					}
+					else if (fim != valorDefaultData) {
+						// Create a new Date object
+						var currentDate = new Date();
+
+						// Get the individual components of the date (year, month, day)
+						var year = currentDate.getFullYear();
+						var month = currentDate.getMonth() + 1; // Note: Months are zero-based, so we add 1
+						var day = currentDate.getDate();
+
+						// Format the date as YYYY-MM-DD
+						var formattedDate = year + '-' + (month < 10 ? '0' : '') + month + '-' + (day < 10 ? '0' : '') + day;
+
+						// Display the formatted date
+						document.getElementById("datafim2").value = formattedDate;
+
+						document.getElementById("clienteEquipsMov").value = cliente;
+						askInicDate();
+					}
+				})
+				.error(function (response) {
+					alert("Erro a encontrar DadosJSON por favor tente de novo!");
+					//console.log(response);
+					//console.log(response.error);
+				});
+		}
+
+		function askInicDate() {
+			//Se quer pedir a data inicial também tem de pedir a obra onde se situa o equipamento e tem de esconder a data final
+			document.getElementById("div-dfin").style.display = "block";
+			document.getElementById("detalhesFinais").style.display = "none";
+			document.getElementById("div-clientes").style.display = "block";
+			document.getElementById("div-obras").style.display = "block";
+			document.getElementById("buttonAlterarMovimEqp").textContent = "Enviar";
+			getClienteObra();
+		}
+
+		function askEndDate() {
+			//Se quer pedir a data final já tem a data inicial e a obra
+			document.getElementById("div-obras").style.display = "none";
+			document.getElementById("div-clientes").style.display = "none";
+			document.getElementById("div-dfin").style.display = "block";
+			document.getElementById("detalhesFinais").style.display = "block";
+			document.getElementById("buttonAlterarMovimEqp").textContent = "Recolher";
+		}
+
+		function insereEquipamentoMovim(value) {
+			var excecao = 0;
+			var dataF = document.getElementById("datafim2").value;
+			if (document.getElementById("buttonAlterarMovimEqp").textContent == "Enviar") {
+				var obra = document.getElementById("obrasEquip").value;
+			}
+			var inicio = equipamento[0].Inicio;
+			var fim = equipamento[0].Fim;
+			var valorDefaultInicio = "01/01/1900 00:00:00";
+			let row = "";
+			var formattedDate5Yrslater = new Date(dataF);
+			formattedDate5Yrslater.setFullYear(formattedDate5Yrslater.getFullYear() + 5);
+			formattedDate5Yrslater = formattedDate5Yrslater.getFullYear() +
+				('0' + (formattedDate5Yrslater.getMonth() + 1)).slice(-2) +
+				('0' + formattedDate5Yrslater.getDate()).slice(-2);
+			//Se está numa obra sem a data final estar definida
+			try {
+				if (document.getElementById("buttonAlterarMovimEqp").textContent == "Enviar ") {
+					obra = document.getElementById("obraEqp").value;
+					obra = obra.split(" - ")[0].trim();
+					excecao = 1;
+				} else if (document.getElementById("buttonAlterarMovimEqp").textContent == "Recolher") {
+					obra = document.getElementById("obraEqp").value;
+					obra = obra.split(" - ")[0].trim();
+				} else {
+					obra = document.getElementById("obrasEquip").value;
+					obra = obra.split(" - ")[0].trim();
+				}
+				var data = dataF.replace(/T/, " ");
+				var id = equipamento[0].id
+				var params = {};
+				var myQuery = `select eqpid, id
+								FROM u_eqpmov
+								WHERE FIM = '19000101' and eqpid = ` + id;
+				params.id = "SELECTtoJSON";
+				params.select = myQuery;
+				var novo = 1;
+				var eqpmovid = 0;
+				$.ajax({
+					type: "POST",
+					url: "../api/code/run",
+					async: false,
+					data: JSON.stringify(params),
+					contentType: "application/json",
+				}).done(function (result, textStatus, jqXHR) {
+					try {
+						//console.log(result);
+						resposta = JSON.parse(result);
+					} catch {
+						resposta = JSON.parse('{"Dados":[]}');
+					}
+					if (resposta.Dados.length > 0) {
+						novo = 0;
+						eqpmovid = resposta.Dados[0].id;
+					} else {
+						eqpmovid = 0;
+					}
+				}).error(function (response) {
+					alert("Erro a encontrar DadosJSON por favor tente de novo!");
+				});
+				var params = {};
+				myQuery = `select id
+								from u_planeam
+								where eqpId = '` + id + `'`;
+				params.id = "SELECTtoJSON";
+				params.select = myQuery;
+				var planeamID = '';
+				$.ajax({
+					type: "POST",
+					url: "../api/code/run",
+					async: false,
+					data: JSON.stringify(params),
+					contentType: "application/json",
+				}).done(function (result, textStatus, jqXHR) {
+					try {
+						//console.log(result);
+						resposta = JSON.parse(result);
+					} catch {
+						resposta = JSON.parse('{"Dados":[]}');
+					}
+					if (resposta.Dados.length > 0) {
+						planeamID = resposta.Dados[0].id;
+					}
+				}).error(function (response) {
+					alert("Erro a encontrar DadosJSON por favor tente de novo!");
+				});
+				if (document.getElementById("clienteEquipsMov").value != undefined && document.getElementById("clienteEquipsMov").value != "") {
+					var cliente = document.getElementById("clienteEquipsMov").value;
+				} else if (document.getElementById("clienteEquipsMov").value == "") {
+					var cliente = document.getElementById("clienteEquips").value;
+				}
+				$.ajax({
+					type: "GET",
+					url:
+						"../programs/gensel.aspx?cscript=insertEquipMov&eqpid=" + id +
+						"&data=" + data +
+						"&fim=" + formattedDate5Yrslater +
+						"&obra=" + obra +
+						"&novo=" + novo +
+						"&eqpmovid=" + eqpmovid +
+						"&recursonome=" + equipamento[0].descricao +
+						"&recursocod=" + equipamento[0].codigo +
+						"&planeamId=" + planeamID +
+						"&excecao=" + excecao +
+						"&cliente=" + cliente,
+					data: JSON.stringify(params),
+					async: false,
+					contentType: "application/json",
+					success: function (response) {
+						document.getElementById("datafim2").value = "";
+						fechabox();
+						getEquip();
+						fillSelectBoxes(data8DiasDepois)
+						document.getElementById("label-dtfimEqpmov").textContent = "Data final";
+						document.getElementById("clienteEquipsMov").value = undefined;
+					},
+					error: function (response) {
+						alert("Erro a inserir por favor tente de novo!");
+					},
+				});
+			} catch (err) {
+				alert(err);
+			} finally {
+
+			}
+		}
+
+		function insereEquipamento(value) {
+			var codigo = document.getElementById("nome-codigo").value;
+			var Descricao = document.getElementById("nome-descricao").value;
+			var preco = document.getElementById("precoEquipamento").value;
+			var divNovoTipo = document.getElementById("div-novoTipo");
+			var divNovosubTipo = document.getElementById("div-novosubTipo");
+
+			//verificação se selecionou um novo tipo
+			if (divNovoTipo.style.display == "block") {
+				var e = document.getElementById("nome-novoTipo")
+				var tipo = e.value;
+			} else {
+				var e = document.getElementById("tipos");
+				var tipo = e.options[e.selectedIndex].text;
+			}
+
+			//verificação se selecionou um novo subtipo
+			if (divNovosubTipo.style.display == "block") {
+				var e = document.getElementById("nome-novosubTipo")
+				var subtipo = e.value;
+			} else {
+				var e = document.getElementById("subtipos");
+				var subtipo = e.options[e.selectedIndex].text;
+			}
+
+			try {
+				//verificação se algum dos campos foram enviados em vazio
+				if (codigo == "" || Descricao == "" || tipo == "" || subtipo == "" || preco == "")
+					throw "Tem que inserir todas as informações"
+
+				var params = {};
+				$.ajax({
+					type: "GET",
+					url:
+						"../programs/gensel.aspx?cscript=insereEquip&codigo=" + codigo +
+						"&Descricao=" + Descricao +
+						"&tipo=" + tipo +
+						"&subtipo=" + subtipo +
+						"&preco=" + preco,
+					data: JSON.stringify(params),
+					async: false,
+					contentType: "application/json",
+					success: function (response) {
+						//console.log("CHEGOU")
+						getEquip();
+						fillSelectBoxes(data8DiasDepois)
+					},
+					error: function (response) {
+						alert("Erro a encontrar arVend por favor tente de novo!");
+						console.log(response);
+						console.log(response.error);
+					},
+				});
+				fechaboxCreate();
+			} catch (err) {
+				alert(err);
+			}
+
+		}
+
+		function insereAgendamento() {
+			const ano = new Date().getFullYear();
+			const mes = new Date().getMonth() + 1;
+			const dia = new Date().getDate();
+			if (mes < 10 && dia >= 10) {
+				var stringDMA = ano + "0" + mes + dia;
+			} else if (mes >= 10 && dia < 10) {
+				var stringDMA = ano + mes + "0" + dia;
+			} else {
+				var stringDMA = ano + "0" + mes + "0" + dia;
+			}
+			var datainic = document.getElementById("datainiAgend").value;
+			datainic = datainic.replace(/T/, " ");
+			var string = datainic.split('-');
+			string[2] = string[2].split(' ');
+			const string1 = string[0] + string[1] + string[2][0];
+			var datafim = document.getElementById("datafimAgend").value;
+			datafim = datafim.replace(/T/, " ");
+			var string2 = datafim.split('-');
+			string2[2] = string2[2].split(' ');
+			const string3 = string2[0] + string2[1] + string2[2][0];
+
+			var selectcodDescEquip = document.getElementById("codDescEquip");
+			var codDescEquip = selectcodDescEquip.options[selectcodDescEquip.selectedIndex].text;
+			var parts = codDescEquip.split(" - ");
+			var descEquip = parts[0]; // "plataformaElevatoria 1"
+			var codEquip = parts[1]; // "elev001"
+
+			var eqpId;
+			var params = {};
+			var omeuselect = `select id
+								from u_eqp
+								where codigo = '` + codEquip + `'
+								and descricao = '` + descEquip + `'`;
+			params.id = 'SELECTtoJSON';
+			params.select = omeuselect
+			$.ajax({
+				type: 'POST',
+				url: '../api/code/run',
+				async: false,
+				data: JSON.stringify(params),
+				contentType: 'application/json'
+			}).done(function (result, textStatus, jqXHR) {
+				try {
+					//console.log(result);
+					resposta = JSON.parse(result);
+				} catch {
+					resposta = JSON.parse('{"Dados":[]}');
+				}
+				eqpId = resposta.Dados[0].id;
+			});
+
+			params = {};
+			omeuselect = `Declare @dataAtual date = '` + stringDMA + `'
+							Declare @dataInicial date = '`+ string1 + `'
+							Declare @dataFinal date = '`+ string3 + `'
+							select *
+							from u_planeam
+							where (u_planeam.inicio between  @dataInicial AND @dataFinal or u_planeam.fim between  @dataInicial AND @dataFinal 
+							or (u_planeam.inicio < @dataInicial and u_planeam.fim >= @dataFinal))  
+							and u_planeam.recursocod = '`+ codEquip + `'`;
+			params.id = 'SELECTtoJSON';
+			params.select = omeuselect
+			$.ajax({
+				type: 'POST',
+				url: '../api/code/run',
+				async: false,
+				data: JSON.stringify(params),
+				contentType: 'application/json'
+			}).done(function (result, textStatus, jqXHR) {
+				try {
+					//console.log(result);
+					resposta = JSON.parse(result);
+				} catch {
+					resposta = JSON.parse('{"Dados":[]}');
+				}
+				if (resposta.Dados.length == 0) {
+					var selectObras = document.getElementById("tiposObras");
+					var obrasTipo = selectObras.options[selectObras.selectedIndex].value;
+
+					var selectcodDescEquip = document.getElementById("codDescEquip");
+					var codDescEquip = selectcodDescEquip.options[selectcodDescEquip.selectedIndex].text;
+					var parts = codDescEquip.split(" - ");
+					var descEquip = parts[0]; // "plataformaElevatoria 1"
+					var codEquip = parts[1]; // "elev001"
+
+					var datainic = document.getElementById("datainiAgend").value;
+					datainic = datainic.replace(/T/, " ");
+					var datafim = document.getElementById("datafimAgend").value;
+					datafim = datafim.replace(/T/, " ");
+					var planeamId = 0;
+					var clientesDropdown = document.getElementById("clientesDropdown");
+					var cliente = clientesDropdown.options[clientesDropdown.selectedIndex].value;
+
+					var params = {};
+					$.ajax({
+						type: "GET",
+						url:
+							"../programs/gensel.aspx?cscript=insertAgendamento&obra=" + encodeURIComponent(obrasTipo) +
+							"&inicio=" + string1 +
+							"&fim=" + string3 +
+							"&recursocod=" + codEquip +
+							"&recursonome=" + descEquip +
+							"&planeamId=" + planeamId +
+							"&eqpId=" + eqpId +
+							"&cliente=" + cliente,
+						data: JSON.stringify(params),
+						async: false,
+						contentType: "application/json",
+						success: function (response) {
+							fechaboxAgendamento();
+							getEquip();
+							loadGantt(diasGantt);
+							//loadGantt(diasGantt);
+							fillSelectBoxes(data8DiasDepois)
+							document.getElementById("clientesDropdown").value = "";
+							document.getElementById("tiposObras").value = "";
+							document.getElementById("tipoSelect").value = "";
+							document.getElementById("subtipoSelect").value = "";
+							document.getElementById("codDescEquip").value = "";
+							document.getElementById("datainiAgend").value = "";
+							document.getElementById("datafimAgend").value = "";
+						},
+						error: function (response) {
+							alert("Erro a encontrar arVend por favor tente de novo!");
+							console.log(response);
+							console.log(response.error);
+						},
+					});
+
+				} else {
+					alert("O equipamento que inseriu está/estará numa obra no intervalo de data introduzido");
+				}
+			});
+		}
+
+		function getPrecos() {
+			let tipo = "";
+			if (document.getElementById("tiposEqpPreco") != null) {
+				tipo = document.getElementById("tiposEqpPreco").value;
+			} else {
+				tipo = "";
+			}
+			var params = {};
+			var omeuselect = `WITH MaxFimDates AS (
+								SELECT
+									tipoeq,
+									MAX(fim) AS max_fim
+								FROM
+									u_eqprecos
+								GROUP BY
+									tipoeq
+							)
+
+							SELECT DISTINCT
+								u_eqp.subtipo,
+								u_eqp.tipo,
+								ISNULL(u_eqprecos.preco, (select top 1 max(preco) from u_eqprecos where tipoeq = u_eqp.tipo and subtipoeq = u_eqp.subtipo)) AS preco
+							FROM
+								u_eqp
+							LEFT JOIN MaxFimDates ON u_eqp.tipo = MaxFimDates.tipoeq
+							LEFT JOIN u_eqprecos ON u_eqp.tipo = u_eqprecos.tipoeq AND u_eqp.subtipo = u_eqprecos.subtipoeq AND u_eqprecos.fim = MaxFimDates.max_fim
+							WHERE 
+								tipo like '%` + tipo + `%'
+							ORDER BY
+								u_eqp.tipo;`;
+			params.id = 'SELECTtoJSON';
+			params.select = omeuselect
+			$.ajax({
+				type: 'POST',
+				url: '../api/code/run',
+				async: false,
+				data: JSON.stringify(params),
+				contentType: 'application/json'
+			}).done(function (result, textStatus, jqXHR) {
+				try {
+					resposta = JSON.parse(result);
+				} catch {
+					resposta = JSON.parse('{"Dados":[]}');
+				}
+				if (resposta.Dados.length == 0) {
+					alert("Não existem preços definidos");
+				} else {
+					var tableBody = document.getElementById("tbodyGestorPrecos");
+					tableBody.innerHTML = "";
+					for (var i = 0; i < resposta.Dados.length; i++) {
+						var row = tableBody.insertRow(-1);
+						var cell1 = row.insertCell(0);
+						var cell2 = row.insertCell(1);
+						var cell3 = row.insertCell(2);
+						var cell4 = row.insertCell(3);
+						var cell5 = row.insertCell(4);
+						var preco = resposta.Dados[i].preco;
+						cell1.innerHTML = resposta.Dados[i].tipo;
+						cell2.innerHTML = resposta.Dados[i].subtipo;
+						cell3.innerHTML = preco.substring(0, preco.indexOf('.') + 3); + "€";
+						cell4.innerHTML = "<button type=\"button\" class='btn_azul' onclick='mostraGestorPrecosEditar(\"" + resposta.Dados[i].tipo + "\",\"" + resposta.Dados[i].subtipo + "\")'><i class='fa fa-pencil' 'style='color:white'></i></button>";
+						cell5.innerHTML = "<button type=\"button\" class='btn_azul' onclick='mostraHistGestorPreco(\"" + resposta.Dados[i].tipo + "\",\"" + resposta.Dados[i].subtipo + "\")'><i class='fa fa-eye' 'style='color:white'></i></button>";
+					}
+				}
+			});
+		}
+
+		function EditEquipamento(id) {
+			var codigo = document.getElementById("nome-codigoE").value;
+			var Descricao = document.getElementById("nome-descricaoE").value;
+			var divNovoTipo = document.getElementById("div-novoTipoE");
+			var divNovosubTipo = document.getElementById("div-novosubTipoE");
+
+			//verificação se selecionou um novo tipo
+			if (divNovoTipo.style.display == "block") {
+				var e = document.getElementById("nome-novoTipoE")
+				var tipo = e.value;
+			} else {
+				var e = document.getElementById("tiposE");
+				var tipo = e.options[e.selectedIndex].text;
+			}
+
+			//verificação se selecionou um novo subtipo
+			if (divNovosubTipo.style.display == "block") {
+				var e = document.getElementById("nome-novosubTipoE")
+				var subtipo = e.value;
+			} else {
+				var e = document.getElementById("subtiposE");
+				var subtipo = e.options[e.selectedIndex].text;
+			}
+
+			var params = {};
+			$.ajax({
+				type: "GET",
+				url:
+					"../programs/gensel.aspx?cscript=updateEquipamento&codigo=" + codigo +
+					"&Descricao=" + Descricao +
+					"&tipo=" + tipo +
+					"&subtipo=" + subtipo +
+					"&id=" + id,
+				data: JSON.stringify(params),
+				async: false,
+				contentType: "application/json",
+				success: function (response) {
+					//console.log("CHEGOU")
+					getEquip();
+					fillSelectBoxes(data8DiasDepois)
+				},
+				error: function (response) {
+					alert("Erro a encontrar arVend por favor tente de novo!");
+					console.log(response);
+					console.log(response.error);
+				},
+			});
+			fechaboxEditEquipamento();
+		}
+
+		function fechaboxEditEquipamento() {
+			document.getElementById("modal-editEquipamento").style.display = "none";
+			document.getElementById("nome-codigo").value = "";
+			document.getElementById("nome-descricao").value = "";
+			document.getElementById("div-novoTipoE").style.display = "none";
+			document.getElementById("nome-novoTipoE").value = "";
+			document.getElementById("div-novosubTipoE").style.display = "none";
+			document.getElementById("nome-novosubTipoE").value = "";
+
+		}
+
+		function mostraBoxEditarEquip(id) {
+			document.getElementById("modal-editEquipamento").style.display = "block";
+			tipo = undefined;
+			subtipo = undefined;
+			preencheTipoSubtipo(tipo, subtipo);
+			var params = {};
+			var myQuery = `select *
+							from u_eqp
+							where id = ` + id;
+			params.id = "SELECTtoJSON";
+			params.select = myQuery;
+			$.ajax({
+				type: "POST",
+				url: "../api/code/run",
+				async: false,
+				data: JSON.stringify(params),
+				contentType: "application/json",
+			}).done(function (result, textStatus, jqXHR) {
+				try {
+					resposta = JSON.parse(result);
+				} catch {
+					resposta = JSON.parse('{"Dados":[]}');
+				}
+				DadosJSON = resposta.Dados;
+				var codigo = DadosJSON[0].codigo;
+				var descricao = DadosJSON[0].Descricao;
+				var tipo = DadosJSON[0].tipo;
+				var subtipo = DadosJSON[0].subtipo;
+				document.getElementById("nome-codigoE").value = codigo;
+				document.getElementById("nome-descricaoE").value = descricao;
+				document.getElementById("tiposE").value = tipo;
+				document.getElementById("subtiposE").value = subtipo;
+				document.getElementById("divEditarEquip").innerHTML = `<button class="btn_azul" id="buttonGuardar" onclick="EditEquipamento(` + DadosJSON[0].id + `)" style="margin-left: auto; text-align: center; width: fit-content; float: right; margin-bottom: 1rem;" type="button" value="">
+																				<i aria-hidden="true" class="fa fa-pencil"></i>&nbsp;Editar Equipamento
+																			</button>`;
+				preencheTipoSubtipo(tipo, subtipo);
+			}).error(function (response) {
+				alert("Erro a encontrar DadosJSON por favor tente de novo!");
+			});
+
+		}
+
+		function preencheTipoSubtipo(tipo, subtipo1) {
+			if (document.getElementById("subtiposE") != null) {
+				subtipoEscolhido = document.getElementById("subtiposE").value;
+			} else {
+				subtipoEscolhido = "";
+			}
+			var params = {};
+			var myQuery =
+				`select distinct tipo from u_eqp
+					where subtipo like '%` + subtipoEscolhido + `%'`;
+			params.id = "SELECTtoJSON";
+			params.select = myQuery;
+			$.ajax({
+				type: "POST",
+				url: "../api/code/run",
+				async: false,
+				data: JSON.stringify(params),
+				contentType: "application/json",
+			}).done(function (result, textStatus, jqXHR) {
+				try {
+					var resposta = JSON.parse(result);
+					equipamento = resposta.Dados;
+				} catch {
+					equipamento = JSON.parse('{"Dados":[]}');
+				}
+				//console.log(equipamento)
+			}).error(function (response) {
+				alert("Erro a encontrar DadosJSON por favor tente de novo!");
+			});
+			//Para saber se é a primeira vez ou não criar o select dos tipos, para não apagar o valor do tipo escolhido
+			if (document.getElementById("div-tipoE").innerHTML == "&nbsp;") {
+				var divComSelect = document.getElementById("div-tipoE");
+				divComSelect.innerHTML = "<label id=\"label-tipo\">Tipo</label><br />";
+				var stringInic = "<select onchange=\"checkNovoE()\" name=\"tipos\" id=\"tiposE\">";
+				let escolhas = "";
+				escolhas += "<option value=\"\"></option>"
+				for (var i = 0; i < equipamento.length; i++) {
+					escolhas += "<option value=\"" + equipamento[i].tipo + "\">" + equipamento[i].tipo + "</option>"
+				}
+				escolhas += "<option value=\"novoTipo\">Novo tipo</option>"
+				divComSelect.innerHTML += stringInic + escolhas + "</select>";
+			}
+			if (document.getElementById("tiposE") != null) {
+				tipoEscolhido = document.getElementById("tiposE").value;
+			} else {
+				tipoEscolhido = "";
+			}
+			if (tipo != undefined) {
+				tipoEscolhido = tipo;
+			}
+			params = {};
+			myQuery =
+				`select distinct subtipo from u_eqp
+					where tipo like '%` + tipoEscolhido + `%'`;
+			params.id = "SELECTtoJSON";
+			params.select = myQuery;
+			$.ajax({
+				type: "POST",
+				url: "../api/code/run",
+				async: false,
+				data: JSON.stringify(params),
+				contentType: "application/json",
+			}).done(function (result, textStatus, jqXHR) {
+				try {
+					var resposta = JSON.parse(result);
+					subtipo = resposta.Dados;
+				} catch {
+					subtipo = JSON.parse('{"Dados":[]}');
+				}
+			}).error(function (response) {
+				alert("Erro a encontrar DadosJSON por favor tente de novo!");
+			});
+			var divComsubSelect = document.getElementById("div-subtipoE");
+			divComsubSelect.innerHTML = "<label id=\"label-subtipo\">Sub-Tipo</label><br />";
+			var stringInic = "<select onchange=\"checkNovoE()\" name=\"subtipos\" id=\"subtiposE\">";
+			let subescolhas = "";
+			for (var i = 0; i < subtipo.length; i++) {
+				subescolhas += "<option value=\"" + subtipo[i].subtipo + "\">" + subtipo[i].subtipo + "</option>"
+			}
+			subescolhas += "<option value=\"novosubTipo\">Novo sub-tipo</option>"
+			divComsubSelect.innerHTML += stringInic + subescolhas + "</select>";
+			if (subtipo1 != undefined) {
+				document.getElementById("subtiposE").value = subtipo1;
+			}
+		}
+
+		function checkNovoE() {
+			var ddl = document.getElementById("tiposE");
+			var selectedValue = ddl.options[ddl.selectedIndex].value;
+			var divNovoTipo = document.getElementById("div-novoTipoE");
+			if (selectedValue == "novoTipo") {
+				divNovoTipo.style.display = "block"
+			} else {
+				divNovoTipo.style.display = "none"
+			}
+
+			var ddl = document.getElementById("subtiposE");
+			var selectedValueSub = ddl.options[ddl.selectedIndex].value;
+			var divNovosubTipo = document.getElementById("div-novosubTipoE");
+			if (selectedValueSub == "novosubTipo") {
+				divNovosubTipo.style.display = "block"
+			} else {
+				divNovosubTipo.style.display = "none"
+			}
+			preencheTipoSubtipo(selectedValue, selectedValueSub);
+		}
+
+		function mostraGestorPrecosEditar(tipoEq, subtipoEq) {
+			document.getElementById("modal-gestorPrecos-editar").style.display = "block";
+			document.getElementById("labelEquipEditar").textContent = "Equipamento a editar: " + tipoEq + " - " + subtipoEq;
+			document.getElementById("botaoConfirmarEditar").innerHTML = "<button type=\"button\" style=\"float: right;\" class='btn_azul' onclick='editGestorPrecos(\"" + tipoEq + "\",\"" + subtipoEq + "\")'>Confirmar</button>";
+		}
+
+		function editGestorPrecos(tipoEq, subtipoEq) {
+			let today = new Date();
+			let year = today.getFullYear();
+			let month = String(today.getMonth() + 1).padStart(2, '0');
+			let day = String(today.getDate()).padStart(2, '0');
+
+			let dataHoje = `${year}${month}${day}`;
+			var preco = document.getElementById("novoPreco").value;
+			var fim = "20501231"
+			var params = {};
+			$.ajax({
+				type: "GET",
+				url:
+					"../programs/gensel.aspx?cscript=editarPreco&tipoeq=" + tipoEq +
+					"&subtipoeq=" + subtipoEq +
+					"&inicio=" + dataHoje +
+					"&fim=" + fim +
+					"&preco=" + preco,
+				data: JSON.stringify(params),
+				async: false,
+				contentType: "application/json",
+				success: function (response) {
+					document.getElementById("novoPreco").value = "";
+					fechaboxGestorPrecosEdit();
+					mostrarboxGestorPrecos();
+				},
+				error: function (response) {
+					alert("Erro a encontrar arVend por favor tente de novo!");
+					console.log(response);
+					console.log(response.error);
+				},
+			});
+
+		}
+
+		function mostraHistGestorPreco(tipoEq, subtipoEq) {
+			document.getElementById("modal-gestorPrecos-historico").style.display = "block";
+			document.getElementById("labelEquipEditar").textContent = "Histórico do eq.: <b>" + tipoEq + " - " + subtipoEq + "</b>";
+			var params = {};
+			var omeuselect = `select *
+								from u_eqprecos 
+								where 
+									tipoeq = '` + tipoEq + `'
+									and subtipoeq = '` + subtipoEq + `'
+								order by inicio desc`;
+			params.id = 'SELECTtoJSON';
+			params.select = omeuselect
+			$.ajax({
+				type: 'POST',
+				url: '../api/code/run',
+				async: false,
+				data: JSON.stringify(params),
+				contentType: 'application/json'
+			}).done(function (result, textStatus, jqXHR) {
+				try {
+					resposta = JSON.parse(result);
+				} catch {
+					resposta = JSON.parse('{"Dados":[]}');
+				}
+				if (resposta.Dados.length == 0) {
+					alert("Não existem preços definidos");
+				} else {
+					var tableBody = document.getElementById("tbodyGestorPrecosHistorico");
+					tableBody.innerHTML = "";
+					for (var i = 0; i < resposta.Dados.length; i++) {
+						var row = tableBody.insertRow(-1);
+						var cell1 = row.insertCell(0);
+						var cell2 = row.insertCell(1);
+						var cell3 = row.insertCell(2);
+						var cell4 = row.insertCell(3);
+						var cell5 = row.insertCell(4);
+						var cell6 = row.insertCell(5);
+						var preco = resposta.Dados[i].preco;
+						var inicio = resposta.Dados[i].inicio;
+						var fim = resposta.Dados[i].fim;
+						inicio = inicio.split(" ")[0];
+						fim = fim.split(" ")[0];
+						cell1.innerHTML = resposta.Dados[i].tipoeq;
+						cell2.innerHTML = resposta.Dados[i].subtipoeq;
+						cell3.innerHTML = inicio;
+						cell4.innerHTML = fim;
+						cell5.innerHTML = preco.substring(0, preco.indexOf('.') + 3); + "€";
+						cell6.innerHTML = "<button type=\"button\" class='btn_vermelho' onclick='apagaLinhaPreco(\"" + resposta.Dados[i].id + "\", \"" + resposta.Dados[i].tipoeq + "\", \"" + resposta.Dados[i].subtipoeq + "\")'><i class='fa fa-trash'></i></button>";
+					}
+				}
+			});
+		}
+
+		function apagaLinhaPreco(id, tipoEq, subtipoEq) {
+			var params = {};
+			$.ajax({
+				type: "GET",
+				url:
+					"../programs/gensel.aspx?cscript=apagarLinhaPreco&id=" + id,
+				data: JSON.stringify(params),
+				async: false,
+				contentType: "application/json",
+				success: function (response) {
+					document.getElementById("novoPreco").value = "";
+					fechaboxGestorPrecosEdit();
+					mostraHistGestorPreco(tipoEq, subtipoEq);
+					getPrecos();
+				},
+				error: function (response) {
+					alert("Erro a encontrar arVend por favor tente de novo!");
+					console.log(response);
+					console.log(response.error);
+				},
+			});
+
+		}
+
+		function fechaboxGestorPrecosHist() {
+			document.getElementById("modal-gestorPrecos-historico").style.display = "none";
+		}
+
+		function mostrarboxGestorPrecos() {
+			document.getElementById("modal-gestorPrecos").style.display = "block";
+			var params = {};
+			var myQuery =
+				`select distinct tipo from u_eqp `;
+			params.id = "SELECTtoJSON";
+			params.select = myQuery;
+			$.ajax({
+				type: "POST",
+				url: "../api/code/run",
+				async: false,
+				data: JSON.stringify(params),
+				contentType: "application/json",
+			}).done(function (result, textStatus, jqXHR) {
+				var resposta = JSON.parse(result);
+				equipamento = resposta.Dados;
+				//console.log(equipamento)
+			}).error(function (response) {
+				alert("Erro a encontrar DadosJSON por favor tente de novo!");
+			});
+			//saber se é a primeira ocurrência ou não, para não estar a apagar o valor depois de alguém mudar o valor do preço de alguma coisa
+			if (document.getElementById("tipoEqpPrecos").innerHTML == "&nbsp;") {
+				var stringInic = "<select onchange=\"getPrecos()\" id=\"tiposEqpPreco\">";
+				let escolhas = "";
+				escolhas += "<option value=\"\"></option>"
+				for (var i = 0; i < equipamento.length; i++) {
+					escolhas += "<option value=\"" + equipamento[i].tipo + "\">" + equipamento[i].tipo + "</option>"
+				}
+				document.getElementById("tipoEqpPrecos").innerHTML = stringInic + escolhas + "</select>";
+			}
+			getPrecos();
+		}
+
+		function fechaboxGestorPrecos() {
+			document.getElementById("modal-gestorPrecos").style.display = "none";
+		}
+
+		function fechaboxGestorPrecosEdit() {
+			document.getElementById("modal-gestorPrecos-editar").style.display = "none";
+		}
+
+		function mostrarboxAgendamento() {
+			document.getElementById("modal-agendamento").style.display = "block";
+			buildSelectClienteObras();
+			buildSelectTipo();
+			buildSelectSubtipo();
+			buildSelectEquips();
+		}
+
+		function fechaboxAgendamento() {
+			document.getElementById("modal-agendamento").style.display = "none";
+		}
+
+		function insereAgendamentoEdit() {
+			var selectObras = document.getElementById("tiposObrasE");
+			var obrasTipo = selectObras.options[selectObras.selectedIndex].value;
+			var selectcodDescEquip = document.getElementById("codDescEquipE");
+			var codDescEquip = selectcodDescEquip.options[selectcodDescEquip.selectedIndex].text;
+			var parts = codDescEquip.split(" - ");
+			var descEquip = parts[0]; // "plataformaElevatoria 1"
+			var codEquip = parts[1]; // "elev001"
+
+			var datainic = document.getElementById("datainiAgendE").value;
+			datainic = datainic.replace(/T/, " ");
+			var datafim = document.getElementById("datafimAgendE").value;
+			datafim = datafim.replace(/T/, " ");
+			var planeamId = document.getElementById("planeamId").value;
+			var eqpId;
+			var cliente = document.getElementById("clientesDropdownE").value;
+			var params = {};
+			var myQuery =
+				`select id from u_eqp where codigo = '` + codEquip + `' and descricao = '` + descEquip + `' `;
+			params.id = "SELECTtoJSON";
+			params.select = myQuery;
+			$.ajax({
+				type: "POST",
+				url: "../api/code/run",
+				async: false,
+				data: JSON.stringify(params),
+				contentType: "application/json",
+			}).done(function (result, textStatus, jqXHR) {
+				eqpId = JSON.parse(result).Dados[0].id;
+			}).error(function (response) {
+				alert("Erro a encontrar DadosJSON por favor tente de novo!");
+			});
+			var params = {};
+			$.ajax({
+				type: "GET",
+				url:
+					"../programs/gensel.aspx?cscript=insertAgendamento&obra=" + encodeURIComponent(obrasTipo) +
+					"&inicio=" + datainic +
+					"&fim=" + datafim +
+					"&recursocod=" + codEquip +
+					"&recursonome=" + descEquip +
+					"&planeamId=" + planeamId +
+					"&eqpId=" + eqpId +
+					"&cliente=" + cliente,
+				data: JSON.stringify(params),
+				async: false,
+				contentType: "application/json",
+				success: function (response) {
+					fechaboxAgendamentoEdit();
+					loadGantt(diasGantt);
+					fillSelectBoxes(data8DiasDepois)
+					document.getElementById("clientesDropdownE").value = "";
+					document.getElementById("tiposObrasE").value = "";
+					document.getElementById("codDescEquipE").value = "";
+					document.getElementById("datainiAgendE").value = "";
+					document.getElementById("datafimAgendE").value = "";
+					document.getElementById("planeamId").value = "";
+					getEquip();
+				},
+				error: function (response) {
+					alert("Erro a encontrar arVend por favor tente de novo!");
+					console.log(response);
+					console.log(response.error);
+				},
+			});
+
+		}
+
+		function mostrarboxAgendamentoEdit() {
+			document.getElementById("modal-agendamento-edit").style.display = "block";
+			buildSelectClienteObras();
+			buildSelectEquips();
+			buildSelectTipo();
+			buildSelectSubtipo();
+		}
+
+		function buildDeleteAgendamento() {
+			document.getElementById("apagarAgendamentoDiv").innerHTML = "";
+			var obra = document.getElementById("tiposObrasE").value;
+			var selectcodDescEquip = document.getElementById("codDescEquipE");
+			var codDescEquip = selectcodDescEquip.options[selectcodDescEquip.selectedIndex].text;
+			var parts = codDescEquip.split(" - ");
+			var descEquip = parts[0]; // "plataformaElevatoria 1"
+			var codEquip = parts[1]; // "elev001"
+
+			var params = {};
+			var omeuselect = `select id, eqpId
+								from u_planeam
+								where recursocod = '`+ codEquip + `'
+								and recursonome = '`+ descEquip + `'
+								and obra = '`+ obra + `'`;
+			params.id = 'SELECTtoJSON';
+			params.select = omeuselect
+			$.ajax({
+				type: 'POST',
+				url: '../api/code/run',
+				async: false,
+				data: JSON.stringify(params),
+				contentType: 'application/json'
+			}).done(function (result, textStatus, jqXHR) {
+				try {
+					var resposta = JSON.parse(result);
+				} catch {
+					resposta = JSON.parse("{\"Dados\":[]}");
+				}
+				var DadosJSON = resposta.Dados
+				document.getElementById("apagarAgendamentoDiv").innerHTML = `<button class="btn_vermelho" onclick="apagarAgendamento(` + $.trim(DadosJSON[0].id) + `, ` + $.trim(DadosJSON[0].eqpId) + `)" style="margin-left: auto; text-align: center; width: fit-content; float: left; margin-bottom: 1rem;" type="button" value=""><i aria-hidden="true" class="fa fa-trash"></i></button>`;
+			}).error(function (response) {
+				alert("Erro a encontrar DadosJSON por favor tente de novo!")
+				console.log(response);
+				console.log(response.error);
+			});
+		}
+
+		function apagarAgendamento(id, eqpId) {
+			var podeApagar = true;
+			var params = {};
+			var omeuselect = `declare @myplaneamID as bigint
+								set @myplaneamid = ` + id + ` --(o id do planeamento que o utilizador está a tentar eliminar)
+								select count(*) as contador from u_eqpmov where u_eqpmov.planeamId=@myplaneamID`;
+			params.id = 'SELECTtoJSON';
+			params.select = omeuselect
+			$.ajax({
+				type: 'POST',
+				url: '../api/code/run',
+				async: false,
+				data: JSON.stringify(params),
+				contentType: 'application/json'
+			}).done(function (result, textStatus, jqXHR) {
+				try {
+					var resposta = JSON.parse(result);
+				} catch {
+					resposta = JSON.parse("{\"Dados\":[]}");
+				}
+				var DadosJSON = resposta.Dados;
+				if (DadosJSON[0].contador > 0) {
+					podeApagar = false;
+				}
+				if (podeApagar) {
+					var params = {};
+					$.ajax({
+						type: "GET",
+						url:
+							"../programs/gensel.aspx?cscript=apagaAgendam&id=" + id,
+						data: JSON.stringify(params),
+						async: false,
+						contentType: "application/json",
+						success: function (response) { },
+						error: function (response) {
+							alert("Erro a encontrar arVend por favor tente de novo!");
+						},
+					});
+					fechaboxAgendamentoEdit();
+					loadGantt(diasGantt);
+				} else {
+					alert("Não pode apagar este agendamento pois já existem movimentos associados a este equipamento!");
+					return;
+				}
+			}).error(function (response) {
+				alert("Erro a encontrar DadosJSON por favor tente de novo!")
+				console.log(response);
+				console.log(response.error);
+			})
+		}
+
+		function fechaboxAgendamentoEdit() {
+			document.getElementById("modal-agendamento-edit").style.display = "none";
+		}
+
+		function buildSelectEquips() {
+			var params = {};
+			var aux = document.getElementById("tipoSelect");
+			if (aux != null) {
+				var tipo = document.getElementById("tipoSelect")[document.getElementById("tipoSelect").selectedIndex].innerText;
+				var subtipo = document.getElementById("subtipoSelect")[document.getElementById("subtipoSelect").selectedIndex].innerText;
+			} else {
+				tipo = "";
+				subtipo = "";
+			}
+			var omeuselect = `select id, codigo, Descricao
+								from u_eqp
+								where tipo like '%`+ tipo + `%'
+								and subtipo like '%`+ subtipo + `%'`;
+			params.id = 'SELECTtoJSON';
+			params.select = omeuselect
+			$.ajax({
+				type: 'POST',
+				url: '../api/code/run',
+				async: false,
+				data: JSON.stringify(params),
+				contentType: 'application/json'
+			}).done(function (result, textStatus, jqXHR) {
+				try {
+					var resposta = JSON.parse(result);
+				} catch {
+					resposta = JSON.parse("{\"Dados\":[]}");
+				}
+				var DadosJSON = resposta.Dados
+				let escolhas = "";
+				escolhas += "<option value=\"\"></option>"
+				let escolhas1 = "";
+				escolhas1 += "<option value=\"\"></option>"
+				for (var i = 0; i < DadosJSON.length; ++i) {
+					var id = $.trim(DadosJSON[i].id);
+					var codigo = $.trim(DadosJSON[i].codigo);
+					var descricao = $.trim(DadosJSON[i].Descricao);
+					var stringInic = "<select class=\"input\" id=\"codDescEquip\" placeholder=\"Selecione o cód. e desc. do equip.\" value=\"\">"
+					escolhas += "<option value=" + id + ">" + descricao + " - " + codigo + "</option>"
+					var stringInic1 = "<select class=\"input\" id=\"codDescEquipE\" placeholder=\"Selecione o cód. e desc. do equip.\" value=\"\">"
+					escolhas1 += "<option value=" + id + ">" + descricao + " - " + codigo + "</option>"
+				}
+				document.getElementById("equipsDescCodSelect").innerHTML = stringInic + escolhas + "</select>";
+				document.getElementById("equipsDescCodSelectE").innerHTML = stringInic1 + escolhas1 + "</select>";
+				new TomSelect("#codDescEquip", {
+					create: false,
+					sortField: {
+						field: "text",
+						direction: "asc"
+					},
+					maxItems: 1,
+					closeAfterSelect: true
+				});
+				new TomSelect("#codDescEquipE", {
+					create: false,
+					sortField: {
+						field: "text",
+						direction: "asc"
+					},
+					maxItems: 1,
+					closeAfterSelect: true
+				});
+			}).error(function (response) {
+				alert("Erro a encontrar DadosJSON por favor tente de novo!")
+				console.log(response);
+				console.log(response.error);
+			})
+		}
+
+		function buildSelectTipo() {
+			var params = {};
+			var omeuselect = `select distinct(tipo)
+							from u_eqp`;
+			params.id = 'SELECTtoJSON';
+			params.select = omeuselect
+			$.ajax({
+				type: 'POST',
+				url: '../api/code/run',
+				async: false,
+				data: JSON.stringify(params),
+				contentType: 'application/json'
+			}).done(function (result, textStatus, jqXHR) {
+				try {
+					var resposta = JSON.parse(result);
+				} catch {
+					resposta = JSON.parse("{\"Dados\":[]}");
+				}
+				var DadosJSON = resposta.Dados
+				let escolhas = "";
+				escolhas += "<option value=\"\"></option>"
+				let escolhas1 = "";
+				escolhas1 += "<option value=\"\"></option>"
+				for (var i = 0; i < DadosJSON.length; ++i) {
+					var tipo = $.trim(DadosJSON[i].tipo);
+					var stringInic = "<select onchange=\"buildSelectSubtipo()\" class=\"input\" id=\"tipoSelect\" placeholder=\"Selecione o tipo\">";
+					escolhas += "<option>" + tipo + "</option>"
+					var stringInic1 = "<select onchange=\"buildSelectSubtipo()\" class=\"input\" id=\"tipoSelectE\" placeholder=\"Selecione o tipo\">";
+					escolhas1 += "<option>" + tipo + "</option>"
+				}
+				document.getElementById("tipoSelectDiv").innerHTML = stringInic + escolhas + "</select>";;
+				document.getElementById("tipoSelectEDiv").innerHTML = stringInic1 + escolhas1 + "</select>";
+				new TomSelect("#tipoSelect", {
+					create: false,
+					sortField: {
+						field: "text",
+						direction: "asc"
+					},
+					maxItems: 1,
+					closeAfterSelect: true
+				});
+				new TomSelect("#tipoSelectE", {
+					create: false,
+					sortField: {
+						field: "text",
+						direction: "asc"
+					},
+					maxItems: 1,
+					closeAfterSelect: true
+				});
+			}).error(function (response) {
+				alert("Erro a encontrar DadosJSON por favor tente de novo!")
+				console.log(response);
+				console.log(response.error);
+			})
+		}
+
+		function buildSelectSubtipo() {
+			tipo = document.getElementById("tipoSelect")[document.getElementById("tipoSelect").selectedIndex].innerText;
+			var params = {};
+			var omeuselect = `select distinct(subtipo)
+							from u_eqp where tipo like '%`+ tipo + `%'`;
+			params.id = 'SELECTtoJSON';
+			params.select = omeuselect;
+			$.ajax({
+				type: 'POST',
+				url: '../api/code/run',
+				async: false,
+				data: JSON.stringify(params),
+				contentType: 'application/json'
+			}).done(function (result, textStatus, jqXHR) {
+				try {
+					var resposta = JSON.parse(result);
+				} catch {
+					resposta = JSON.parse("{\"Dados\":[]}");
+				}
+				var DadosJSON = resposta.Dados
+				let escolhas = "";
+				escolhas += "<option value=\"\"></option>"
+				let escolhas1 = "";
+				escolhas1 += "<option value=\"\"></option>"
+				for (var i = 0; i < DadosJSON.length; ++i) {
+					var subtipo = $.trim(DadosJSON[i].subtipo);
+					var stringInic = "<select onchange=\"buildSelectEquips()\" class=\"input\" id=\"subtipoSelect\" placeholder=\"Selecione o sub-tipo\">";
+					escolhas += "<option>" + subtipo + "</option>"
+					var stringInic1 = "<select onchange=\"buildSelectEquips()\" class=\"input\" id=\"subtipoSelectE\" placeholder=\"Selecione o sub-tipo\">";
+					escolhas1 += "<option>" + subtipo + "</option>"
+				}
+				document.getElementById("subtipoSelectDiv").innerHTML = stringInic + escolhas + "</select>";
+				document.getElementById("subtipoSelectEDiv").innerHTML = stringInic1 + escolhas1 + "</select>";
+				new TomSelect("#subtipoSelect", {
+					create: false,
+					sortField: {
+						field: "text",
+						direction: "asc"
+					},
+					maxItems: 1,
+					closeAfterSelect: true
+				});
+				new TomSelect("#subtipoSelectE", {
+					create: false,
+					sortField: {
+						field: "text",
+						direction: "asc"
+					},
+					maxItems: 1,
+					closeAfterSelect: true
+				});
+			}).error(function (response) {
+				alert("Erro a encontrar DadosJSON por favor tente de novo!")
+				console.log(response);
+				console.log(response.error);
+			})
+		}
+
+		function buildSelectClienteObras() {
+			var clientes = document.getElementById("clienteSelect");
+			clientes.innerHTML = "";
+			var params = {};
+			var omeuselect = `select distinct(nome), no
+							from u_obras`;
+			params.id = 'SELECTtoJSON';
+			params.select = omeuselect
+			$.ajax({
+				type: 'POST',
+				url: '../api/code/run',
+				async: false,
+				data: JSON.stringify(params),
+				contentType: 'application/json'
+			}).done(function (result, textStatus, jqXHR) {
+				try {
+					var resposta = JSON.parse(result);
+				} catch {
+					resposta = JSON.parse("{\"Dados\":[]}");
+				}
+				var DadosJSON = resposta.Dados
+				let escolhas = "";
+				escolhas += "<option value=\"\"></option>"
+				let escolhas1 = "";
+				escolhas1 += "<option value=\"\"></option>"
+				for (var i = 0; i < DadosJSON.length; ++i) {
+					var nome = $.trim(DadosJSON[i].nome);
+					var no = $.trim(DadosJSON[i].no);
+					var stringInic = "<select onchange=\"buildSelectObras()\" class=\"input\" id=\"clientesDropdown\" placeholder=\"Selecione o cliente\">";
+					escolhas += "<option value=" + no + ">" + nome + "</option>"
+					var stringInic1 = "<select onchange=\"buildSelectObrasEdit()\" class=\"input\" id=\"clientesDropdownE\" placeholder=\"Selecione o cliente\">";
+					escolhas1 += "<option value=" + no + ">" + nome + "</option>"
+				}
+				clientes.innerHTML += stringInic + escolhas + "</select>";
+				document.getElementById("clienteSelectE").innerHTML = stringInic1 + escolhas1 + "</select>";
+				new TomSelect("#clientesDropdown", {
+					create: false,
+					sortField: {
+						field: "text",
+						direction: "asc"
+					},
+					maxItems: 1,
+					closeAfterSelect: true
+				});
+				new TomSelect("#clientesDropdownE", {
+					create: false,
+					sortField: {
+						field: "text",
+						direction: "asc"
+					},
+					maxItems: 1,
+					closeAfterSelect: true
+				});
+				buildSelectObras()
+
+			}).error(function (response) {
+				alert("Erro a encontrar DadosJSON por favor tente de novo!")
+				console.log(response);
+				console.log(response.error);
+			})
+		}
+
+		function buildSelectObras() {
+			var seccoesEscolhas = document.getElementById("obrasSelect");
+			var no = document.getElementById("clientesDropdown").value;
+			seccoesEscolhas.innerHTML = "";
+			var params = {};
+			var omeuselect = `select *
+							from u_obras where no like '%` + no + `%'`;
+			params.id = 'SELECTtoJSON';
+			params.select = omeuselect;
+			$.ajax({
+				type: 'POST',
+				url: '../api/code/run',
+				async: false,
+				data: JSON.stringify(params),
+				contentType: 'application/json'
+			}).done(function (result, textStatus, jqXHR) {
+				try {
+					var resposta = JSON.parse(result);
+				} catch {
+					resposta = JSON.parse("{\"Dados\":[]}");
+				}
+				var DadosJSON = resposta.Dados
+				let escolhas = "";
+				escolhas += "<option value=\"\"></option>"
+				for (var i = 0; i < DadosJSON.length; ++i) {
+					var tipos = ($.trim(DadosJSON[i].descricao) == '') ? [$.trim(DadosJSON[i].codigo)] : [$.trim(DadosJSON[i].descricao)];
+					var codigo = $.trim(DadosJSON[i].codigo);
+					var stringInic = "<select class=\"input\" id=\"tiposObras\" placeholder=\"Selecione as obras\" value=\"\">";
+					escolhas += "<option value=" + codigo + ">" + codigo + " - " + tipos + "</option>"
+				}
+				seccoesEscolhas.innerHTML += stringInic + escolhas + "</select>";
+				new TomSelect("#tiposObras", {
+					create: false,
+					sortField: {
+						field: "text",
+						direction: "asc"
+					},
+					maxItems: 1,
+					closeAfterSelect: true
+				});
+			}).error(function (response) {
+				alert("Erro a encontrar DadosJSON por favor tente de novo!")
+				console.log(response);
+				console.log(response.error);
+			})
+		}
+
+		function buildSelectObrasEdit() {
+			var seccoesEscolhas = document.getElementById("obrasSelectE");
+			var no = document.getElementById("clientesDropdownE").value;
+			seccoesEscolhas.innerHTML = "";
+			var params = {};
+			var omeuselect = `select *
+								from u_obras where no like '%` + no + `%'`;
+			params.id = 'SELECTtoJSON';
+			params.select = omeuselect;
+			$.ajax({
+				type: 'POST',
+				url: '../api/code/run',
+				async: false,
+				data: JSON.stringify(params),
+				contentType: 'application/json'
+			}).done(function (result, textStatus, jqXHR) {
+				try {
+					var resposta = JSON.parse(result);
+				} catch {
+					resposta = JSON.parse("{\"Dados\":[]}");
+				}
+				var DadosJSON = resposta.Dados
+				let escolhas = "";
+				escolhas += "<option value=\"\"></option>"
+				for (var i = 0; i < DadosJSON.length; ++i) {
+					var tipos = ($.trim(DadosJSON[i].descricao) == '') ? [$.trim(DadosJSON[i].codigo)] : [$.trim(DadosJSON[i].descricao)];
+					var codigo = $.trim(DadosJSON[i].codigo);
+					var stringInic = "<select class=\"input\" id=\"tiposObrasE\" placeholder=\"Selecione as obras\" value=\"\">";
+					escolhas += "<option value=" + codigo + ">" + tipos + "</option>"
+				}
+				seccoesEscolhas.innerHTML += stringInic + escolhas + "</select>";
+				new TomSelect("#tiposObrasE", {
+					create: false,
+					sortField: {
+						field: "text",
+						direction: "asc"
+					},
+					maxItems: 1,
+					closeAfterSelect: true
+				});
+			}).error(function (response) {
+				alert("Erro a encontrar DadosJSON por favor tente de novo!")
+				console.log(response);
+				console.log(response.error);
+			})
+		}
+
+		async function loadGantt(diasInput) {
+			const tipoEquipamento = document.getElementById("tipoEquipamento").value;
+			const subtipoEquipamento = document.getElementById("subtipoEquipamento").value;
+			const numDias = diasInput;
+			const currentDate = new Date();
+
+			const year = currentDate.getFullYear();
+			const month = (currentDate.getMonth() + 1).toString().padStart(2, '0');
+			const day = currentDate.getDate().toString().padStart(2, '0');
+
+			const formattedDate = `${year}${month}${day}`;
+			var params = {};
+			var omeuselect = `Declare 
+								@dataInicial date = '`+ formattedDate + `',
+								@numeroDias int = `+ numDias + `,
+								@dataFinal date;
+
+							
+
+								Set @dataFinal = DateAdd(day, @numeroDias, @dataInicial);
+								With plano as 
+									( 
+										Select 
+											u_eqp.codigo as recursocod
+											, u_eqp.id as 'eqpId'
+											, u_eqp.tipo as 'tipo'
+											, u_eqp.subtipo as 'subtipo'
+											, u_eqp.descricao as recursonome
+											, isnull(plano.id, 0) as planeamId
+											, isnull(plano.obra, '') as obra
+											, isnull(u_obras.descricao, '')  as descricao
+											, isnull(plano.data, '19000101') as data
+											, case when plano.inicio > @dataInicial then plano.inicio else @dataInicial end as inicio
+											, case when plano.fim is null then @dataInicial else case when plano.fim < @dataFinal then plano.fim else @dataFinal end end as fim
+											, @dataInicial as datainicial
+											, case when plano.fim is null then '' else plano.fim end as 'fimReal'
+											, isnull(u_obras.nome , '') as nome
+											, isnull(u_obras.no, '') as clienteNo
+										From 
+											u_eqp
+											left join u_planeam plano on u_eqp.id = plano.eqpId
+											left join u_obras on u_obras.codigo = plano.obra
+										Where
+											u_eqp.tipo like '%` + tipoEquipamento + `%'
+											and u_eqp.subtipo like '%` + subtipoEquipamento + `%'
+									)
+								select * from plano`;
+			//console.log(omeuselect);
+			params.id = 'SELECTtoJSON';
+			params.select = omeuselect
+			$.ajax({
+				type: 'POST',
+				url: '../api/code/run',
+				async: false,
+				data: JSON.stringify(params),
+				contentType: 'application/json'
+			}).done(function (result, textStatus, jqXHR) {
+				const chartData = [];
+				try {
+					var resposta = JSON.parse(result);
+				} catch {
+					resposta = JSON.parse("{\"Dados\":[]}");
+				}
+				var agenda = resposta.Dados;
+				if (agenda.length == 0) {
+					document.getElementById("container").innerHTML = "<h1>Não existem dados para apresentar</h1>";
+					return;
+				}
+				if (document.getElementById("tipoEquipamento").value == "") {
+					document.getElementById("container").innerHTML = "<h1>Escolha um equipamento para filtrar</h1>";
+					return;
+				}
+				if (ganttAtivo == false) {
+					document.getElementById("container").innerHTML = "<h1>Escolha um equipamento para filtrar</h1>";
+					return;
+				}
+				for (var i = 0; i < agenda.length; ++i) {
+					var eqpId = $.trim(agenda[i].eqpId);
+					var recursocod = $.trim(agenda[i].recursocod);
+					var recursonome = $.trim(agenda[i].recursonome);
+					var planeamId = $.trim(agenda[i].planeamId);
+					var obra = $.trim(agenda[i].obra);
+					var descricao = $.trim(agenda[i].descricao);
+					var data = $.trim(agenda[i].data);
+					var inicio = $.trim(agenda[i].inicio);
+					var fim = $.trim(agenda[i].fim);
+					var datainicial = $.trim(agenda[i].datainicial);
+					var nome = $.trim(agenda[i].nome);
+					var tipo = $.trim(agenda[i].tipo);
+					var subtipo = $.trim(agenda[i].subtipo);
+					var fimReal = $.trim(agenda[i].fimReal);
+					var clienteNo = $.trim(agenda[i].clienteNo);
+					fimReal = fimReal.split(' ')[0];
+					const currentDate = new Date();
+					const stringi = inicio.split('/');
+					const stringf = fim.split('/');
+					const stringfReal = fimReal.split('/');
+					const string1 = stringi[1] + "/" + stringi[0] + "/" + stringi[2];
+					const string2 = stringf[1] + "/" + stringf[0] + "/" + stringf[2];
+					const string3 = stringfReal[1] + "/" + stringfReal[0] + "/" + stringfReal[2];
+					//Ele está a vir com o formato dd-mm-yyyy temos que trocar para mm-dd-yyyy
+					inicio = new Date(Date.parse(string1));
+					fim = new Date(Date.parse(string2));
+					var seriesMap = {
+						name: recursonome + " - " + recursocod,
+						customText: obra,
+						id: planeamId,
+						start: new Date(inicio).getTime(),
+						end: new Date(fim).getTime(),
+						recursocod: recursocod,
+						recursonome: recursonome,
+						planeamId: planeamId,
+						obra: obra,
+						descricao: descricao,
+						data: data,
+						inicio: inicio,
+						fim: fim,
+						datainicial: datainicial,
+						nome: nome,
+						eqpId: eqpId,
+						tipo: tipo,
+						subtipo: subtipo,
+						fimReal: fimReal,
+						fimRealDate: new Date(Date.parse(string3)),
+						clienteNo: clienteNo
+					};
+
+					chartData.push(seriesMap);
+				}
+				Highcharts.setOptions({
+					lang: {
+						months: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
+						weekdays: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'],
+						shortMonths: ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"]
+					}
+				});
+				const dateInMilliseconds = 86400000;
+				const now = new Date().getTime();
+				Highcharts.ganttChart('container', {
+					title: {
+						text: 'Agendamento de equipamentos',
+						style: {
+							fontSize: "30px",
+						}
+					},
+					time: {
+						useUTC: false,
+						timezone: 'Europe/Lisbon',
+					},
+					plotOptions: {
+						gantt: {
+							dataLabels: {
+								enabled: true,
+								formatter: function () {
+									return this.point.customText
+								},
+								style: {
+									fontSize: "20px",
+									textAlign: "center"
+								}
+							},
+						},
+						series: {
+							cursor: 'pointer',
+							point: {
+								events: {
+									click: function () {
+										mostrarboxAgendamentoEdit();
+										document.getElementById("planeamId").value = this.planeamId;
+										//console.log(this.chart.series[0].points[this.pos].obra)
+										//mudar os selects
+										//mudar do dos clientes
+										var userChoice = this.clienteNo;
+										var dropdown = document.getElementById("clientesDropdownE");
+										let control = dropdown.tomselect;
+										control.setValue(userChoice.trim());
+										//mudar do das obras
+										//atualizar dropdown das obras
+										buildSelectObrasEdit();
+										userChoice = this.obra;
+										let select = document.getElementById('tiposObrasE');
+										control = select.tomselect;
+										var options = control.options;
+										control.setValue(userChoice);
+										//mudar o tipo e o subtipo
+										userChoice = this.tipo;
+										select = document.getElementById('tipoSelectE');
+										control = select.tomselect;
+										control.setValue(userChoice);
+										userChoice = this.subtipo;
+										select = document.getElementById('subtipoSelectE');
+										control = select.tomselect;
+										control.setValue(userChoice);
+										//mudar do tipo dos equipamentos - codigo e descrição
+										select = document.getElementById('codDescEquipE');
+										control = select.tomselect;
+										control.setValue(this.eqpId);
+										//mudar as datas
+										//inicial
+										// Assume the date object is stored in a variable called dateObject
+										var dateObject = this.inicio;
+										dateObject.setHours(dateObject.getHours() + 1);
+
+										// Get the date part in the ISO format (YYYY-MM-DD)
+										var isoDate = dateObject.toISOString().split('T')[0];
+
+										// Set the value of the date input field
+										var dateInput = document.getElementById("datainiAgendE");
+										dateInput.value = isoDate;
+
+										//final
+										// Assume the date object is stored in a variable called dateObject
+										dateObject = this.fimRealDate;
+										dateObject.setHours(dateObject.getHours() + 1);
+
+
+										// Get the date part in the ISO format (YYYY-MM-DD)
+										isoDate = dateObject.toISOString().split('T')[0];
+
+										// Set the value of the date input field
+										dateInput = document.getElementById("datafimAgendE");
+										dateInput.value = isoDate;
+										buildDeleteAgendamento();
+									}
+								}
+							}
+						}
+					},
+					chart: {
+						events: {
+							load: function () {
+								var chart = this;
+								chart.xAxis[0].labelGroup.element.childNodes.forEach(function (label) {
+									if (label.innerHTML.includes('Sábado') || label.innerHTML.includes('Domingo')) {
+										label.style.fill = 'red';
+									}
+								});
+								chart.xAxis[1].labelGroup.element.childNodes.forEach(function (label) {
+									label.style.fontSize = '20px';
+								});
+							}
+						},
+						height: 500,
+						width: 1500
+					},
+					yAxis: {
+						uniqueNames: true,
+						labels: {
+							events: {
+								click: function () {
+									mostrarboxAgendamentoEdit();
+									document.getElementById("planeamId").value = this.chart.series[0].points[this.pos].planeamId;
+									//console.log(this.chart.series[0].points[this.pos].obra)
+									//mudar os selects
+									//mudar do dos clientes
+									var userChoice = this.chart.series[0].points[this.pos].clienteNo;
+									var dropdown = document.getElementById("clientesDropdownE");
+									let control = dropdown.tomselect;
+									control.setValue(userChoice.trim());
+									//mudar do das obras
+									//atualizar dropdown das obras
+									buildSelectObrasEdit();
+									userChoice = this.chart.series[0].points[this.pos].obra;
+									let select = document.getElementById('tiposObrasE');
+									control = select.tomselect;
+									var options = control.options;
+									control.setValue(userChoice);
+									//mudar o tipo e o subtipo
+									userChoice = this.chart.series[0].points[this.pos].tipo;
+									select = document.getElementById('tipoSelectE');
+									control = select.tomselect;
+									control.setValue(userChoice);
+									userChoice = this.chart.series[0].points[this.pos].subtipo;
+									select = document.getElementById('subtipoSelectE');
+									control = select.tomselect;
+									control.setValue(userChoice);
+									//mudar do tipo dos equipamentos - codigo e descrição
+									select = document.getElementById('codDescEquipE');
+									control = select.tomselect;
+									control.setValue(this.chart.series[0].points[this.pos].eqpId);
+									//mudar as datas
+									//inicial
+									// Assume the date object is stored in a variable called dateObject
+									var dateObject = this.chart.series[0].points[this.pos].inicio;
+									dateObject.setHours(dateObject.getHours() + 1);
+
+									// Get the date part in the ISO format (YYYY-MM-DD)
+									var isoDate = dateObject.toISOString().split('T')[0];
+
+									// Set the value of the date input field
+									var dateInput = document.getElementById("datainiAgendE");
+									dateInput.value = isoDate;
+
+									//final
+									// Assume the date object is stored in a variable called dateObject
+									dateObject = this.chart.series[0].points[this.pos].fimRealDate;
+									dateObject.setHours(dateObject.getHours() + 1);
+
+									// Get the date part in the ISO format (YYYY-MM-DD)
+									isoDate = dateObject.toISOString().split('T')[0];
+
+									// Set the value of the date input field
+									dateInput = document.getElementById("datafimAgendE");
+									dateInput.value = isoDate;
+									buildDeleteAgendamento();
+								}
+							},
+							style: {
+								fontSize: "20px"
+							}
+						},
+						style: {
+							fontSize: "20px"
+						}
+					},
+					xAxis: {
+						height: 500,
+						labels: {
+							style: {
+								fontSize: "20px"
+							}
+						},
+					},
+					accessibility: {
+						point: {
+							descriptionFormatter: function (point) {
+								var completedValue = point.completed ?
+									point.completed.amount || point.completed : null,
+									completed = completedValue ?
+										' Task ' + Math.round(completedValue * 1000) / 10 + '% completed.' :
+										'';
+								return Highcharts.format(
+									'{point.yCategory}.{completed} Começo {point.x:%Y-%m-%d}, Fim {point.x2:%Y-%m-%d}.',
+									{ point, completed }
+								);
+							}
+						}
+					},
+					tooltip: {
+						headerFormat: '<span style="font-size: 20px">Agendamento</span><br/>',
+
+						pointFormat: '<span>Cliente: {point.nome}<br/>Obra: {point.descricao}</span><br/><span>Começo: {point.start:%d/%m/%y}</span><br/><span>Fim: {point.fimReal:}</span>',
+						style: {
+							fontSize: "18px"
+						}
+					},
+					lang: {
+						accessibility: {
+							axis: {
+								xAxisDescriptionPlural: 'The chart has a two-part X axis showing time in both week numbers and days.'
+							}
+						}
+					},
+
+					series: [{
+						name: 'Agendamento',
+						data: chartData
+					}]
+				});
+			}).error(function (response) {
+				alert("Erro a encontrar DadosJSON por favor tente de novo!")
+				console.log(response);
+				console.log(response.error);
+			})
+		}
+
+		function mostrarbox() {
+			var modalInputBox = document.getElementById("modal-input").style.display = "block";
+		}
+		function fechabox() {
+			var modalInputBox = document.getElementById("modal-input").style.display = "none";
+			var closeModalButton = document.getElementById("close-modal-button");
+			document.getElementById("datafim2").value = "";
+		}
+
+		function mostrarboxCreate() {
+			var modalInputBox = document.getElementById("modal-add");
+			modalInputBox.style.display = "block";
+			var params = {};
+			var myQuery =
+				`select distinct tipo from u_eqp `;
+			params.id = "SELECTtoJSON";
+			params.select = myQuery;
+			$.ajax({
+				type: "POST",
+				url: "../api/code/run",
+				async: false,
+				data: JSON.stringify(params),
+				contentType: "application/json",
+			}).done(function (result, textStatus, jqXHR) {
+				var resposta = JSON.parse(result);
+				equipamento = resposta.Dados;
+				//console.log(equipamento)
+			}).error(function (response) {
+				alert("Erro a encontrar DadosJSON por favor tente de novo!");
+			});
+
+			var divComSelect = document.getElementById("div-tipo");
+			divComSelect.innerHTML = "<label id=\"label-tipo\">Tipo</label><br />";
+			var stringInic = "<select onchange=\"filtraSubTipoEcheckNovo()\" name=\"tipos\" id=\"tipos\">";
+			let escolhas = "";
+			escolhas += "<option value=\"\"></option>"
+			for (var i = 0; i < equipamento.length; i++) {
+				escolhas += "<option value=\"" + equipamento[i].tipo + "\">" + equipamento[i].tipo + "</option>"
+			}
+			escolhas += "<option value=\"novoTipo\">Novo tipo</option>"
+			divComSelect.innerHTML += stringInic + escolhas + "</select>";
+
+			params = {};
+			myQuery =
+				`select distinct subtipo from u_eqp `;
+			params.id = "SELECTtoJSON";
+			params.select = myQuery;
+			$.ajax({
+				type: "POST",
+				url: "../api/code/run",
+				async: false,
+				data: JSON.stringify(params),
+				contentType: "application/json",
+			}).done(function (result, textStatus, jqXHR) {
+				var resposta = JSON.parse(result);
+				subtipo = resposta.Dados;
+			}).error(function (response) {
+				alert("Erro a encontrar DadosJSON por favor tente de novo!");
+			});
+
+			var divComsubSelect = document.getElementById("div-subtipo");
+			divComsubSelect.innerHTML = "<label id=\"label-subtipo\">Sub-Tipo</label><br />";
+			var stringInic = "<select onchange=\"checkNovo()\" name=\"subtipos\" id=\"subtipos\">";
+			let subescolhas = "";
+			for (var i = 0; i < subtipo.length; i++) {
+				subescolhas += "<option value=\"" + subtipo[i].subtipo + "\">" + subtipo[i].subtipo + "</option>"
+			}
+			subescolhas += "<option value=\"novosubTipo\">Novo sub-tipo</option>"
+			divComsubSelect.innerHTML += stringInic + subescolhas + "</select>";
+		}
+
+		function filtraSubTipoEcheckNovo() {
+			var params = {};
+			var tipo = document.getElementById("tipos").value;
+			if (tipo == "novoTipo") {
+				tipo = "";
+			}
+			var myQuery =
+				`select distinct subtipo from u_eqp where tipo like '%` + tipo + `%'`;
+			params.id = "SELECTtoJSON";
+			params.select = myQuery;
+			$.ajax({
+				type: "POST",
+				url: "../api/code/run",
+				async: false,
+				data: JSON.stringify(params),
+				contentType: "application/json",
+			}).done(function (result, textStatus, jqXHR) {
+				var resposta = JSON.parse(result);
+				subtipo = resposta.Dados;
+			}).error(function (response) {
+				alert("Erro a encontrar DadosJSON por favor tente de novo!");
+			});
+
+			var divComsubSelect = document.getElementById("div-subtipo");
+			divComsubSelect.innerHTML = "<label id=\"label-subtipo\">Sub-Tipo</label><br />";
+			var stringInic = "<select onchange=\"checkNovo()\" name=\"subtipos\" id=\"subtipos\">";
+			let subescolhas = "";
+			for (var i = 0; i < subtipo.length; i++) {
+				subescolhas += "<option value=\"" + subtipo[i].subtipo + "\">" + subtipo[i].subtipo + "</option>"
+			}
+			subescolhas += "<option value=\"novosubTipo\">Novo sub-tipo</option>"
+			divComsubSelect.innerHTML += stringInic + subescolhas + "</select>";
+
+			checkNovo();
+		}
+
+		function checkNovo() {
+			var ddl = document.getElementById("tipos");
+			var selectedValue = ddl.options[ddl.selectedIndex].value;
+			var divNovoTipo = document.getElementById("div-novoTipo");
+			if (selectedValue == "novoTipo") {
+				divNovoTipo.style.display = "block"
+			} else {
+				divNovoTipo.style.display = "none"
+			}
+
+			var ddl = document.getElementById("subtipos");
+			var selectedValue = ddl.options[ddl.selectedIndex].value;
+			var divNovosubTipo = document.getElementById("div-novosubTipo");
+			if (selectedValue == "novosubTipo") {
+				divNovosubTipo.style.display = "block"
+			} else {
+				divNovosubTipo.style.display = "none"
+			}
+		}
+
+		function fechaboxCreate() {
+			var modalInputBox = document.getElementById("modal-add").style.display = "none";
+			document.getElementById("nome-codigo").value = "";
+			document.getElementById("nome-descricao").value = "";
+			document.getElementById("div-novoTipo").style.display = "none";
+			document.getElementById("nome-novoTipo").value = "";
+			document.getElementById("div-novosubTipo").style.display = "none";
+			document.getElementById("nome-novosubTipo").value = "";
+		}
+
+		function openTabs(evt, tarefa) {
+			var i, tabcontent, tablinks;
+			tabcontent = document.getElementsByClassName("tabcontent");
+			for (i = 0; i < tabcontent.length; i++) {
+				tabcontent[i].style.display = "none";
+			}
+			tablinks = document.getElementsByClassName("tablinks");
+			for (i = 0; i < tablinks.length; i++) {
+				tablinks[i].className = tablinks[i].className.replace(" active", "");
+			}
+			document.getElementById(tarefa).style.display = "block";
+			evt.currentTarget.className += " active";
+		}
+
+		function pageGoTo(page) {
+			let dataGrid = document.getElementById("DataGrid");
+			let totalPages = parseInt(dataGrid.getAttribute("data-totalpages"));
+			let totalRecords = parseInt(dataGrid.getAttribute("data-totalrecords"));
+			let currentPage = parseInt(dataGrid.getAttribute("data-currentpage"));
+
+			switch (page) {
+				case "first":
+					currentPage = 1;
+					break;
+				case "previous":
+					currentPage--;
+					if (currentPage < 1) {
+						currentPage = 1;
+					}
+					break;
+				case "next":
+					currentPage++;
+					if (currentPage > totalPages) {
+						currentPage = totalPages;
+					}
+					break;
+				case "last":
+					currentPage = totalPages;
+					break;
+			}
+
+			changePage(currentPage);
+		}
+
+		function pageGoToObras(page) {
+			let dataGrid = document.getElementById("DataGridObras");
+			let totalPages = parseInt(dataGrid.getAttribute("data-totalpages"));
+			let totalRecords = parseInt(dataGrid.getAttribute("data-totalrecords"));
+			let currentPage = parseInt(dataGrid.getAttribute("data-currentpage"));
+
+			switch (page) {
+				case "first":
+					currentPage = 1;
+					break;
+				case "previous":
+					currentPage--;
+					if (currentPage < 1) {
+						currentPage = 1;
+					}
+					break;
+				case "next":
+					currentPage++;
+					if (currentPage > totalPages) {
+						currentPage = totalPages;
+					}
+					break;
+				case "last":
+					currentPage = totalPages;
+					break;
+			}
+
+			changePageObras(currentPage);
+		}
+
+		function pageGoToPendentes(page) {
+			let dataGrid = document.getElementById("DataGridPendentes");
+			let totalPages = parseInt(dataGrid.getAttribute("data-totalpages"));
+			let totalRecords = parseInt(dataGrid.getAttribute("data-totalrecords"));
+			let currentPage = parseInt(dataGrid.getAttribute("data-currentpage"));
+
+			switch (page) {
+				case "first":
+					currentPage = 1;
+					break;
+				case "previous":
+					currentPage--;
+					if (currentPage < 1) {
+						currentPage = 1;
+					}
+					break;
+				case "next":
+					currentPage++;
+					if (currentPage > totalPages) {
+						currentPage = totalPages;
+					}
+					break;
+				case "last":
+					currentPage = totalPages;
+					break;
+			}
+
+			changePagePendentes(currentPage);
+		}
+
+		function changePage(page) {
+			let dataGrid = document.getElementById("DataGrid");
+			let currentPage = parseInt(dataGrid.getAttribute("data-currentpage"));
+
+			document.getElementById("currentPage").innerHTML = page;
+			dataGrid.setAttribute("data-currentpage", "" + page);
+
+			getEquip();
+		}
+
+		function changePageSize() {
+			let dataGrid = document.getElementById("DataGrid");
+			let pageSize = document.getElementById("pageSize").value;
+			dataGrid.setAttribute("data-pagesize", "" + pageSize);
+			changePage(1);
+		}
+
+		function changePageObras(page) {
+			let dataGrid = document.getElementById("DataGridObras");
+			let currentPage = parseInt(dataGrid.getAttribute("data-currentpage"));
+
+			document.getElementById("currentPageObras").innerHTML = page;
+			dataGrid.setAttribute("data-currentpage", "" + page);
+			getObras();
+		}
+
+		function changePageSizeObras() {
+			let dataGrid = document.getElementById("DataGridObras");
+			let pageSize = document.getElementById("pageSizeObras").value;
+			dataGrid.setAttribute("data-pagesize", "" + pageSize);
+			changePageObras(1);
+		}
+
+		function changePagePendentes(page) {
+			let dataGrid = document.getElementById("DataGridPendentes");
+			let currentPage = parseInt(dataGrid.getAttribute("data-currentpage"));
+
+			document.getElementById("currentPagePendentes").innerHTML = page;
+			dataGrid.setAttribute("data-currentpage", "" + page);
+
+			getPendentes(data8DiasDepois);
+		}
+
+		function changePageSizePendentes() {
+			let dataGrid = document.getElementById("DataGridPendentes");
+			let pageSize = document.getElementById("pageSizePendentes").value;
+			dataGrid.setAttribute("data-pagesize", "" + pageSize);
+			changePagePendentes(1);
+		}
+
+		function handleEnterKey(e) {
+			if (e.keyCode == 13) {
+				// enter pressed
+				try {
+					e.preventDefault ? e.preventDefault() : (e.returnValue = false);
+					//DO ALTERNATE ACTION RATHER THAN SEND ENTER
+					changePageSize();
+					changePageSizeObras();
+					changePageSizePendentes();
+				} catch (err) {
+					console.log(err.message);
+				}
+			}
+		}
+	</script>
+</p>

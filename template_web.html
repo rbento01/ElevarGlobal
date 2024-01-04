@@ -1,0 +1,995 @@
+<link href="https://cdn.jsdelivr.net/npm/tom-select@2.2.2/dist/css/tom-select.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/tom-select@2.2.2/dist/js/tom-select.complete.min.js"></script>
+<style type="text/css">
+	#main-container {
+		padding-top: 10px;
+	}
+
+	.inline {
+		display: inline;
+	}
+
+	.show {
+		display: block;
+	}
+
+	.hide {
+		display: none;
+	}
+
+	table {
+		font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+			Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
+			sans-serif;
+		border-collapse: collapse;
+		width: 100%;
+	}
+
+	thead tr th {
+		background-color: #fafafa;
+	}
+
+	thead tr th:first-child {
+		border-left: 1px solid #dddddd;
+	}
+
+	thead tr th:last-child {
+		border-right: 1px solid #dddddd;
+	}
+
+	thead tr:first-child th {
+		border-top: 1px solid #dddddd;
+		padding-top: 8px;
+		cursor: pointer;
+	}
+
+	thead tr:first-child th div {
+		display: flex;
+		flex-wrap: nowrap;
+		justify-content: space-between;
+	}
+
+	thead tr:last-child th {
+		border-bottom: 1px solid #dddddd;
+	}
+
+	thead tr,
+	thead th {
+		text-align: left;
+		padding-left: 8px;
+		padding-right: 8px;
+		color: #757575;
+		font-weight: normal;
+	}
+
+	tbody tr,
+	tbody td {
+		text-align: left;
+		font-weight: normal;
+
+		border: 1px solid #dddddd;
+	}
+
+	tbody tr:hover {
+		background-color: #cfd8dc55;
+	}
+
+	.column-filter,
+	.column-vars-filter {
+		/* width: 100%;
+	background-color: #fafafa;
+	border: 0px solid #cccccc;
+	border-bottom: 1px solid #cccccc;
+	margin-bottom: 12px;
+	font-weight: normal;
+	padding: 5px;
+	color: #999999; */
+		width: 100%;
+		height: 5rem;
+		border-radius: 10px;
+		box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+		border: none;
+		outline-color: #4086d1
+	}
+
+	.column-filter:focus,
+	.column-filter-date:focus,
+	.column-vars-filter:focus,
+	.column-vars-filter-date:focus {
+		outline: none;
+	}
+
+	.column-filterProjetoss,
+	.column-vars-filterProjetos {
+		/* width: 100%;
+	background-color: #fafafa;
+	border: 0px solid #cccccc;
+	border-bottom: 1px solid #cccccc;
+	margin-bottom: 12px;
+	font-weight: normal;
+	padding: 5px;
+	color: #999999; */
+		width: 100%;
+		height: 5rem;
+		border-radius: 10px;
+		box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+		border: none;
+		outline-color: #4086d1
+	}
+
+	.column-filterProjetoss:focus,
+	.column-filter-dateProjetos:focus,
+	.column-vars-filterProjetos:focus,
+	.column-vars-filter-dateProjetos:focus {
+		outline: none;
+	}
+
+	.column-filterPendentes,
+	.column-vars-filterPendentes {
+		/* width: 100%;
+	background-color: #fafafa;
+	border: 0px solid #cccccc;
+	border-bottom: 1px solid #cccccc;
+	margin-bottom: 12px;
+	font-weight: normal;
+	padding: 5px;
+	color: #999999; */
+		width: 100%;
+		height: 5rem;
+		border-radius: 10px;
+		box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+		border: none;
+		outline-color: #4086d1
+	}
+
+	.column-filterPendentes:focus,
+	.column-filter-datePendentes:focus,
+	.column-vars-filterPendentes:focus,
+	.column-vars-filter-datePendentes:focus {
+		outline: none;
+	}
+
+	.input-date {
+		/* width: 100%;
+	position: relative;
+	background-color: #fafafa;
+	border: 0px solid #cccccc;
+	border-bottom: 1px solid #cccccc;
+	margin-bottom: 12px;
+	font-weight: normal;
+	padding: 5px;
+	color: #999999; */
+		width: 100%;
+		height: 5rem;
+		border-radius: 10px;
+		box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+		border: none;
+		outline-color: #4086d1
+	}
+
+	.input {
+		width: 100%;
+		height: 5rem;
+		border-radius: 10px;
+		box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+		border: none;
+		outline-color: #4086d1
+	}
+
+	.column-filter-date {
+		/* background-color: #fafafa;
+	border: 0px solid #cccccc;
+	color: #999999;
+	padding: 0px; */
+		width: 100%;
+		height: 5rem;
+		border-radius: 10px;
+		box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+		border: none;
+		outline-color: #4086d1
+	}
+
+	.btn-no-background {
+		background-color: transparent;
+		color: #999999;
+		background-repeat: no-repeat;
+		border: none;
+		cursor: pointer;
+		overflow: hidden;
+		outline: none;
+		position: absolute;
+		right: 0;
+	}
+
+	.btn-no-background:hover {
+		color: #757575;
+	}
+
+	.dropdown-datafilter-content {
+		display: none;
+		position: absolute;
+		right: 0;
+		background-color: #ffffff;
+		box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.5);
+		z-index: 1;
+		padding: 15px;
+	}
+
+	.input-daterange {
+		display: flex;
+		flex-wrap: nowrap;
+		justify-content: space-between;
+	}
+
+	.dropdown-datafilter-content span {
+		background-color: transparent;
+		border: none;
+	}
+
+	.input-daterange label {
+		font-size: 12px;
+		color: #808080;
+	}
+
+	.input-daterange input {
+		font-size: 12px;
+		font-weight: 500;
+		border: 1px solid #a7b1c288;
+		color: #808080;
+		border-radius: 5px;
+		max-width: 115px;
+	}
+
+	.datefilters-buttongroup button {
+		display: block;
+		width: 100%;
+		border-radius: 5px;
+		background-color: none;
+		border: 1px solid #a7b1c288;
+		font-weight: 500;
+		padding: 5px;
+		color: #808080;
+		align-self: center;
+		margin-top: 10px;
+	}
+
+	.datefilters-buttongroup>div {
+		width: 100%;
+		display: flex;
+	}
+
+	.datefilters-buttongroup>div>button {
+		display: inline;
+	}
+
+	::placeholder {
+		/* Chrome, Firefox, Opera, Safari 10.1+ */
+		color: #cccccc;
+		opacity: 1;
+		/* Firefox */
+	}
+
+	:-ms-input-placeholder {
+		/* Internet Explorer 10-11 */
+		color: #cccccc;
+	}
+
+	::-ms-input-placeholder {
+		/* Microsoft Edge */
+		color: #cccccc;
+	}
+
+	.modal-input-container {
+		display: none;
+		position: fixed;
+		z-index: 1;
+		padding-top: 100px;
+		left: 0;
+		top: 0;
+		width: 100%;
+		height: 100%;
+		overflow: auto;
+		overflow-y: initial;
+		background-color: rgb(0, 0, 0);
+		background-color: rgba(0, 0, 0, 0.6);
+	}
+
+	.modal-content {
+		background-color: #fefefe;
+		margin: auto;
+		padding: 20px;
+		border: 1px solid #888;
+		width: 40%;
+		overflow-y: auto;
+	}
+
+	.btn_verde {
+		background: #47cf73;
+		border: 1px solid #47cf73;
+		border-radius: 6px;
+		box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
+		box-sizing: border-box;
+		color: #ffffff;
+		cursor: pointer;
+		display: inline-block;
+		font-family: nunito, roboto, proxima-nova, "proxima nova", sans-serif;
+		font-size: 16px;
+		font-weight: 800;
+		line-height: 16px;
+		min-height: 40px;
+		outline: 0;
+		padding: 12px 14px;
+		text-align: center;
+		text-rendering: geometricprecision;
+		text-transform: none;
+		user-select: none;
+		-webkit-user-select: none;
+		touch-action: manipulation;
+		vertical-align: middle;
+	}
+
+	.btn_verde:hover {
+		background-color: initial;
+		background-position: 0 0;
+		color: #47cf73;
+	}
+
+	.btn_azul {
+		background: #506ce8;
+		border: 1px solid #506ce8;
+		border-radius: 6px;
+		box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
+		box-sizing: border-box;
+		color: #ffffff;
+		cursor: pointer;
+		display: inline-block;
+		font-family: nunito, roboto, proxima-nova, "proxima nova", sans-serif;
+		font-size: 16px;
+		font-weight: 800;
+		line-height: 16px;
+		min-height: 40px;
+		outline: 0;
+		padding: 12px 14px;
+		text-align: center;
+		text-rendering: geometricprecision;
+		text-transform: none;
+		user-select: none;
+		-webkit-user-select: none;
+		touch-action: manipulation;
+		vertical-align: middle;
+	}
+
+	.btn_azul1 {
+		background: #506ce8;
+		border: 1px solid #506ce8;
+		border-radius: 6px;
+		box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
+		box-sizing: border-box;
+		color: #ffffff;
+		cursor: pointer;
+		display: inline-block;
+		font-family: nunito, roboto, proxima-nova, "proxima nova", sans-serif;
+		font-size: 16px;
+		font-weight: 800;
+		line-height: 16px;
+		min-height: 40px;
+		outline: 0;
+		padding: 12px 14px;
+		text-align: center;
+		text-rendering: geometricprecision;
+		text-transform: none;
+		user-select: none;
+		-webkit-user-select: none;
+		touch-action: manipulation;
+		vertical-align: middle;
+	}
+
+	.btn_azul:hover {
+		background-color: initial;
+		background-position: 0 0;
+		color: #506ce8;
+	}
+
+	.btn_vermelho {
+
+		background: #ff3c41;
+		border: 1px solid #ff3c41;
+		border-radius: 6px;
+		box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
+		box-sizing: border-box;
+		color: #FFFFFF;
+		cursor: pointer;
+		display: inline-block;
+		font-family: nunito, roboto, proxima-nova, "proxima nova", sans-serif;
+		font-size: 16px;
+		font-weight: 800;
+		line-height: 16px;
+		min-height: 40px;
+		outline: 0;
+		padding: 12px 14px;
+		text-align: center;
+		text-rendering: geometricprecision;
+		text-transform: none;
+		user-select: none;
+		-webkit-user-select: none;
+		touch-action: manipulation;
+		vertical-align: middle;
+
+
+	}
+
+	.btn_vermelho:hover {
+		background-color: initial;
+		background-position: 0 0;
+		color: #ff3c41;
+
+	}
+
+	.btn_azulesc {
+		background: #1e2d84;
+		border: 1px solid #1e2d84;
+		border-radius: 6px;
+		box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
+		box-sizing: border-box;
+		color: #ffffff;
+		cursor: pointer;
+		display: inline-block;
+		font-family: nunito, roboto, proxima-nova, "proxima nova", sans-serif;
+		font-size: 16px;
+		font-weight: 800;
+		line-height: 16px;
+		min-height: 40px;
+		outline: 0;
+		padding: 12px 14px;
+		text-align: center;
+		text-rendering: geometricprecision;
+		text-transform: none;
+		user-select: none;
+		-webkit-user-select: none;
+		touch-action: manipulation;
+		vertical-align: middle;
+	}
+
+	.btn_azulesc:hover {
+		background-color: initial;
+		background-position: 0 0;
+		color: #1e2d84;
+	}
+
+	tfoot tr td {
+		background-color: #fafafa;
+		border: 1px solid #dddddd;
+		padding: 5px;
+		text-align: right;
+	}
+
+	#footer-span,
+	#footer-span * {
+		font-size: 14px;
+		font-weight: normal !important;
+	}
+
+	#footer-span>* {
+		margin-left: 10px;
+		text-align: center;
+	}
+
+	#footer-span input[type="number"] {
+		width: 35px;
+		border: 1px solid #dddddd;
+		text-align: center;
+	}
+
+	input::-webkit-outer-spin-button,
+	input::-webkit-inner-spin-button {
+		-webkit-appearance: none;
+		margin: 0;
+	}
+
+	/* Firefox */
+	input[type="number"] {
+		-moz-appearance: textfield;
+		appearance: textfield;
+	}
+
+	#toolbar-right {
+		display: flex;
+		justify-content: flex-end;
+		padding-bottom: 20px;
+	}
+
+	#toolbar-right button {
+		border-radius: 5px;
+		font-weight: 500;
+		padding-top: 10px;
+		padding-bottom: 10px;
+	}
+
+	.modal-content1 {
+		height: 23rem;
+		background-color: #fefefe;
+		margin: auto;
+		padding: 20px;
+		border: 1px solid #888;
+		width: 50%;
+		overflow-y: auto;
+		border-radius: 10px;
+	}
+
+	.botoes {
+		display: flex;
+		justify-content: end;
+	}
+
+	.horas_botoes {
+		display: flex;
+		justify-content: space-between;
+	}
+
+	b {
+		color: #1e2d84;
+	}
+
+	select {
+		width: 100%;
+		height: 5rem;
+		border-radius: 8px;
+		box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+		border: none;
+		outline-color: #4086d1;
+		margin-bottom: 1rem;
+	}
+
+	.datas {
+		display: flex;
+		justify-content: space-around;
+	}
+
+	.data_final {
+		display: flex;
+		flex-direction: column;
+	}
+
+	.x {
+		font-size: 14px;
+		padding: 4px;
+	}
+
+	.chk {
+		margin-top: 2rem;
+	}
+
+	.footer {
+		display: flex;
+		align-items: center;
+		justify-content: flex-end;
+	}
+
+	.close {
+		cursor: pointer;
+	}
+
+	/* Style the tab */
+	.tab {
+		border-radius: 8px;
+		overflow: hidden;
+		border: 1px solid #ccc;
+		background-color: #f1f1f1;
+	}
+
+	/* Style the buttons inside the tab */
+	.tab button {
+		background-color: inherit;
+		float: left;
+		border: none;
+		outline: none;
+		cursor: pointer;
+		padding: 14px 16px;
+		transition: 0.3s;
+		font-size: 17px;
+	}
+
+	/* Change background color of buttons on hover */
+	.tab button:hover {
+		background-color: #ddd;
+	}
+
+	/* Create an active/current tablink class */
+	.tab button.active {
+		background-color: #ccc;
+	}
+
+	/* Style the tab content */
+	.tabcontent {
+		display: none;
+		border-radius: 8px;
+		padding: 6px 12px;
+		border: 1px solid #ccc;
+		border-top: none;
+	}
+
+	#container,
+	#button-container {
+		margin: 1em auto;
+	}
+
+	/* .choices__input.choices__input--cloned{
+width: 100%!important;
+} */
+	#ts-control {
+		font-size: 18px !important;
+	}
+
+	#ts-dropdown.single {
+		font-size: 18px !important;
+	}
+
+	.ts-control {
+		border: none;
+	}
+
+
+	.ts-dropdown,
+	.ts-control,
+	.ts-control input {
+		font-size: 16px;
+	}
+</style>
+<div>
+	<h1 style="text-align: center; font-weight: bold; margin-bottom: 3rem;">Análise Financeira das Obras</h1>
+
+	<div id="Projetos">
+
+		<div id="grid-container" style="display: block;
+		overflow-x: auto;">
+			<table class="table table-striped" data-currentpage="1" data-ordercolumn="dataaber" data-ordertype="desc"
+				data-pagesize="50" data-totalpages="1" data-totalrecords="50" id="DataGridProjetos"
+				style="width: 100%;">
+				<thead>
+					<tr id="tableHeaderProjetos">
+						<th data-column="ng.codigo" data-order="desc" scope="col" style="font-size: 16px;">
+							<b>Nº Projetos</b><span></span>
+						</th>
+						<th data-column="ng.vendedor" data-order="desc" scope="col" style="font-size: 16px;">
+							<b>Descrição</b><span></span>
+						</th>
+						<th data-column="ng.usrdata" data-order="desc" scope="col" style="font-size: 16px;">
+							<b>Cliente</b><span></span></th>
+						<th data-column="ng.contacto" data-order="desc" scope="col" style="font-size: 16px;">
+							<b>V. Qt. Anul.</b><span></span>
+						</th>
+						<th data-column="e.u_respcl" data-order="desc" scope="col" style="font-size: 16px;">
+							<b>V. Adjud.</b><span></span>
+						</th>
+						<th data-column="e.u_respcltl" data-order="desc" scope="col"
+							style="font-size: 16px; width: 160px;">
+							<b>V. Faturado</b><span></span>
+						</th>
+						<th data-column="e.u_respclem" data-order="desc" scope="col" style="font-size: 16px;">
+							<b>Por Faturar</b><span></span>
+						</th>
+						<th data-column="ng.resumo" data-order="desc" scope="col" style="font-size: 16px;">
+							<b>Regularizado</b><span></span>
+						</th>
+						<th data-column="(SELECT TOP 1 [zona] FROM [vi] WHERE [ngstamp] = ng.[ngstamp] ORDER BY [data] DESC)"
+							data-order="desc" scope="col" style="font-size: 16px; width: 110px; text-align: center;">
+							<b>Por Regularizar</b><span></span>
+						</th>
+						<th data-column="(SELECT TOP 1 [NGSTATUS] FROM [vi] WHERE [ngstamp] = ng.[ngstamp] ORDER BY [data] DESC)"
+							data-order="desc" scope="col" style="font-size: 16px;"><b>Recebido
+								(Depositado)</b><span></span></th>
+						<th data-column="(SELECT TOP 1 [data] FROM [vi] WHERE [ngstamp] = ng.[ngstamp] ORDER BY [data] DESC)"
+							data-order="desc" scope="col" style="font-size: 16px;"><b>Recebido em
+								Título</b><span></span></th>
+					</tr>
+					<tr id="filtrosProjetoss" onkeypress="handleEnterKey(event)">
+						<th><input class="column-filterProjetoss" oninput="checkCharsProjetos(this)"
+								placeholder="Filtrar..." type="text" /></th>
+						<th><input class="column-filterProjetoss" oninput="checkCharsProjetos(this)"
+								placeholder="Filtrar..." type="text" /></th>
+						<th><input class="column-filterProjetoss" oninput="checkCharsProjetos(this)"
+								placeholder="Filtrar..." type="text" /></th>
+						<th><input class="column-filterProjetoss" oninput="checkCharsProjetos(this)"
+								placeholder="Filtrar..." type="text" /></th>
+						<th><input class="column-filterProjetoss" oninput="checkCharsProjetos(this)"
+								placeholder="Filtrar..." type="text" /></th>
+						<th><input class="column-filterProjetoss" oninput="checkCharsProjetos(this)"
+								placeholder="Filtrar..." type="text" /></th>
+						<th><input class="column-filterProjetoss" oninput="checkCharsProjetos(this)"
+								placeholder="Filtrar..." type="text" /></th>
+						<th><input class="column-filterProjetoss" oninput="checkCharsProjetos(this)"
+								placeholder="Filtrar..." type="text" /></th>
+						<th><input class="column-filterProjetoss" oninput="checkCharsProjetos(this)"
+								placeholder="Filtrar..." type="text" /></th>
+						<th>&nbsp;</th>
+						<th>&nbsp;</th>
+					</tr>
+				</thead>
+				<tbody id="tableBodyProjetos">
+				</tbody>
+				<tfoot>
+					<tr>
+						<td colspan="100">
+							<div class="footer" onkeypress="handleEnterKey(event)" style="margin-top: 1rem;"><span
+									id="footer-span"><span><span><input id="pageSizeProjetos"
+												onchange="changePageSizeProjetos()" type="number" value="50" /> </span>
+										por p&aacute;gina </span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button
+										class="btn_azulesc" onclick="pageGoToProjetos('first')" type="button"><i
+											aria-hidden="true" class="fa fa-step-backward  fa-2xl"></i></button><button
+										class="btn_verde" onclick="pageGoToProjetos('previous')" type="button"><i
+											aria-hidden="true" class="fa fa-chevron-left"></i></button> <span> <span
+											id="currentPageProjetos">1</span> de <span id="totalPagesProjetos">1</span>
+										p&aacute;ginas </span><button class="btn_verde"
+										onclick="pageGoToProjetos('next')" type="button"><i aria-hidden="true"
+											class="fa fa-chevron-right"></i></button><button class="btn_azulesc"
+										onclick="pageGoToProjetos('last')" type="button"><i aria-hidden="true"
+											class="fa fa-step-forward fa-2xl"></i></button> </span></div>
+						</td>
+					</tr>
+				</tfoot>
+			</table>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+	//limpa cache
+	if (!location.hash) {
+		location.hash = "#reloading";
+		location.reload(true);
+	} else {
+		location.hash = "#reloaded";
+	}
+	var buscarProjetos = 0;
+	window.onload = function onLoadFunction() {
+		$(".headerZone").hide();
+		$(".dropdown-toggle btn btn-default btn-sm").hide();
+		$("#OptionsRecordDropDown").hide();
+		$(".navbar").hide();
+		caches.keys().then((list) => list.map((key) => caches.delete(key)));
+		getProjetos();
+	};
+
+
+
+	//Add event listener for the filter inputs
+	document.addEventListener("DOMContentLoaded", function () {
+		var filterInputsProjetos = document.getElementsByClassName("column-filterProjetoss");
+		for (var i = 0; i < filterInputsProjetos.length; i++) {
+			filterInputsProjetos[i].addEventListener("change", filterTableProjetos);
+		}
+		var filterInputsVarsProjetos = document.getElementsByClassName("column-vars-filterProjetos");
+		for (var i = 0; i < filterInputsVarsProjetos.length; i++) {
+			filterInputsVarsProjetos[i].addEventListener("change", filterTableProjetos);
+		}
+	});
+
+	//Order the table
+	let tableHeaderProjetos = document.getElementById("tableHeaderProjetos");
+	let headersProjetos = tableHeaderProjetos.getElementsByTagName("th");
+	for (let i = 0; i < headersProjetos.length; i++) {
+		headersProjetos[i].addEventListener("click", function () {
+			var column = $(this).data("column");
+			var order = $(this).data("order");
+			let dataGrid = document.getElementById("DataGridProjetos");
+
+			if (order == "desc") {
+				$(this).data("order", "asc");
+				dataGrid.dataset.ordercolumn = column;
+				dataGrid.dataset.ordertype = "ASC";
+			} else {
+				$(this).data("order", "desc");
+				dataGrid.dataset.ordercolumn = column;
+				dataGrid.dataset.ordertype = "DESC";
+			}
+			// neste for está o -1 porque o último th da tabela é apenas um spacer, e ele atrofiava porque não tinha valores
+			// caso se adicionar novas colunas mudar isto (-1 no for) accordingly
+			for (let j = 0; j < headersProjetos.length - 1; j++) {
+				if (headersProjetos[j].getElementsByTagName("span")[0] != undefined) {
+					headersProjetos[j].getElementsByTagName("span")[0].innerHTML = "";
+				}
+			}
+			this.getElementsByTagName("span")[0].innerHTML = order == "desc" ? "&#9650" : "&#9660";
+			getProjetos();
+		});
+	}
+
+	getProjetos();
+
+	function checkCharsProjetos(element) {
+		const filterValue = element.value;
+		if (filterValue.length >= 3) {
+			getProjetos();
+		}
+		if (filterValue == "") {
+			getProjetos();
+		}
+	}
+
+	function getProjetos() {
+		const dataGrid = document.getElementById("DataGridProjetos");
+		const columnFilter = document.getElementsByClassName("column-filterProjetoss");
+		const numberColumns = document.getElementById("DataGridProjetos").rows[0].cells.length;
+		const codigoFilter = columnFilter[0].value;
+		const vendedorFilter = columnFilter[1].value;
+		const usrdataFilter = columnFilter[2].value;
+		const contactoFilter = columnFilter[3].value;
+		const u_respclFilter = columnFilter[4].value;
+		const u_respcltlFilter = columnFilter[5].value;
+		const u_respclemFilter = columnFilter[6].value;
+		const resumoFilter = columnFilter[7].value;
+		const zonaFilter = columnFilter[8].value;
+
+
+		//Get order
+		const orderColumn = dataGrid.dataset.ordercolumn;
+		const orderType = dataGrid.dataset.ordertype;
+		//Get Grid Attributes
+		const currentPage = dataGrid.dataset.currentpage;
+		const pageSize = dataGrid.dataset.pagesize;
+		var offset = (currentPage - 1) * pageSize;
+		var paginacao = "";
+		if (buscarProjetos != 0) {
+			paginacao =
+				` OFFSET ` + offset.toString() +
+				` ROWS FETCH NEXT ` + pageSize.toString() + ` ROWS ONLY`;
+		}
+		const Projetos = [];
+		let params = {};
+		const queryString = window.location.search;
+		const urlParams = new URLSearchParams(queryString);
+		const posto = urlParams.get("posto");
+		const varMyQuery =
+			`SELECT
+				*,
+				(SELECT TOP 1 [data] FROM [vi] WHERE [ngstamp] = ng.[ngstamp] ORDER BY [data] DESC) AS [dataUltimaVisita],
+				--este próximo select devia de ter a cláusula de [and vi.zona <> '']
+				(SELECT TOP 1 [NGSTATUS] FROM [vi] WHERE [ngstamp] = ng.[ngstamp] ORDER BY [data] DESC) AS [statusUltimaVisita],
+				(SELECT TOP 1 [zona] FROM [vi] WHERE [ngstamp] = ng.[ngstamp] ORDER BY [data] DESC) AS [zona],
+				e.u_respclem, 
+				e.u_respcltl, 
+				e.u_respcl
+			FROM
+				[ng] AS ng
+			INNER JOIN [em] AS e ON ng.[nocontacto] = e.[no]
+			INNER JOIN [cm3] AS cm3 ON ng.[vendedor] = cm3.[nome]
+			WHERE ng.vendedor LIKE '%` + vendedorFilter + `%'
+				AND ng.usrdata LIKE '%` + usrdataFilter + `%'
+				AND ng.contacto LIKE '%` + contactoFilter + `%'
+				AND e.u_respcl LIKE '%` + u_respclFilter + `%'
+				AND e.u_respcltl LIKE '%` + u_respcltlFilter + `%'
+				AND e.u_respclem LIKE '%` + u_respclemFilter + `%'
+				AND ng.codigo LIKE '%` + codigoFilter + `%'
+				AND ng.resumo LIKE '%` + resumoFilter + `%'
+				AND (SELECT TOP 1 [zona] FROM [vi] WHERE [ngstamp] = ng.[ngstamp] ORDER BY [data] DESC) LIKE '%` + zonaFilter + `%'
+			ORDER BY ` + orderColumn + ` ` + orderType + paginacao + ``;
+		//AND nproposta LIKE '%` + npropostaFilter + `%'
+		//console.log(varMyQuery);
+		params.id = "xmltoquery";
+		params.select = varMyQuery;
+		$.ajax({
+			type: "POST",
+			url: "../api/code/run",
+			async: true,
+			data: JSON.stringify(params),
+			contentType: "application/json",
+		}).done(function (result, textStatus, jqXHR) {
+			try {
+				//console.log(result);
+				resposta = JSON.parse(result);
+			} catch {
+				resposta = JSON.parse('{"Dados":[]}');
+			}
+			if (buscarProjetos == 0 && resposta.Dados.length > 0) {
+				buscarProjetos = parseInt(resposta.Dados.length);
+				return getProjetos();
+			} else {
+				const totalRecords = buscarProjetos;
+				buscarProjetos = 0;
+				const totalPages = Math.ceil(totalRecords / pageSize);
+				if (totalRecords > 0) {
+					document.getElementById("totalPagesProjetos").innerHTML = totalPages;
+					for (var i = 0; i < resposta.Dados.length; ++i) {
+						Projetos.push(resposta.Dados[i]);
+					}
+				} else {
+					document.getElementById("totalPagesProjetos").innerHTML = 1;
+				}
+				dataGrid.dataset.totalrecords = totalRecords;
+				dataGrid.dataset.totalpages = totalPages;
+				buildProjetos(Projetos);
+
+			}
+		});
+	}
+
+	function buildNegocios(data) {
+		let tBody = document.getElementById("tableBodyNegocios");
+		tBody.innerHTML = "";
+		let row = "";
+		for (var i = 0; i < data.length; i++) {
+			row += "<tr>";
+			row += '<td style=" font-size:16px; padding:8px; width: 100px;">' + data[i].codigo + "</td>";
+			row += '<td style=" font-size:16px; padding:8px; background-color:' + data[i].u_cor + '; font-weight: bold; text-align: center; width: 150px;"><a style="cursor: pointer; color: black;" onclick="openVendedorEdit(\'' + data[i].novend + '\', \'' + data[i].ngstamp + '\')">' + data[i].vendedor + "</td>";
+			row += '<td style=" font-size:16px; padding:8px; width: 100px;">' + ((data[i].dataaber).split(' '))[0] + "</td>";
+			row += '<td style=" font-size:16px; padding:8px">' + data[i].contacto + "</td>";
+			row += '<td style=" font-size:16px; padding:8px">' + data[i].u_respcl + "</td>";
+			row += '<td style=" font-size:16px; padding:8px">' + data[i].u_respcltl + "</td>";
+			row += '<td style=" font-size:16px; padding:8px">' + data[i].u_respclem + "</td>";
+			row += '<td style=" font-size:16px; padding:8px"><a style="cursor: pointer;" onclick=openModalAbreResumo(\'' + data[i].ngstamp + '\')>' + data[i].resumo.substring(0, 20) + "</a></td>";
+			row += '<td style=" font-size:16px; padding:8px">' + data[i].zona + "</td>";
+			row += buildStatusColor(data[i].statusUltimaVisita, data[i].dataUltimaVisita);
+			row += '<td style="font-size: 16px;  text-align: center;">'
+				+ '<button type="button" onclick="openModalCriarVisita(\'' + data[i].ngstamp + '\', \'' + data[i].codigo + '\', \'' + data[i].vendedor + '\')" class="btn_azul" style="text-align: center;"><i class="fa fa-plus"></i></button>'
+				+ '</td>';
+			row += '<td style="font-size: 16px;  text-align: center;">'
+				+ '<button type="button" onclick="openModalAbreStatus(\'' + data[i].ngstamp + '\', \'' + data[i].codigo + '\', \'' + data[i].vendedor + '\')" class="btn_azul" style="text-align: center;"><i class="fa fa-eye"></i></button>'
+				+ '</td>';
+			row += "</tr>";
+		}
+		tBody.innerHTML += row;
+	}
+
+	function pageGoToProjetos(page) {
+		let dataGrid = document.getElementById("DataGridProjetos");
+		let totalPages = parseInt(dataGrid.getAttribute("data-totalpages"));
+		let totalRecords = parseInt(dataGrid.getAttribute("data-totalrecords"));
+		let currentPage = parseInt(dataGrid.getAttribute("data-currentpage"));
+
+		switch (page) {
+			case "first":
+				currentPage = 1;
+				break;
+			case "previous":
+				currentPage--;
+				if (currentPage < 1) {
+					currentPage = 1;
+				}
+				break;
+			case "next":
+				currentPage++;
+				if (currentPage > totalPages) {
+					currentPage = totalPages;
+				}
+				break;
+			case "last":
+				currentPage = totalPages;
+				break;
+		}
+
+		changePageProjetos(currentPage);
+	}
+
+	function changePageProjetos(page) {
+		let dataGrid = document.getElementById("DataGridProjetos");
+		let currentPage = parseInt(dataGrid.getAttribute("data-currentpage"));
+
+		document.getElementById("currentPageProjetos").innerHTML = page;
+		dataGrid.setAttribute("data-currentpage", "" + page);
+		getProjetos();
+	}
+
+	function changePageSizeProjetos() {
+		let dataGrid = document.getElementById("DataGridProjetos");
+		let pageSize = document.getElementById("pageSizeProjetos").value;
+		dataGrid.setAttribute("data-pagesize", "" + pageSize);
+		changePageProjetos(1);
+	}
+
+	function filterTableProjetos() {
+		changePageProjetos(1);
+	}
+
+	function handleEnterKey(e) {
+		if (e.keyCode == 13) {
+			// enter pressed
+			try {
+				e.preventDefault ? e.preventDefault() : (e.returnValue = false);
+				//DO ALTERNATE ACTION RATHER THAN SEND ENTER
+				changePageSizeProjetos();
+			} catch (err) {
+				console.log(err.message);
+			}
+		}
+	}
+</script>

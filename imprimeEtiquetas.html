@@ -1,0 +1,1348 @@
+<style>
+    h1 {
+        font-family: helvetica;
+        text-align: center;
+    }
+
+    .pin-code {
+        padding: 0;
+        margin: 0 auto;
+        display: flex;
+        justify-content: center;
+    }
+
+    .pin-code input {
+        border: none;
+        text-align: center;
+        width: 48px;
+        height: 48px;
+        font-size: 36px;
+        background-color: #F3F3F3;
+        margin-right: 5px;
+    }
+
+    .pin-code input:focus {
+        border: 1px solid #573D8B;
+        outline: none;
+    }
+
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    #confirmButton {
+        margin-top: 20px;
+        padding: 10px;
+        font-size: 16px;
+        cursor: pointer;
+    }
+
+    .btn_verde {
+        background: #47cf73;
+        border: 1px solid #47cf73;
+        border-radius: 6px;
+        box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
+        box-sizing: border-box;
+        color: #ffffff;
+        cursor: pointer;
+        display: inline-block;
+        font-family: nunito, roboto, proxima-nova, "proxima nova", sans-serif;
+        font-size: 16px;
+        font-weight: 800;
+        line-height: 16px;
+        min-height: 40px;
+        outline: 0;
+        padding: 12px 14px;
+        text-align: center;
+        text-rendering: geometricprecision;
+        text-transform: none;
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+        vertical-align: middle;
+    }
+
+    .btn_verde:hover {
+        background-color: initial;
+        background-position: 0 0;
+        color: #47cf73;
+    }
+
+    .column-filterObras,
+    .column-vars-filterObras {
+        /* width: 100%;
+        background-color: #fafafa;
+        border: 0px solid #cccccc;
+        border-bottom: 1px solid #cccccc;
+        margin-bottom: 12px;
+        font-weight: normal;
+        padding: 5px;
+        color: #999999; */
+        width: 100%;
+        height: 5rem;
+        border-radius: 10px;
+        box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+        border: none;
+        outline-color: #4086d1
+    }
+
+    .column-filterObras:focus,
+    .column-filter-dateObras:focus,
+    .column-vars-filterObras:focus,
+    .column-vars-filter-dateObras:focus {
+        outline: none;
+    }
+
+    .column-filterFabrico,
+    .column-vars-filterFabrico {
+        /* width: 100%;
+        background-color: #fafafa;
+        border: 0px solid #cccccc;
+        border-bottom: 1px solid #cccccc;
+        margin-bottom: 12px;
+        font-weight: normal;
+        padding: 5px;
+        color: #999999; */
+        width: 100%;
+        height: 5rem;
+        border-radius: 10px;
+        box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+        border: none;
+        outline-color: #4086d1
+    }
+
+    .column-filterFabrico:focus,
+    .column-filter-dateFabrico:focus,
+    .column-vars-filterFabrico:focus,
+    .column-vars-filter-dateFabrico:focus {
+        outline: none;
+    }
+
+    .btn_azulesc {
+        background: #1e2d84;
+        border: 1px solid #1e2d84;
+        border-radius: 6px;
+        box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
+        box-sizing: border-box;
+        color: #ffffff;
+        cursor: pointer;
+        display: inline-block;
+        font-family: nunito, roboto, proxima-nova, "proxima nova", sans-serif;
+        font-size: 16px;
+        font-weight: 800;
+        line-height: 16px;
+        min-height: 40px;
+        outline: 0;
+        padding: 12px 14px;
+        text-align: center;
+        text-rendering: geometricprecision;
+        text-transform: none;
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+        vertical-align: middle;
+    }
+
+    .btn_azulesc:hover {
+        background-color: initial;
+        background-position: 0 0;
+        color: #1e2d84;
+    }
+
+    table {
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+            Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
+            sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    thead tr th {
+        background-color: #fafafa;
+    }
+
+    thead tr th:first-child {
+        border-left: 1px solid #dddddd;
+    }
+
+    thead tr th:last-child {
+        border-right: 1px solid #dddddd;
+    }
+
+    thead tr:first-child th {
+        border-top: 1px solid #dddddd;
+        padding-top: 8px;
+        cursor: pointer;
+    }
+
+    thead tr:first-child th div {
+        display: flex;
+        flex-wrap: nowrap;
+        justify-content: space-between;
+    }
+
+    thead tr:last-child th {
+        border-bottom: 1px solid #dddddd;
+    }
+
+    thead tr,
+    thead th {
+        text-align: left;
+        padding-left: 8px;
+        padding-right: 8px;
+        color: #757575;
+        font-weight: normal;
+    }
+
+    tbody tr,
+    tbody td {
+        text-align: left;
+        font-weight: normal;
+
+        border: 1px solid #dddddd;
+    }
+
+    tbody tr:hover {
+        background-color: #cfd8dc55;
+    }
+
+    tfoot tr td {
+        background-color: #fafafa;
+        border: 1px solid #dddddd;
+        padding: 5px;
+        text-align: right;
+    }
+
+    .input {
+        width: 100%;
+        height: 5rem;
+        border-radius: 10px;
+        box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+        border: none;
+        outline-color: #4086d1
+    }
+
+    .modal-input-container {
+        display: none;
+        position: fixed;
+        z-index: 1;
+        padding-top: 100px;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        overflow-y: initial;
+        background-color: rgb(0, 0, 0);
+        background-color: rgba(0, 0, 0, 0.6);
+    }
+
+    .modal-content {
+        background-color: #fefefe;
+        margin: auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 40%;
+        overflow-y: auto;
+    }
+
+    .dropdown-datafilter-content span {
+        background-color: transparent;
+        border: none;
+    }
+
+    #footer-span,
+    #footer-span * {
+        font-size: 14px;
+        font-weight: normal !important;
+    }
+
+    #footer-span>* {
+        margin-left: 10px;
+        text-align: center;
+    }
+
+    #footer-span input[type="number"] {
+        width: 35px;
+        border: 1px solid #dddddd;
+        text-align: center;
+    }
+
+    b {
+        color: #1e2d84;
+    }
+</style>
+</head>
+
+<body>
+    <div id="divInicial">
+        <h1>Insira o seu PIN</h1>
+        <div class="pin-code">
+            <input type="password" maxlength="1" autofocus>
+            <input type="password" maxlength="1">
+            <input type="password" maxlength="1">
+            <input type="password" maxlength="1">
+            <input type="password" maxlength="1">
+            <input type="password" maxlength="1">
+            <button class="btn_verde" style="margin-top: 0px;" id="confirmButton" type="button"
+                onclick="confirmPIN()">OK</button>
+        </div>
+    </div>
+
+    <div id="Obras" style="display: none;">
+        <div id="grid-container">
+            <table data-currentpage="1" data-ordercolumn="u_noobra" data-ordertype="DESC" data-pagesize="10"
+                data-totalpages="1" data-totalrecords="10" id="DataGridObras">
+                <thead>
+                    <tr id="tableHeaderObras">
+                        <th data-column="u_noobra" data-order="desc" scope="col" style="font-size: 16px;"><b>Nº de
+                                Obra</b><span></span></th>
+                        <th data-column="serie" data-order="desc" scope="col" style="font-size: 16px;">
+                            <b>Obra</b><span></span>
+                        </th>
+                        <th data-column="u_noplano" data-order="desc" scope="col" style="font-size: 16px;">
+                            <b>Plano</b><span></span>
+                        </th>
+                        <th></th>
+                    </tr>
+                    <tr id="filtrosObras" onkeypress="handleEnterKey(event)">
+                        <th><input class="column-filterObras" oninput="getObras()" placeholder="Filtrar..."
+                                type="text" /></th>
+                        <th><input class="column-filterObras" oninput="getObras()" placeholder="Filtrar..."
+                                type="text" /></th>
+                        <th><input class="column-filterObras" oninput="getObras()" placeholder="Filtrar..."
+                                type="text" /></th>
+                        <th>&nbsp;</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBodyObras">
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="100">
+                            <div class="footer" onkeypress="handleEnterKey(event)" style="margin-top: 1rem;"><span
+                                    id="footer-span"><span><span><input id="pageSizeObras"
+                                                onchange="changePageSizeObras()" type="number" value="10" /> </span> por
+                                        p&aacute;gina </span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button
+                                        class="btn_azulesc" onclick="pageGoToObras('first')" type="button"><i
+                                            aria-hidden="true" class="fa fa-step-backward  fa-2xl"></i></button><button
+                                        class="btn_verde" onclick="pageGoToObras('previous')" type="button"><i
+                                            aria-hidden="true" class="fa fa-chevron-left"></i></button> <span> <span
+                                            id="currentPageObras">1</span> de <span id="totalPagesObras">1</span>
+                                        p&aacute;ginas </span><button class="btn_verde" onclick="pageGoToObras('next')"
+                                        type="button"><i aria-hidden="true"
+                                            class="fa fa-chevron-right"></i></button><button class="btn_azulesc"
+                                        onclick="pageGoToObras('last')" type="button"><i aria-hidden="true"
+                                            class="fa fa-step-forward fa-2xl"></i></button> </span></div>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+
+    <div class="modal-input-container" id="modal-planofabrico">
+        <div class="modal-content" style="width: 800px;"><span class="close" id="close"
+                onclick="fechaboxPFabrico()">&times;</span>
+
+            <div style="margin: 2rem;">
+                <h1>Planos de fabrico</h1>
+                <div id="grid-container">
+                    <table data-currentpage="1" data-ordercolumn="bi.LITEM2" data-ordertype="DESC" data-pagesize="10"
+                        data-totalpages="1" data-totalrecords="10" id="DataGridFabrico">
+                        <thead>
+                            <tr id="tableHeaderFabrico">
+                                <th data-column="bi.LITEM2" data-order="desc" scope="col" style="font-size: 16px;">
+                                    <b>LITEM2</b><span></span>
+                                </th>
+                                <th data-column="bi.design" data-order="desc" scope="col" style="font-size: 16px;">
+                                    <b>Design</b><span></span>
+                                </th>
+                                <th data-column="bi.qtt" data-order="desc" scope="col" style="font-size: 16px;">
+                                    <b>QTT</b><span></span>
+                                </th>
+                                <th data-column="impresso" data-order="desc" scope="col" style="font-size: 16px;">
+                                    <b>Impresso</b><span></span>
+                                </th>
+                                <th data-column="bi.ettdeb" data-order="desc" scope="col" style="font-size: 16px;">
+                                    <b>Ett Deb</b><span></span>
+                                </th>
+                                <th data-column="finalizado" data-order="desc" scope="col" style="font-size: 16px;">
+                                    <b>Finalizado</b><span></span>
+                                </th>
+                                <th data-column="bi.marcada" data-order="desc" scope="col" style="font-size: 16px;">
+                                    <b>Marcada</b><span></span>
+                                </th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                            <tr id="filtrosFabrico" onkeypress="handleEnterKey(event)">
+                                <th><input class="column-filterFabrico" placeholder="Filtrar..." oninput="getFabrico()"
+                                        type="text" /></th>
+                                <th><input class="column-filterFabrico" placeholder="Filtrar..." oninput="getFabrico()"
+                                        type="text" /></th>
+                                <th><input class="column-filterFabrico" placeholder="Filtrar..." oninput="getFabrico()"
+                                        type="text" /></th>
+                                <th>&nbsp;</th>
+                                <th><input class="column-filterFabrico" placeholder="Filtrar..." oninput="getFabrico()"
+                                        type="text" /></th>
+                                <th>&nbsp;</th>
+                                <th>&nbsp;</th>
+                                <th>&nbsp;</th>
+                                <th>&nbsp;</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tableBodyFabrico">
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="100">
+                                    <div class="footer" onkeypress="handleEnterKey(event)" style="margin-top: 1rem;">
+                                        <span id="footer-span"><span><span><input id="pageSizeFabrico"
+                                                        onchange="changePageSizeFabrico()" type="number" value="10" />
+                                                </span> por
+                                                p&aacute;gina </span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button
+                                                class="btn_azulesc" onclick="pageGoToFabrico('first')" type="button"><i
+                                                    aria-hidden="true"
+                                                    class="fa fa-step-backward  fa-2xl"></i></button><button
+                                                class="btn_verde" onclick="pageGoToFabrico('previous')" type="button"><i
+                                                    aria-hidden="true" class="fa fa-chevron-left"></i></button> <span>
+                                                <span id="currentPageFabrico">1</span> de <span
+                                                    id="totalPagesFabrico">1</span>
+                                                p&aacute;ginas </span><button class="btn_verde"
+                                                onclick="pageGoToFabrico('next')" type="button"><i aria-hidden="true"
+                                                    class="fa fa-chevron-right"></i></button><button class="btn_azulesc"
+                                                onclick="pageGoToFabrico('last')" type="button"><i aria-hidden="true"
+                                                    class="fa fa-step-forward fa-2xl"></i></button> </span>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-input-container" id="modal-etiquetas">
+        <div class="modal-content"><span class="close" id="close" onclick="fechaboxEtiquetas()">&times;</span>
+
+            <div style="margin: 2rem;">
+                <h1>Etiquetas</h1>
+                <div id="grid-container">
+                    <table data-currentpage="1" data-ordercolumn="numero" data-ordertype="DESC" data-pagesize="10"
+                        data-totalpages="1" data-totalrecords="10" id="DataGridEtiqueta">
+                        <thead>
+                            <tr id="tableHeaderEtiqueta">
+                                <th data-column="ref" data-order="desc" scope="col" style="font-size: 16px;">
+                                    <b>Referência</b><span></span>
+                                </th>
+                                <th data-column="qtt" data-order="desc" scope="col" style="font-size: 16px;">
+                                    <b>Qtt</b><span></span>
+                                </th>
+                                <th data-column="obra" data-order="desc" scope="col" style="font-size: 16px;">
+                                    <b>Obra</b><span></span>
+                                </th>
+                                <th data-column="numero" data-order="desc" scope="col" style="font-size: 16px;">
+                                    <b>Número</b><span></span>
+                                </th>
+                                <th data-column="estado" data-order="desc" scope="col" style="font-size: 16px;">
+                                    <b>Estado</b><span></span>
+                                </th>
+                                <th data-column="design" data-order="desc" scope="col" style="font-size: 16px;">
+                                    <b>Design</b><span></span>
+                                </th>
+                                <th data-column="peso" data-order="desc" scope="col" style="font-size: 16px;">
+                                    <b>Peso</b><span></span>
+                                <th></th>
+                            </tr>
+                            <tr id="filtrosEtiqueta" onkeypress="handleEnterKey(event)">
+                                <th>&nbsp;</th>
+                                <th>&nbsp;</th>
+                                <th>&nbsp;</th>
+                                <th>&nbsp;</th>
+                                <th>&nbsp;</th>
+                                <th>&nbsp;</th>
+                                <th>&nbsp;</th>
+                                <th>&nbsp;</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tableBodyEtiqueta">
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="100">
+                                    <div class="footer" onkeypress="handleEnterKey(event)" style="margin-top: 1rem;">
+                                        <span id="footer-span"><span><span><input id="pageSizeEtiqueta"
+                                                        onchange="changePageSizeEtiqueta()" type="number" value="10" />
+                                                </span> por
+                                                p&aacute;gina </span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button
+                                                class="btn_azulesc" onclick="pageGoToEtiqueta('first')" type="button"><i
+                                                    aria-hidden="true"
+                                                    class="fa fa-step-backward  fa-2xl"></i></button><button
+                                                class="btn_verde" onclick="pageGoToEtiqueta('previous')"
+                                                type="button"><i aria-hidden="true"
+                                                    class="fa fa-chevron-left"></i></button> <span>
+                                                <span id="currentPageEtiqueta">1</span> de <span
+                                                    id="totalPagesEtiqueta">1</span>
+                                                p&aacute;ginas </span><button class="btn_verde"
+                                                onclick="pageGoToEtiqueta('next')" type="button"><i aria-hidden="true"
+                                                    class="fa fa-chevron-right"></i></button><button class="btn_azulesc"
+                                                onclick="pageGoToEtiqueta('last')" type="button"><i aria-hidden="true"
+                                                    class="fa fa-step-forward fa-2xl"></i></button> </span>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+            <button onclick="getCheckedBoxes()" type="button" class="btn_verde">Imprimir</button>
+        </div>
+    </div>
+
+    <div class="modal-input-container" id="modal-CriaEtiquetas">
+        <div class="modal-content"><span class="close" id="close" onclick="fechaboxCriaEtiquetas()">&times;</span>
+
+            <div style="margin: 2rem;">
+                <h1>Etiquetas</h1>
+                <div style="display: flex; flex-direction: column; margin-bottom: 1rem;">
+                    <label id="label-codigo">Quantidade</label>
+                    <input class="input" data-language="pt" id="qttEtiqueta" name="qttEtiqueta" type="text" />
+                </div>
+
+            </div>
+            <button onclick="criaEtiqueta()" type="button" class="btn_verde">Imprimir</button>
+        </div>
+    </div>
+</body>
+<script>
+
+    //limpa cache
+    if (!location.hash) {
+        location.hash = "#reloading";
+        location.reload(true);
+    } else {
+        location.hash = "#reloaded";
+    }
+    var buscarObras = 0;
+    var buscarFabrico = 0;
+    var buscarEtiqueta = 0;
+    var bostamp = "";
+    var u_noobra = "";
+    var u_noplano = "";
+    var LITEM2 = "";
+    var bistamp = "";
+    var userini = "";
+    window.onload = function () {
+        preparaPin();
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+        var filterInputsObras = document.getElementsByClassName("column-filterObras");
+        for (var i = 0; i < filterInputsObras.length; i++) {
+            filterInputsObras[i].addEventListener("change", filterTableObras);
+        }
+        var filterInputsVarsObras =
+            document.getElementsByClassName("column-vars-filterObras");
+        for (var i = 0; i < filterInputsVarsObras.length; i++) {
+            filterInputsVarsObras[i].addEventListener("change", filterTableObras);
+        }
+    });
+
+    //Order the table
+    let tableHeaderObras = document.getElementById("tableHeaderObras");
+    let headersObras = tableHeaderObras.getElementsByTagName("th");
+    for (let i = 0; i < headersObras.length; i++) {
+        headersObras[i].addEventListener("click", function () {
+            var column = $(this).data("column");
+            var order = $(this).data("order");
+            let dataGrid = document.getElementById("DataGridObras");
+
+            if (order == "desc") {
+                $(this).data("order", "asc");
+                dataGrid.dataset.ordercolumn = column;
+                dataGrid.dataset.ordertype = "ASC";
+            } else {
+                $(this).data("order", "desc");
+                dataGrid.dataset.ordercolumn = column;
+                dataGrid.dataset.ordertype = "DESC";
+            }
+            // neste for está o -1 porque o último th da tabela é apenas um spacer, e ele atrofiava porque não tinha valores
+            // caso se adicionar novas colunas mudar isto (-1 no for) accordingly
+            for (let j = 0; j < headersObras.length - 1; j++) {
+                if (headersObras[j].getElementsByTagName("span")[0] != undefined) {
+                    headersObras[j].getElementsByTagName("span")[0].innerHTML = "";
+                }
+            }
+            this.getElementsByTagName("span")[0].innerHTML = order == "desc" ? "&#9650" : "&#9660";
+            getObras();
+        });
+    }
+    getObras();
+
+    function preparaPin() {
+        var pinContainer = document.querySelector(".pin-code");
+
+        pinContainer.addEventListener('input', function (event) {
+            var target = event.target;
+
+            var maxLength = parseInt(target.attributes["maxlength"].value, 10);
+            var myLength = target.value.length;
+
+            if (myLength >= maxLength) {
+                var next = target.nextElementSibling;
+                if (next && next.tagName.toLowerCase() === "input") {
+                    next.focus();
+                }
+            }
+
+            if (myLength === 0) {
+                var prev = target.previousElementSibling;
+                if (prev && prev.tagName.toLowerCase() === "input") {
+                    prev.focus();
+                }
+            }
+        }, false);
+
+        pinContainer.addEventListener('keydown', function (event) {
+            var target = event.srcElement;
+            target.value = "";
+        }, false);
+    }
+
+
+    function confirmPIN() {
+        var pinContainer = document.querySelector(".pin-code");
+        var pin = Array.from(pinContainer.children).map(input => input.value).join('');
+        var params = {};
+        var varMyQuery = `select top 1 usercode, username as nome from u_funcs where inactivo = 0 and password = '${pin}'`;
+        params.id = "SELECTtoJSON";
+        params.select = varMyQuery;
+        $.ajax({
+            type: "POST",
+            url: "../api/code/run",
+            async: true,
+            data: JSON.stringify(params),
+            contentType: "application/json",
+        }).done(function (result, textStatus, jqXHR) {
+            try {
+                resposta = JSON.parse(result);
+            } catch {
+                resposta = JSON.parse('{"Dados":[]}');
+            }
+            if (resposta.Dados.length == 0) {
+                alert("PIN inválido!");
+            } else {
+                userini = resposta.Dados[0].usercode;
+                var obrasContent = document.getElementById("Obras").innerHTML;
+                document.getElementById("divInicial").innerHTML = obrasContent;
+                getObras();
+            }
+        });
+    }
+
+    function getObras() {
+        const dataGrid = document.getElementById("DataGridObras");
+        const columnFilter = document.getElementsByClassName("column-filterObras");
+        const numberColumns = document.getElementById("DataGridObras").rows[0].cells.length;
+        const u_noobraFiltro = columnFilter[0].value;
+        const serieFiltro = columnFilter[1].value;
+        const u_noplanoFiltro = columnFilter[2].value;
+        if (document.getElementById("filterClienteObrasSelect") != null) {
+            clienteFilter = document.getElementById("filterClienteObrasSelect").value;
+        } else {
+            clienteFilter = "";
+        }
+        //Get order
+        const orderColumn = dataGrid.dataset.ordercolumn;
+        const orderType = dataGrid.dataset.ordertype;
+        //Get Grid Attributes
+        const currentPage = dataGrid.dataset.currentpage;
+        const pageSize = dataGrid.dataset.pagesize;
+        var offset = (currentPage - 1) * pageSize;
+        var paginacao = "";
+        if (buscarObras != 0) {
+            paginacao =
+                `   OFFSET ` + offset.toString() +
+                ` ROWS FETCH NEXT ` + pageSize.toString() + ` ROWS ONLY`;
+        }
+        const obras = [];
+        let params = {};
+        const varMyQuery =
+            `select distinct u_noobra, serie, u_noplano, bostamp
+            from 
+                bo 
+            where 
+                fechada=0 
+                and ndos = 95 
+                and u_noobra like '%${u_noobraFiltro}%'
+                and serie like '%${serieFiltro}%'
+                and u_noplano like '%${u_noplanoFiltro}%'
+            ORDER BY ` + orderColumn + ` ` + orderType + paginacao;
+        //console.log(varMyQuery);
+        params.id = "xmltoquery";
+        params.select = varMyQuery;
+        $.ajax({
+            type: "POST",
+            url: "../api/code/run",
+            async: true,
+            data: JSON.stringify(params),
+            contentType: "application/json",
+        }).done(function (result, textStatus, jqXHR) {
+            try {
+                //console.log(result);
+                resposta = JSON.parse(result);
+            } catch {
+                resposta = JSON.parse('{"Dados":[]}');
+            }
+            if (buscarObras == 0 && resposta.Dados.length > 0) {
+                buscarObras = parseInt(resposta.Dados.length);
+                return getObras();
+            } else {
+                const totalRecords = buscarObras;
+                buscarObras = 0;
+                const totalPages = Math.ceil(totalRecords / pageSize);
+                if (totalRecords > 0) {
+                    document.getElementById("totalPagesObras").innerHTML = totalPages;
+                    for (var i = 0; i < resposta.Dados.length; ++i) {
+                        obras.push(resposta.Dados[i]);
+                    }
+                } else {
+                    document.getElementById("totalPagesObras").innerHTML = 1;
+                }
+                dataGrid.dataset.totalrecords = totalRecords;
+                dataGrid.dataset.totalpages = totalPages;
+                buildObras(obras);
+            }
+        });
+    }
+
+    function buildObras(data) {
+        let tBody = document.getElementById("tableBodyObras");
+        tBody.innerHTML = "";
+        let row = "";
+        for (var i = 0; i < data.length; i++) {
+            row += "<tr>";
+            row += '<td style=" font-size:16px;padding:8px">' + data[i].u_noobra + "</td>";
+            row += '<td style=" font-size:16px; padding:8px">' + data[i].serie + "</td>";
+            row += '<td style=" font-size:16px; padding:8px">' + data[i].u_noplano + "</td>";
+            row += '<td style="font-size: 16px; padding: 8px; text-align: center;">'
+                + '<button type="button" onclick="mudaVarsFabrico(\'' + data[i].bostamp + '\', \'' + data[i].u_noobra + '\', \'' + data[i].u_noplano + '\')" class="btn_verde" style="text-align: center;"><i class=\'fa fa-eye\' \'style=\'color:white\'></i></button>'
+                + '</td>';
+            row += "</tr>";
+        }
+        tBody.innerHTML += row;
+    }
+
+    function mudaVarsFabrico(bostamp1, u_noobra1, u_noplano1) {
+        bostamp = bostamp1.trim();
+        u_noobra = u_noobra1.trim();
+        u_noplano = u_noplano1.trim();
+        getFabrico();
+    }
+
+    function getFabrico() {
+        document.getElementById("modal-planofabrico").style.display = "block";
+        const dataGrid = document.getElementById("DataGridFabrico");
+        const columnFilter = document.getElementsByClassName("column-filterFabrico");
+        const numberColumns = document.getElementById("DataGridFabrico").rows[0].cells.length;
+        const biLITEM2Filtro = columnFilter[0].value;
+        const biDesignFiltro = columnFilter[1].value;
+        const biQttFiltro = columnFilter[2].value;
+        const biEttdebFiltro = columnFilter[3].value;
+        //Get order
+        const orderColumn = dataGrid.dataset.ordercolumn;
+        const orderType = dataGrid.dataset.ordertype;
+        //Get Grid Attributes
+        const currentPage = dataGrid.dataset.currentpage;
+        const pageSize = dataGrid.dataset.pagesize;
+        var offset = (currentPage - 1) * pageSize;
+        var paginacao = "";
+        if (buscarFabrico != 0) {
+            paginacao =
+                `   OFFSET ` + offset.toString() +
+                ` ROWS FETCH NEXT ` + pageSize.toString() + ` ROWS ONLY`;
+        }
+        const fabrico = [];
+        let params = {};
+        const varMyQuery =
+            `select bi.LITEM2
+                , bi.design
+                , bi.qtt 
+                , isnull((SELECT sum(qtt) from u_etiquetas where ref = bi.LITEM2 AND obra = bo.u_noobra AND estado <> 'Anulada'),0) as impresso
+                , bi.ettdeb
+                , iif(isnull((SELECT sum(qtt) from u_etiquetas where ref = bi.LITEM2 AND obra = bo.u_noobra AND estado <> 'Anulada'),0) >= qtt , 1, 0) as finalizado
+                , bi.bistamp
+                , bi.marcada as marcada
+                , COUNT(bi.LITEM2) OVER () AS qttTotal
+            from
+                bi 
+                inner join bo on bo.bostamp=bi.bostamp 
+            where 
+                bi.fechada=0
+                and bi.qtt>0
+                and bo.ndos=95
+                and bo.bostamp = '${bostamp}'
+                and bo.u_noobra = '${u_noobra}'
+                and bo.u_noplano = '${u_noplano}'
+                and bi.LITEM2 like '%${biLITEM2Filtro}%'
+                and bi.design like '%${biDesignFiltro}%'
+                and bi.qtt like '%${biQttFiltro}%'
+                and bi.ettdeb like '%${biEttdebFiltro}%'
+            ORDER BY ` + orderColumn + ` ` + orderType + paginacao;
+        //console.log(varMyQuery);
+        params.id = "xmltoquery";
+        params.select = varMyQuery;
+        $.ajax({
+            type: "POST",
+            url: "../api/code/run",
+            async: true,
+            data: JSON.stringify(params),
+            contentType: "application/json",
+        }).done(function (result, textStatus, jqXHR) {
+            try {
+                //console.log(result);
+                resposta = JSON.parse(result);
+            }
+            catch {
+                resposta = JSON.parse('{"Dados":[]}');
+            }
+            if (buscarFabrico == 0 && resposta.Dados.length > 0) {
+                buscarFabrico = parseInt(resposta.Dados.length);
+                return getFabrico();
+            } else {
+                const totalRecords = buscarFabrico;
+                buscarFabrico = 0;
+                const totalPages = Math.ceil(totalRecords / pageSize);
+                if (totalRecords > 0) {
+                    document.getElementById("totalPagesFabrico").innerHTML = totalPages;
+                    for (var i = 0; i < resposta.Dados.length; ++i) {
+                        fabrico.push(resposta.Dados[i]);
+                    }
+                } else {
+                    document.getElementById("totalPagesFabrico").innerHTML = 1;
+                }
+                dataGrid.dataset.totalrecords = totalRecords;
+                dataGrid.dataset.totalpages = totalPages;
+                buildFabrico(fabrico);
+            }
+        });
+    }
+
+    function buildFabrico(data) {
+        let tBody = document.getElementById("tableBodyFabrico");
+        tBody.innerHTML = "";
+        let row = "";
+        for (var i = 0; i < data.length; i++) {
+            row += "<tr>";
+            row += '<td  style=" font-size:16px;padding:8px">' + data[i].LITEM2 + "</td>";
+            row += '<td style=" font-size:16px; padding:8px">' + data[i].design + "</td>";
+            row += '<td style=" font-size:16px; padding:8px">' + data[i].qtt + "</td>";
+            if (data[i].impresso == 0.0000) {
+                row += '<td style=" font-size:16px; padding:8px"><input type="checkbox" disabled></td>';
+            } else {
+                row += '<td style=" font-size:16px; padding:8px"><input type="checkbox" checked disabled></td>';
+            }
+            row += '<td style=" font-size:16px; padding:8px">' + data[i].ettdeb + "</td>";
+            if (data[i].finalizado == 0) {
+                row += '<td style=" font-size:16px; padding:8px"><input type="checkbox" disabled></td>';
+            } else {
+                row += '<td style=" font-size:16px; padding:8px"><input type="checkbox" checked disabled></td>';
+            }
+            if (data[i].marcada == "False") {
+                row += '<td style=" font-size:16px; padding:8px"><input type="checkbox" disabled></td>';
+            } else {
+                row += '<td style=" font-size:16px; padding:8px"><input type="checkbox" checked disabled></td>';
+            }
+            if (parseInt(data[i].qtt) != parseInt(data[i].qttTotal)) {
+                row += '<td style="font-size: 16px; padding: 8px; text-align: center;">'
+                    + '<button type="button" onclick="openModalCriaEtiqueta(\'' + data[i].LITEM2 + '\', \'' + data[i].bistamp + '\')" class="btn_verde" style="text-align: center;"><i class=\'fa fa-print\' \'style=\'color:white\'></i></button>'
+                    + '</td>';
+            } else {
+                row += '<td></td>'
+            }
+            row += '<td style="font-size: 16px; padding: 8px; text-align: center;">'
+                + '<button type="button" onclick="mudaVarsEtiqueta(\'' + data[i].LITEM2 + '\', \'' + data[i].bistamp + '\')" class="btn_verde" style="text-align: center;"><i class=\'fa fa-eye\' \'style=\'color:white\'></i></button>'
+                + '</td>';
+            row += "</tr>";
+        }
+        tBody.innerHTML += row;
+    }
+
+    function openModalCriaEtiqueta(LITEM21, bistamp1) {
+        LITEM2 = LITEM21.trim();
+        bistamp = bistamp1.trim();
+        document.getElementById("modal-CriaEtiquetas").style.display = "block";
+    }
+
+    function fechaboxCriaEtiquetas() {
+        document.getElementById("modal-CriaEtiquetas").style.display = "none";
+    }
+
+    function mudaVarsEtiqueta(LITEM21, bistamp1) {
+        LITEM2 = LITEM21.trim();
+        bistamp = bistamp1.trim();
+        getEtiqueta();
+
+    }
+
+    function getEtiqueta() {
+        document.getElementById("modal-etiquetas").style.display = "block";
+        const dataGrid = document.getElementById("DataGridEtiqueta");
+        const columnFilter = document.getElementsByClassName("column-filterEtiqueta");
+        const numberColumns = document.getElementById("DataGridEtiqueta").rows[0].cells.length;
+        //Get order
+        const orderColumn = dataGrid.dataset.ordercolumn;
+        const orderType = dataGrid.dataset.ordertype;
+        //Get Grid Attributes
+        const currentPage = dataGrid.dataset.currentpage;
+        const pageSize = dataGrid.dataset.pagesize;
+        var offset = (currentPage - 1) * pageSize;
+        var paginacao = "";
+        if (buscarEtiqueta != 0) {
+            paginacao =
+                `   OFFSET ` + offset.toString() +
+                ` ROWS FETCH NEXT ` + pageSize.toString() + ` ROWS ONLY`;
+        }
+        const etiqueta = [];
+        let params = {};
+        const varMyQuery =
+            `select
+            u_etiquetas.ref
+            , u_etiquetas.qtt
+            , u_etiquetas.obra 
+            , u_etiquetas.numero 
+            , u_etiquetas.estado
+            , u_etiquetas.bistamp
+            , (SELECT design from bi where bi.bistamp = u_etiquetas.bistamp) as design
+            , (SELECT qtt from bi where bi.bistamp = u_etiquetas.bistamp) as qttBI
+            , u_etiquetastamp
+            , u_etiquetas.peso
+        from
+                u_etiquetas
+        where 
+            ref = '${LITEM2}'
+            and obra = '${u_noobra}'
+            ORDER BY ` + orderColumn + ` ` + orderType + paginacao;
+        //console.log(varMyQuery);
+        params.id = "xmltoquery";
+        params.select = varMyQuery;
+        $.ajax({
+            type: "POST",
+            url: "../api/code/run",
+            async: false,
+            data: JSON.stringify(params),
+            contentType: "application/json",
+        }).done(function (result, textStatus, jqXHR) {
+            try {
+                //console.log(result);
+                resposta = JSON.parse(result);
+            }
+            catch {
+                resposta = JSON.parse('{"Dados":[]}');
+            }
+            if (buscarEtiqueta == 0 && resposta.Dados.length > 0) {
+                buscarEtiqueta = parseInt(resposta.Dados.length);
+                return getEtiqueta();
+            } else {
+                const totalRecords = buscarEtiqueta;
+                buscarEtiqueta = 0;
+                const totalPages = Math.ceil(totalRecords / pageSize);
+                if (totalRecords > 0) {
+                    document.getElementById("totalPagesEtiqueta").innerHTML = totalPages;
+                    for (var i = 0; i < resposta.Dados.length; ++i) {
+                        etiqueta.push(resposta.Dados[i]);
+                    }
+                } else {
+                    document.getElementById("totalPagesEtiqueta").innerHTML = 1;
+                }
+                dataGrid.dataset.totalrecords = totalRecords;
+                dataGrid.dataset.totalpages = totalPages;
+                buildEtiqueta(etiqueta);
+            }
+        });
+    }
+
+    function buildEtiqueta(data) {
+        let tBody = document.getElementById("tableBodyEtiqueta");
+        tBody.innerHTML = "";
+        let row = "";
+        for (var i = 0; i < data.length; i++) {
+            row += "<tr>";
+            row += '<td  style=" font-size:16px;padding:8px">' + data[i].ref + "</td>";
+            row += '<td style=" font-size:16px; padding:8px">' + data[i].qtt + "</td>";
+            row += '<td style=" font-size:16px; padding:8px">' + data[i].obra + "</td>";
+            row += '<td style=" font-size:16px; padding:8px">' + data[i].numero + "</td>";
+            row += '<td style=" font-size:16px; padding:8px">' + data[i].estado + "</td>";
+            row += '<td style=" font-size:16px; padding:8px">' + data[i].design + "</td>";
+            row += '<td style=" font-size:16px; padding:8px">' + data[i].peso + "</td>";
+            row += '<td style="font-size:16px;padding:8px"><input type="checkbox" class="row-checkbox"></td>';
+            row += "</tr>";
+        }
+        tBody.innerHTML += row;
+    }
+
+    function getCheckedBoxes() {
+        var checkboxes = document.querySelectorAll('.row-checkbox');
+        var selectedRows = [];
+
+        checkboxes.forEach(function (checkbox, index) {
+            if (checkbox.checked) {
+                var row = checkbox.closest('tr');
+                var rowData = {
+                    ref: row.cells[0].innerText,
+                    qtt: row.cells[1].innerText,
+                    obra: row.cells[2].innerText,
+                    numero: row.cells[3].innerText,
+                    estado: row.cells[4].innerText,
+                    design: row.cells[5].innerText,
+                    peso: row.cells[6].innerText,
+                    // Add more properties as needed
+                };
+
+                selectedRows.push(rowData);
+            }
+        });
+        selectedRows.forEach(element => {
+            //ir buscar o nome da obra para o no da obra
+            var params = {};
+            var varMyQuery = `select serie from bo where u_noobra = '${u_noobra}' and bostamp = '${bostamp}' and u_noplano = '${u_noplano}' and ndos = 95`;
+            params.id = "SELECTtoJSON";
+            params.select = varMyQuery;
+            $.ajax({
+                type: "POST",
+                url: "../api/code/run",
+                async: false,
+                data: JSON.stringify(params),
+                contentType: "application/json",
+            }).done(function (result, textStatus, jqXHR) {
+                try {
+                    resposta = JSON.parse(result);
+                } catch {
+                    resposta = JSON.parse('{"Dados":[]}');
+                }
+                serie = resposta.Dados[0].serie;
+            });
+            var qttTotal = 0;
+            selectedRows.forEach(element => {
+                qttTotal += 1
+                    ;
+            });
+            imprime(element.ref.trim(), element.design.trim(), element.obra.trim(), serie.trim(), selectedRows.indexOf(element) + 1, qttTotal, element.peso.trim(), bostamp);
+        });
+    }
+
+    function criaEtiqueta() {
+        var qttEtiqueta = document.getElementById("qttEtiqueta").value;
+        var numero = 0;
+        var params = {}
+        let varMyQuery = `select 
+                            isnull(max(numero),0)+1 as numero 
+                        FROM 
+                            u_etiquetas(nolock) 
+                        where 
+                            u_etiquetas.ref = '` + LITEM2 + `' 
+                            AND obra = '` + u_noobra + `'`;
+        //console.log(varMyQuery);
+        params.id = "xmltoquery";
+        params.select = varMyQuery;
+        $.ajax({
+            type: "POST",
+            url: "../api/code/run",
+            async: false,
+            data: JSON.stringify(params),
+            contentType: "application/json",
+        }).done(function (result, textStatus, jqXHR) {
+            try {
+                //console.log(result);
+                resposta = JSON.parse(result);
+            }
+            catch {
+                resposta = JSON.parse('{"Dados":[]}');
+            }
+            numero = resposta.Dados[0].numero;
+        });
+        stampetiqueta = LITEM2 + "@" + u_noobra + "@" + qttEtiqueta + "@" + numero;
+        params = {}
+        var peso = 0;
+        var design = "";
+        var serie = "";
+        var qtt = 0;
+        varMyQuery = `select
+                    edebito * qtt as peso,
+                    ettdeb,
+                    design,
+                    bo.serie, 
+                    qtt
+                from
+                        bi 
+                            inner join bo on bo.bostamp=bi.bostamp 
+                where 
+                    bi.fechada=0
+                    and bi.qtt>0
+                    and bo.ndos=95
+                    and bi.bistamp='` + bistamp + `'`
+        //console.log(varMyQuery);
+        params.id = "xmltoquery";
+        params.select = varMyQuery;
+        $.ajax({
+            type: "POST",
+            url: "../api/code/run",
+            async: false,
+            data: JSON.stringify(params),
+            contentType: "application/json",
+        }).done(function (result, textStatus, jqXHR) {
+            try {
+                //console.log(result);
+                resposta = JSON.parse(result);
+            }
+            catch {
+                resposta = JSON.parse('{"Dados":[]}');
+            }
+            peso = parseFloat(resposta.Dados[0].peso).toFixed(2);
+            design = resposta.Dados[0].design.trim();
+            serie = resposta.Dados[0].serie.trim();
+            qtt = resposta.Dados[0].qtt.trim();
+        });
+        params = {}
+        $.ajax({
+            type: "GET",
+            url:
+                "../programs/gensel.aspx?cscript=criaEtiqueta&bistamp=" + bistamp +
+                "&stampetiqueta=" + stampetiqueta +
+                "&qtt=" + qttEtiqueta +
+                "&peso=" + peso +
+                "&userini=" + userini.trim(),
+            data: JSON.stringify(params),
+            contentType: "application/json",
+            success: function (response) { },
+            error: function (response) {
+                //alert("Erro a encontrar arVend por favor tente de novo!");
+            },
+        });
+
+        imprime(design, serie, qttEtiqueta, qtt, peso);
+    }
+
+    function imprime(design, nomeObra, qtt, qttTotal, peso) {
+        var zplCode = `^XA
+                    ^FT500,310^BQN,2,8
+                    ^FH\^FDLA,#QRCODE#^FS
+                    ^FO50,113^A0N,45^CI13^FH\^FD#REFERENCIA#^FS
+                    ^FO50,180^A0N,24^CI13^FH\^FD#DESIGNACAO#^FS
+                    ^FO50,230^A0N,30^CI13^FH\^FDObra: #OBRA#^FS
+                    ^FO50,280^A0N,30^CI13^FH\^FD#NOMEOBRA#^FS
+                    ^FO50,330^A0N,30^CI13^FH\^FDQtd.:#QTT# de #QTTTOTAL#^FS
+                    ^FO50,370^A0N,30^CI13^FH\^FDPeso sujeito confirmacao: #PESO# Kg^FS
+                    ^PQ1,0,1,Y^XZ`;
+        zplCode = zplCode.replace("#REFERENCIA#", LITEM2.trim())
+        zplCode = zplCode.replace("#DESIGNACAO#", design.trim())
+        zplCode = zplCode.replace("#OBRA#", u_noobra.trim())
+        zplCode = zplCode.replace("#NOMEOBRA#", nomeObra.trim())
+        zplCode = zplCode.replace("#QTT#", qtt.trim())
+        zplCode = zplCode.replace("#QTTTOTAL#", qttTotal.trim())
+        zplCode = zplCode.replace("#PESO#", peso.trim())
+        zplCode = zplCode.replace("#QRCODE#", 'Nº Plano: ' + bostamp.trim())
+        var params = {};
+        params.id = 'tcpPrint' // elevar esta comentado
+        params.ip = '192.168.20.175'; //192.168.100.78
+        params.port = "6101" //9100
+        params.zpl = zplCode
+        $.ajax({
+            type: 'POST',
+            url: '../api/code/run',
+            async: false,
+            data: JSON.stringify(params),
+            contentType: 'application/json'
+        }).done(function (result) {
+            document.getElementById("modal-CriaEtiquetas").style.display = "none";
+            getObras();
+            getFabrico();
+        }).error(function (response) {
+            alert("Erro a imprimir")
+            console.log(response.error);
+
+        })
+
+    }
+
+    function fechaboxPFabrico() {
+        document.getElementById("modal-planofabrico").style.display = "none";
+    }
+
+    function fechaboxEtiquetas() {
+        document.getElementById("modal-etiquetas").style.display = "none";
+    }
+
+    function fechaboxPFabrico() {
+        document.getElementById("modal-planofabrico").style.display = "none";
+    }
+
+    function handleEnterKey(e) {
+        if (e.keyCode == 13) {
+            // enter pressed
+            try {
+                e.preventDefault ? e.preventDefault() : (e.returnValue = false);
+                //DO ALTERNATE ACTION RATHER THAN SEND ENTER
+                changePageSizeObras();
+                chagePageSizeFabrico();
+                changePageSizeEtiqueta();
+            } catch (err) {
+                console.log(err.message);
+            }
+        }
+    }
+
+    function changePageSizeObras() {
+        let dataGrid = document.getElementById("DataGridObras");
+        let pageSize = document.getElementById("pageSizeObras").value;
+        dataGrid.setAttribute("data-pagesize", "" + pageSize);
+        changePageObras(1);
+    }
+
+    function pageGoToObras(page) {
+        let dataGrid = document.getElementById("DataGridObras");
+        let totalPages = parseInt(dataGrid.getAttribute("data-totalpages"));
+        let totalRecords = parseInt(dataGrid.getAttribute("data-totalrecords"));
+        let currentPage = parseInt(dataGrid.getAttribute("data-currentpage"));
+
+        switch (page) {
+            case "first":
+                currentPage = 1;
+                break;
+            case "previous":
+                currentPage--;
+                if (currentPage < 1) {
+                    currentPage = 1;
+                }
+                break;
+            case "next":
+                currentPage++;
+                if (currentPage > totalPages) {
+                    currentPage = totalPages;
+                }
+                break;
+            case "last":
+                currentPage = totalPages;
+                break;
+        }
+
+        changePageObras(currentPage);
+    }
+
+    function changePageObras(page) {
+        let dataGrid = document.getElementById("DataGridObras");
+        let currentPage = parseInt(dataGrid.getAttribute("data-currentpage"));
+
+        document.getElementById("currentPageObras").innerHTML = page;
+        dataGrid.setAttribute("data-currentpage", "" + page);
+        getObras();
+    }
+
+    function filterTableObras() {
+        changePageObras(1);
+    }
+
+    function changePageSizeFabrico() {
+        let dataGrid = document.getElementById("DataGridFabrico");
+        let pageSize = document.getElementById("pageSizeFabrico").value;
+        dataGrid.setAttribute("data-pagesize", "" + pageSize);
+        changePageFabrico(1);
+    }
+
+    function pageGoToFabrico(page) {
+        let dataGrid = document.getElementById("DataGridFabrico");
+        let totalPages = parseInt(dataGrid.getAttribute("data-totalpages"));
+        let totalRecords = parseInt(dataGrid.getAttribute("data-totalrecords"));
+        let currentPage = parseInt(dataGrid.getAttribute("data-currentpage"));
+
+        switch (page) {
+            case "first":
+                currentPage = 1;
+                break;
+            case "previous":
+                currentPage--;
+                if (currentPage < 1) {
+                    currentPage = 1;
+                }
+                break;
+            case "next":
+                currentPage++;
+                if (currentPage > totalPages) {
+                    currentPage = totalPages;
+                }
+                break;
+            case "last":
+                currentPage = totalPages;
+                break;
+        }
+
+        changePageFabrico(currentPage);
+    }
+
+    function changePageFabrico(page) {
+        let dataGrid = document.getElementById("DataGridFabrico");
+        let currentPage = parseInt(dataGrid.getAttribute("data-currentpage"));
+
+        document.getElementById("currentPageFabrico").innerHTML = page;
+        dataGrid.setAttribute("data-currentpage", "" + page);
+        getFabrico();
+    }
+
+    function filterTableFabrico() {
+        changePageFabrico(1);
+    }
+
+    function changePageSizeEtiqueta() {
+        let dataGrid = document.getElementById("DataGridEtiqueta");
+        let pageSize = document.getElementById("pageSizeEtiqueta").value;
+        dataGrid.setAttribute("data-pagesize", "" + pageSize);
+        changePageEtiqueta(1);
+    }
+
+    function pageGoToEtiqueta(page) {
+        let dataGrid = document.getElementById("DataGridEtiqueta");
+        let totalPages = parseInt(dataGrid.getAttribute("data-totalpages"));
+        let totalRecords = parseInt(dataGrid.getAttribute("data-totalrecords"));
+        let currentPage = parseInt(dataGrid.getAttribute("data-currentpage"));
+
+        switch (page) {
+            case "first":
+                currentPage = 1;
+                break;
+            case "previous":
+                currentPage--;
+                if (currentPage < 1) {
+                    currentPage = 1;
+                }
+                break;
+            case "next":
+                currentPage++;
+                if (currentPage > totalPages) {
+                    currentPage = totalPages;
+                }
+                break;
+            case "last":
+                currentPage = totalPages;
+                break;
+        }
+
+        changePageEtiqueta(currentPage);
+    }
+
+    function changePageEtiqueta(page) {
+        let dataGrid = document.getElementById("DataGridEtiqueta");
+        let currentPage = parseInt(dataGrid.getAttribute("data-currentpage"));
+
+        document.getElementById("currentPageEtiqueta").innerHTML = page;
+        dataGrid.setAttribute("data-currentpage", "" + page);
+        getEtiqueta();
+    }
+
+    function filterTableEtiqueta() {
+        changePageEtiqueta(1);
+    }
+</script>

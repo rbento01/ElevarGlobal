@@ -1,0 +1,1759 @@
+<script src="https://unpkg.com/read-excel-file@4.x/bundle/read-excel-file.min.js"></script>
+<style type="text/css">
+	.btn_verde {
+
+		background: #47cf73;
+		border: 1px solid #47cf73;
+		border-radius: 6px;
+		box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
+		box-sizing: border-box;
+		color: #FFFFFF;
+		cursor: pointer;
+		display: inline-block;
+		font-family: nunito, roboto, proxima-nova, "proxima nova", sans-serif;
+		font-size: 16px;
+		font-weight: 800;
+		line-height: 16px;
+		min-height: 40px;
+		outline: 0;
+		padding: 12px 14px;
+		text-align: center;
+		text-rendering: geometricprecision;
+		text-transform: none;
+		user-select: none;
+		-webkit-user-select: none;
+		touch-action: manipulation;
+		vertical-align: middle;
+
+
+	}
+
+	.btn_verde:hover {
+		background-color: initial;
+		background-position: 0 0;
+		color: #47cf73;
+
+	}
+
+	.btn_vermelho {
+
+		background: #ff3c41;
+		border: 1px solid #ff3c41;
+		border-radius: 6px;
+		box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
+		box-sizing: border-box;
+		color: #FFFFFF;
+		cursor: pointer;
+		display: inline-block;
+		font-family: nunito, roboto, proxima-nova, "proxima nova", sans-serif;
+		font-size: 16px;
+		font-weight: 800;
+		line-height: 16px;
+		min-height: 40px;
+		outline: 0;
+		padding: 12px 14px;
+		text-align: center;
+		text-rendering: geometricprecision;
+		text-transform: none;
+		user-select: none;
+		-webkit-user-select: none;
+		touch-action: manipulation;
+		vertical-align: middle;
+
+
+	}
+
+	.btn_vermelho:hover {
+		background-color: initial;
+		background-position: 0 0;
+		color: #ff3c41;
+
+	}
+
+	.btn_azul {
+
+		background: #506ce8;
+		border: 1px solid #506ce8;
+		border-radius: 6px;
+		box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
+		box-sizing: border-box;
+		color: #FFFFFF;
+		cursor: pointer;
+		display: inline-block;
+		font-family: nunito, roboto, proxima-nova, "proxima nova", sans-serif;
+		font-size: 16px;
+		font-weight: 800;
+		line-height: 16px;
+		min-height: 40px;
+		outline: 0;
+		padding: 12px 14px;
+		text-align: center;
+		text-rendering: geometricprecision;
+		text-transform: none;
+		user-select: none;
+		-webkit-user-select: none;
+		touch-action: manipulation;
+		vertical-align: middle;
+
+
+	}
+
+	.btn_azul:hover {
+		background-color: initial;
+		background-position: 0 0;
+		color: #506ce8;
+
+	}
+
+	.btn_azulesc {
+
+		background: #1e2d84;
+		border: 1px solid #1e2d84;
+		border-radius: 6px;
+		box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
+		box-sizing: border-box;
+		color: #FFFFFF;
+		cursor: pointer;
+		display: inline-block;
+		font-family: nunito, roboto, proxima-nova, "proxima nova", sans-serif;
+		font-size: 16px;
+		font-weight: 800;
+		line-height: 16px;
+		min-height: 40px;
+		outline: 0;
+		padding: 12px 14px;
+		text-align: center;
+		text-rendering: geometricprecision;
+		text-transform: none;
+		user-select: none;
+		-webkit-user-select: none;
+		touch-action: manipulation;
+		vertical-align: middle;
+
+	}
+
+	.btn_azulesc:hover {
+		background-color: initial;
+		background-position: 0 0;
+		color: #1e2d84;
+
+	}
+
+	/* Style the tab */
+	.tab {
+		border-radius: 8px;
+		overflow: hidden;
+		border: 1px solid #ccc;
+		background-color: #f1f1f1;
+	}
+
+	/* Style the buttons inside the tab */
+	.tab button {
+		background-color: inherit;
+		float: left;
+		border: none;
+		outline: none;
+		cursor: pointer;
+		padding: 14px 16px;
+		transition: 0.3s;
+		font-size: 17px;
+	}
+
+	/* Change background color of buttons on hover */
+	.tab button:hover {
+		background-color: #ddd;
+
+	}
+
+	/* Create an active/current tablink class */
+	.tab button.active {
+		background-color: #ccc;
+	}
+
+	/* Style the tab content */
+	.tabcontent {
+		display: none;
+		border-radius: 8px;
+		padding: 6px 12px;
+		border: 1px solid #ccc;
+		border-top: none;
+	}
+
+	.modal-input-container {
+		display: none;
+		position: fixed;
+		z-index: 1;
+		padding-top: 100px;
+		left: 0;
+		top: 0;
+		width: 100%;
+		height: 100%;
+		overflow: auto;
+		overflow-y: initial;
+		background-color: rgb(0, 0, 0);
+		background-color: rgba(0, 0, 0, 0.6);
+	}
+
+	.modal-content {
+		background-color: #fefefe;
+		margin: auto;
+		padding: 20px;
+		border: 1px solid #888;
+		width: 40%;
+		overflow-y: auto;
+	}
+
+	.modal-content1 {
+		height: 23rem;
+		background-color: #fefefe;
+		margin: auto;
+		padding: 20px;
+		border: 1px solid #888;
+		width: 50%;
+		overflow-y: auto;
+		border-radius: 10px;
+	}
+
+	table {
+		font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+			Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
+			sans-serif;
+		border-collapse: collapse;
+		width: 100%;
+	}
+
+	thead tr th {
+		background-color: #fafafa;
+	}
+
+	thead tr th:first-child {
+		border-left: 1px solid #dddddd;
+	}
+
+	thead tr th:last-child {
+		border-right: 1px solid #dddddd;
+	}
+
+	thead tr:first-child th {
+		border-top: 1px solid #dddddd;
+		padding-top: 8px;
+		cursor: pointer;
+	}
+
+	thead tr:first-child th div {
+		display: flex;
+		flex-wrap: nowrap;
+		justify-content: space-between;
+	}
+
+	thead tr:last-child th {
+		border-bottom: 1px solid #dddddd;
+	}
+
+	thead tr,
+	thead th {
+		text-align: left;
+		padding-left: 8px;
+		padding-right: 8px;
+		color: #757575;
+		font-weight: normal;
+	}
+
+	tbody tr,
+	tbody td {
+		text-align: left;
+		font-weight: normal;
+
+		border: 1px solid #dddddd;
+	}
+
+	tbody tr:hover {
+		background-color: #cfd8dc55;
+	}
+
+	.input {
+		width: 100%;
+		height: 5rem;
+		border-radius: 10px;
+		box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+		border: none;
+		outline-color: #4086d1
+	}
+</style>
+<div style="margin: 2rem;">
+	<h1 style="text-align: center; font-weight: bold; margin-bottom: 3rem;">Monitor de Fatura&ccedil;&atilde;o</h1>
+
+	<div class="tab"><button class="tablinks" id="btn_encomenda" onclick="openTabs(event, 'Encomendas')"
+			type="button"><b>Encomenda</b></button><button class="tablinks" onclick="openTabs(event, 'PATS')"
+			type="button"><b>Pats</b></button><button class="tablinks" onclick="openTabs(event, 'Avencas')"
+			type="button"><b>Aven&ccedil;as</b></button><button class="tablinks"
+			onclick="openTabs(event, 'Assinaturas')" type="button"><b>Assinaturas</b></button></div>
+
+	<div class="tabcontent" id="Encomendas">
+		<table class="table table-hover" id="tabelaEncomenda" style="margin-top: 10px;">
+			<thead>
+				<tr>
+					<th>Cliente</th>
+					<th>Data</th>
+					<th style="width: 8%;">Encomenda</th>
+					<th>Neg&oacute;cio</th>
+					<th>Material</th>
+					<th>Servi&ccedil;os</th>
+					<th>Total</th>
+					<th style="width: 13%;">&nbsp;</th>
+				</tr>
+			</thead>
+			<tbody id="tableBodyEncomenda">
+			</tbody>
+		</table>
+	</div>
+
+	<div class="tabcontent" id="PATS">
+		<table class="table table-hover" id="tabelaPats" style="margin-top: 10px;">
+			<thead>
+				<tr>
+					<th style="width: 8%;">PAT</th>
+					<th>Cliente</th>
+					<th style="width: 8%;">Data</th>
+					<th>Problema</th>
+					<th style="width: 8%;">Horas</th>
+					<th style=" text-align: center;width: 9%;">&nbsp;</th>
+					<th style=" text-align: center;width: 9%;">&nbsp;</th>
+				</tr>
+			</thead>
+			<tbody id="tableBodyPats">
+			</tbody>
+		</table>
+	</div>
+
+	<div class="tabcontent" id="Avencas">
+		<table class="table table-hover" id="tabelaAvencas" style="margin-top: 10px;">
+			<thead>
+				<tr>
+					<th>Nome</th>
+					<th style=" text-align: center;">&nbsp;</th>
+				</tr>
+				<tr id="filtrosDossier" onkeypress="handleEnterKey(event)">
+					<th><input class="input" id="filterCliente" placeholder="Filtrar..." type="text" /></th>
+					<th>&nbsp;</th>
+				</tr>
+			</thead>
+			<tbody id="tableBodyAvencas">
+			</tbody>
+		</table>
+	</div>
+
+	<div class="tabcontent" id="Assinaturas"><button class="btn_verde" onclick="openModalAssinaturas()"
+			type="button">Importar Assinaturas</button>
+
+		<table class="table table-hover" id="tabelaAvencas" style="margin-top: 10px;">
+			<thead>
+				<tr>
+					<th>Cliente</th>
+					<th>Valor em PDFs</th>
+					<th>XMLs</th>
+					<th style="width: 50px;">&nbsp;</th>
+				</tr>
+				<tr id="filtrosAssinaturas" onkeypress="handleEnterKey(event)">
+					<th><input class="input" id="filterClienteAssinaturas" placeholder="Filtrar..." type="text" /></th>
+					<th>&nbsp;</th>
+					<th>&nbsp;</th>
+					<th>&nbsp;</th>
+				</tr>
+			</thead>
+			<tbody id="tableBodyAssinaturas">
+			</tbody>
+		</table>
+	</div>
+</div>
+
+<div class="modal-input-container" id="modalDetalhesEnc">
+	<div class="modal-content" style="width: 1500px;"><span class="close" id="close"
+			onclick="fechaboxDetalhesEnc()">&times;</span>
+
+		<div style="margin: 2rem;">
+			<p style="margin-bottom: 1rem; margin-top: 1rem; font-size: 25px; color: #1e2d84; font-weight: bold;"><label
+					id="label-tituloDetalhesEnc"></label></p>
+		</div>
+
+		<table>
+			<thead id="tableHeaderDetalhesEnc">
+				<tr>
+					<th style="font-size: 16px;">Linha</th>
+					<th style="font-size: 16px;">Refer&ecirc;ncia</th>
+					<th style="font-size: 16px;">Designa&ccedil;&atilde;o</th>
+					<th style="font-size: 16px;">Enc_Cli</th>
+					<th style="font-size: 16px;">Anu_Cli</th>
+					<th style="font-size: 16px;">Enc_For</th>
+					<th style="font-size: 16px;">Anu_For</th>
+					<th style="font-size: 16px;">Rec_For</th>
+					<th style="font-size: 16px;">Dev_For</th>
+					<th style="font-size: 16px;">Res_Cli</th>
+					<th style="font-size: 16px;">Fac_Cli</th>
+					<th style="font-size: 16px;">Dev_Cli</th>
+					<th style="font-size: 16px;">Quantidade</th>
+					<!-- <th style="font-size: 16px;">Exportar</th>
+		<th style="font-size: 16px;">U_Linha</th> -->
+				</tr>
+			</thead>
+			<tbody id="tableBodyDetalhesEnc">
+			</tbody>
+		</table>
+	</div>
+</div>
+
+<div class="modal-input-container" id="modalDetalhesAvenca">
+	<div class="modal-content" style="width: fit-content;"><span class="close" id="close"
+			onclick="fechaboxDetalhesAvenca()">&times;</span>
+
+		<div style="margin: 2rem;">
+			<p style="margin-bottom: 1rem; margin-top: 1rem; font-size: 25px; color: #1e2d84; font-weight: bold;"><label
+					id="label-tituloDetalhesAvenca"></label></p>
+		</div>
+
+		<table>
+			<thead id="tableHeaderDetalhesAvenca">
+				<tr>
+					<th style="font-size: 16px;">Linha</th>
+					<th style="font-size: 16px;">Aven&ccedil;a</th>
+					<th style="font-size: 16px;">Refer&ecirc;ncia</th>
+					<th style="font-size: 16px;">Designa&ccedil;&atilde;o</th>
+					<th style="font-size: 16px;">Total</th>
+					<th style="font-size: 16px;">&Uacute;ltima</th>
+					<th style="font-size: 16px;">Peridiciodade</th>
+					<th style="font-size: 16px;">Pr&oacute;xima</th>
+					<th>&nbsp;</th>
+					<th>&nbsp;</th>
+					<th>&nbsp;</th>
+				</tr>
+			</thead>
+			<tbody id="tableBodyDetalhesAvenca">
+			</tbody>
+		</table>
+		&nbsp;
+
+		<div id="Faturacao">&nbsp;</div>
+		<button class="btn_vermelho" onclick="fechaboxDetalhesAvenca()" style="float: right;"
+			type="button">Sair</button>
+	</div>
+</div>
+
+<div class="modal-input-container" id="modalHistoricoAvenca">
+	<div class="modal-content" style="width: fit-content;"><span class="close" id="close"
+			onclick="fechaboxHistoricoAvenca()">&times;</span>
+
+		<div style="margin: 2rem;">
+			<p style="margin-bottom: 1rem; margin-top: 1rem; font-size: 25px; color: #1e2d84; font-weight: bold;"><label
+					id="label-tituloDetalhesAvenca"></label></p>
+		</div>
+
+		<table>
+			<thead id="tableHeaderDetalhesAvenca">
+				<tr>
+					<th style="font-size: 16px;">Data</th>
+					<th style="font-size: 16px;">N&ordm; Fat.</th>
+					<th style="font-size: 16px;">Designa&ccedil;&atilde;o</th>
+					<th style="font-size: 16px;">Quantidade</th>
+					<th style="font-size: 16px;">EPV</th>
+					<th style="font-size: 16px;">Etiliquido</th>
+					<th>&nbsp;</th>
+				</tr>
+			</thead>
+			<tbody id="tableBodyHistoricoAvenca">
+			</tbody>
+		</table>
+		&nbsp;<button class="btn_vermelho" onclick="fechaboxHistoricoAvenca()" style="float: right;"
+			type="button">Sair</button>
+	</div>
+</div>
+
+<div class="modal-input-container" id="modalLink">
+	<div class="modal-content" style="width: fit-content;"><span class="close" id="close"
+			onclick="fechaboxLink()">&times;</span>
+
+		<div style="margin: 2rem;">
+			<p style="margin-bottom: 1rem; margin-top: 1rem; font-size: 25px; color: #1e2d84; font-weight: bold;">
+				<label>Link Aven&ccedil;as</label></p>
+		</div>
+
+		<table>
+			<thead id="tableHeaderDetalhesLink">
+				<tr>
+					<th style="font-size: 16px;">Data</th>
+					<th style="font-size: 16px;">N&ordm; Fat.</th>
+					<th style="font-size: 16px;">Refer&ecirc;ncia</th>
+					<th style="font-size: 16px;">Designa&ccedil;&atilde;o</th>
+					<th style="font-size: 16px;">Quantidade</th>
+					<th style="font-size: 16px;">Epv</th>
+					<th style="font-size: 16px;">Etiliquido</th>
+					<th>&nbsp;</th>
+				</tr>
+			</thead>
+			<tbody id="tableBodyHistoricoLink">
+			</tbody>
+		</table>
+		&nbsp;<br />
+		<button class="btn_vermelho" onclick="fechaboxLink()" style="float: right;" type="button">Sair</button>
+	</div>
+</div>
+
+<div class="modal-input-container" id="modalDetalhesAvencaTexto">
+	<div class="modal-content" style="width: fit-content;"><span class="close" id="close"
+			onclick="fechaboxDetalhesAvencaTexto()">&times;</span>
+
+		<div style="margin: 2rem;">
+			<p style="margin-bottom: 1rem; margin-top: 1rem; font-size: 25px; color: #1e2d84; font-weight: bold;"><label
+					id="label-tituloDetalhesAvencaTexto"></label></p>
+		</div>
+
+		<table>
+			<thead id="tableHeaderDetalhesAvencaTexto">
+				<tr>
+					<th style="font-size: 16px;">Texto</th>
+				</tr>
+			</thead>
+			<tbody id="tableBodyDetalhesAvencaTexto">
+			</tbody>
+		</table>
+		&nbsp;<button class="btn_vermelho" onclick="fechaboxDetalhesAvencaTexto()" style="float: right;"
+			type="button">Sair</button>
+	</div>
+
+	<section class="alertify-logs" id="alertify-logs">&nbsp;</section>
+</div>
+
+<div class="modal-input-container" id="modalImportarAssinaturas">
+	<div class="modal-content" style="width: fit-content;"><span class="close" id="close"
+			onclick="fechaboxImportarAssinaturas()">&times;</span>
+
+		<div style="margin: 2rem;">
+			<p style="margin-bottom: 1rem; margin-top: 1rem; font-size: 25px; color: #1e2d84; font-weight: bold;">
+				<label>Importar Assinaturas</label></p>
+		</div>
+		<label>M&ecirc;s</label> <input accept="number" class="input" id="mesAssinatura"
+			placeholder="1,2,...,12" /><br />
+		<label>Ano</label> <input accept="number" class="input" id="anoAssinatura" placeholder="2023" />
+		<label>Ficheiro</label> <input
+			accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
+			class="input" id="excel" placeholder="Selecione o ficheiro" type="file" />
+		<table class="table table-hover" id="excel-table">
+		</table>
+		<button class="btn_azul" onclick="acceptExcelFile()" style="float: left;" type="button">Importar</button><button
+			class="btn_vermelho" onclick="fechaboxImportarAssinaturas()" style="float: right;"
+			type="button">Sair</button>
+	</div>
+
+	<section class="alertify-logs" id="alertify-logs">&nbsp;</section>
+</div>
+
+<div class="modal-input-container" id="modalDetalhesAssinatura">
+	<div class="modal-content" style="width: fit-content;"><span class="close" id="close"
+			onclick="fechaboxDetalhesAssinatura()">&times;</span>
+
+		<div style="margin: 2rem;">
+			<p style="margin-bottom: 1rem; margin-top: 1rem; font-size: 25px; color: #1e2d84; font-weight: bold;"><label
+					id="label-tituloDetalhesAssinatura"></label></p>
+		</div>
+
+		<table>
+			<thead>
+				<tr>
+					<th style="font-size: 16px;text-align: center;">Ano</th>
+					<th style="font-size: 16px;text-align: center;">M&ecirc;s</th>
+					<th style="font-size: 16px;text-align: center;">PDFs QTT</th>
+					<th style="font-size: 16px;text-align: center;">Pre&ccedil;o PDF</th>
+					<th style="font-size: 16px;text-align: center;">PDFs Total</th>
+					<th style="font-size: 16px;text-align: center;">XMLs QTT</th>
+					<th style="font-size: 16px;text-align: center;">Pre&ccedil;o XML</th>
+					<th style="font-size: 16px;text-align: center;">XMLs Total</th>
+					<th style="font-size: 16px;text-align: center;">Total</th>
+				</tr>
+			</thead>
+			<tbody id="tableBodyDetalhesAssinatura">
+			</tbody>
+		</table>
+
+		<div id="FaturacaoAssinatura">&nbsp;</div>
+		<button class="btn_vermelho" onclick="fechaboxDetalhesAssinatura()" style="float: right;"
+			type="button">Sair</button>
+	</div>
+</div>
+<script>
+	var textFilterAvencas = "";
+	var textFilterAssinaturas = "";
+
+	window.onload = function onLoadFunction() {
+		$(".headerZone").hide();
+		$("#OptionsRecordDropDown").hide();
+		getDadosEncomendas();
+		getDadosAvencas();
+		getDadosPats();
+		getDadosAssinaturas();
+		//gestorAlertas("Hello", "is it me youre looking for?")
+		document.getElementById("btn_encomenda").click();
+		const excelFile = document.getElementById('excel');
+		const table = document.getElementById('excel-table');
+		excelFile.addEventListener('change', (event) => {
+			const file = event.target.files[0];
+
+			readXlsxFile(file).then((rows) => {
+				// Clear the table
+				table.innerHTML = '';
+				const thead = document.createElement('thead');
+				thead.setAttribute('id', 'theadFicheiro');
+				const tbody = document.createElement('tbody');
+				tbody.setAttribute('id', 'tbodyFicheiro');
+				var aux = 0;
+				// Add the rows to the table
+				rows.forEach((row) => {
+					const tr = document.createElement('tr');
+					row.forEach((cell) => {
+						const td = document.createElement('td');
+						td.textContent = cell;
+						tr.appendChild(td);
+					});
+					if (aux == 0) {
+						thead.appendChild(tr);
+						table.appendChild(thead);
+					} else {
+						tbody.appendChild(tr);
+						table.appendChild(tbody);
+					}
+					aux = 1;
+				});
+			});
+		});
+	}
+
+	function openTabs(evt, tarefa) {
+		var i, tabcontent, tablinks;
+		tabcontent = document.getElementsByClassName("tabcontent");
+		for (i = 0; i < tabcontent.length; i++) {
+			tabcontent[i].style.display = "none";
+		}
+		tablinks = document.getElementsByClassName("tablinks");
+		for (i = 0; i < tablinks.length; i++) {
+			tablinks[i].className = tablinks[i].className.replace(" active", "");
+		}
+		document.getElementById(tarefa).style.display = "block";
+		evt.currentTarget.className += " active";
+	}
+
+	function handleEnterKey(e) {
+		if (e.keyCode == 13) {
+			// enter pressed
+			try {
+				e.preventDefault ? e.preventDefault() : (e.returnValue = false);
+				//DO ALTERNATE ACTION RATHER THAN SEND ENTER
+				updateFilter();
+			} catch (err) {
+				console.log(err.message);
+			}
+		}
+	}
+
+	function updateFilter() {
+		textFilterAvencas = document.getElementById('filterCliente').value;
+		textFilterAssinaturas = document.getElementById('filterClienteAssinaturas').value;
+		getDadosAvencas();
+		getDadosAssinaturas();
+	}
+
+	function getDadosEncomendas() {
+		let tBody = document.getElementById('tableBodyEncomenda')
+		let params = {};
+		let varMyQuery = `select distinct Cliente
+			, Data
+			, encomenda
+			, obranome as Negócio
+			, convert(varchar, convert(money, sum(Material)), 1) as material
+			, convert(varchar, convert(money, sum(Serviços)), 1) as servicos
+			, convert(varchar, convert(money, sum(Material)+sum(Serviços)), 1) as Total
+			, bostamp
+			from
+			(
+			select
+			CONVERT(char, bo.obrano, 102) as Encomenda
+			, bo.nome as cliente
+			, bo.bostamp
+			, bienc.ref
+			, bienc.design
+			, bo.obranome
+			, cast(bo.dataobra as date) as Data
+			, sum(case when bienc.stns=0 then bienc.ettdeb else 0 end) as Material
+			, sum(case when bienc.stns=1 then bienc.ettdeb else 0 end) as Serviços
+			, sum(bienc.qtt-bienc.binum1) as enc
+			, isnull(sum(case when ft.tipodoc in (1,2) then fi.qtt else case when ft.tipodoc=3 then -fi.qtt else 0 end end), 0) as fat
+			from bo inner join bi as bienc on bienc.bostamp=bo.bostamp
+			left join fi on fi.u_neg=bienc.u_neg and fi.u_linha=bienc.u_linha
+			LEFT join ft on ft.ftstamp=fi.ftstamp and ft.anulado=0
+			where bo.fechada=0 and bo.ndos=1 and bienc.ettdeb <> 0.00
+			group by bo.nmdos, bo.ndos, bo.obrano, bo.bostamp, bo.dataobra, bo.obranome, bo.nome, bienc.ref, bienc.design, bienc.qtt) as tabela1
+			where tabela1.enc > tabela1.fat
+			group by Encomenda, cliente, obranome, Data, bostamp
+			order by data`
+		params.id = 'SELECTtoJSON'
+		params.select = varMyQuery
+		$.ajax({
+			type: 'POST',
+			url: '../api/code/run',
+			async: true,
+			data: JSON.stringify(params),
+			contentType: 'application/json'
+		})
+			.done(function (result, textStatus, jqXHR) {
+
+				resposta = JSON.parse(result);
+				//console.log(resposta);
+				try {
+					for (var i = 0; i < resposta.Dados.length; i++) {
+						var cliente = resposta.Dados[i].Cliente;
+						var Data = resposta.Dados[i].Data;
+						var encomenda = resposta.Dados[i].encomenda;
+						var Negócio = resposta.Dados[i].Negócio;
+						var material = resposta.Dados[i].material;
+						var servicos = resposta.Dados[i].servicos;
+						var Total = resposta.Dados[i].Total;
+						var bostamp = resposta.Dados[i].bostamp;
+
+
+						//console.log(cliente);
+
+						let row = ""
+						row += "<tr>"
+						row += "<td>" + cliente + "</td>"
+						row += "<td>" + Data.slice(0, 10); + "</td>"
+						row += "<td>" + encomenda + "</td>"
+						row += "<td>" + Negócio + "</td>"
+						row += "<td>" + material.substring(0, material.indexOf('.') + 3) + "</td>"
+						row += "<td>" + servicos.substring(0, servicos.indexOf('.') + 3) + "</td>"
+						row += "<td>" + Total.substring(0, Total.indexOf('.') + 3) + "</td>"
+
+						row += "<td><button title=\"Detalhes Encomenda\" class=\"btn_azulesc\" type=\"button\" onclick=\"abrirModalDetalhesEnc(" + encomenda + ")\"><i class=\"fa fa-eye\" aria-hidden=\"true\"></i></button>"
+						row += "<button title=\"Faturar\" style = \"margin-left: 1rem;\"class=\"btn_azul\" type=\"button\" onclick=\"\"><i class=\"fa fa-file-text\" aria-hidden=\"true\"></i></button>"
+						row += "<button title=\"Abrir Dossier\" style = \"margin-left: 1rem;\"class=\"btn_azul\" type=\"button\" onclick=\"redirectUser('" + bostamp + "')\"><i aria-hidden=\"true\" class=\"fa fa-chevron-right\"></i></button></td>"
+						row += "</tr>"
+						tBody.innerHTML += row
+					}
+				} catch (e) {
+					console.log(e);
+				}
+			})
+	}
+	function getDadosAvencas() {
+		let tBody = document.getElementById('tableBodyAvencas')
+		let params = {};
+		let row = "";
+		let varMyQuery = `WITH linhas AS 
+							(
+								select
+									*
+									, case when cast(cast(year(ultima)+1 as varchar(4))+right('00'+cast(month(dedata) as varchar(2)), 2)+right('00'+cast(day(dedata) as varchar(2)), 2) as date) = '19000101' then dedata else cast(cast(year(ultima)+1 as varchar(4))+right('00'+cast(month(dedata) as varchar(2)), 2)+right('00'+cast(day(dedata) as varchar(2)), 2) as date) end as proxima
+								from
+									(
+										SELECT 
+											bi.ref,
+											bi.design,
+											bi.no,
+											bi.dedata,
+											Isnull(
+												(
+													SELECT Max(rdata)
+													FROM   fi
+													WHERE  fi.u_avenca = bi.obrano AND fi.u_linha = bi.u_linha
+												)
+												, '19000101') AS Ultima
+											,bi.binum1
+										FROM   
+											bi
+											LEFT JOIN bo2 ON bo2.bo2stamp = bi.bostamp
+										WHERE  
+											bi.ndos = 33
+											AND bo2.anulado = 0 
+											AND getDate() between bi.dedata 
+											and case when bi.atedata = '19000101' then '20501231' else bi.atedata end
+									) as tabela1
+							)
+
+						
+
+						SELECT 
+							no,
+							nome,
+							CASE WHEN EXISTS (SELECT linhas.no FROM linhas WHERE linhas.no = bo.no AND Month(proxima) <= Month(Getdate())) THEN 1 ELSE 0 END AS faturar
+						FROM   
+							bo 
+							inner join bo2 ON bo2.bo2stamp = bo.bostamp
+						WHERE  
+							bo.ndos = 33 
+							and bo2.anulado = 0 
+							and bo.nome like '%` + textFilterAvencas + `%'
+						GROUP  BY 
+							bo.no,
+							bo.nome
+						ORDER  BY 
+							faturar desc
+							, bo.nome`
+		params.id = 'SELECTtoJSON'
+		params.select = varMyQuery
+		$.ajax({
+			type: 'POST',
+			url: '../api/code/run',
+			async: true,
+			data: JSON.stringify(params),
+			contentType: 'application/json'
+		}).done(function (result, textStatus, jqXHR) {
+			resposta = JSON.parse(result);
+			//console.log(resposta);
+			try {
+				for (var i = 0; i < resposta.Dados.length; i++) {
+					var no = $.trim(resposta.Dados[i].no);
+					var nome = $.trim(resposta.Dados[i].nome);
+					var faturar = $.trim(resposta.Dados[i].faturar);
+					if (faturar == 1) {
+						row += "<tr style=\"background-color:#f9dfde;\">";
+					} else if (faturar == 0) {
+						row += "<tr style=\"background-color: #e6f9de;\">";
+					}
+					row += "<td>" + nome + "</td>";
+					//Trocar o nao sei no botão
+					row += "<td style=\"width: 50px\"><button title=\"Detalhes Avença\" class=\"btn_azulesc\" type=\"button\" onclick=\"abrirModalDetalhesAvenca(" + no + ", \'" + nome + "\')\"><i class=\"fa fa-eye\" aria-hidden=\"true\"></i></button></td>";
+					row += "</tr>"
+
+				}
+				tBody.innerHTML = row
+			} catch (e) {
+				console.log(e);
+			}
+		})
+	}
+
+	function getDadosPats() {
+		let tBody = document.getElementById('tableBodyPats')
+		let params = {};
+		let varMyQuery = `select top 1
+			cast(0 as bit) as temavença,
+			pa.no,
+			pa.estab,
+			pa.nopat,
+			pa.nome,
+			pa.pdata,
+			pa.pquem,
+			convert(char,pa.pdata,104) as Data,
+			pa.problema,
+			pa.u_aprovado,
+			pa.u_amais,
+			pa.u_neg,
+			pa.u_facno,
+			pa.status,
+			(select isnull(sum(mh.u_mohfinal),0) from mh (nolock) where mh.nopat=pa.nopat) as Horas,
+			pa.pastamp,
+			pa.u_naofat,
+			pa.ptipo,
+			cl2.u_ftpasusp
+			from
+			pa (nolock) left join
+			ft (nolock) on ft.fno=pa.u_facno and ft.anulado=0 and ft.ndoc=1
+			left join
+			(cl inner join cl2 on cl.clstamp=cl2.cl2stamp)
+			on pa.no=cl.no and pa.estab=cl.estab
+			where
+			pa.no<>15825
+			and isnull(ft.fno,0)=0
+			and isnull(pa.u_neg,0)=0
+			and pa.u_amais=0
+			and pa.u_horasp>0
+			and left(pa.status,1)='4'
+
+			and pa.u_projecto like '%%'
+			order by
+			pa.nopat`
+		params.id = 'SELECTtoJSON'
+		params.select = varMyQuery
+		$.ajax({
+			type: 'POST',
+			url: '../api/code/run',
+			async: true,
+			data: JSON.stringify(params),
+			contentType: 'application/json'
+		})
+			.done(function (result, textStatus, jqXHR) {
+				var result2 = result.replace(/\n/g, "\\n").replace(/\r/g, "\\r").replace(/\t/g, "\\t")
+				resposta = JSON.parse(result2);
+				//console.log(resposta);
+				try {
+					for (var i = 0; i < resposta.Dados.length; i++) {
+						var nopat = resposta.Dados[i].nopat
+						var cliente = resposta.Dados[i].nome //falta cliente
+						var data = resposta.Dados[i].Data
+						var problema = resposta.Dados[i].problema
+						var horas = resposta.Dados[i].Horas
+						//console.log(cliente);
+						let row = ""
+						row += "<tr>"
+						row += "<td>" + nopat + "</td>"
+						row += "<td>" + cliente + "</td>"
+						row += "<td>" + data + "</td>"
+						row += "<td>" + problema + "</td>"
+						row += "<td>" + horas + "</td>"
+						row += "<td ><button title=\"Faturar\" class=\"btn_azulesc\" type=\"button\" onclick=\"\"><i class=\"fa fa-file-text\" aria-hidden=\"true\"></i></button><button title=\"Intervenção\" style = \"margin-left: 1rem;\"class=\"btn_azul\" type=\"button\" onclick=\"\"><i class=\"fa fa-cog\" aria-hidden=\"true\"></i></button></td>"
+						row += "<td ><button title=\"Ir ao PAT\" class=\"btn_verde\" type=\"button\" onclick=\"\"><i class=\"fa fa-arrow-circle-right\" aria-hidden=\"true\"></i></button><button title=\"Suspender\" style = \"margin-left: 1rem;\"class=\"btn_vermelho\" type=\"button\" onclick=\"\"><i class=\"fa fa-times\" aria-hidden=\"true\"></i></button></td>"
+						row += "</tr>"
+						tBody.innerHTML += row
+					}
+				} catch (e) {
+					console.log(e);
+				}
+			})
+	}
+
+	function getDadosAssinaturas() {
+		let tBody = document.getElementById('tableBodyAssinaturas');
+		let params = {};
+		let row = "";
+		let varMyQuery = `select cl.nome as Cliente, sum(pdfs*0.06) as PDFs, sum(xmls*0.2) as XMLs, u_assinaturas.no
+						from u_assinaturas 
+							inner join cl on cl.no=u_assinaturas.no and cl.estab=0 
+							WHERE cl.nome like '%` + textFilterAssinaturas + `%'
+							group by cl.nome, u_assinaturas.no having sum(PDFs)<>0 or sum(XMLs)<> 0
+						order by cl.nome`
+		params.id = 'SELECTtoJSON'
+		params.select = varMyQuery
+		$.ajax({
+			type: 'POST',
+			url: '../api/code/run',
+			async: true,
+			data: JSON.stringify(params),
+			contentType: 'application/json'
+		}).done(function (result, textStatus, jqXHR) {
+			try {
+				var resposta = JSON.parse(result);
+			} catch {
+				resposta = JSON.parse("{\"Dados\":[]}");
+			}
+			for (var i = 0; i < resposta.Dados.length; i++) {
+				var cliente = $.trim(resposta.Dados[i].Cliente);
+				var pdfs = $.trim(resposta.Dados[i].PDFs);
+				var xmls = $.trim(resposta.Dados[i].XMLs);
+				row += "<tr>";
+				row += "<td>" + cliente + "</td>";
+				row += "<td>" + pdfs + " €</td>";
+				row += "<td>" + xmls + "</td>";
+				row += "<td><button title=\"Detalhes Assinatura\" class=\"btn_azulesc\" type=\"button\" onclick=\"abrirModalDetalhesAssinaturas(" + $.trim(resposta.Dados[i].no) + ")\"><i class=\"fa fa-eye\" aria-hidden=\"true\"></i></button></td>";
+				row += "</tr>"
+			}
+			tBody.innerHTML = row
+		})
+	}
+
+	function acceptExcelFile() {
+		let ano = document.getElementById("anoAssinatura").value;
+		let mes = document.getElementById("mesAssinatura").value;
+		let nif;
+		let pdfs;
+		let xmls;
+		let tableBodyFicheiro = document.getElementById("tbodyFicheiro");
+		let bodyConteudo = tableBodyFicheiro.getElementsByTagName("tr");
+		for (let j = 0; j < bodyConteudo.length; j++) {
+			nif = bodyConteudo[j].getElementsByTagName("td")[0].textContent;
+			nif = nif.substring(2);
+			xmls = bodyConteudo[j].getElementsByTagName("td")[2].textContent;
+			pdfs = bodyConteudo[j].getElementsByTagName("td")[3].textContent;
+			insereAssinaturas(ano, mes, nif, pdfs, xmls);
+		}
+		document.getElementById("anoAssinatura").value = "";
+		document.getElementById("mesAssinatura").value = "";
+		document.getElementById("modalImportarAssinaturas").style.display = "none";
+		getDadosAssinaturas();
+	}
+
+	function insereAssinaturas(ano, mes, nif, pdfs, xmls) {
+		var params = {};
+		var myQuery = `select no from cl where ncont ='` + nif + `'`;
+		params.id = "SELECTtoJSON";
+		params.select = myQuery;
+		var no;
+		$.ajax({
+			type: "POST",
+			url: "../api/code/run",
+			async: false,
+			data: JSON.stringify(params),
+			contentType: "application/json",
+		}).done(function (result, textStatus, jqXHR) {
+			try {
+				var resposta = JSON.parse(result);
+			} catch {
+				resposta = JSON.parse("{\"Dados\":[]}");
+			}
+			var DadosJSON = resposta.Dados;
+			for (var i = 0; i < DadosJSON.length; ++i) {
+				no = $.trim(DadosJSON[0].no)
+			}
+		}).error(function (response) {
+			alert("Erro a encontrar DadosJSON por favor tente de novo!");
+		});
+		var params = {};
+		$.ajax({
+			type: "GET",
+			url:
+				"../programs/gensel.aspx?cscript=insereAssinaturas&ano=" + ano +
+				"&mes=" + mes +
+				"&no=" + no +
+				"&pdfs=" + pdfs +
+				"&xmls=" + xmls,
+			data: JSON.stringify(params),
+			contentType: "application/json",
+			success: function (response) { },
+			error: function (response) {
+				alert("Erro a encontrar arVend por favor tente de novo!");
+			},
+		});
+	}
+
+	function redirectUser(bostamp) {
+		var params = {};
+		params.id = "encrypt_bostamp";
+		params.select = bostamp;
+		$.ajax({
+			type: "POST",
+			url: "../api/code/run",
+			async: false,
+			data: JSON.stringify(params),
+			contentType: "application/json",
+		}).done(function (result, textStatus, jqXHR) {
+			window.open("https://phc.elevarglobal.pt/Intranet/dos/boform.aspx?stamp=" + result.replace('!', ''));
+		}).error(function (response) {
+		});
+	}
+
+	function faturarAvenca(no) {
+		var params = {};
+		var myQuery = `select 
+		   bi.ref
+		 , bi.design
+		 , bi.no
+		 , isnull((select max(rdata) from fi where fi.u_avenca=bi.obrano and fi.ref=bi.ref and bi.design=fi.design), '19000101') as Ultima
+		 , bi.binum1
+		 , dateadd(month, bi.binum1, isnull((select max(rdata) from fi where fi.u_avenca=bi.obrano and fi.ref=bi.ref and bi.design=fi.design), '19000101')) as proxima
+		 , convert(varchar, convert(money, bi.ettdeb, 1), 1) + ' €' as Total
+		 , bi.qtt
+		 , bi.desconto
+		 , bi.desc2
+		 , bi.ndoc
+		 , bi.edebito
+		 , bi.obrano
+		   from bi left join bo2 on bo2.bo2stamp=bi.bostamp
+		   where bi.ndos=33 and bo2.anulado=0 and bi.no=` + no;
+		params.id = "SELECTtoJSON";
+		params.select = myQuery;
+		let faturasLinhas = [];
+		$.ajax({
+			type: "POST",
+			url: "../api/code/run",
+			async: false,
+			data: JSON.stringify(params),
+			contentType: "application/json",
+		}).done(function (result, textStatus, jqXHR) {
+			try {
+				var resposta = JSON.parse(result);
+			} catch {
+				resposta = JSON.parse("{\"Dados\":[]}");
+			}
+			var DadosJSON = resposta.Dados;
+			for (var i = 0; i < DadosJSON.length; ++i) {
+				let object = {
+					ndoc: $.trim(DadosJSON[i].ndoc),
+					no: $.trim(DadosJSON[i].no),
+					ref: $.trim(DadosJSON[i].ref),
+					design: $.trim(DadosJSON[i].design),
+					qtt: $.trim(DadosJSON[i].qtt),
+					edebito: $.trim(DadosJSON[i].edebito),
+					desconto: $.trim(DadosJSON[i].desconto),
+					desc2: $.trim(DadosJSON[i].desc2),
+					obrano: $.trim(DadosJSON[i].obrano)
+				};
+				faturasLinhas.push(object);
+			}
+		}).error(function (response) {
+			alert("Erro a encontrar DadosJSON por favor tente de novo!");
+		});
+		//"<ft nmdoc='"+ alltrim(lcNmdoc) +"' ndoc='"+ aSTR(lnNdoc) +"' no='" + aSTR(ft.no) + "' nome='" + alltrim(ft.nome) + "' carga='" + alltrim(ft.carga) + "' descar='" + alltrim(ft.descar) + "' matricula='" + alltrim(ft.matricula) + "' >" 
+		var xml = "<ft ndoc=\"" + 1 + "\" no=\"" + faturasLinhas[0].no + "\">";
+		faturasLinhas.forEach(element => {
+			xml += "<fi ref=\"" + element.ref + "\" design=\"" + element.design + "\" qtt=\"" + element.qtt + "\" epv=\"" + element.edebito + "\" u_avenca=\"" + element.obrano + "\"></fi>";
+		});
+		xml += "</ft>";
+		params = {};
+		params.id = "xmltoft";
+		params.xml = xml;
+		$.ajax({
+			type: "POST",
+			url: "../api/code/run",
+			async: false,
+			data: JSON.stringify(params),
+			contentType: "application/json",
+		}).done(function (result, textStatus, jqXHR) {
+			console.log("Entrou");
+		}).error(function (response) {
+		});
+	}
+
+	function faturarAssinatura(no) {
+		//Primeiro faz-se dos PDFs e depois faz-se para os XMLs
+		faturarAssinaturaPDF(no);
+		faturarAssinaturaXML(no);
+	}
+
+	function faturarAssinaturaPDF(no) {
+		var params = {};
+		var myQuery = `select mes,
+						sum(pdfs) as PDFsqtt
+						from u_assinaturas 
+						where no = ` + no + `
+						group by mes, no`;
+		params.id = "SELECTtoJSON";
+		params.select = myQuery;
+		let faturasLinhas = [];
+		$.ajax({
+			type: "POST",
+			url: "../api/code/run",
+			async: false,
+			data: JSON.stringify(params),
+			contentType: "application/json",
+		}).done(function (result, textStatus, jqXHR) {
+			try {
+				var resposta = JSON.parse(result);
+			} catch {
+				resposta = JSON.parse("{\"Dados\":[]}");
+			}
+			var DadosJSON = resposta.Dados;
+			for (var i = 0; i < DadosJSON.length; ++i) {
+				let object = {
+					no: no,
+					ref: 'S.MOA.TMP.PDFAQ',
+					design: "PHC - PDF Assinatura Qualificada, Mês: " + $.trim(DadosJSON[i].mes),
+					qtt: $.trim(DadosJSON[i].PDFsqtt)
+				};
+				faturasLinhas.push(object);
+			}
+		}).error(function (response) {
+			alert("Erro a encontrar DadosJSON por favor tente de novo!");
+		});
+		//"<ft nmdoc='"+ alltrim(lcNmdoc) +"' ndoc='"+ aSTR(lnNdoc) +"' no='" + aSTR(ft.no) + "' nome='" + alltrim(ft.nome) + "' carga='" + alltrim(ft.carga) + "' descar='" + alltrim(ft.descar) + "' matricula='" + alltrim(ft.matricula) + "' >" 
+		var xml = "<ft ndoc=\"" + 1 + "\" no=\"" + faturasLinhas[0].no + "\">";
+		faturasLinhas.forEach(element => {
+			xml += "<fi ref=\"" + element.ref + "\" design=\"" + element.design + "\" qtt=\"" + element.qtt + "\"></fi>";
+		});
+		xml += "</ft>";
+		params = {};
+		params.id = "xmltoft";
+		params.xml = xml;
+		$.ajax({
+			type: "POST",
+			url: "../api/code/run",
+			async: false,
+			data: JSON.stringify(params),
+			contentType: "application/json",
+		}).done(function (result, textStatus, jqXHR) {
+			console.log("Entrou");
+		}).error(function (response) {
+		});
+	}
+
+	function faturarAssinaturaXML(no) {
+		var params = {};
+		var myQuery = `select mes,
+						sum(xmls) as XMLsqtt
+						from u_assinaturas  
+						where no = ` + no + `
+						group by mes, no`;
+		params.id = "SELECTtoJSON";
+		params.select = myQuery;
+		let faturasLinhas = [];
+		$.ajax({
+			type: "POST",
+			url: "../api/code/run",
+			async: false,
+			data: JSON.stringify(params),
+			contentType: "application/json",
+		}).done(function (result, textStatus, jqXHR) {
+			try {
+				var resposta = JSON.parse(result);
+			} catch {
+				resposta = JSON.parse("{\"Dados\":[]}");
+			}
+			var DadosJSON = resposta.Dados;
+			for (var i = 0; i < DadosJSON.length; ++i) {
+				let object = {
+					no: no,
+					ref: 'S.MOA.TMP.DOCELETR',
+					design: "PHC - Fatura Eletrónica, Mês: " + $.trim(DadosJSON[i].mes),
+					qtt: $.trim(DadosJSON[i].XMLsqtt)
+				};
+				faturasLinhas.push(object);
+			}
+		}).error(function (response) {
+			alert("Erro a encontrar DadosJSON por favor tente de novo!");
+		});
+		//"<ft nmdoc='"+ alltrim(lcNmdoc) +"' ndoc='"+ aSTR(lnNdoc) +"' no='" + aSTR(ft.no) + "' nome='" + alltrim(ft.nome) + "' carga='" + alltrim(ft.carga) + "' descar='" + alltrim(ft.descar) + "' matricula='" + alltrim(ft.matricula) + "' >" 
+		var xml = "<ft ndoc=\"" + 1 + "\" no=\"" + faturasLinhas[0].no + "\">";
+		faturasLinhas.forEach(element => {
+			xml += "<fi ref=\"" + element.ref + "\" design=\"" + element.design + "\" qtt=\"" + element.qtt + "\"></fi>";
+		});
+		xml += "</ft>";
+		params = {};
+		params.id = "xmltoft";
+		params.xml = xml;
+		$.ajax({
+			type: "POST",
+			url: "../api/code/run",
+			async: false,
+			data: JSON.stringify(params),
+			contentType: "application/json",
+		}).done(function (result, textStatus, jqXHR) {
+			console.log("Entrou");
+		}).error(function (response) {
+		});
+	}
+
+	function openModalAssinaturas() {
+		document.getElementById("modalImportarAssinaturas").style.display = "block";
+	}
+
+	function abrirModalDetalhesAssinaturas(no) {
+		document.getElementById("modalDetalhesAssinatura").style.display = "block";
+		document.getElementById("label-tituloDetalhesAssinatura").textContent = "Detalhes da Assinatura nº " + no;
+		var params = {};
+		var myQuery = `select ano,mes,
+					sum(pdfs) as PDFsqtt,
+					(select isnull((select evalfixo from dq where 'S.MOA.TMP.PDFAQ' between dq.refi and dq.reff and 10 between qtt1 and qtt2), (select st.u_fixo from st where ref='S.MOA.TMP.PDFAQ'))) as PreçoPDF, 
+					(select isnull((select evalfixo from dq where 'S.MOA.TMP.PDFAQ' between dq.refi and dq.reff and 10 between qtt1 and qtt2), (select st.u_fixo from st where ref='S.MOA.TMP.PDFAQ')) * sum(pdfs)) as PDFsTotal,
+					sum(xmls) as XMLsqtt,
+					(select isnull((select evalfixo from dq where 'S.MOA.TMP.DOCELETR' between dq.refi and dq.reff and 10 between qtt1 and qtt2), (select st.u_fixo from st where ref='S.MOA.TMP.DOCELETR'))) as PreçoXML, 
+					(select isnull((select evalfixo from dq where 'S.MOA.TMP.DOCELETR' between dq.refi and dq.reff and 10 between qtt1 and qtt2), (select st.u_fixo from st where ref='S.MOA.TMP.DOCELETR')) * sum(xmls)) as XMLsTotal
+					from u_assinaturas 
+						where no = ` + no + `
+						group by ano, mes, no`;
+		params.id = "SELECTtoJSON";
+		params.select = myQuery;
+		$.ajax({
+			type: "POST",
+			url: "../api/code/run",
+			async: false,
+			data: JSON.stringify(params),
+			contentType: "application/json",
+		})
+			.done(function (result, textStatus, jqXHR) {
+				try {
+					var resposta = JSON.parse(result);
+				} catch {
+					resposta = JSON.parse("{\"Dados\":[]}");
+				}
+				var DadosJSON = resposta.Dados;
+				var escolhas = "";
+				for (var i = 0; i < DadosJSON.length; ++i) {
+					let ano = $.trim(DadosJSON[i].ano)
+					let mes = $.trim(DadosJSON[i].mes)
+					let PDFsqtt = $.trim(DadosJSON[i].PDFsqtt)
+					let PreçoPDF = $.trim(DadosJSON[i].PreçoPDF)
+					let PDFsTotal = $.trim(DadosJSON[i].PDFsTotal)
+					let XMLsqtt = $.trim(DadosJSON[i].XMLsqtt)
+					let PreçoXML = $.trim(DadosJSON[i].PreçoXML)
+					let XMLsTotal = $.trim(DadosJSON[i].XMLsTotal)
+					let total = ($.trim(DadosJSON[i].PDFsTotal) + $.trim(DadosJSON[i].XMLsTotal))
+					escolhas += '<tr>'
+					escolhas += '<td style="font-size:16px;padding:8px;text-align: center;">' + ano + "</td>";
+					escolhas += '<td style="font-size:16px;padding:8px;text-align: center;">' + mes + "</td>";
+					escolhas += '<td style="font-size:16px;padding:8px;text-align: center;">' + PDFsqtt + "</td>";
+					escolhas += '<td style="font-size:16px;padding:8px;text-align: center;">' + PreçoPDF.substring(0, PreçoPDF.indexOf('.') + 3) + "</td>";
+					escolhas += '<td style="font-size:16px;padding:8px;text-align: center;">' + PDFsTotal.substring(0, PDFsTotal.indexOf('.')) + "</td>";
+					escolhas += '<td style="font-size:16px;padding:8px;text-align: center;">' + XMLsqtt + "</td>";
+					escolhas += '<td style="font-size:16px;padding:8px;text-align: center;">' + PreçoXML.substring(0, PreçoXML.indexOf('.') + 3) + "</td>";
+					escolhas += '<td style="font-size:16px;padding:8px;text-align: center;">' + XMLsTotal.substring(0, XMLsTotal.indexOf('.')) + "</td>";
+					escolhas += '<td style="font-size:16px;padding:8px;text-align: center;">' + total.substring(0, total.indexOf('.')) + "</td>";
+					escolhas += "</tr>"
+				}
+				document.getElementById("FaturacaoAssinatura").innerHTML = "<button class=\"btn_verde\" style=\"float: left;\" type=\"button\" onclick=\"faturarAssinatura(" + no + ")\"><i class=\"fa fa-check\"></i>&nbsp;Faturar</button>"
+				document.getElementById("tableBodyDetalhesAssinatura").innerHTML = escolhas;
+			})
+			.error(function (response) {
+				alert("Erro a encontrar DadosJSON por favor tente de novo!");
+			});
+	}
+
+	function abrirModalDetalhesEnc(idEncomenda) {
+		document.getElementById("modalDetalhesEnc").style.display = "block";
+		document.getElementById("label-tituloDetalhesEnc").textContent = "Detalhes da Encomenda nº " + idEncomenda;
+		var params = {};
+		var myQuery = `SELECT   Cast(0 AS BIT) AS exportar,
+			(
+				SELECT ref
+				FROM   bi
+				WHERE  bi.ndos=1
+				AND    bi.u_neg=` + idEncomenda + `
+				AND    bi.u_linha=tabela.u_linha) AS ref,
+			(
+				SELECT design
+				FROM   bi
+				WHERE  bi.ndos=1
+				AND    bi.u_neg=` + idEncomenda + `
+				AND    bi.u_linha=tabela.u_linha) AS design,
+			(
+				SELECT TOP 1
+							bi9.u_texto
+				FROM   bi AS bi9
+				WHERE  bi9.ndos=1
+				AND    bi9.u_linha=tabela.u_linha
+				AND    bi9.u_neg=` + idEncomenda + `)                AS texto,
+			Avg(preco)                                                  AS preco,
+			Sum(enccli)                                                 AS enc_cli,
+			Sum(anucli)                                                 AS anu_cli,
+			Sum(encfor)                                                 AS enc_for,
+			Sum(anufor)                                                 AS anu_for,
+			Sum(recfor)                                                 AS rec_for,
+			Sum(devfor)                                                 AS dev_for,
+			Sum(rescli)                                                 AS res_cli,
+			Sum(faccli)                                                 AS fac_cli,
+			Sum(devcli)                                                 AS dev_cli,
+			Sum(enccli)-Sum(anucli)-Sum(encfor)+Sum(anufor)-Sum(rescli) AS quant,
+			` + idEncomenda + `                                         AS negocio,
+			u_linha
+		FROM     (
+					SELECT
+								CASE
+											WHEN LEFT(bi.ref,6)='S.PHC.' THEN bi.edebito
+											ELSE bi.epcusto
+								END                              AS preco,
+								isnull(bi.qtt, 0.0000)           AS enccli,
+								isnull(bi.binum1, 0.0000)*1.0000 AS anucli,
+								0.0000                           AS encfor,
+								0.0000                           AS anufor,
+								0.0000                           AS recfor,
+								0.0000                           AS devfor,
+								0.0000                           AS rescli,
+								0.0000                           AS faccli,
+								0.0000                           AS devcli,
+								bi.u_linha
+					FROM       bi(nolock)
+					INNER JOIN bo(nolock)
+					ON         bo.bostamp=bi.bostamp
+					WHERE      bo.ndos=1
+					AND        bi.u_neg=` + idEncomenda + `
+					UNION ALL
+					SELECT     0.0000                          AS preco,
+								0.0000                          AS enccli,
+								0.0000                          AS anucli,
+								isnull(bi.qtt,0.0000)           AS encfor,
+								isnull(bi.binum1,0.0000)*1.0000 AS anufor,
+								0.0000                          AS recfor,
+								0.0000                          AS devfor,
+								0.0000                          AS rescli,
+								0.0000                          AS faccli,
+								0.0000                          AS devcli,
+								bi.u_linha
+					FROM       bi(nolock)
+					INNER JOIN bo(nolock)
+					ON         bo.bostamp=bi.bostamp
+					WHERE      bo.ndos=2
+					AND        bi.u_neg=` + idEncomenda + `
+					UNION ALL
+					SELECT     0.0000 AS preco,
+								0.0000 AS enccli,
+								0.0000 AS anucli,
+								0.0000 AS encfor,
+								0.0000 AS anufor,
+								isnull(
+								CASE
+											WHEN fo.doccode IN(55,120,56,16) THEN qtt
+											ELSE 0.0000
+								END,0.0000) AS recfor,
+								isnull(
+								CASE
+											WHEN fo.doccode IN(3) THEN qtt
+											ELSE 0.0000
+								END,0.0000) AS devfor,
+								0.0000      AS rescli,
+								0.0000      AS faccli,
+								0.0000      AS devcli,
+								fn.u_linha
+					FROM       fn(nolock)
+					INNER JOIN fo(nolock)
+					ON         fo.fostamp=fn.fostamp
+					WHERE      fo.doccode IN (55,120,56,16,3)
+					AND        fn.u_neg=` + idEncomenda + `
+					UNION ALL
+					SELECT     0.0000                AS preco,
+								0.0000                AS enccli,
+								0.0000                AS anucli,
+								0.0000                AS encfor,
+								0.0000                AS anufor,
+								0.0000                AS recfor,
+								0.0000                AS devfor,
+								isnull(bi.qtt,0.0000) AS rescli,
+								0.0000                AS faccli,
+								0.0000                AS devcli,
+								bi.u_linha
+					FROM       bi(nolock)
+					INNER JOIN bo(nolock)
+					ON         bo.bostamp=bi.bostamp
+					WHERE      bo.ndos=7
+					AND        bi.u_neg=` + idEncomenda + `
+					UNION ALL
+					SELECT     0.0000 AS preco,
+								0.0000 AS enccli,
+								0.0000 AS anucli,
+								0.0000 AS encfor,
+								0.0000 AS anufor,
+								0.0000 AS recfor,
+								0.0000 AS devfor,
+								0.0000 AS rescli,
+								isnull(
+								CASE
+											WHEN fi.ndoc IN (1,3,8) THEN qtt
+											ELSE 0.0000
+								END,0.0000) AS faccli,
+								isnull(
+								CASE
+											WHEN fi.ndoc IN (2,4) THEN qtt
+											ELSE 0.0000
+								END,0.0000) AS devcli,
+								fi.u_linha
+					FROM       fi(nolock)
+					INNER JOIN ft(nolock)
+					ON         ft.ftstamp=fi.ftstamp
+					WHERE      ft.ndoc IN (1,3,8,2,4) AND ft.anulado = 0
+					AND        fi.u_neg=` + idEncomenda + `) AS tabela
+		GROUP BY tabela.u_linha
+		ORDER BY tabela.u_linha`;
+		params.id = "SELECTtoJSON";
+		params.select = myQuery;
+		$.ajax({
+			type: "POST",
+			url: "../api/code/run",
+			async: false,
+			data: JSON.stringify(params),
+			contentType: "application/json",
+		})
+			.done(function (result, textStatus, jqXHR) {
+				try {
+					var string = result.replace(/\n/g, "\\n").replace(/\r/g, "\\r").replace(/\t/g, "\\t")
+					var resposta = JSON.parse(string);
+				} catch {
+					resposta = JSON.parse("{\"Dados\":[]}");
+				}
+				var DadosJSON = resposta.Dados;
+				var escolhas = "";
+				for (var i = 0; i < DadosJSON.length; ++i) {
+					var conta = $.trim(DadosJSON[i].res_cli).split(".")[0] - $.trim(DadosJSON[i].rec_for).split(".")[0];
+					if (conta <= 0) {
+						conta = 0;
+					}
+
+						escolhas += '<tr>'
+
+
+					escolhas += '<td style="font-size:16px;padding:8px">' + $.trim(DadosJSON[i].u_linha); + "</td>";
+					escolhas += '<td style="font-size:16px;padding:8px">' + $.trim(DadosJSON[i].ref); + "</td>";
+					escolhas += '<td style="font-size:16px;padding:8px">' + $.trim(DadosJSON[i].design); + "</td>";
+					escolhas += '<td style="font-size:16px;padding:8px;text-align:center;">' + $.trim(DadosJSON[i].enc_cli).split(".")[0] + "</td>";
+					escolhas += '<td style="font-size:16px;padding:8px;text-align:center;">' + $.trim(DadosJSON[i].anu_cli).split(".")[0] + "</td>";
+					if($.trim(DadosJSON[i].enc_for).split(".")[0] < ( $.trim(DadosJSON[i].enc_cli).split(".")[0] - $.trim(DadosJSON[i].anu_cli).split(".")[0])){
+						escolhas += '<td style="font-size:16px;padding:8px;text-align:center;background-color:#f9dfde;">' + $.trim(DadosJSON[i].enc_for).split(".")[0] + "</td>";
+					}else{
+						escolhas += '<td style="font-size:16px;padding:8px;text-align:center;background-color:#e6f9de;">' + $.trim(DadosJSON[i].enc_for).split(".")[0] + "</td>";
+					}
+					escolhas += '<td style="font-size:16px;padding:8px;text-align:center;">' + $.trim(DadosJSON[i].anu_for).split(".")[0] + "</td>";
+					if(($.trim(DadosJSON[i].rec_for).split(".")[0] - $.trim(DadosJSON[i].dev_for).split(".")[0]) < ( $.trim(DadosJSON[i].enc_cli).split(".")[0] - $.trim(DadosJSON[i].anu_cli).split(".")[0])){
+						escolhas += '<td style="font-size:16px;padding:8px;text-align:center;background-color:#f9dfde;">' + $.trim(DadosJSON[i].rec_for).split(".")[0] + "</td>";
+					}else{
+						escolhas += '<td style="font-size:16px;padding:8px;text-align:center;background-color:#e6f9de;">' + $.trim(DadosJSON[i].rec_for).split(".")[0] + "</td>";
+					}
+					escolhas += '<td style="font-size:16px;padding:8px;text-align:center;">' + $.trim(DadosJSON[i].dev_for).split(".")[0] + "</td>";
+					escolhas += '<td style="font-size:16px;padding:8px;text-align:center;">' + $.trim(DadosJSON[i].res_cli).split(".")[0] + "</td>";
+					if(($.trim(DadosJSON[i].fac_cli).split(".")[0] - $.trim(DadosJSON[i].dev_cli).split(".")[0]) < ( $.trim(DadosJSON[i].enc_cli).split(".")[0] - $.trim(DadosJSON[i].anu_cli).split(".")[0])){
+						escolhas += '<td style="font-size:16px;padding:8px;text-align:center;background-color:#f9dfde;">' + $.trim(DadosJSON[i].fac_cli).split(".")[0] + "</td>";	
+					}else{
+						escolhas += '<td style="font-size:16px;padding:8px;text-align:center;background-color:#e6f9de;">' + $.trim(DadosJSON[i].fac_cli).split(".")[0] + "</td>";
+					}
+					escolhas += '<td style="font-size:16px;padding:8px;text-align:center;">' + $.trim(DadosJSON[i].dev_cli).split(".")[0] + "</td>";
+					//conta = (enc_cli - anu_cli) - (fac_cli - dev_cli)
+					let aux = $.trim(DadosJSON[i].enc_cli).split(".")[0] - $.trim(DadosJSON[i].anu_cli).split(".")[0] - ($.trim(DadosJSON[i].fac_cli).split(".")[0] - $.trim(DadosJSON[i].dev_cli).split(".")[0]);
+					escolhas += '<td style="font-size:16px;padding:8px;text-align:center;">' + aux + "</td>";
+					escolhas += "</tr>"
+				}
+				document.getElementById("tableBodyDetalhesEnc").innerHTML = escolhas;
+			})
+			.error(function (response) {
+				alert("Erro a encontrar DadosJSON por favor tente de novo!");
+			});
+	}
+
+	function abrirModalDetalhesAvenca(no, nome) {
+		document.getElementById("modalDetalhesAvenca").style.display = "block";
+		document.getElementById("label-tituloDetalhesAvenca").textContent = "Avenças de " + nome;
+		var params = {};
+		var myQuery = `select *, case when cast(cast(year(ultima)+1 as varchar(4))+right('00'+cast(month(dedata) as varchar(2)), 2)+right('00'+cast(day(dedata) as varchar(2)), 2) as date) = '19000101' then dedata else cast(cast(year(ultima)+1 as varchar(4))+right('00'+cast(month(dedata) as varchar(2)), 2)+right('00'+cast(day(dedata) as varchar(2)), 2) as date) end as proxima  from (select  
+		   bi.ref
+		 , bi.design
+		 , bi.obrano
+		 , bi.no
+		 , isnull((select max(rdata) from fi where fi.u_avenca=bi.obrano and fi.ref=bi.ref), '19000101') as Ultima
+		 , bi.binum1
+		 , convert(varchar, convert(money, bi.ettdeb, 1), 1) + ' €' as Total
+		 , bi.qtt
+		 , bi.desconto
+		 , bi.desc2
+		 , bi.u_linha
+		 , bi.dedata
+         , bi.u_avenca
+		   from bi left join bo2 on bo2.bo2stamp=bi.bostamp
+		   where bi.ndos=33 and bo2.anulado=0 and bi.no=` + no + `) as tabela1`;
+		params.id = "SELECTtoJSON";
+		params.select = myQuery;
+		$.ajax({
+			type: "POST",
+			url: "../api/code/run",
+			async: false,
+			data: JSON.stringify(params),
+			contentType: "application/json",
+		}).done(function (result, textStatus, jqXHR) {
+			try {
+				var resposta = JSON.parse(result);
+			} catch {
+				resposta = JSON.parse("{\"Dados\":[]}");
+			}
+			var DadosJSON = resposta.Dados;
+			var escolhas = "";
+			for (var i = 0; i < DadosJSON.length; ++i) {
+				let proximaDate = DadosJSON[i].proxima.split(" ")[0].split("/");
+				proximaDate = new Date(proximaDate[1] + "/" + proximaDate[0] + "/" + proximaDate[2]);
+				let dateToday = new Date();
+				if (proximaDate.getTime() < dateToday.getTime()) {
+					escolhas += "<tr style=\"background-color:#f9dfde;\">";
+				} else {
+					escolhas += "<tr style=\"background-color: #e6f9de;\">";
+				}
+				escolhas += '<td style="font-size:16px;padding:8px;text-align:left;">' + $.trim(DadosJSON[i].u_linha); + "</td>";
+				escolhas += '<td style="font-size:16px;padding:8px;text-align:left;">' + $.trim(DadosJSON[i].obrano); + "</td>";
+				escolhas += '<td style="font-size:16px;padding:8px;text-align:left;">' + $.trim(DadosJSON[i].ref); + "</td>";
+				escolhas += '<td style="font-size:16px;padding:8px;text-align:left;">' + $.trim(DadosJSON[i].design); + "</td>";
+				escolhas += '<td style="font-size:16px;padding:8px;text-align:left;">' + $.trim(DadosJSON[i].Total); + "</td>";
+				escolhas += '<td style="font-size:16px;padding:8px;text-align:left;">' + $.trim(DadosJSON[i].Ultima).split(" ")[0] + "</td>";
+				escolhas += '<td style="font-size:16px;padding:8px;text-align:left;">' + $.trim(DadosJSON[i].binum1).split(" ")[0] + "</td>";
+				escolhas += '<td style="font-size:16px;padding:8px;text-align:left;">' + $.trim(DadosJSON[i].proxima).split(" ")[0] + "</td>";
+				escolhas += '<td style="font-size:16px;padding:8px;text-align:left;"><button type="button" class="btn_azul" title="Ver Texto" onclick="abrirModalDetalhesAvencaTexto(' + $.trim(DadosJSON[i].obrano) + ')"><i class="fa fa-eye" aria-hidden="true"></i></button></td>';
+				escolhas += '<td style="font-size:16px;padding:8px;text-align:left;"><button type="button" class="btn_azul" title="Ver Histórico" onclick="abrirModalHistoricoAvenca(\'' + no + '\',' + $.trim(DadosJSON[i].obrano) + ',\'' + $.trim(DadosJSON[i].u_linha) + '\', 1)"><i class="fa fa-history" aria-hidden="true"></i></button></td>';
+				escolhas += '<td style="font-size:16px;padding:8px;text-align:left;"><button type="button" class="btn_azul" title="Ligar" onclick="abrirModalLink(\'' + no + '\',' + $.trim(DadosJSON[i].u_linha) + ',\'' + $.trim(DadosJSON[i].u_avenca) + '\',\'' + $.trim(DadosJSON[i].ref) + '\')"><i class="fa fa-link" aria-hidden="true"></i></button></td>';
+				escolhas += "</tr>"
+
+			}
+			document.getElementById("Faturacao").innerHTML = "<button class=\"btn_verde\" style=\"float: left;\" type=\"button\" onclick=\"faturarAvenca(" + no + ")\"><i class=\"fa fa-check\"></i>&nbsp;Faturar</button>"
+			document.getElementById("tableBodyDetalhesAvenca").innerHTML = escolhas;
+		}).error(function (response) {
+			alert("Erro a encontrar DadosJSON por favor tente de novo!");
+		});
+	}
+
+	function abrirModalHistoricoAvenca(no, obrano, u_linha, hist) {
+		document.getElementById("modalHistoricoAvenca").style.display = "block";
+		var params = {};
+		var myQuery = ''
+		var myQuery = `select fi.fistamp, cast(ft.fdata as date) as Data, ft.nmdoc+' n.º '+cast(ft.fno as varchar(30)) as Fat_num, fi.ref, fi.design, fi.qtt, fi.epv, fi.etiliquido
+					from fi inner join ft on ft.ftstamp=fi.ftstamp
+					where ft.no=`+ no + ` and fi.u_linha=` + u_linha + ` and fi.u_avenca=` + (hist == 1 ? obrano : 0) + `
+					order by ft.fdata`
+		params.id = "SELECTtoJSON";
+		params.select = myQuery;
+		$.ajax({
+			type: "POST",
+			url: "../api/code/run",
+			async: false,
+			data: JSON.stringify(params),
+			contentType: "application/json",
+		}).done(function (result, textStatus, jqXHR) {
+			var string = result.replace(/\n/g, "\\n").replace(/\r/g, "\\r").replace(/\t/g, "\\t")
+			try {
+				var resposta = JSON.parse(string);
+			} catch {
+				resposta = JSON.parse("{\"Dados\":[]}");
+			}
+			var DadosJSON = resposta.Dados;
+			var row = "";
+
+			for (var i = 0; i < DadosJSON.length; ++i) {
+				var epv = parseFloat($.trim(DadosJSON[i].epv).split(" ")[0]).toFixed(2).toString()
+				var etiliquido = parseFloat($.trim(DadosJSON[i].etiliquido).split(" ")[0]).toFixed(2).toString()
+				row += "<tr>";
+				row += '<td style="font-size:16px;padding:8px;text-align:left;">' + $.trim(DadosJSON[i].Data).slice(0, 10); + "</td>";
+				row += '<td style="font-size:16px;padding:8px;text-align:left;">' + $.trim(DadosJSON[i].Fat_num); + "</td>";
+				row += '<td style="font-size:16px;padding:8px;text-align:left;">' + $.trim(DadosJSON[i].design); + "</td>";
+				row += '<td style="font-size:16px;padding:8px;text-align:left;">' + parseFloat($.trim(DadosJSON[i].qtt)).toFixed(2); + "</td>";
+				row += '<td style="font-size:16px;padding:8px;text-align:left;">' + epv.replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, " ") + "€" + "</td>";
+				row += '<td style="font-size:16px;padding:8px;text-align:left;">' + etiliquido.replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, " ") + "€" + "</td>";
+				if (hist == 0) {
+					row += '<td style="font-size:16px;padding:8px;text-align:left;"><button type="button" class="btn_azul" title="Ligar" onclick="updateHistoricoAvenca(' + obrano + ',\'' + $.trim(DadosJSON[i].fistamp) + '\')"><i class="fa fa-link" aria-hidden="true"></i></button></td>';
+				}
+				row += "</tr>"
+			}
+			document.getElementById("tableBodyHistoricoAvenca").innerHTML = row;
+		}).error(function (response) {
+			alert("Erro a encontrar DadosJSON por favor tente de novo!");
+		});
+
+	}
+
+	function abrirModalLink(no, u_linha, u_avenca, ref) {
+		document.getElementById("modalLink").style.display = "block";
+		var params = {};
+		var myQuery = ` select cast(ft.fdata as date) as Data, ft.nmdoc + ' Nº ' + cast(ft.fno as varchar) as ndoc, ref as Referencia, design as Designacao, qtt, epv, etiliquido, fi.fistamp
+						from fi inner join ft on ft.ftstamp=fi.ftstamp 
+						where ref='` + ref + `' AND no = ` + no + `  AND (u_avenca = 0 or u_linha=0)`
+		params.id = "SELECTtoJSON";
+		params.select = myQuery;
+		$.ajax({
+			type: "POST",
+			url: "../api/code/run",
+			async: false,
+			data: JSON.stringify(params),
+			contentType: "application/json",
+		}).done(function (result, textStatus, jqXHR) {
+			try {
+				var resposta = JSON.parse(result);
+			} catch {
+				resposta = JSON.parse("{\"Dados\":[]}");
+			}
+			var DadosJSON = resposta.Dados;
+			var row = "";
+
+			for (var i = 0; i < DadosJSON.length; ++i) {
+				var epv = parseFloat($.trim(DadosJSON[i].epv).split(" ")[0]).toFixed(2).toString()
+				var etiliquido = parseFloat($.trim(DadosJSON[i].etiliquido).split(" ")[0]).toFixed(2).toString()
+				row += "<tr>";
+				row += '<td style="font-size:16px;padding:8px;text-align:left;">' + $.trim(DadosJSON[i].Data).slice(0, 10); + "</td>";
+				row += '<td style="font-size:16px;padding:8px;text-align:left;">' + $.trim(DadosJSON[i].ndoc); + "</td>";
+				row += '<td style="font-size:16px;padding:8px;text-align:left;">' + $.trim(DadosJSON[i].Referencia); + "</td>";
+				row += '<td style="font-size:16px;padding:8px;text-align:left;">' + $.trim(DadosJSON[i].Designacao); + "</td>";
+				row += '<td style="font-size:16px;padding:8px;text-align:left;">' + parseFloat($.trim(DadosJSON[i].qtt)).toFixed(2); + "</td>";
+				row += '<td style="font-size:16px;padding:8px;text-align:left;">' + epv.replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, " ") + "€" + "</td>";
+				row += '<td style="font-size:16px;padding:8px;text-align:left;">' + etiliquido.replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, " ") + "€" + "</td>";
+				row += '<td style="font-size:16px;padding:8px;text-align:left;"><button type="button" class="btn_azul" title="Ligar" onclick="updateLink(' + u_avenca + ',\'' + $.trim(DadosJSON[i].fistamp) + '\', ' + u_linha + ')">Criar Link</button></td>';
+				row += "</tr>"
+			}
+			document.getElementById("tableBodyHistoricoLink").innerHTML = row;
+		}).error(function (response) {
+			alert("Erro a encontrar DadosJSON por favor tente de novo!");
+		});
+	}
+
+	function updateLink(u_avenca, fistamp, u_linha) {
+		var link = `../programs/gensel.aspx?cscript=createLink&u_avenca=` + u_avenca + `&fistamp=` + fistamp + `&u_linha=` + u_linha;
+		$.ajax({
+			type: "GET",
+			url: link,
+			data: JSON.stringify({}),
+			async: false,
+			cache: false,
+			contentType: 'application/json',
+			success: function (response) {
+				alert("Link criado com sucesso!")
+			},
+			error: function (response) {
+				alert("Erro a criar o link");
+			}
+		})
+	}
+
+	function updateHistoricoAvenca(obrano, stamp) {
+		document.getElementById("modalHistoricoAvenca").style.display = "block";
+		var params = {};
+		var link = `../programs/gensel.aspx?cscript=crudFaturas&obrano=` + obrano + `&stamp=` + stamp
+		$.ajax({
+			type: "GET",
+			url: link,
+			data: JSON.stringify({}),
+			async: false,
+			cache: false,
+			contentType: 'application/json',
+			success: function (response) {
+				//gestorAlertas("", "Avença atualizada com sucesso!")
+				alert("Avença atualizada com sucesso!")
+				fechaboxHistoricoAvenca()
+				getDadosEncomendas()
+				getDadosAvencas()
+				getDadosPats()
+				var nome = document.getElementById("label-tituloDetalhesAvenca").textContent.slice(11, document.getElementById("label-tituloDetalhesAvenca").textContent.length)
+				abrirModalDetalhesAvenca(obrano, nome)
+			},
+			error: function (response) {
+				alert("Erro a atualizar avença!");
+			}
+		})
+	}
+
+	function abrirModalDetalhesAvencaTexto(obrano) {
+		document.getElementById("modalDetalhesAvencaTexto").style.display = "block";
+
+		var params = {};
+		var myQuery = `select u_texto, nome
+			from bi
+			where ndos=33 and obrano = ` + obrano;
+		params.id = "SELECTtoJSON";
+		params.select = myQuery;
+		$.ajax({
+			type: "POST",
+			url: "../api/code/run",
+			async: false,
+			data: JSON.stringify(params),
+			contentType: "application/json",
+		}).done(function (result, textStatus, jqXHR) {
+			var string = result.replace(/\n/g, "\\n").replace(/\r/g, "\\r").replace(/\t/g, "\\t")
+			try {
+				var resposta = JSON.parse(string);
+			} catch {
+				resposta = JSON.parse("{\"Dados\":[]}");
+			}
+			var DadosJSON = resposta.Dados;
+			var escolhas = "";
+			escolhas += "<tr>";
+			if ($.trim(DadosJSON[0].u_texto) != "") {
+				escolhas += '<td style="font-size:16px;padding:8px;text-align:left;white-space: pre-wrap;">' + $.trim(DadosJSON[0].u_texto); + "</td>";
+			} else {
+				escolhas += '<td style="font-size:16px;padding:8px;text-align:left;white-space: pre-wrap;">Sem Comentários</td>';
+			}
+			escolhas += "</tr>"
+			document.getElementById("tableBodyDetalhesAvencaTexto").innerHTML = escolhas;
+			document.getElementById("label-tituloDetalhesAvencaTexto").textContent = "Comentários da Empresa " + $.trim(DadosJSON[0].nome) + " nº " + obrano;
+		}).error(function (response) {
+			alert("Erro a encontrar DadosJSON por favor tente de novo!");
+		});
+	}
+
+	function fechaboxLink() {
+		document.getElementById("modalLink").style.display = "none";
+
+	}
+
+	function fechaboxImportarAssinaturas() {
+		document.getElementById("modalImportarAssinaturas").style.display = "none";
+	}
+
+	function fechaboxDetalhesAvenca() {
+		document.getElementById("modalDetalhesAvenca").style.display = "none";
+	}
+
+	function fechaboxHistoricoAvenca() {
+		document.getElementById("modalHistoricoAvenca").style.display = "none";
+	}
+
+	function fechaboxDetalhesAvencaTexto() {
+		document.getElementById("modalDetalhesAvencaTexto").style.display = "none";
+	}
+
+	function fechaboxDetalhesEnc() {
+		document.getElementById("modalDetalhesEnc").style.display = "none";
+	}
+
+	function fechaboxDetalhesAssinatura() {
+		document.getElementById("modalDetalhesAssinatura").style.display = "none";
+	}
+</script>

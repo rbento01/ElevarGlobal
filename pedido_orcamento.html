@@ -1,0 +1,2157 @@
+<link href="https://cdn.jsdelivr.net/npm/tom-select@2.2.2/dist/css/tom-select.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/tom-select@2.2.2/dist/js/tom-select.complete.min.js"></script>
+<style type="text/css">
+	#main-container {
+		padding-top: 10px;
+	}
+
+	.inline {
+		display: inline;
+	}
+
+	.show {
+		display: block;
+	}
+
+	.hide {
+		display: none;
+	}
+
+	table {
+		font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+			Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
+			sans-serif;
+		border-collapse: collapse;
+		width: 100%;
+	}
+
+	thead tr th {
+		background-color: #fafafa;
+	}
+
+	thead tr th:first-child {
+		border-left: 1px solid #dddddd;
+	}
+
+	thead tr th:last-child {
+		border-right: 1px solid #dddddd;
+	}
+
+	thead tr:first-child th {
+		border-top: 1px solid #dddddd;
+		padding-top: 8px;
+		cursor: pointer;
+	}
+
+	thead tr:first-child th div {
+		display: flex;
+		flex-wrap: nowrap;
+		justify-content: space-between;
+	}
+
+	thead tr:last-child th {
+		border-bottom: 1px solid #dddddd;
+	}
+
+	thead tr,
+	thead th {
+		text-align: left;
+		padding-left: 8px;
+		padding-right: 8px;
+		color: #757575;
+		font-weight: normal;
+	}
+
+	tbody tr,
+	tbody td {
+		text-align: left;
+		font-weight: normal;
+
+		border: 1px solid #dddddd;
+	}
+
+	tbody tr:hover {
+		background-color: #cfd8dc55;
+	}
+
+	.column-filter,
+	.column-vars-filter {
+		/* width: 100%;
+	background-color: #fafafa;
+	border: 0px solid #cccccc;
+	border-bottom: 1px solid #cccccc;
+	margin-bottom: 12px;
+	font-weight: normal;
+	padding: 5px;
+	color: #999999; */
+		width: 100%;
+		height: 5rem;
+		border-radius: 10px;
+		box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+		border: none;
+		outline-color: #4086d1
+	}
+
+	.column-filter:focus,
+	.column-filter-date:focus,
+	.column-vars-filter:focus,
+	.column-vars-filter-date:focus {
+		outline: none;
+	}
+
+	.column-filterNegocios,
+	.column-vars-filterNegocios {
+		/* width: 100%;
+	background-color: #fafafa;
+	border: 0px solid #cccccc;
+	border-bottom: 1px solid #cccccc;
+	margin-bottom: 12px;
+	font-weight: normal;
+	padding: 5px;
+	color: #999999; */
+		width: 100%;
+		height: 5rem;
+		border-radius: 10px;
+		box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+		border: none;
+		outline-color: #4086d1
+	}
+
+	.column-filterNegocios:focus,
+	.column-filter-dateNegocios:focus,
+	.column-vars-filterNegocios:focus,
+	.column-vars-filter-dateNegocios:focus {
+		outline: none;
+	}
+
+	.column-filterPendentes,
+	.column-vars-filterPendentes {
+		/* width: 100%;
+	background-color: #fafafa;
+	border: 0px solid #cccccc;
+	border-bottom: 1px solid #cccccc;
+	margin-bottom: 12px;
+	font-weight: normal;
+	padding: 5px;
+	color: #999999; */
+		width: 100%;
+		height: 5rem;
+		border-radius: 10px;
+		box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+		border: none;
+		outline-color: #4086d1
+	}
+
+	.column-filterPendentes:focus,
+	.column-filter-datePendentes:focus,
+	.column-vars-filterPendentes:focus,
+	.column-vars-filter-datePendentes:focus {
+		outline: none;
+	}
+
+	.input-date {
+		/* width: 100%;
+	position: relative;
+	background-color: #fafafa;
+	border: 0px solid #cccccc;
+	border-bottom: 1px solid #cccccc;
+	margin-bottom: 12px;
+	font-weight: normal;
+	padding: 5px;
+	color: #999999; */
+		width: 100%;
+		height: 5rem;
+		border-radius: 10px;
+		box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+		border: none;
+		outline-color: #4086d1
+	}
+
+	.input {
+		width: 100%;
+		height: 5rem;
+		border-radius: 10px;
+		box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+		border: none;
+		outline-color: #4086d1
+	}
+
+	.column-filter-date {
+		/* background-color: #fafafa;
+	border: 0px solid #cccccc;
+	color: #999999;
+	padding: 0px; */
+		width: 100%;
+		height: 5rem;
+		border-radius: 10px;
+		box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+		border: none;
+		outline-color: #4086d1
+	}
+
+	.btn-no-background {
+		background-color: transparent;
+		color: #999999;
+		background-repeat: no-repeat;
+		border: none;
+		cursor: pointer;
+		overflow: hidden;
+		outline: none;
+		position: absolute;
+		right: 0;
+	}
+
+	.btn-no-background:hover {
+		color: #757575;
+	}
+
+	.dropdown-datafilter-content {
+		display: none;
+		position: absolute;
+		right: 0;
+		background-color: #ffffff;
+		box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.5);
+		z-index: 1;
+		padding: 15px;
+	}
+
+	.input-daterange {
+		display: flex;
+		flex-wrap: nowrap;
+		justify-content: space-between;
+	}
+
+	.dropdown-datafilter-content span {
+		background-color: transparent;
+		border: none;
+	}
+
+	.input-daterange label {
+		font-size: 12px;
+		color: #808080;
+	}
+
+	.input-daterange input {
+		font-size: 12px;
+		font-weight: 500;
+		border: 1px solid #a7b1c288;
+		color: #808080;
+		border-radius: 5px;
+		max-width: 115px;
+	}
+
+	.datefilters-buttongroup button {
+		display: block;
+		width: 100%;
+		border-radius: 5px;
+		background-color: none;
+		border: 1px solid #a7b1c288;
+		font-weight: 500;
+		padding: 5px;
+		color: #808080;
+		align-self: center;
+		margin-top: 10px;
+	}
+
+	.datefilters-buttongroup>div {
+		width: 100%;
+		display: flex;
+	}
+
+	.datefilters-buttongroup>div>button {
+		display: inline;
+	}
+
+	::placeholder {
+		/* Chrome, Firefox, Opera, Safari 10.1+ */
+		color: #cccccc;
+		opacity: 1;
+		/* Firefox */
+	}
+
+	:-ms-input-placeholder {
+		/* Internet Explorer 10-11 */
+		color: #cccccc;
+	}
+
+	::-ms-input-placeholder {
+		/* Microsoft Edge */
+		color: #cccccc;
+	}
+
+	.modal-input-container {
+		display: none;
+		position: fixed;
+		z-index: 1;
+		padding-top: 100px;
+		left: 0;
+		top: 0;
+		width: 100%;
+		height: 100%;
+		overflow: auto;
+		overflow-y: initial;
+		background-color: rgb(0, 0, 0);
+		background-color: rgba(0, 0, 0, 0.6);
+	}
+
+	.modal-content {
+		background-color: #fefefe;
+		margin: auto;
+		padding: 20px;
+		border: 1px solid #888;
+		width: 40%;
+		overflow-y: auto;
+	}
+
+	.btn_verde {
+		background: #47cf73;
+		border: 1px solid #47cf73;
+		border-radius: 6px;
+		box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
+		box-sizing: border-box;
+		color: #ffffff;
+		cursor: pointer;
+		display: inline-block;
+		font-family: nunito, roboto, proxima-nova, "proxima nova", sans-serif;
+		font-size: 16px;
+		font-weight: 800;
+		line-height: 16px;
+		min-height: 40px;
+		outline: 0;
+		padding: 12px 14px;
+		text-align: center;
+		text-rendering: geometricprecision;
+		text-transform: none;
+		user-select: none;
+		-webkit-user-select: none;
+		touch-action: manipulation;
+		vertical-align: middle;
+	}
+
+	.btn_verde:hover {
+		background-color: initial;
+		background-position: 0 0;
+		color: #47cf73;
+	}
+
+	.btn_azul {
+		background: #506ce8;
+		border: 1px solid #506ce8;
+		border-radius: 6px;
+		box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
+		box-sizing: border-box;
+		color: #ffffff;
+		cursor: pointer;
+		display: inline-block;
+		font-family: nunito, roboto, proxima-nova, "proxima nova", sans-serif;
+		font-size: 16px;
+		font-weight: 800;
+		line-height: 16px;
+		min-height: 40px;
+		outline: 0;
+		padding: 12px 14px;
+		text-align: center;
+		text-rendering: geometricprecision;
+		text-transform: none;
+		user-select: none;
+		-webkit-user-select: none;
+		touch-action: manipulation;
+		vertical-align: middle;
+	}
+
+	.btn_azul1 {
+		background: #506ce8;
+		border: 1px solid #506ce8;
+		border-radius: 6px;
+		box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
+		box-sizing: border-box;
+		color: #ffffff;
+		cursor: pointer;
+		display: inline-block;
+		font-family: nunito, roboto, proxima-nova, "proxima nova", sans-serif;
+		font-size: 16px;
+		font-weight: 800;
+		line-height: 16px;
+		min-height: 40px;
+		outline: 0;
+		padding: 12px 14px;
+		text-align: center;
+		text-rendering: geometricprecision;
+		text-transform: none;
+		user-select: none;
+		-webkit-user-select: none;
+		touch-action: manipulation;
+		vertical-align: middle;
+	}
+
+	.btn_azul:hover {
+		background-color: initial;
+		background-position: 0 0;
+		color: #506ce8;
+	}
+
+	.btn_vermelho {
+
+		background: #ff3c41;
+		border: 1px solid #ff3c41;
+		border-radius: 6px;
+		box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
+		box-sizing: border-box;
+		color: #FFFFFF;
+		cursor: pointer;
+		display: inline-block;
+		font-family: nunito, roboto, proxima-nova, "proxima nova", sans-serif;
+		font-size: 16px;
+		font-weight: 800;
+		line-height: 16px;
+		min-height: 40px;
+		outline: 0;
+		padding: 12px 14px;
+		text-align: center;
+		text-rendering: geometricprecision;
+		text-transform: none;
+		user-select: none;
+		-webkit-user-select: none;
+		touch-action: manipulation;
+		vertical-align: middle;
+
+
+	}
+
+	.btn_vermelho:hover {
+		background-color: initial;
+		background-position: 0 0;
+		color: #ff3c41;
+
+	}
+
+	.btn_azulesc {
+		background: #1e2d84;
+		border: 1px solid #1e2d84;
+		border-radius: 6px;
+		box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
+		box-sizing: border-box;
+		color: #ffffff;
+		cursor: pointer;
+		display: inline-block;
+		font-family: nunito, roboto, proxima-nova, "proxima nova", sans-serif;
+		font-size: 16px;
+		font-weight: 800;
+		line-height: 16px;
+		min-height: 40px;
+		outline: 0;
+		padding: 12px 14px;
+		text-align: center;
+		text-rendering: geometricprecision;
+		text-transform: none;
+		user-select: none;
+		-webkit-user-select: none;
+		touch-action: manipulation;
+		vertical-align: middle;
+	}
+
+	.btn_azulesc:hover {
+		background-color: initial;
+		background-position: 0 0;
+		color: #1e2d84;
+	}
+
+	tfoot tr td {
+		background-color: #fafafa;
+		border: 1px solid #dddddd;
+		padding: 5px;
+		text-align: right;
+	}
+
+	#footer-span,
+	#footer-span * {
+		font-size: 14px;
+		font-weight: normal !important;
+	}
+
+	#footer-span>* {
+		margin-left: 10px;
+		text-align: center;
+	}
+
+	#footer-span input[type="number"] {
+		width: 35px;
+		border: 1px solid #dddddd;
+		text-align: center;
+	}
+
+	input::-webkit-outer-spin-button,
+	input::-webkit-inner-spin-button {
+		-webkit-appearance: none;
+		margin: 0;
+	}
+
+	/* Firefox */
+	input[type="number"] {
+		-moz-appearance: textfield;
+		appearance: textfield;
+	}
+
+	#toolbar-right {
+		display: flex;
+		justify-content: flex-end;
+		padding-bottom: 20px;
+	}
+
+	#toolbar-right button {
+		border-radius: 5px;
+		font-weight: 500;
+		padding-top: 10px;
+		padding-bottom: 10px;
+	}
+
+	.modal-content1 {
+		height: 23rem;
+		background-color: #fefefe;
+		margin: auto;
+		padding: 20px;
+		border: 1px solid #888;
+		width: 50%;
+		overflow-y: auto;
+		border-radius: 10px;
+	}
+
+	.botoes {
+		display: flex;
+		justify-content: end;
+	}
+
+	.horas_botoes {
+		display: flex;
+		justify-content: space-between;
+	}
+
+	b {
+		color: #1e2d84;
+	}
+
+	select {
+		width: 100%;
+		height: 5rem;
+		border-radius: 8px;
+		box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+		border: none;
+		outline-color: #4086d1;
+		margin-bottom: 1rem;
+	}
+
+	.datas {
+		display: flex;
+		justify-content: space-around;
+	}
+
+	.data_final {
+		display: flex;
+		flex-direction: column;
+	}
+
+	.x {
+		font-size: 14px;
+		padding: 4px;
+	}
+
+	.chk {
+		margin-top: 2rem;
+	}
+
+	.footer {
+		display: flex;
+		align-items: center;
+		justify-content: flex-end;
+	}
+
+	.close {
+		cursor: pointer;
+	}
+
+	/* Style the tab */
+	.tab {
+		border-radius: 8px;
+		overflow: hidden;
+		border: 1px solid #ccc;
+		background-color: #f1f1f1;
+	}
+
+	/* Style the buttons inside the tab */
+	.tab button {
+		background-color: inherit;
+		float: left;
+		border: none;
+		outline: none;
+		cursor: pointer;
+		padding: 14px 16px;
+		transition: 0.3s;
+		font-size: 17px;
+	}
+
+	/* Change background color of buttons on hover */
+	.tab button:hover {
+		background-color: #ddd;
+	}
+
+	/* Create an active/current tablink class */
+	.tab button.active {
+		background-color: #ccc;
+	}
+
+	/* Style the tab content */
+	.tabcontent {
+		display: none;
+		border-radius: 8px;
+		padding: 6px 12px;
+		border: 1px solid #ccc;
+		border-top: none;
+	}
+
+	#container,
+	#button-container {
+		margin: 1em auto;
+	}
+
+	/* .choices__input.choices__input--cloned{
+width: 100%!important;
+} */
+	#ts-control {
+		font-size: 18px !important;
+	}
+
+	#ts-dropdown.single {
+		font-size: 18px !important;
+	}
+
+	.ts-control {
+		border: none;
+	}
+
+
+	.ts-dropdown,
+	.ts-control,
+	.ts-control input {
+		font-size: 16px;
+	}
+</style>
+<div>
+	<h1 style="text-align: center; font-weight: bold; margin-bottom: 3rem;">Pedidos de Or&ccedil;amentos</h1>
+
+	<div id="Negocios">
+		<div style="margin-bottom: 2rem;margin-top: 1rem;"><button class="btn_verde" onclick="openModalCriarNegocio()"
+				type="button">&nbsp;Criar Neg&oacute;cio</button></div>
+
+		<div style="margin-bottom: 2rem;margin-top: 1rem;"><button class="btn_verde" onclick="openModalResumo()"
+				type="button">&nbsp;Abrir Resumo</button></div>
+
+		<div id="grid-container" style="display: block;
+		overflow-x: auto;">
+			<table class="table table-striped" data-currentpage="1" data-ordercolumn="dataaber" data-ordertype="desc"
+				data-pagesize="50" data-totalpages="1" data-totalrecords="50" id="DataGridNegocios"
+				style="width: 100%;">
+				<thead>
+					<tr id="tableHeaderNegocios">
+						<th data-column="ng.codigo" data-order="desc" scope="col" style="font-size: 16px;">
+							<b>Neg&oacute;cio</b><span></span></th>
+						<th data-column="ng.vendedor" data-order="desc" scope="col" style="font-size: 16px;">
+							<b>Vendedor</b><span></span></th>
+						<th data-column="ng.usrdata" data-order="desc" scope="col" style="font-size: 16px;"><b>Data de
+								cria&ccedil;&atilde;o</b><span></span></th>
+						<th data-column="ng.contacto" data-order="desc" scope="col" style="font-size: 16px;">
+							<b>Empresa</b><span></span></th>
+						<th data-column="(SELECT TOP 1 [zona] FROM [vi] WHERE [ngstamp] = ng.[ngstamp] ORDER BY [data] DESC)"
+							data-order="desc" scope="col" style="font-size: 16px; width: 110px; text-align: center;">
+							<b>Zona</b><span></span></th>
+						<th data-column="e.u_respcl" data-order="desc" scope="col" style="font-size: 16px;">
+							<b>Contacto</b><span></span></th>
+						<th data-column="e.u_respcltl" data-order="desc" scope="col"
+							style="font-size: 16px; width: 160px;"><b>Telefone</b><span></span></th>
+						<th data-column="e.u_respclem" data-order="desc" scope="col" style="font-size: 16px;">
+							<b>E-Mail</b><span></span></th>
+						<th data-column="ng.resumo" data-order="desc" scope="col" style="font-size: 16px;">
+							<b>Resumo</b><span></span></th>
+						<th data-column="(SELECT TOP 1 [NGSTATUS] FROM [vi] WHERE [ngstamp] = ng.[ngstamp] ORDER BY [data] DESC)"
+							data-order="desc" scope="col" style="font-size: 16px;"><b>&Uacute;ltimo
+								Status</b><span></span></th>
+						<th data-column="(SELECT TOP 1 [data] FROM [vi] WHERE [ngstamp] = ng.[ngstamp] ORDER BY [data] DESC)"
+							data-order="desc" scope="col" style="font-size: 16px;"><b>&Uacute;ltima
+								Data</b><span></span></th>
+						<th>&nbsp;</th>
+						<th>&nbsp;</th>
+						<th>&nbsp;</th>
+						<th>&nbsp;</th>
+					</tr>
+					<tr id="filtrosNegocios" onkeypress="handleEnterKey(event)">
+						<th><input class="column-filterNegocios" oninput="checkCharsNegocios(this)"
+								placeholder="Filtrar..." type="text" /></th>
+						<th><input class="column-filterNegocios" oninput="checkCharsNegocios(this)"
+								placeholder="Filtrar..." type="text" /></th>
+						<th><input class="column-filterNegocios" oninput="checkCharsNegocios(this)"
+								placeholder="Filtrar..." type="text" /></th>
+						<th><input class="column-filterNegocios" oninput="checkCharsNegocios(this)"
+								placeholder="Filtrar..." type="text" /></th>
+						<th><input class="column-filterNegocios" oninput="checkCharsNegocios(this)"
+								placeholder="Filtrar..." type="text" /></th>
+						<th><input class="column-filterNegocios" oninput="checkCharsNegocios(this)"
+								placeholder="Filtrar..." type="text" /></th>
+						<th><input class="column-filterNegocios" oninput="checkCharsNegocios(this)"
+								placeholder="Filtrar..." type="text" /></th>
+						<th><input class="column-filterNegocios" oninput="checkCharsNegocios(this)"
+								placeholder="Filtrar..." type="text" /></th>
+						<th><input class="column-filterNegocios" oninput="checkCharsNegocios(this)"
+								placeholder="Filtrar..." type="text" /></th>
+						<th>&nbsp;</th>
+						<th>&nbsp;</th>
+						<th>&nbsp;</th>
+						<th>&nbsp;</th>
+						<th>&nbsp;</th>
+						<th>&nbsp;</th>
+					</tr>
+				</thead>
+				<tbody id="tableBodyNegocios">
+				</tbody>
+				<tfoot>
+					<tr>
+						<td colspan="100">
+							<div class="footer" onkeypress="handleEnterKey(event)" style="margin-top: 1rem;"><span
+									id="footer-span"><span><span><input id="pageSizeNegocios"
+												onchange="changePageSizeNegocios()" type="number" value="50" /> </span>
+										por p&aacute;gina </span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button
+										class="btn_azulesc" onclick="pageGoToNegocios('first')" type="button"><i
+											aria-hidden="true" class="fa fa-step-backward  fa-2xl"></i></button><button
+										class="btn_verde" onclick="pageGoToNegocios('previous')" type="button"><i
+											aria-hidden="true" class="fa fa-chevron-left"></i></button> <span> <span
+											id="currentPageNegocios">1</span> de <span id="totalPagesNegocios">1</span>
+										p&aacute;ginas </span><button class="btn_verde"
+										onclick="pageGoToNegocios('next')" type="button"><i aria-hidden="true"
+											class="fa fa-chevron-right"></i></button><button class="btn_azulesc"
+										onclick="pageGoToNegocios('last')" type="button"><i aria-hidden="true"
+											class="fa fa-step-forward fa-2xl"></i></button> </span></div>
+						</td>
+					</tr>
+				</tfoot>
+			</table>
+		</div>
+	</div>
+</div>
+
+<div class="modal-input-container" id="modal-AddNegocio">
+	<div class="modal-content"><span class="close" id="close" onclick="fechaboxNegocios()">&times;</span>
+
+		<div style="margin: 2rem;">
+			<p style="margin-bottom: 1rem; margin-top: 1rem; font-size: 25px; color: #1e2d84; font-weight: bold;"><label
+					id="label-titulo">Criar Neg&oacute;cio</label></p>
+
+			<div style="display:flex; flex-direction: column;"><label>Vendedor</label>
+
+				<div id="selectVendedor">&nbsp;</div>
+			</div>
+
+			<div style="display:flex; flex-direction: column;"><label>Data de Cria&ccedil;&atilde;o</label> <input
+					class="input" id="dataCriacaoNegocio" style="margin-bottom: 1.5rem;" type="date" /></div>
+
+			<div style="display:flex; flex-direction: column;"><label>Empresa</label>
+
+				<div id="selectEmpresa">&nbsp;</div>
+			</div>
+
+			<div style="display:flex; flex-direction: column;"><label>Zona</label>
+
+				<div id="selectZona">&nbsp;</div>
+			</div>
+
+			<div style="display:flex; flex-direction: column;"><label>Contacto</label> <input class="input"
+					id="contactoNegocio" style="margin-bottom: 1.5rem;" type="text" /></div>
+
+			<div style="display:flex; flex-direction: column;"><label>Telefone</label> <input class="input"
+					id="telefoneNegocio" style="margin-bottom: 1.5rem;" type="text" /></div>
+
+			<div style="display:flex; flex-direction: column;"><label>E-Mail</label> <input class="input"
+					id="emailNegocio" style="margin-bottom: 1.5rem;" type="text" /></div>
+
+			<div style="display:flex; flex-direction: column;"><label>Resumo</label> <input class="input"
+					id="resumoNegocio" style="margin-bottom: 1.5rem;" type="text" /></div>
+			<br />
+			<button class="btn_azul" id="buttonAlterarMovimEqp" onclick="insereNegocio()"
+				style="margin-left: auto; text-align: center; float: right; margin-bottom: 1rem;" type="button"
+				value="">&nbsp;Gravar</button>
+		</div>
+	</div>
+</div>
+
+<div class="modal-input-container" id="modal-AddVisitas">
+	<div class="modal-content"><span class="close" id="close" onclick="fechaboxVisitas()">&times;</span>
+
+		<h1>Adicionar Visita</h1>
+
+		<form id="Form">
+			<div style="margin: 1rem;">
+				<div style="display: flex;align-items: center;justify-content: space-between; margin-bottom: 1rem;">
+					<div style="display:flex;flex-direction: column;margin-bottom: 1rem;"><label>Status</label> <select
+							class="input" id="statusVisita">
+							<option value="Por Enviar">Por Enviar</option>
+							<option value="Enviado">Enviado</option>
+							<option value="Contactar">Contactar</option>
+							<option value="Contactado">Contactado</option>
+							<option value="Aguardar">Aguardar</option>
+							<option value="Adjudicado">Adjudicado</option>
+							<option value="Fechado">Fechado</option>
+						</select></div>
+
+					<div style="display:flex;flex-direction: column;"><label>Data:</label> <input class="input"
+							id="inp_data" placeholder="Data" type="date" /></div>
+				</div>
+
+				<div style="display:flex;flex-direction: column;margin-bottom: 1rem;">
+					<label>Relat&oacute;rio</label><textarea class="input" id="relatorioVisita"></textarea>
+				</div>
+				<button class="btn_azul" onclick="insereVisita()"
+					style="margin-left: auto; text-align: center; float: right; margin-bottom: 1rem;" type="button"
+					value="">Adicionar</button>
+			</div>
+			<label id="ngstampVisitas" style="display: none;"></label> <label id="ngcodigo"
+				style="display: none;"></label>
+		</form>
+	</div>
+</div>
+
+<div class="modal-input-container" id="modal-detalhesStatusNg">
+	<div class="modal-content" style="width: 500px;"><span class="close" id="close"
+			onclick="fechaboxStatusNg()">&times;</span>
+
+		<h1>Datas dos estados</h1>
+
+		<div id="grid-container" style="display: block; overflow-x: auto;">
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th scope="col" style="font-size: 16px;"><b>Status</b></th>
+						<th scope="col" style="font-size: 16px;"><b>Data de Altera&ccedil;&atilde;o</b></th>
+						<th scope="col" style="font-size: 16px;"><b>Relat&oacute;rio</b></th>
+					</tr>
+				</thead>
+				<tbody id="tableBodyDetalhesStatus">
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+
+<div class="modal-input-container" id="modal-detalhesResumoNg">
+	<div class="modal-content" style="width: 500px;"><span class="close" id="close"
+			onclick="fechaboxResumoNg()">&times;</span>
+
+		<h1 style="text-align: center;">Resumo do neg&oacute;cio</h1>
+
+		<div><textarea class="input" disabled="disabled" id="resumoNegocioDetalhes"
+				style="height: fit-content;"></textarea></div>
+	</div>
+</div>
+
+<div class="modal-input-container" id="modal-editNegocio">
+	<div class="modal-content" style="width: 500px; height: 730px;"><span class="close" id="close"
+			onclick="fechaboxVendedorEditNg()">&times;</span>
+
+		<h1>Editar Vendedor</h1>
+		<label id="ngstampVendedor" style="display: none;"></label>
+
+		<div style="display:flex; flex-direction: column;"><label>Vendedor</label>
+
+			<div id="selectEditVendedor">&nbsp;</div>
+		</div>
+
+		<div style="display:flex; flex-direction: column;"><label>Empresa</label>
+
+			<div id="selectEditEmpresa">&nbsp;</div>
+		</div>
+
+		<div style="display:flex; flex-direction: column;"><label>Zona</label>
+
+			<div id="selectEditZona">&nbsp;</div>
+		</div>
+
+		<div style="display:flex; flex-direction: column;"><label>Contacto</label> <input class="input"
+				id="editContacto" type="text" /> <label>Telefone</label> <input class="input" id="editTelefone"
+				type="text" /> <label>E-Mail</label> <input class="input" id="editEmail" type="text" />
+			<label>Resumo</label><textarea class="input" id="editResumo" type="text"></textarea>
+		</div>
+		<button class="btn_azul" onclick="editNegocio()"
+			style="margin-left: auto; text-align: center; float: right; margin-bottom: 1rem; margin-top: 10px;"
+			type="button" value="">Editar</button>
+	</div>
+</div>
+
+<div class="modal-input-container" id="modal-ResumoDados">
+	<div class="modal-content" style="width: 750px; height: 600px;"><span class="close" id="close"
+			onclick="fechaBoxResumoDados()">&times;</span>
+
+		<h1>Resumo de Dados</h1>
+
+		<div id="grid-container" style="display: block; overflow-x: auto;">
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th colspan="4" style="font-size: 16px;text-align:center;"><b>Comerciais</b></th>
+					</tr>
+				</thead>
+				<tbody id="tableBodyResumoComerciais">
+				</tbody>
+			</table>
+		</div>
+		&nbsp;
+
+		<div id="grid-container" style="display: block; overflow-x: auto;">
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th colspan="3" style="font-size: 16px;text-align:center;"><b>Zonas</b></th>
+					</tr>
+				</thead>
+				<tbody id="tableBodyResumoZonas">
+				</tbody>
+			</table>
+		</div>
+		&nbsp;
+
+		<div id="grid-container" style="display: block; overflow-x: auto;">
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th colspan="7" style="font-size: 16px; text-align:center;"><b>Estados</b></th>
+					</tr>
+				</thead>
+				<tbody id="tableBodyResumoEstados">
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+	//limpa cache
+	if (!location.hash) {
+		location.hash = "#reloading";
+		location.reload(true);
+	} else {
+		location.hash = "#reloaded";
+	}
+	var buscarNegocios = 0;
+	window.onload = function onLoadFunction() {
+		$(".headerZone").hide();
+		$(".dropdown-toggle btn btn-default btn-sm").hide();
+		$("#OptionsRecordDropDown").hide();
+		$(".navbar").hide();
+		caches.keys().then((list) => list.map((key) => caches.delete(key)));
+		getNegocios();
+	};
+
+
+
+	//Add event listener for the filter inputs
+	document.addEventListener("DOMContentLoaded", function () {
+		var filterInputsNegocios = document.getElementsByClassName("column-filterNegocios");
+		for (var i = 0; i < filterInputsNegocios.length; i++) {
+			filterInputsNegocios[i].addEventListener("change", filterTableNegocios);
+		}
+		var filterInputsVarsNegocios = document.getElementsByClassName("column-vars-filterNegocios");
+		for (var i = 0; i < filterInputsVarsNegocios.length; i++) {
+			filterInputsVarsNegocios[i].addEventListener("change", filterTableNegocios);
+		}
+	});
+
+	//Order the table
+	let tableHeaderNegocios = document.getElementById("tableHeaderNegocios");
+	let headersNegocios = tableHeaderNegocios.getElementsByTagName("th");
+	for (let i = 0; i < headersNegocios.length; i++) {
+		headersNegocios[i].addEventListener("click", function () {
+			var column = $(this).data("column");
+			var order = $(this).data("order");
+			let dataGrid = document.getElementById("DataGridNegocios");
+
+			if (order == "desc") {
+				$(this).data("order", "asc");
+				dataGrid.dataset.ordercolumn = column;
+				dataGrid.dataset.ordertype = "ASC";
+			} else {
+				$(this).data("order", "desc");
+				dataGrid.dataset.ordercolumn = column;
+				dataGrid.dataset.ordertype = "DESC";
+			}
+			// neste for está o -1 porque o último th da tabela é apenas um spacer, e ele atrofiava porque não tinha valores
+			// caso se adicionar novas colunas mudar isto (-1 no for) accordingly
+			for (let j = 0; j < headersNegocios.length - 1; j++) {
+				if (headersNegocios[j].getElementsByTagName("span")[0] != undefined) {
+					headersNegocios[j].getElementsByTagName("span")[0].innerHTML = "";
+				}
+			}
+			this.getElementsByTagName("span")[0].innerHTML = order == "desc" ? "&#9650" : "&#9660";
+			getNegocios();
+		});
+	}
+
+	getNegocios();
+
+	function checkCharsNegocios(element) {
+		const filterValue = element.value;
+		if (filterValue.length >= 3) {
+			getNegocios();
+		}
+		if (filterValue == "") {
+			getNegocios();
+		}
+	}
+
+	function insereVisita() {
+		let data = document.getElementById("inp_data").value;
+		let relatorio = document.getElementById("relatorioVisita").value;
+		let status = document.getElementById("statusVisita").value;
+		let ngstamp = document.getElementById("ngstampVisitas").innerHTML;
+		let ngcodigo = document.getElementById("ngcodigo").innerHTML;
+		let nome = "";
+		let vendnm = "";
+		let no = "";
+		let zona = "";
+		let vendedor = "";
+		let rel = "";
+		let params = {};
+		let varMyQuery = `SELECT * FROM [vi] WHERE [ngstamp] = '` + ngstamp + `'`;
+		params.id = "xmltoquery";
+		params.select = varMyQuery;
+		$.ajax({
+			type: "POST",
+			url: "../api/code/run",
+			async: false,
+			data: JSON.stringify(params),
+			contentType: "application/json",
+		}).done(function (result, textStatus, jqXHR) {
+			try {
+				//console.log(result);
+				resposta = JSON.parse(result);
+			} catch {
+				resposta = JSON.parse('{"Dados":[]}');
+			}
+			if (resposta.Dados.length > 0) {
+				nome = resposta.Dados[0].nome;
+				vendnm = resposta.Dados[0].vendnm;
+				no = resposta.Dados[0].no;
+				zona = resposta.Dados[0].zona;
+				vendedor = resposta.Dados[0].vendedor;
+				rel = resposta.Dados[0].rel;
+			}
+		});
+		let lInsert = `INSERT INTO [dbo].[vi]
+                                    (
+                                        [data],
+                                        [resumo],
+                                        [NGSTATUS],
+                                        [ngstamp],
+                                        [negocio],
+                                        [vistamp],
+                                        [nome],
+                                        [vendnm],
+                                        [no],
+                                        [zona],
+                                        [vendedor],
+                                        [rel],
+                                        [hora]
+                                    )
+                                VALUES
+                                    (
+                                        '` + data + `',
+                                        '` + rel + `',
+                                        '` + status + `',
+                                        '` + ngstamp + `',
+                                        '` + ngcodigo + `',
+                                        left(newid(), 25),
+                                        '` + nome + `',
+                                        '` + vendnm + `',
+                                        '` + no + `',
+                                        '` + zona + `',
+                                        '` + vendedor + `',
+                                        '` + rel + `',
+                                        FORMAT(GETDATE(), 'HH:mm')
+                                    )`;
+		//insert the information on the table vi
+		params = {};
+		$.ajax({
+			type: "GET",
+			url:
+				"../programs/gensel.aspx?cscript=insereVisitas&data=" + data +
+				"&rel=" + relatorio +
+				"&status=" + status +
+				"&ngstamp=" + ngstamp +
+				"&negocio=" + ngcodigo +
+				"&nome=" + nome +
+				"&vendnm=" + vendnm +
+				"&no=" + no +
+				"&zona=" + zona +
+				"&vendedor=" + vendedor +
+				"&relNg=" + rel,
+			data: JSON.stringify(params),
+			async: false,
+			contentType: "application/json",
+			success: function (response) {
+				fechaboxVisitas();
+				getNegocios();
+				document.getElementById("relatorioVisita").value = "";
+			},
+			error: function (response) {
+				alert("Erro a inserir por favor tente de novo!");
+			},
+		});
+
+	}
+
+	function getNegocios() {
+		const dataGrid = document.getElementById("DataGridNegocios");
+		const columnFilter = document.getElementsByClassName("column-filterNegocios");
+		const numberColumns = document.getElementById("DataGridNegocios").rows[0].cells.length;
+		const codigoFilter = columnFilter[0].value;
+		const vendedorFilter = columnFilter[1].value;
+		const usrdataFilter = columnFilter[2].value;
+		const contactoFilter = columnFilter[3].value;
+		const u_respclFilter = columnFilter[4].value;
+		const u_respcltlFilter = columnFilter[5].value;
+		const u_respclemFilter = columnFilter[6].value;
+		const resumoFilter = columnFilter[7].value;
+		const zonaFilter = columnFilter[8].value;
+
+
+		//Get order
+		const orderColumn = dataGrid.dataset.ordercolumn;
+		const orderType = dataGrid.dataset.ordertype;
+		//Get Grid Attributes
+		const currentPage = dataGrid.dataset.currentpage;
+		const pageSize = dataGrid.dataset.pagesize;
+		var offset = (currentPage - 1) * pageSize;
+		var paginacao = "";
+		if (buscarNegocios != 0) {
+			paginacao =
+				` OFFSET ` + offset.toString() +
+				` ROWS FETCH NEXT ` + pageSize.toString() + ` ROWS ONLY`;
+		}
+		const Negocios = [];
+		let params = {};
+		const varMyQuery =
+			`SELECT
+				*,
+				(SELECT TOP 1 [data] FROM [vi] WHERE [ngstamp] = ng.[ngstamp] ORDER BY [data] DESC) AS [dataUltimaVisita],
+				--este próximo select devia de ter a cláusula de [and vi.zona <> '']
+				(SELECT TOP 1 [NGSTATUS] FROM [vi] WHERE [ngstamp] = ng.[ngstamp] ORDER BY [data] DESC) AS [statusUltimaVisita],
+				(SELECT TOP 1 [zona] FROM [vi] WHERE [ngstamp] = ng.[ngstamp] ORDER BY [data] DESC) AS [zonaReal],
+				e.u_respclem, 
+				e.u_respcltl, 
+				e.u_respcl
+			FROM
+				[ng] AS ng
+			INNER JOIN [em] AS e ON ng.[nocontacto] = e.[no]
+			INNER JOIN [cm3] AS cm3 ON ng.[vendedor] = cm3.[cmdesc]
+			WHERE ng.vendedor LIKE '%` + vendedorFilter + `%'
+				AND ng.usrdata LIKE '%` + usrdataFilter + `%'
+				AND ng.contacto LIKE '%` + contactoFilter + `%'
+				AND e.u_respcl LIKE '%` + u_respclFilter + `%'
+				AND e.u_respcltl LIKE '%` + u_respcltlFilter + `%'
+				AND e.u_respclem LIKE '%` + u_respclemFilter + `%'
+				AND ng.codigo LIKE '%` + codigoFilter + `%'
+				AND ng.resumo LIKE '%` + resumoFilter + `%'
+				AND (SELECT TOP 1 [zona] FROM [vi] WHERE [ngstamp] = ng.[ngstamp] ORDER BY [data] DESC) LIKE '%` + zonaFilter + `%'
+			ORDER BY ` + orderColumn + ` ` + orderType + paginacao + ``;
+		//AND nproposta LIKE '%` + npropostaFilter + `%'
+		params.id = "xmltoquery";
+		params.select = varMyQuery;
+		$.ajax({
+			type: "POST",
+			url: "../api/code/run",
+			async: true,
+			data: JSON.stringify(params),
+			contentType: "application/json",
+		}).done(function (result, textStatus, jqXHR) {
+			try {
+				//console.log(result);
+				resposta = JSON.parse(result);
+			} catch {
+				resposta = JSON.parse('{"Dados":[]}');
+			}
+			if (buscarNegocios == 0 && resposta.Dados.length > 0) {
+				buscarNegocios = parseInt(resposta.Dados.length);
+				return getNegocios();
+			} else {
+				const totalRecords = buscarNegocios;
+				buscarNegocios = 0;
+				const totalPages = Math.ceil(totalRecords / pageSize);
+				if (totalRecords > 0) {
+					document.getElementById("totalPagesNegocios").innerHTML = totalPages;
+					for (var i = 0; i < resposta.Dados.length; ++i) {
+						Negocios.push(resposta.Dados[i]);
+					}
+				} else {
+					document.getElementById("totalPagesNegocios").innerHTML = 1;
+				}
+				dataGrid.dataset.totalrecords = totalRecords;
+				dataGrid.dataset.totalpages = totalPages;
+				buildNegocios(Negocios);
+
+			}
+		});
+	}
+
+	function buildNegocios(data) {
+		let tBody = document.getElementById("tableBodyNegocios");
+		tBody.innerHTML = "";
+		let row = "";
+		for (var i = 0; i < data.length; i++) {
+			row += "<tr>";
+			row += '<td style=" font-size:16px; padding:8px; width: 100px; text-align:center;">' + data[i].codigo + "</td>";
+			row += '<td style=" font-size:16px; padding:8px; background-color:' + data[i].u_cor + '; font-weight: bold; text-align: center; width: 150px;"><a style="cursor: pointer; color: black;" onclick="openVendedorEdit(\'' + data[i].novend + '\', \'' + data[i].ngstamp + '\', \'' + data[i].vistamp + '\', \'' + data[i].nocontacto + '\')">' + data[i].vendedor + "</td>";
+			row += '<td style=" font-size:16px; padding:8px; width: 100px;text-align:center;">' + ((data[i].dataaber).split(' '))[0] + "</td>";
+			row += '<td style=" font-size:16px; padding:8px;text-align:center;vertical-align: middle;">' + data[i].contacto + "</td>";
+			row += '<td style=" font-size:16px; padding:8px;text-align:center;vertical-align: middle;">' + data[i].zonaReal + "</td>";
+			row += '<td style=" font-size:16px; padding:8px;text-align:center;vertical-align: middle;">' + data[i].u_respcl + "</td>";
+			row += '<td style=" font-size:16px; padding:8px;text-align:center;vertical-align: middle;">' + data[i].u_respcltl + "</td>";
+			row += '<td style=" font-size:16px; padding:8px;text-align:center;vertical-align: middle;">' + data[i].u_respclem + "</td>";
+			row += '<td style=" font-size:16px; padding:8px;text-align:center;"><a style="cursor: pointer;" onclick=openModalAbreResumo(\'' + data[i].ngstamp + '\')>' + data[i].resumo.substring(0, 20) + "</a></td>";
+			row += buildStatusColor(data[i].statusUltimaVisita, data[i].dataUltimaVisita);
+			row += '<td style="font-size: 16px;  text-align: center;">'
+				+ '<button type="button" onclick="openModalCriarVisita(\'' + data[i].ngstamp + '\', \'' + data[i].codigo + '\', \'' + data[i].vendedor + '\')" class="btn_azul" style="text-align: center;"><i class="fa fa-plus"></i></button>'
+				+ '</td>';
+			row += '<td style="font-size: 16px;  text-align: center;">'
+				+ '<button type="button" onclick="openModalAbreStatus(\'' + data[i].ngstamp + '\', \'' + data[i].codigo + '\', \'' + data[i].vendedor + '\')" class="btn_azul" style="text-align: center;"><i class="fa fa-eye"></i></button>'
+				+ '</td>';
+			row += '<td style="font-size: 16px;  text-align: center;">'
+				+ '<button type="button" onclick="openVendedorEdit(\'' + data[i].novend + '\', \'' + data[i].ngstamp + '\', \'' + data[i].vistamp + '\', \'' + data[i].nocontacto + '\')" class="btn_azul" style="text-align: center;"><i class="fa fa-pencil"></i></button>'
+				+ '</td>';
+			row += '<td style="font-size: 16px;  text-align: center;">'
+				+ '<button type="button" onclick="deleteNegocio(\'' + data[i].ngstamp + '\')" class="btn_vermelho" style="text-align: center;"><i class="fa fa-trash"></i></button>'
+				+ '</td>';
+
+
+			row += "</tr>";
+		}
+		tBody.innerHTML += row;
+	}
+
+	function buildStatusColor(status, date) {
+		let colorClass = '';
+		switch (status) {
+			case 'Por Enviar':
+				colorClass = '#ff0000';
+				break;
+			case 'Enviado':
+				colorClass = '#c6efce';
+				break;
+			case 'Contactar':
+				colorClass = '#ffff00';
+				break;
+			case 'Contactado':
+				colorClass = '#ADD8E6';
+				break;
+			case 'Aguardar':
+				colorClass = '#ffc700';
+				break;
+			case 'Adjudicado':
+				colorClass = '#92d050';
+				break;
+			case 'Fechado':
+				colorClass = '#843951';
+				break;
+			default:
+				colorClass = 'white';
+		}
+
+		return `<td style=" font-size:16px; padding:8px; background-color: ${colorClass}; font-weight: bold; text-align: center; width: 150px;">${status}</td>
+				<td style=" font-size:16px; padding:8px">` + (date.split(' '))[0] + ` </td>`;
+	}
+
+	function deleteNegocio(ngstamp) {
+		var params = {};
+		$.ajax({
+			type: "GET",
+			url:
+				"../programs/gensel.aspx?cscript=deleteNegocio&ngstamp=" + ngstamp,
+			data: JSON.stringify(params),
+			async: false,
+			contentType: "application/json",
+			success: function (response) {
+				getNegocios();
+			},
+			error: function (response) {
+				alert("Erro a eliminar por favor tente de novo!");
+			},
+		});
+	}
+
+	function openModalResumo() {
+		document.getElementById("modal-ResumoDados").style.display = "block";
+		getResumoDados();
+	}
+
+	function fechaBoxResumoDados() {
+		document.getElementById("modal-ResumoDados").style.display = "none";
+	}
+
+	function getResumoDados() {
+		let params = {};
+		const varMyQuery =
+			`select count(vendedor)  as 'NegociosCatarina',
+			(select count (vendedor) from ng where vendedor = 'Pedro Pereira') as 'NegociosPedro',
+			(select count (vendedor) from ng where vendedor = 'Paulo Matias') as 'NegociosPaulo',
+			(select count (vendedor) from ng where vendedor = 'Carlos Pereira') as 'NegociosCarlos',
+			(select count (zona) from ng where zona = 'Norte') as 'NegociosNorte',
+			(select count (zona) from ng where zona = 'Sul') as 'NegociosSul',
+			(select count (zona) from ng where zona = 'Centro') as 'NegociosCentro',
+			(select u_cor from cm3 where cmdesc = 'Catarina Oliveira') as 'corCatarina',
+			(select u_cor from cm3 where cmdesc = 'Pedro Pereira') as 'corPedro',
+			(select u_cor from cm3 where cmdesc = 'Paulo Matias') as 'corPaulo',
+			(select u_cor from cm3 where cmdesc = 'Carlos Pereira') as 'corCarlos'
+			from ng
+			where vendedor = 'Catarina Oliveira'`;
+		params.id = "xmltoquery";
+		params.select = varMyQuery;
+		$.ajax({
+			type: "POST",
+			url: "../api/code/run",
+			async: true,
+			data: JSON.stringify(params),
+			contentType: "application/json",
+		}).done(function (result, textStatus, jqXHR) {
+			try {
+				//console.log(result);
+				resposta = JSON.parse(result);
+			} catch {
+				resposta = JSON.parse('{"Dados":[]}');
+			}
+			buildResumoDados(resposta.Dados);
+		});
+	}
+
+	function buildResumoDados(dados) {
+		let tBodyComerciais = document.getElementById("tableBodyResumoComerciais");
+		let tBodyZonas = document.getElementById("tableBodyResumoZonas");
+		let tBodyEstados = document.getElementById("tableBodyResumoEstados");
+		tBodyComerciais.innerHTML = "";
+		tBodyZonas.innerHTML = "";
+		tBodyEstados.innerHTML = "";
+		let rowComerciais = "";
+		let rowZonas = "";
+		let rowEstados = "";
+		rowComerciais += "<tr>";
+		rowComerciais += '<td style="text-align: center; font-size:16px; padding:8px; width: 100px; background-color: ' + dados[0].corPaulo + '">Paulo</td>';
+		rowComerciais += '<td style="text-align:center; font-size:16px; padding:8px; width: 100px; background-color: ' + dados[0].corPedro + '">Pedro</td>';
+		rowComerciais += '<td style="text-align:center; font-size:16px; padding:8px; width: 100px; background-color: ' + dados[0].corCarlos + '">Carlos</td>';
+		rowComerciais += '<td style="text-align:center; font-size:16px; padding:8px; width: 100px; background-color: ' + dados[0].corCatarina + '">Catarina</td>';
+		rowComerciais += "<tr>";
+		rowComerciais += '<td style="text-align:center; font-size:16px; padding:8px; width: 100px;">' + dados[0].NegociosPaulo + "</td>";
+		rowComerciais += '<td style="text-align:center; font-size:16px; padding:8px; width: 100px;">' + dados[0].NegociosPedro + "</td>";
+		rowComerciais += '<td style="text-align:center; font-size:16px; padding:8px; width: 100px;">' + dados[0].NegociosCarlos + "</td>";
+		rowComerciais += '<td style="text-align:center; font-size:16px; padding:8px; width: 100px;">' + dados[0].NegociosCatarina + "</td>";
+		rowComerciais += "</tr>";
+		rowZonas += "<tr>";
+		rowZonas += '<td style="text-align:center; font-size:16px; padding:8px; width: 100px; background-color: #d9e1f2">Norte</td>';
+		rowZonas += '<td style="text-align:center; font-size:16px; padding:8px; width: 100px; background-color: #fff2cc">Centro</td>';
+		rowZonas += '<td style="text-align:center; font-size:16px; padding:8px; width: 100px; background-color: #e2efda">Sul</td>';
+		rowZonas += "<tr>";
+		rowZonas += '<td style="text-align:center; font-size:16px; padding:8px; width: 100px;">' + dados[0].NegociosNorte + "</td>";
+		rowZonas += '<td style="text-align:center; font-size:16px; padding:8px; width: 100px;">' + dados[0].NegociosSul + "</td>";
+		rowZonas += '<td style="text-align:center; font-size:16px; padding:8px; width: 100px;">' + dados[0].NegociosCentro + "</td>";
+		rowZonas += "</tr>";
+		rowEstados += "<tr>";
+		rowEstados += '<td style="text-align:center; font-size:16px; padding:8px; width: 100px; background-color: #ff0000">Por Enviar</td>';
+		rowEstados += '<td style="text-align:center; font-size:16px; padding:8px; width: 100px; background-color: #c6efce">Enviado</td>';
+		rowEstados += '<td style="text-align:center; font-size:16px; padding:8px; width: 100px; background-color: #ffff00">Contactar</td>';
+		rowEstados += '<td style="text-align:center; font-size:16px; padding:8px; width: 100px; background-color: #ADD8E6">Contactado</td>';
+		rowEstados += '<td style="text-align:center; font-size:16px; padding:8px; width: 100px; background-color: #ffc700">Aguardar</td>';
+		rowEstados += '<td style="text-align:center; font-size:16px; padding:8px; width: 100px; background-color: #92d050">Adjudicado</td>';
+		rowEstados += '<td style="text-align:center; font-size:16px; padding:8px; width: 100px; background-color: #843951">Fechado</td>';
+		rowEstados += "</tr>";
+		rowEstados += "<tr>";
+		rowEstados += '<td style="text-align:center; font-size:16px; padding:8px; width: 100px;">' + getStatusNegocio("Por Enviar") + "</td>";
+		rowEstados += '<td style="text-align:center; font-size:16px; padding:8px; width: 100px;">' + getStatusNegocio("Enviado") + "</td>";
+		rowEstados += '<td style="text-align:center; font-size:16px; padding:8px; width: 100px;">' + getStatusNegocio("Contactar") + "</td>";
+		rowEstados += '<td style="text-align:center; font-size:16px; padding:8px; width: 100px;">' + getStatusNegocio("Contactado") + "</td>";
+		rowEstados += '<td style="text-align:center; font-size:16px; padding:8px; width: 100px;">' + getStatusNegocio("Aguardar") + "</td>";
+		rowEstados += '<td style="text-align:center; font-size:16px; padding:8px; width: 100px;">' + getStatusNegocio("Adjudicado") + "</td>";
+		rowEstados += '<td style="text-align:center; font-size:16px; padding:8px; width: 100px;">' + getStatusNegocio("Fechado") + "</td>";
+		rowEstados += "</tr>";
+		tBodyComerciais.innerHTML += rowComerciais;
+		tBodyZonas.innerHTML += rowZonas;
+		tBodyEstados.innerHTML += rowEstados;
+	}
+
+	function getStatusNegocio(estado) {
+		let aux = 0;
+		let params = {};
+		const varMyQuery =
+			`select tabela1.estado, count(*) as conta from (
+				select resumo, (select top 1 ngstatus from vi where vi.ngstamp = ng.ngstamp order by vi.data desc ) as estado
+				from ng) as tabela1 group by estado`;
+		params.id = "xmltoquery";
+		params.select = varMyQuery;
+		$.ajax({
+			type: "POST",
+			url: "../api/code/run",
+			async: false,
+			data: JSON.stringify(params),
+			contentType: "application/json",
+		}).done(function (result, textStatus, jqXHR) {
+			try {
+				//console.log(result);
+				resposta = JSON.parse(result);
+			} catch {
+				resposta = JSON.parse('{"Dados":[]}');
+			}
+			for (let index = 0; index < resposta.Dados.length; index++) {
+				if (resposta.Dados[index].estado == estado) {
+					aux = resposta.Dados[index].conta;
+				}
+			}
+		});
+		return aux;
+	}
+
+
+	function editNegocio() {
+		let ngstamp = document.getElementById("ngstampVendedor").innerHTML;
+		let novendedor = document.getElementById("vendedorSelectEdit").value;
+		let vendedor = document.getElementById("vendedorSelectEdit").options[document.getElementById("vendedorSelectEdit").selectedIndex].text;
+		vendedor = vendedor.split(' - ')[0];
+		let nocontacto = document.getElementById("empresaSelectEdit").value;
+		let contacto = document.getElementById("empresaSelectEdit").options[document.getElementById("empresaSelectEdit").selectedIndex].text;
+		let u_respcl = document.getElementById("editContacto").value;
+		let zona = document.getElementById("zonaSelectEdit").value;
+		let telefone = document.getElementById("editTelefone").value;
+		let email = document.getElementById("editEmail").value;
+		let resumo = document.getElementById("editResumo").value;
+		var params = {};
+		$.ajax({
+			type: "GET",
+			url:
+				"../programs/gensel.aspx?cscript=editNegocio&ngstamp=" + ngstamp +
+				"&novendedor=" + novendedor +
+				"&vendedor=" + vendedor +
+				"&nocontacto=" + nocontacto +
+				"&contacto=" + contacto +
+				"&u_respcl=" + u_respcl +
+				"&zona=" + zona +
+				"&telefone=" + telefone +
+				"&email=" + email +
+				"&resumo=" + resumo,
+			data: JSON.stringify(params),
+			async: false,
+			contentType: "application/json",
+			success: function (response) {
+				fechaboxVendedorEditNg();
+				getNegocios();
+
+			},
+			error: function (response) {
+				alert("Erro a inserir por favor tente de novo!");
+			},
+		});
+
+	}
+
+	function openVendedorEdit(novend, ngstamp, vistamp, nocontacto) {
+		document.getElementById("modal-editNegocio").style.display = "block";
+		fillSelectVendedor();
+		createSelects();
+		fillSelectEmpresaEdit(ngstamp);
+		fillSelectZonaEdit(ngstamp);
+		fillInformacoesNegocio(ngstamp, nocontacto);
+		var userChoice = novend;
+		var dropdown = document.getElementById("vendedorSelectEdit");
+		let control = dropdown.tomselect;
+		control.setValue(userChoice.trim());
+		document.getElementById("ngstampVendedor").innerHTML = ngstamp;
+	}
+
+	function fechaboxVendedorEditNg() {
+		document.getElementById("modal-editNegocio").style.display = "none";
+	}
+
+	function createSelects(ngstamp, vistamp) {
+		//first create the select
+		var params = {};
+		let varMyQuery =
+			`SELECT
+				nome, no
+			FROM
+				em`;
+		params.id = "xmltoquery";
+		params.select = varMyQuery;
+		$.ajax({
+			type: "POST",
+			url: "../api/code/run",
+			async: false,
+			data: JSON.stringify(params),
+			contentType: "application/json",
+		}).done(function (result, textStatus, jqXHR) {
+			try {
+				resposta = JSON.parse(result);
+			} catch {
+				resposta = JSON.parse('{"Dados":[]}');
+			}
+			let options = ""
+			options += ""
+			var stringInic = "<select onchange=\"changeEmpresa()\" class=\"input\" id=\"empresaSelectEdit\"  value=\"\">"
+			for (let index = 0; index < resposta.Dados.length; index++) {
+				options += '<option value="' + resposta.Dados[index].no + '">' + resposta.Dados[index].nome + '</option>'
+			}
+			document.getElementById("selectEditEmpresa").innerHTML = stringInic + options;
+			new TomSelect("#empresaSelectEdit", {
+				create: false,
+				sortField: {
+					field: "text",
+					direction: "asc"
+				},
+				maxItems: 1,
+				closeAfterSelect: true
+			});
+		});
+		let options = ""
+		options += ""
+		var stringInic = "<select class=\"input\" id=\"zonaSelectEdit\"  value=\"\">"
+		options += '<option value="Norte">Norte</option>';
+		options += '<option value="Centro">Centro</option>';
+		options += '<option value="Sul">Sul</option>';
+		document.getElementById("selectEditZona").innerHTML = stringInic + options;
+		new TomSelect("#zonaSelectEdit", {
+			create: false,
+			sortField: {
+				field: "text",
+				direction: "asc"
+			},
+			maxItems: 1,
+			closeAfterSelect: true
+		});
+
+	}
+
+
+	function fillSelectEmpresaEdit(ngstamp) {
+		let params = {};
+		let varMyQuery =
+			`SELECT
+				contacto, nocontacto
+			FROM
+				[ng] AS ng
+			WHERE
+				ngstamp = '` + ngstamp + `'`;
+		params.id = "xmltoquery";
+		params.select = varMyQuery;
+		$.ajax({
+			type: "POST",
+			url: "../api/code/run",
+			async: false,
+			data: JSON.stringify(params),
+			contentType: "application/json",
+		}).done(function (result, textStatus, jqXHR) {
+			try {
+				//console.log(result);
+				resposta = JSON.parse(result);
+			} catch {
+				resposta = JSON.parse('{"Dados":[]}');
+			}
+			var userChoice = resposta.Dados[0].nocontacto;
+			var dropdown = document.getElementById("empresaSelectEdit");
+			let control = dropdown.tomselect;
+			control.setValue(userChoice.trim());
+		});
+	}
+
+	function fillSelectZonaEdit(ngstamp) {
+		let params = {};
+		let varMyQuery =
+			`SELECT
+				zona
+			FROM
+				[vi] AS vi
+			WHERE
+			ngstamp = '` + ngstamp + `'`;
+		params.id = "xmltoquery";
+		params.select = varMyQuery;
+		$.ajax({
+			type: "POST",
+			url: "../api/code/run",
+			async: false,
+			data: JSON.stringify(params),
+			contentType: "application/json",
+		}).done(function (result, textStatus, jqXHR) {
+			try {
+				//console.log(result);
+				resposta = JSON.parse(result);
+			} catch {
+				resposta = JSON.parse('{"Dados":[]}');
+			}
+			var userChoice = resposta.Dados[0].zona;
+			var dropdown = document.getElementById("zonaSelectEdit");
+			let control = dropdown.tomselect;
+			control.setValue(userChoice.trim());
+		});
+	}
+
+	function changeEmpresa() {
+		let params = {};
+		let varMyQuery =
+			`SELECT
+				u_respcl, u_respcltl, u_respclem
+			FROM
+				[em] AS em
+			WHERE
+				no = '` + document.getElementById("empresaSelectEdit").value + `'`;
+		params.id = "xmltoquery";
+		params.select = varMyQuery;
+		$.ajax({
+			type: "POST",
+			url: "../api/code/run",
+			async: false,
+			data: JSON.stringify(params),
+			contentType: "application/json",
+		}).done(function (result, textStatus, jqXHR) {
+			try {
+				//console.log(result);
+				resposta = JSON.parse(result);
+			} catch {
+				resposta = JSON.parse('{"Dados":[]}');
+			}
+			document.getElementById("editContacto").value = resposta.Dados[0].u_respcl;
+			document.getElementById("editTelefone").value = resposta.Dados[0].u_respcltl;
+			document.getElementById("editEmail").value = resposta.Dados[0].u_respclem;
+		});
+	}
+
+	function fillInformacoesNegocio(ngstamp, nocontacto) {
+		var params = {};
+		let varMyQuery =
+			`SELECT U_RESPCL, U_RESPCLTL ,[U_RESPCLEM]
+		FROM [EM] 
+		WHERE NO = '` + nocontacto + `'`;
+		params.id = "xmltoquery";
+		params.select = varMyQuery;
+		$.ajax({
+			type: "POST",
+			url: "../api/code/run",
+			async: false,
+			data: JSON.stringify(params),
+			contentType: "application/json",
+		}).done(function (result, textStatus, jqXHR) {
+			try {
+				//console.log(result);
+				resposta = JSON.parse(result);
+			} catch {
+				resposta = JSON.parse('{"Dados":[]}');
+			}
+			document.getElementById("editContacto").value = resposta.Dados[0].U_RESPCL;
+			document.getElementById("editTelefone").value = resposta.Dados[0].U_RESPCLTL;
+			document.getElementById("editEmail").value = resposta.Dados[0].U_RESPCLEM;
+		});
+		//buscar o resumo do negócio
+		params = {};
+		varMyQuery = `SELECT
+						ng.resumo
+					FROM
+						[ng] 
+					WHERE
+						ngstamp = '` + ngstamp + `'`;
+		params.id = "xmltoquery";
+		params.select = varMyQuery;
+		$.ajax({
+			type: "POST",
+			url: "../api/code/run",
+			async: true,
+			data: JSON.stringify(params),
+			contentType: "application/json",
+		}).done(function (result, textStatus, jqXHR) {
+			try {
+				resposta = JSON.parse(result);
+			} catch {
+				resposta = JSON.parse('{"Dados":[]}');
+			}
+			document.getElementById("editResumo").value = resposta.Dados[0].resumo;
+		});
+	}
+
+	function openModalAbreResumo(ngstamp) {
+		document.getElementById("modal-detalhesResumoNg").style.display = "block";
+		document.getElementById("resumoNegocioDetalhes").innerHTML = "";
+		var params = {};
+		varMyQuery = `SELECT
+						ng.resumo
+					FROM
+						[ng] 
+					WHERE
+						ngstamp = '` + ngstamp + `'`;
+		params.id = "xmltoquery";
+		params.select = varMyQuery;
+		$.ajax({
+			type: "POST",
+			url: "../api/code/run",
+			async: true,
+			data: JSON.stringify(params),
+			contentType: "application/json",
+		}).done(function (result, textStatus, jqXHR) {
+			try {
+				resposta = JSON.parse(result);
+			} catch {
+				resposta = JSON.parse('{"Dados":[]}');
+			}
+			let row = "";
+			for (let index = 0; index < resposta.Dados.length; index++) {
+				row += resposta.Dados[index].resumo;
+			}
+			document.getElementById("resumoNegocioDetalhes").innerHTML += row;
+		});
+	}
+
+	function fechaboxResumoNg() {
+		document.getElementById("modal-detalhesResumoNg").style.display = "none";
+	}
+
+	function openModalAbreStatus(ngstamp, codigo, vendedor) {
+		document.getElementById("modal-detalhesStatusNg").style.display = "block";
+		document.getElementById("tableBodyDetalhesStatus").innerHTML = "";
+		var params = {};
+		varMyQuery = `SELECT
+		'Por Enviar' AS vi_status1,
+                    (SELECT MAX(data) FROM [vi] WHERE ngstamp = ng.ngstamp AND ngstatus = 'Por Enviar') AS vi_statusdate1,
+                    (select top 1 resumo FROM [vi] WHERE ngstamp = ng.ngstamp AND ngstatus = 'Por Enviar' order by data asc) as resumo_statusdate1,
+                    'Enviado' AS vi_status2,
+                    (SELECT MAX(data) FROM [vi] WHERE ngstamp = ng.ngstamp AND ngstatus = 'Enviado') AS vi_statusdate2,
+                    (select top 1 resumo FROM [vi] WHERE ngstamp = ng.ngstamp AND ngstatus = 'Enviado' order by data asc) as resumo_statusdate2,
+                    'Contactar' AS vi_status3,
+                    (SELECT MAX(data) FROM [vi] WHERE ngstamp = ng.ngstamp AND ngstatus = 'Contactar') AS vi_statusdate3,
+                    (select top 1 resumo FROM [vi] WHERE ngstamp = ng.ngstamp AND ngstatus = 'Contactar' order by data asc) as resumo_statusdate3,
+                    'Contactado' AS vi_status4,
+                    (SELECT MAX(data) FROM [vi] WHERE ngstamp = ng.ngstamp AND ngstatus = 'Contactado') AS vi_statusdate4,
+                    (select top 1 resumo FROM [vi] WHERE ngstamp = ng.ngstamp AND ngstatus = 'Contactado' order by data asc) as resumo_statusdate4,
+                    'Aguardar' AS vi_status5,
+                    (SELECT MAX(data) FROM [vi] WHERE ngstamp = ng.ngstamp AND ngstatus = 'Aguardar') AS vi_statusdate5,
+                    (select top 1 resumo FROM [vi] WHERE ngstamp = ng.ngstamp AND ngstatus = 'Aguardar' order by data asc) as resumo_statusdate5,
+                    'Adjudicado' AS vi_status6,
+                    (SELECT MAX(data) FROM [vi] WHERE ngstamp = ng.ngstamp AND ngstatus = 'Adjudicado') AS vi_statusdate6,
+                    (select top 1 resumo FROM [vi] WHERE ngstamp = ng.ngstamp AND ngstatus = 'Adjudicado' order by data asc) as resumo_statusdate6,
+                    'Fechado' AS vi_status7,
+                    (SELECT MAX(data) FROM [vi] WHERE ngstamp = ng.ngstamp AND ngstatus = 'Fechado') AS vi_statusdate7,
+                    (select top 1 resumo FROM [vi] WHERE ngstamp = ng.ngstamp AND ngstatus = 'Fechado' order by data asc) as resumo_statusdate7
+                FROM
+                    [ng] 
+                WHERE
+                    ngstamp = '` + ngstamp + `'`;
+		params.id = "xmltoquery";
+		params.select = varMyQuery;
+		$.ajax({
+			type: "POST",
+			url: "../api/code/run",
+			async: true,
+			data: JSON.stringify(params),
+			contentType: "application/json",
+		}).done(function (result, textStatus, jqXHR) {
+			try {
+				resposta = JSON.parse(result);
+			} catch {
+				resposta = JSON.parse('{"Dados":[]}');
+			}
+			let row = "";
+			for (let index = 0; index < resposta.Dados.length; index++) {
+				for (let i = 1; i <= 7; i++) {
+					const statusKey = `vi_status${i}`;
+					const dateKey = `vi_statusdate${i}`;
+					const relKey = `resumo_statusdate${i}`;
+					row += buildTableRow(resposta.Dados[index][statusKey], ((resposta.Dados[index][dateKey]).split(' '))[0], i, resposta.Dados[index][relKey]);
+				}
+			}
+			document.getElementById("tableBodyDetalhesStatus").innerHTML += row;
+		});
+	}
+
+	function buildTableRow(status, date, index, rel) {
+		let colorClass = '';
+		switch (status) {
+			case 'Por Enviar':
+				colorClass = '#ff0000';
+				break;
+			case 'Enviado':
+				colorClass = '#c6efce';
+				break;
+			case 'Contactar':
+				colorClass = '#ffff00';
+				break;
+			case 'Contactado':
+				colorClass = '#ADD8E6';
+				break;
+			case 'Aguardar':
+				colorClass = '#ffc700';
+				break;
+			case 'Adjudicado':
+				colorClass = '#92d050';
+				break;
+			case 'Fechado':
+				colorClass = '#843951';
+				break;
+			default:
+				colorClass = '';
+		}
+
+		return `<tr">
+            <td style="font-size:16px; padding:8px; font-weight: bold; background-color: ${colorClass}">${status}</td>
+            <td style="font-size:16px; padding:8px; text-align: center;">${date}</td>
+			<td style="font-size:16px; padding:8px; text-align: center;">${rel}</td>
+        </tr>`;
+	}
+
+
+	function fechaboxStatusNg() {
+		document.getElementById("modal-detalhesStatusNg").style.display = "none";
+	}
+
+	function openModalCriarVisita(ngstamp, codigo, vendedor) {
+		document.getElementById("modal-AddVisitas").style.display = "block";
+		fillSelectVendedor();
+		document.getElementById("ngstampVisitas").innerHTML = ngstamp;
+		document.getElementById("ngcodigo").innerHTML = codigo;
+		// Get the current date
+		const currentDate = new Date();
+		// Format the date as "YYYY-MM-DD" for a date input field
+		const formattedDate = currentDate.toISOString().split('T')[0];
+		// Set the value of the input field to the formatted date
+		document.getElementById("inp_data").value = formattedDate;
+	}
+
+	function openModalCriarNegocio() {
+		document.getElementById("modal-AddNegocio").style.display = "block";
+		//change the input to todays date
+		var currentDate = new Date();
+		var year = currentDate.getFullYear().toString();
+		var month = (currentDate.getMonth() + 1).toString().padStart(2, '0'); // Months are zero-based
+		var day = currentDate.getDate().toString().padStart(2, '0');
+		var formattedDate = year + '-' + month + '-' + day;
+		document.getElementById("dataCriacaoNegocio").value = formattedDate;
+		fillSelectEmpresa();
+		fillSelectVendedor();
+		fillSelectZona();
+	}
+
+	function fillSelectZona() {
+		document.getElementById("selectZona").innerHTML = "";
+		let options = ""
+		options += "<option value=\"\"></option>"
+		var stringInic = "<select class=\"input\" id=\"zonaSelectCreate\" placeholder=\"Selecione a zona\" value=\"\">"
+		options += '<option value="Norte">Norte</option>'
+		options += '<option value="Centro">Centro</option>'
+		options += '<option value="Sul">Sul</option>'
+		document.getElementById("selectZona").innerHTML = stringInic + options;
+		new TomSelect("#zonaSelectCreate", {
+			create: true,
+			sortField: {
+				field: "text",
+				direction: "asc"
+			},
+			maxItems: 1,
+			closeAfterSelect: true
+		});
+	}
+
+	function fillSelectEmpresa() {
+		document.getElementById("selectEmpresa").innerHTML = "";
+		var params = {};
+		varMyQuery = `select distinct no, nome from em`;
+		params.id = "xmltoquery";
+		params.select = varMyQuery;
+		$.ajax({
+			type: "POST",
+			url: "../api/code/run",
+			async: true,
+			data: JSON.stringify(params),
+			contentType: "application/json",
+		}).done(function (result, textStatus, jqXHR) {
+			try {
+				resposta = JSON.parse(result);
+			} catch {
+				resposta = JSON.parse('{"Dados":[]}');
+			}
+			let options = ""
+			options += "<option value=\"\"></option>"
+			var stringInic = "<select class=\"input\" id=\"empresaSelectCreate\" placeholder=\"Selecione a empresa ou escreva uma nova\" value=\"\">"
+			for (let index = 0; index < resposta.Dados.length; index++) {
+				options += '<option value="' + resposta.Dados[index].no + '">' + resposta.Dados[index].nome + '</option>'
+			}
+			document.getElementById("selectEmpresa").innerHTML = stringInic + options;
+			new TomSelect("#empresaSelectCreate", {
+				create: true,
+				sortField: {
+					field: "text",
+					direction: "asc"
+				},
+				maxItems: 1,
+				closeAfterSelect: true,
+				onChange: function () {
+					fillNegocioBoxes();
+				}
+			});
+		});
+	}
+
+	async function fillSelectVendedor() {
+		document.getElementById("selectEditVendedor").innerHTML = "";
+		document.getElementById("selectVendedor").innerHTML = "";
+		var params = {};
+		varMyQuery = `select distinct cm, nome from cm3`;
+		params.id = "xmltoquery";
+		params.select = varMyQuery;
+		$.ajax({
+			type: "POST",
+			url: "../api/code/run",
+			async: false,
+			data: JSON.stringify(params),
+			contentType: "application/json",
+		}).success(function (result, textStatus, jqXHR) {
+			try {
+				resposta = JSON.parse(result);
+			} catch {
+				resposta = JSON.parse('{"Dados":[]}');
+			}
+			let options = ""
+			options += "<option value=\"\"></option>"
+			var stringInic = "<select class=\"input\" id=\"vendedorSelectCreate\" placeholder=\"Selecione o vendedor\" value=\"\">"
+			var stringInic2 = "<select class=\"input\" id=\"vendedorSelectEdit\" placeholder=\"Selecione o vendedor\" value=\"\">"
+			for (let index = 0; index < resposta.Dados.length; index++) {
+				options += '<option value="' + resposta.Dados[index].cm + '">' + resposta.Dados[index].nome + '</option>'
+			}
+			document.getElementById("selectVendedor").innerHTML = stringInic + options;
+			document.getElementById("selectEditVendedor").innerHTML = stringInic2 + options;
+			new TomSelect("#vendedorSelectCreate", {
+				create: false,
+				sortField: {
+					field: "text",
+					direction: "asc"
+				},
+				maxItems: 1,
+				closeAfterSelect: true
+			});
+			new TomSelect("#vendedorSelectEdit", {
+				create: false,
+				sortField: {
+					field: "text",
+					direction: "asc"
+				},
+				maxItems: 1,
+				closeAfterSelect: true
+			});
+		});
+	}
+
+	function fillNegocioBoxes() {
+		let empresaNO = document.getElementById("empresaSelectCreate").value;
+		let empresaNome = document.getElementById("empresaSelectCreate").options[document.getElementById("empresaSelectCreate").selectedIndex].text;
+		var params = {};
+		varMyQuery = `select U_RESPCL, U_RESPCLTL, U_RESPCLEM, ZONA  from em where no = '` + empresaNO + `' and nome = '` + empresaNome + `'`;
+		params.id = "xmltoquery";
+		params.select = varMyQuery;
+		$.ajax({
+			type: "POST",
+			url: "../api/code/run",
+			async: true,
+			data: JSON.stringify(params),
+			contentType: "application/json",
+		}).done(function (result, textStatus, jqXHR) {
+			try {
+				resposta = JSON.parse(result);
+			} catch {
+				resposta = JSON.parse('{"Dados":[]}');
+			}
+			if (resposta != undefined && resposta.Dados.length != 0) {
+				document.getElementById("contactoNegocio").value = resposta.Dados[0].U_RESPCL;
+				document.getElementById("telefoneNegocio").value = resposta.Dados[0].U_RESPCLTL;
+				document.getElementById("emailNegocio").value = resposta.Dados[0].U_RESPCLEM;
+				var userChoice = resposta.Dados[0].ZONA;
+				var dropdown = document.getElementById("zonaSelectCreate");
+				let control = dropdown.tomselect;
+				control.setValue(userChoice.trim());
+			}
+		});
+	}
+
+	async function insereNegocio() {
+		var empresaNO = document.getElementById("empresaSelectCreate").value;
+		var empresaNome = document.getElementById("empresaSelectCreate").options[document.getElementById("empresaSelectCreate").selectedIndex].text;
+		var contacto = document.getElementById("contactoNegocio").value;
+		var telefone = document.getElementById("telefoneNegocio").value;
+		var email = document.getElementById("emailNegocio").value;
+		var resumo = document.getElementById("resumoNegocio").value;
+		var vendedorNO = document.getElementById("vendedorSelectCreate").value;
+		var vendedorNome = document.getElementById("vendedorSelectCreate").options[document.getElementById("vendedorSelectCreate").selectedIndex].text;
+		vendedorNome = vendedorNome.split(' - ')[0];
+		var dataCriacao = document.getElementById("dataCriacaoNegocio").value;
+		var zona = document.getElementById("zonaSelectCreate").value;
+		let novo = 0;
+		if (checkEmpresaNova()) {
+			novo = 1;
+			empresaNO = await getMaxNO();
+		}
+		var params = {};
+		$.ajax({
+			type: "GET",
+			url:
+				"../programs/gensel.aspx?cscript=insereNegocio&nomeContacto=" + empresaNome +
+				"&noContacto=" + empresaNO +
+				"&U_RESPCL=" + contacto +
+				"&U_RESPCLTL=" + telefone +
+				"&U_RESPCLEM=" + email +
+				"&vendedor=" + vendedorNome +
+				"&novend=" + vendedorNO +
+				"&novo=" + novo +
+				"&resumo=" + resumo +
+				"&dataCriacao=" + dataCriacao +
+				"&zona=" + zona,
+			data: JSON.stringify(params),
+			async: false,
+			contentType: "application/json",
+			success: function (response) {
+				fechaboxNegocios();
+				getNegocios();
+				document.getElementById("empresaSelectCreate").value = "";
+				document.getElementById("contactoNegocio").value = "";
+				document.getElementById("telefoneNegocio").value = "";
+				document.getElementById("emailNegocio").value = "";
+				document.getElementById("resumoNegocio").value = "";
+				document.getElementById("vendedorSelectCreate").value = "";
+			},
+			error: function (response) {
+				alert("Erro a inserir por favor tente de novo!");
+			},
+		});
+	}
+
+	function checkEmpresaNova() {
+		let empresaNO = document.getElementById("empresaSelectCreate").value;
+		let empresaNome = document.getElementById("empresaSelectCreate").options[document.getElementById("empresaSelectCreate").selectedIndex].text;
+		//ver se tem letras (está a criar uma empresa) ou numeros
+		var hasLetters = /[a-zA-Z]/.test(empresaNO);
+		var hasNumbers = /\d/.test(empresaNO);
+		var flag = false;
+
+		if (hasLetters) {
+			flag = true;
+		} else if (hasNumbers) {
+			var params = {};
+			var varMyQuery = `select U_RESPCL, U_RESPCLTL, U_RESPCLEM from em where no = '` + empresaNO + `' and nome = '` + empresaNome + `'`;
+			params.id = "xmltoquery";
+			params.select = varMyQuery;
+			$.ajax({
+				type: "POST",
+				url: "../api/code/run",
+				async: true,
+				data: JSON.stringify(params),
+				contentType: "application/json",
+			}).done(function (result, textStatus, jqXHR) {
+				try {
+					resposta = JSON.parse(result);
+				} catch {
+					resposta = JSON.parse('{"Dados":[]}');
+				}
+				if (resposta != undefined && resposta.Dados.length != 0) {
+					flag = false;
+				} else {
+					flag = true;
+				}
+			});
+		}
+		return flag;
+	}
+
+
+
+	function getMaxNO() {
+		return new Promise(function (resolve, reject) {
+			var params = {};
+			var varMyQuery = `select max(no) as no from em`;
+			params.id = "xmltoquery";
+			params.select = varMyQuery;
+			$.ajax({
+				type: "POST",
+				url: "../api/code/run",
+				async: true,
+				data: JSON.stringify(params),
+				contentType: "application/json",
+			}).done(function (result, textStatus, jqXHR) {
+				try {
+					resposta = JSON.parse(result);
+					resolve(parseInt(resposta.Dados[0].no) + 1);
+				} catch {
+					resposta = JSON.parse('{"Dados":[]}');
+					resolve(1); // If there are no records, return 1 as the next value
+				}
+			});
+		});
+	}
+
+	function fechaboxNegocios() {
+		document.getElementById("modal-AddNegocio").style.display = "none";
+	}
+
+	function fechaboxVisitas() {
+		document.getElementById("modal-AddVisitas").style.display = "none";
+	}
+
+	function pageGoToNegocios(page) {
+		let dataGrid = document.getElementById("DataGridNegocios");
+		let totalPages = parseInt(dataGrid.getAttribute("data-totalpages"));
+		let totalRecords = parseInt(dataGrid.getAttribute("data-totalrecords"));
+		let currentPage = parseInt(dataGrid.getAttribute("data-currentpage"));
+
+		switch (page) {
+			case "first":
+				currentPage = 1;
+				break;
+			case "previous":
+				currentPage--;
+				if (currentPage < 1) {
+					currentPage = 1;
+				}
+				break;
+			case "next":
+				currentPage++;
+				if (currentPage > totalPages) {
+					currentPage = totalPages;
+				}
+				break;
+			case "last":
+				currentPage = totalPages;
+				break;
+		}
+
+		changePageNegocios(currentPage);
+	}
+
+	function changePageNegocios(page) {
+		let dataGrid = document.getElementById("DataGridNegocios");
+		let currentPage = parseInt(dataGrid.getAttribute("data-currentpage"));
+
+		document.getElementById("currentPageNegocios").innerHTML = page;
+		dataGrid.setAttribute("data-currentpage", "" + page);
+		getNegocios();
+	}
+
+	function changePageSizeNegocios() {
+		let dataGrid = document.getElementById("DataGridNegocios");
+		let pageSize = document.getElementById("pageSizeNegocios").value;
+		dataGrid.setAttribute("data-pagesize", "" + pageSize);
+		changePageNegocios(1);
+	}
+
+	function filterTableNegocios() {
+		changePageNegocios(1);
+	}
+
+	function handleEnterKey(e) {
+		if (e.keyCode == 13) {
+			// enter pressed
+			try {
+				e.preventDefault ? e.preventDefault() : (e.returnValue = false);
+				//DO ALTERNATE ACTION RATHER THAN SEND ENTER
+				changePageSizeNegocios();
+			} catch (err) {
+				console.log(err.message);
+			}
+		}
+	}
+</script>

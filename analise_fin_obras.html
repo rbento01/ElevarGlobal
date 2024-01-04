@@ -1,0 +1,1854 @@
+<link href="https://cdn.jsdelivr.net/npm/tom-select@2.2.2/dist/css/tom-select.css" rel="stylesheet" /><script src="https://cdn.jsdelivr.net/npm/tom-select@2.2.2/dist/js/tom-select.complete.min.js"></script>
+<style type="text/css">#main-container {
+		padding-top: 10px;
+	}
+
+	.inline {
+		display: inline;
+	}
+
+	.show {
+		display: block;
+	}
+
+	.hide {
+		display: none;
+	}
+
+	table {
+		font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+			Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
+			sans-serif;
+		border-collapse: collapse;
+		width: 100%;
+	}
+
+	thead tr th {
+		background-color: #fafafa;
+	}
+
+	thead tr th:first-child {
+		border-left: 1px solid #dddddd;
+	}
+
+	thead tr th:last-child {
+		border-right: 1px solid #dddddd;
+	}
+
+	thead tr:first-child th {
+		border-top: 1px solid #dddddd;
+		padding-top: 8px;
+		cursor: pointer;
+	}
+
+	thead tr:first-child th div {
+		display: flex;
+		flex-wrap: nowrap;
+		justify-content: space-between;
+	}
+
+	thead tr:last-child th {
+		border-bottom: 1px solid #dddddd;
+	}
+
+	thead tr,
+	thead th {
+		text-align: left;
+		padding-left: 8px;
+		padding-right: 8px;
+		color: #757575;
+		font-weight: normal;
+	}
+
+	tbody tr,
+	tbody td {
+		text-align: left;
+		font-weight: normal;
+
+		border: 1px solid #dddddd;
+	}
+
+	tbody tr:hover {
+		background-color: #cfd8dc55;
+	}
+
+	.column-filter,
+	.column-vars-filter {
+		/* width: 100%;
+	background-color: #fafafa;
+	border: 0px solid #cccccc;
+	border-bottom: 1px solid #cccccc;
+	margin-bottom: 12px;
+	font-weight: normal;
+	padding: 5px;
+	color: #999999; */
+		width: 100%;
+		height: 5rem;
+		border-radius: 10px;
+		box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+		border: none;
+		outline-color: #4086d1
+	}
+
+	.column-filter:focus,
+	.column-filter-date:focus,
+	.column-vars-filter:focus,
+	.column-vars-filter-date:focus {
+		outline: none;
+	}
+
+	.column-filterProjetos,
+	.column-vars-filterProjetos {
+		/* width: 100%;
+	background-color: #fafafa;
+	border: 0px solid #cccccc;
+	border-bottom: 1px solid #cccccc;
+	margin-bottom: 12px;
+	font-weight: normal;
+	padding: 5px;
+	color: #999999; */
+		width: 100%;
+		height: 5rem;
+		border-radius: 10px;
+		box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+		border: none;
+		outline-color: #4086d1
+	}
+
+	.column-filterProjetos:focus,
+	.column-filter-dateProjetos:focus,
+	.column-vars-filterProjetos:focus,
+	.column-vars-filter-dateProjetos:focus {
+		outline: none;
+	}
+
+	.column-filterPendentes,
+	.column-vars-filterPendentes {
+		/* width: 100%;
+	background-color: #fafafa;
+	border: 0px solid #cccccc;
+	border-bottom: 1px solid #cccccc;
+	margin-bottom: 12px;
+	font-weight: normal;
+	padding: 5px;
+	color: #999999; */
+		width: 100%;
+		height: 5rem;
+		border-radius: 10px;
+		box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+		border: none;
+		outline-color: #4086d1
+	}
+
+	.column-filterPendentes:focus,
+	.column-filter-datePendentes:focus,
+	.column-vars-filterPendentes:focus,
+	.column-vars-filter-datePendentes:focus {
+		outline: none;
+	}
+
+	.input-date {
+		/* width: 100%;
+	position: relative;
+	background-color: #fafafa;
+	border: 0px solid #cccccc;
+	border-bottom: 1px solid #cccccc;
+	margin-bottom: 12px;
+	font-weight: normal;
+	padding: 5px;
+	color: #999999; */
+		width: 100%;
+		height: 5rem;
+		border-radius: 10px;
+		box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+		border: none;
+		outline-color: #4086d1
+	}
+
+	.input {
+		width: 100%;
+		height: 5rem;
+		border-radius: 10px;
+		box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+		border: none;
+		outline-color: #4086d1
+	}
+
+	.column-filter-date {
+		/* background-color: #fafafa;
+	border: 0px solid #cccccc;
+	color: #999999;
+	padding: 0px; */
+		width: 100%;
+		height: 5rem;
+		border-radius: 10px;
+		box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+		border: none;
+		outline-color: #4086d1
+	}
+
+	.btn-no-background {
+		background-color: transparent;
+		color: #999999;
+		background-repeat: no-repeat;
+		border: none;
+		cursor: pointer;
+		overflow: hidden;
+		outline: none;
+		position: absolute;
+		right: 0;
+	}
+
+	.btn-no-background:hover {
+		color: #757575;
+	}
+
+	.dropdown-datafilter-content {
+		display: none;
+		position: absolute;
+		right: 0;
+		background-color: #ffffff;
+		box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.5);
+		z-index: 1;
+		padding: 15px;
+	}
+
+	.input-daterange {
+		display: flex;
+		flex-wrap: nowrap;
+		justify-content: space-between;
+	}
+
+	.dropdown-datafilter-content span {
+		background-color: transparent;
+		border: none;
+	}
+
+	.input-daterange label {
+		font-size: 12px;
+		color: #808080;
+	}
+
+	.input-daterange input {
+		font-size: 12px;
+		font-weight: 500;
+		border: 1px solid #a7b1c288;
+		color: #808080;
+		border-radius: 5px;
+		max-width: 115px;
+	}
+
+	.datefilters-buttongroup button {
+		display: block;
+		width: 100%;
+		border-radius: 5px;
+		background-color: none;
+		border: 1px solid #a7b1c288;
+		font-weight: 500;
+		padding: 5px;
+		color: #808080;
+		align-self: center;
+		margin-top: 10px;
+	}
+
+	.datefilters-buttongroup>div {
+		width: 100%;
+		display: flex;
+	}
+
+	.datefilters-buttongroup>div>button {
+		display: inline;
+	}
+
+	::placeholder {
+		/* Chrome, Firefox, Opera, Safari 10.1+ */
+		color: #cccccc;
+		opacity: 1;
+		/* Firefox */
+	}
+
+	:-ms-input-placeholder {
+		/* Internet Explorer 10-11 */
+		color: #cccccc;
+	}
+
+	::-ms-input-placeholder {
+		/* Microsoft Edge */
+		color: #cccccc;
+	}
+
+	.modal-input-container {
+		display: none;
+		position: fixed;
+		z-index: 1;
+		padding-top: 100px;
+		left: 0;
+		top: 0;
+		width: 100%;
+		height: 100%;
+		overflow: auto;
+		overflow-y: initial;
+		background-color: rgb(0, 0, 0);
+		background-color: rgba(0, 0, 0, 0.6);
+	}
+
+	.modal-content {
+		background-color: #fefefe;
+		margin: auto;
+		padding: 20px;
+		border: 1px solid #888;
+		width: 40%;
+		overflow-y: auto;
+	}
+
+	.btn_verde {
+		background: #47cf73;
+		border: 1px solid #47cf73;
+		border-radius: 6px;
+		box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
+		box-sizing: border-box;
+		color: #ffffff;
+		cursor: pointer;
+		display: inline-block;
+		font-family: nunito, roboto, proxima-nova, "proxima nova", sans-serif;
+		font-size: 16px;
+		font-weight: 800;
+		line-height: 16px;
+		min-height: 40px;
+		outline: 0;
+		padding: 12px 14px;
+		text-align: center;
+		text-rendering: geometricprecision;
+		text-transform: none;
+		user-select: none;
+		-webkit-user-select: none;
+		touch-action: manipulation;
+		vertical-align: middle;
+	}
+
+	.btn_verde:hover {
+		background-color: initial;
+		background-position: 0 0;
+		color: #47cf73;
+	}
+
+	.btn_azul {
+		background: #506ce8;
+		border: 1px solid #506ce8;
+		border-radius: 6px;
+		box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
+		box-sizing: border-box;
+		color: #ffffff;
+		cursor: pointer;
+		display: inline-block;
+		font-family: nunito, roboto, proxima-nova, "proxima nova", sans-serif;
+		font-size: 16px;
+		font-weight: 800;
+		line-height: 16px;
+		min-height: 40px;
+		outline: 0;
+		padding: 12px 14px;
+		text-align: center;
+		text-rendering: geometricprecision;
+		text-transform: none;
+		user-select: none;
+		-webkit-user-select: none;
+		touch-action: manipulation;
+		vertical-align: middle;
+	}
+
+	.btn_azul1 {
+		background: #506ce8;
+		border: 1px solid #506ce8;
+		border-radius: 6px;
+		box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
+		box-sizing: border-box;
+		color: #ffffff;
+		cursor: pointer;
+		display: inline-block;
+		font-family: nunito, roboto, proxima-nova, "proxima nova", sans-serif;
+		font-size: 16px;
+		font-weight: 800;
+		line-height: 16px;
+		min-height: 40px;
+		outline: 0;
+		padding: 12px 14px;
+		text-align: center;
+		text-rendering: geometricprecision;
+		text-transform: none;
+		user-select: none;
+		-webkit-user-select: none;
+		touch-action: manipulation;
+		vertical-align: middle;
+	}
+
+	.btn_azul:hover {
+		background-color: initial;
+		background-position: 0 0;
+		color: #506ce8;
+	}
+
+	.btn_vermelho {
+
+		background: #ff3c41;
+		border: 1px solid #ff3c41;
+		border-radius: 6px;
+		box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
+		box-sizing: border-box;
+		color: #FFFFFF;
+		cursor: pointer;
+		display: inline-block;
+		font-family: nunito, roboto, proxima-nova, "proxima nova", sans-serif;
+		font-size: 16px;
+		font-weight: 800;
+		line-height: 16px;
+		min-height: 40px;
+		outline: 0;
+		padding: 12px 14px;
+		text-align: center;
+		text-rendering: geometricprecision;
+		text-transform: none;
+		user-select: none;
+		-webkit-user-select: none;
+		touch-action: manipulation;
+		vertical-align: middle;
+
+
+	}
+
+	.btn_vermelho:hover {
+		background-color: initial;
+		background-position: 0 0;
+		color: #ff3c41;
+
+	}
+
+	.btn_azulesc {
+		background: #1e2d84;
+		border: 1px solid #1e2d84;
+		border-radius: 6px;
+		box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
+		box-sizing: border-box;
+		color: #ffffff;
+		cursor: pointer;
+		display: inline-block;
+		font-family: nunito, roboto, proxima-nova, "proxima nova", sans-serif;
+		font-size: 16px;
+		font-weight: 800;
+		line-height: 16px;
+		min-height: 40px;
+		outline: 0;
+		padding: 12px 14px;
+		text-align: center;
+		text-rendering: geometricprecision;
+		text-transform: none;
+		user-select: none;
+		-webkit-user-select: none;
+		touch-action: manipulation;
+		vertical-align: middle;
+	}
+
+	.btn_azulesc:hover {
+		background-color: initial;
+		background-position: 0 0;
+		color: #1e2d84;
+	}
+
+	tfoot tr td {
+		background-color: #fafafa;
+		border: 1px solid #dddddd;
+		padding: 5px;
+		text-align: right;
+	}
+
+	#footer-span,
+	#footer-span * {
+		font-size: 14px;
+		font-weight: normal !important;
+	}
+
+	#footer-span>* {
+		margin-left: 10px;
+		text-align: center;
+	}
+
+	#footer-span input[type="number"] {
+		width: 35px;
+		border: 1px solid #dddddd;
+		text-align: center;
+	}
+
+	input::-webkit-outer-spin-button,
+	input::-webkit-inner-spin-button {
+		-webkit-appearance: none;
+		margin: 0;
+	}
+
+	/* Firefox */
+	input[type="number"] {
+		-moz-appearance: textfield;
+		appearance: textfield;
+	}
+
+	#toolbar-right {
+		display: flex;
+		justify-content: flex-end;
+		padding-bottom: 20px;
+	}
+
+	#toolbar-right button {
+		border-radius: 5px;
+		font-weight: 500;
+		padding-top: 10px;
+		padding-bottom: 10px;
+	}
+
+	.modal-content1 {
+		height: 23rem;
+		background-color: #fefefe;
+		margin: auto;
+		padding: 20px;
+		border: 1px solid #888;
+		width: 50%;
+		overflow-y: auto;
+		border-radius: 10px;
+	}
+
+	.botoes {
+		display: flex;
+		justify-content: end;
+	}
+
+	.horas_botoes {
+		display: flex;
+		justify-content: space-between;
+	}
+
+	b {
+		color: #1e2d84;
+	}
+
+	select {
+		width: 100%;
+		height: 5rem;
+		border-radius: 8px;
+		box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+		border: none;
+		outline-color: #4086d1;
+		margin-bottom: 1rem;
+	}
+
+	.datas {
+		display: flex;
+		justify-content: space-around;
+	}
+
+	.data_final {
+		display: flex;
+		flex-direction: column;
+	}
+
+	.x {
+		font-size: 14px;
+		padding: 4px;
+	}
+
+	.chk {
+		margin-top: 2rem;
+	}
+
+	.footer {
+		display: flex;
+		align-items: center;
+		justify-content: flex-end;
+	}
+
+	.close {
+		cursor: pointer;
+	}
+
+	/* Style the tab */
+	.tab {
+		border-radius: 8px;
+		overflow: hidden;
+		border: 1px solid #ccc;
+		background-color: #f1f1f1;
+	}
+
+	/* Style the buttons inside the tab */
+	.tab button {
+		background-color: inherit;
+		float: left;
+		border: none;
+		outline: none;
+		cursor: pointer;
+		padding: 14px 16px;
+		transition: 0.3s;
+		font-size: 17px;
+	}
+
+	/* Change background color of buttons on hover */
+	.tab button:hover {
+		background-color: #ddd;
+	}
+
+	/* Create an active/current tablink class */
+	.tab button.active {
+		background-color: #ccc;
+	}
+
+	/* Style the tab content */
+	.tabcontent {
+		display: none;
+		border-radius: 8px;
+		padding: 6px 12px;
+		border: 1px solid #ccc;
+		border-top: none;
+	}
+
+	#container,
+	#button-container {
+		margin: 1em auto;
+	}
+
+	/* .choices__input.choices__input--cloned{
+width: 100%!important;
+} */
+	#ts-control {
+		font-size: 18px !important;
+	}
+
+	#ts-dropdown.single {
+		font-size: 18px !important;
+	}
+
+	.ts-control {
+		border: none;
+	}
+
+	.ts-dropdown,
+	.ts-control,
+	.ts-control input {
+		font-size: 16px;
+	}
+
+	.filter-group {
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		margin-bottom: 10px;
+		/* Add some margin between the label and input groups */
+	}
+
+	#loadingMessage {
+		display: none;
+		/* Styling for the loading message */
+		padding: 10px;
+		background-color: #f1f1f1;
+		border: 1px solid #ddd;
+		text-align: center;
+	}
+</style>
+<div>
+<h1 style="text-align: center; font-weight: bold; margin-bottom: 3rem;">An&aacute;lise Financeira das Obras</h1>
+
+<div id="Projetos">
+<div onkeypress="handleEnterKey(event)" style="margin-bottom: 10px;">
+<div id="loadingMessage" style="margin-bottom: 2rem;">Loading...</div>
+
+<div style="display: flex; justify-content: space-between;margin-bottom: 2rem; ">
+<div style="display: flex; flex-direction: column;"><label style="margin-right: 10px;">Dt. Abert. Ini</label> <input class="column-filterProjetos" onchange="filterTableProjetos()" placeholder="Filtrar..." style="width: 100%; margin-right: 15px;" type="date" /></div>
+
+<div style="display: flex; flex-direction: column;"><label>Vendedor</label>
+
+<div class="column-filterProjetos" id="vendedorProjetoSelect" style="width:  200px;">&nbsp;</div>
+</div>
+
+<div style="display: flex; flex-direction: column;"><label style="margin-right: 10px;">Representada</label>
+
+<div class="column-filterProjetos" id="representadaProjetoSelect" style="width: 200px;">&nbsp;</div>
+</div>
+
+<div style="display: flex; flex-direction: column;"><label style="margin-right: 10px;">Dt. Abert. Final</label> <input class="column-filterProjetos" onchange="filterTableProjetos()" placeholder="Filtrar..." style="width:100%; margin-right: 15px;" type="date" /></div>
+
+<div style="display: flex; flex-direction: column;"><label>Cliente</label> <input class="column-filterProjetos" oninput="checkCharsProjetos(this)" placeholder="Filtrar..." style="width: 100%; margin-right: 15px;" type="text" /></div>
+
+<div style="display: flex; flex-direction: column;"><label>Estado Obra</label> <select id="estadoObraProjetoSelect" onchange="filterTableProjetos()" style="width: fit-content;"><option value="Aberta">Aberta</option><option value="Todas">Todas</option><option value="Fechada">Fechada</option> </select></div>
+</div>
+</div>
+
+<div id="grid-container" style="display: block;
+		overflow-x: auto;">
+<table class="table table-striped" data-currentpage="1" data-ordercolumn="obra" data-ordertype="desc" data-pagesize="10" data-totalpages="1" data-totalrecords="10" id="DataGridProjetos" style="width: 100%;">
+	<thead>
+		<tr id="tableHeaderProjetos">
+			<th style="font-size: 16px;width: 6%;"><b>N&ordm; Projetos</b><span></span></th>
+			<th style="font-size: 16px;width: 15%;"><b>Descri&ccedil;&atilde;o</b><span></span></th>
+			<th style="font-size: 16px;"><b>Cliente</b><span></span></th>
+			<th style="font-size: 16px;width: 7%;"><b>V. Qt. Anul.</b><span></span></th>
+			<th style="font-size: 16px;width: 6%;"><b>V. Adjud.</b><span></span></th>
+			<th style="font-size: 16px; width: 160px;"><b>V. Faturado</b><span></span></th>
+			<th style="font-size: 16px;width: 7%;"><b>Por Faturar</b><span></span></th>
+			<th style="font-size: 16px;width: 8%;"><b>Regularizado</b><span></span></th>
+			<th style="font-size: 16px; width: 110px; text-align: center;"><b>Por Regularizar</b><span></span></th>
+			<th style="font-size: 16px;width: 8%"><b>Recebido (Depositado)</b><span></span></th>
+			<th style="font-size: 16px;"><b>Recebido em T&iacute;tulo</b><span></span></th>
+		</tr>
+	</thead>
+	<tbody id="tableBodyProjetos">
+	</tbody>
+	<tfoot>
+		<tr>
+			<td colspan="100">
+			<div class="footer" onkeypress="handleEnterKey(event)" style="margin-top: 1rem;"><span id="footer-span"><span><span><input id="pageSizeProjetos" onchange="changePageSizeProjetos()" type="number" value="10" /> </span> por p&aacute;gina </span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button class="btn_azulesc" onclick="pageGoToProjetos('first')" type="button"><i aria-hidden="true" class="fa fa-step-backward  fa-2xl"></i></button><button class="btn_verde" onclick="pageGoToProjetos('previous')" type="button"><i aria-hidden="true" class="fa fa-chevron-left"></i></button> <span> <span id="currentPageProjetos">1</span> de <span id="totalPagesProjetos">1</span> p&aacute;ginas </span><button class="btn_verde" onclick="pageGoToProjetos('next')" type="button"><i aria-hidden="true" class="fa fa-chevron-right"></i></button><button class="btn_azulesc" onclick="pageGoToProjetos('last')" type="button"><i aria-hidden="true" class="fa fa-step-forward fa-2xl"></i></button> </span></div>
+			</td>
+		</tr>
+	</tfoot>
+</table>
+</div>
+</div>
+</div>
+<script type="text/javascript">
+	//limpa cache
+	if (!location.hash) {
+		location.hash = "#reloading";
+		location.reload(true);
+	} else {
+		location.hash = "#reloaded";
+	}
+	fillSelectsAndDates();
+	var buscarProjetos = 0;
+	window.onload = function onLoadFunction() {
+		$(".headerZone").hide();
+		$(".dropdown-toggle btn btn-default btn-sm").hide();
+		$("#OptionsRecordDropDown").hide();
+		$(".navbar").hide();
+		caches.keys().then((list) => list.map((key) => caches.delete(key)));
+	};
+
+	//Order the table
+	let tableHeaderProjetos = document.getElementById("tableHeaderProjetos");
+	let headersProjetos = tableHeaderProjetos.getElementsByTagName("th");
+	for (let i = 0; i < headersProjetos.length; i++) {
+		headersProjetos[i].addEventListener("click", function () {
+			var column = $(this).data("column");
+			var order = $(this).data("order");
+			let dataGrid = document.getElementById("DataGridProjetos");
+
+			if (order == "desc") {
+				$(this).data("order", "asc");
+				dataGrid.dataset.ordercolumn = column;
+				dataGrid.dataset.ordertype = "ASC";
+			} else {
+				$(this).data("order", "desc");
+				dataGrid.dataset.ordercolumn = column;
+				dataGrid.dataset.ordertype = "DESC";
+			}
+			// neste for está o -1 porque o último th da tabela é apenas um spacer, e ele atrofiava porque não tinha valores
+			// caso se adicionar novas colunas mudar isto (-1 no for) accordingly
+			for (let j = 0; j < headersProjetos.length - 1; j++) {
+				if (headersProjetos[j].getElementsByTagName("span")[0] != undefined) {
+					headersProjetos[j].getElementsByTagName("span")[0].innerHTML = "";
+				}
+			}
+			this.getElementsByTagName("span")[0].innerHTML = order == "desc" ? "&#9650" : "&#9660";
+			getProjetos();
+		});
+	}
+
+	getProjetos();
+
+	function checkCharsProjetos(element) {
+		const filterValue = element.value;
+		if (filterValue.length >= 3) {
+			filterTableProjetos();
+		}
+		if (filterValue == "") {
+			filterTableProjetos();
+		}
+	}
+
+	async function fillSelectsAndDates() {
+		const columnFilter = document.getElementsByClassName("column-filterProjetos");
+		const today = new Date();
+		let lastMonth = today.getMonth() - 1;
+		let lastYear = today.getFullYear();
+
+		if (lastMonth < 0) {
+			// Adjust the month and year for January of the previous year
+			lastMonth = 11; // December
+			lastYear--;
+		}
+
+		let openingDayLastMonth;
+
+		if (today.getDate() < 7) {
+			// If today is within the first 7 days, set to the 1st of the current month
+			openingDayLastMonth = new Date(today.getFullYear(), today.getMonth(), 1);
+		} else {
+			// Calculate the last 7 days of the current month
+			openingDayLastMonth = new Date(today.getFullYear(), today.getMonth(), today.getDate() - 6);
+		}
+		columnFilter[0].valueAsDate = openingDayLastMonth;
+		columnFilter[3].valueAsDate = today;
+		var params = {};
+		let varMyQuery = `select nome 
+						  from ( select 'AAA' as ordem,'TODOS' as nome union select distinct 'AAB' as ordem, cmdesc as nome from cm3 
+						  where cm3.inactivo=0 union  select distinct 'AAB' as ordem, area as nome from cm3 where cm3.inactivo=0 and area<>'' ) 
+						  as lista 
+						  order by ordem, nome`;
+		params.id = "xmltoquery";
+		params.select = varMyQuery;
+		$.ajax({
+			type: "POST",
+			url: "../api/code/run",
+			async: true,
+			data: JSON.stringify(params),
+			contentType: "application/json",
+		}).done(function (result, textStatus, jqXHR) {
+			try {
+				resposta = JSON.parse(result);
+			} catch {
+				resposta = JSON.parse('{"Dados":[]}');
+			}
+			let options = ""
+			options += "<option value=\"TODOS\">TODOS</option>"
+			var stringInic = "<select class=\"input\" id=\"vendedorProjeto\" placeholder=\"Selecione o vendedor\" value=\"\">"
+			for (let index = 0; index < resposta.Dados.length; index++) {
+				options += '<option value="' + (resposta.Dados[index].nome).trim() + '">' + (resposta.Dados[index].nome).trim() + '</option>'
+			}
+			document.getElementById("vendedorProjetoSelect").innerHTML = stringInic + options;
+			new TomSelect("#vendedorProjeto", {
+				create: false,
+				sortField: {
+					field: "text",
+					direction: "asc"
+				},
+				maxItems: 1,
+				closeAfterSelect: true
+			});
+		});
+		params.select = "select repres from u_repres(nolock) order by repres";
+		$.ajax({
+			type: "POST",
+			url: "../api/code/run",
+			async: true,
+			data: JSON.stringify(params),
+			contentType: "application/json",
+		}).done(function (result, textStatus, jqXHR) {
+			try {
+				resposta = JSON.parse(result);
+			} catch {
+				resposta = JSON.parse('{"Dados":[]}');
+			}
+			let options = ""
+			options += "<option value=\"\"></option>"
+			var stringInic = "<select class=\"input\" id=\"representadaProjeto\" placeholder=\"Selecione a representada\" value=\"\">"
+			for (let index = 0; index < resposta.Dados.length; index++) {
+				options += '<option value="' + (resposta.Dados[index].repres).trim() + '">' + (resposta.Dados[index].repres).trim() + '</option>'
+			}
+			document.getElementById("representadaProjetoSelect").innerHTML = stringInic + options;
+			new TomSelect("#representadaProjeto", {
+				create: false,
+				sortField: {
+					field: "text",
+					direction: "asc"
+				},
+				maxItems: 1,
+				closeAfterSelect: true
+			});
+		});
+	}
+
+	function getProjetos() {
+		// Display loading message
+		showLoadingMessage();
+		const dataGrid = document.getElementById("DataGridProjetos");
+		const columnFilter = document.getElementsByClassName("column-filterProjetos");
+		const dataInicial = columnFilter[0].value;
+		if (document.getElementById("vendedorProjeto") == null || document.getElementById("vendedorProjeto").value == "") {
+			var vendedorFilter = "TODOS";
+		} else {
+			var vendedorFilter = document.getElementById("vendedorProjeto").value;
+		}
+		if (document.getElementById("representadaProjeto") == null) {
+			var representadaFilter = "";
+		} else {
+			var representadaFilter = document.getElementById("representadaProjeto").value;
+		}
+		const dataFinal = columnFilter[3].value;
+		const clienteFilter = columnFilter[4].value;
+		const estadoObraFilter = document.getElementById("estadoObraProjetoSelect").value;
+
+
+		//Get order
+		const orderColumn = dataGrid.dataset.ordercolumn;
+		const orderType = dataGrid.dataset.ordertype;
+		//Get Grid Attributes
+		const currentPage = dataGrid.dataset.currentpage;
+		const pageSize = dataGrid.dataset.pagesize;
+		var offset = (currentPage - 1) * pageSize;
+		var paginacao = "";
+		if (buscarProjetos != 0) {
+			paginacao =
+				` OFFSET ` + offset.toString() +
+				` ROWS FETCH NEXT ` + pageSize.toString() + ` ROWS ONLY`;
+		}
+		const Projetos = [];
+		let params = {};
+		const varMyQuery =
+			`DECLARE @EstadoOb AS VARCHAR(50);
+				DECLARE @DtIni AS DATETIME;
+				DECLARE @DtFim AS DATETIME;
+				DECLARE @Vendedor AS VARCHAR(70);
+				DECLARE @Cliente AS VARCHAR(70);
+				DECLARE @Represent AS VARCHAR(70);
+
+				SET @EstadoOb='` + estadoObraFilter + `';
+				SET @DtIni='` + dataInicial + `';
+				SET @DtFim='` + dataFinal + `';
+				SET @Vendedor='` + vendedorFilter + `';
+				SET @Cliente='` + clienteFilter + `';
+				SET @Represent='` + representadaFilter + `';
+
+				DECLARE @myobras TABLE
+				(
+					opcstamp VARCHAR(25),
+					vendnm   VARCHAR(70),
+					processo VARCHAR(20),
+					u_repres VARCHAR(200)
+				)
+
+				INSERT INTO @myobras
+				SELECT opc.opcstamp,
+					bo.vendnm,
+					bo2.processo,
+					Cast(bo.u_repres AS CHAR(200)) AS u_repres
+				FROM   opc(nolock)
+					LEFT JOIN ( bo(nolock)
+								INNER JOIN bo2(nolock)
+										ON bo.bostamp = bo2.bo2stamp )
+							ON bo2.processo = opc.processo
+					LEFT JOIN cm3(nolock)
+							ON cm3.cm = bo.vendedor
+				WHERE
+				/* Enc. Cliente */
+				bo.ndos = 1
+				AND bo2.anulado = 0
+				AND opc.processo <> '00000000'
+				AND ( ( CASE
+							WHEN Year(opc.datafecho) <= 1900 THEN 'ABERTA'
+							ELSE 'FECHADA'
+						END ) = @EstadoOb
+						OR 'TODAS' = @EstadoOb )
+				AND opc.dataa BETWEEN @DtIni AND @DtFim
+				AND ( CASE
+						WHEN Upper(@Vendedor) = 'TODOS' THEN 1
+						WHEN ( bo.vendnm LIKE @Vendedor
+								OR ( cm3.area LIKE @Vendedor ) ) THEN 1
+						ELSE 0
+						END ) = 1
+				AND opc.nome LIKE '%' + @Cliente + '%'
+				AND bo.u_repres LIKE '%' + @Represent + '%'
+				GROUP  BY opc.opcstamp,
+						bo.vendnm,
+						bo2.processo,
+						Cast(bo.u_repres AS CHAR(200))
+
+				/* Recebido (Depositado) */
+				DECLARE @myrecebido_dep TABLE
+				(
+					obra       VARCHAR(20),
+					v_recebido NUMERIC(15, 3)
+				)
+
+				INSERT INTO @myrecebido_dep
+				SELECT recebido.obra,
+					Sum(recebido.v_recebido) AS v_recebido
+				FROM   (SELECT fatur2.obra,
+							Sum(fatur2.v_s_iva) AS v_recebido
+						FROM   (SELECT fatur.nmdoc,
+									fatur.fno,
+									fatur.obra,
+				Sum(Round(( fatur.v_s_iva *
+							( fatur.val_recebido_civa / fatur.tot_c_iva ) ), 2))
+				AS v_s_iva,
+				fatur.tot_c_iva,
+				fatur.val_recebido_civa,
+				fatur.ftstamp
+				FROM   (
+				/* Linhas faturas */
+				SELECT ft.nmdoc,
+					ft.fno,
+					fi.ref,
+					fi.design,
+					fi.qtt,
+					Cast(( CASE
+								WHEN fi.ivaincl = 1 THEN
+				Round(( fi.etiliquido / ( 1 + ( fi.iva / 100 ) ) ), 2)
+				ELSE fi.etiliquido
+				END ) AS DECIMAL(20, 5))                    AS v_s_iva,
+				ft.etotal                                          AS tot_c_iva,
+				cc.ccstamp,
+				ft.ftstamp,
+				( CASE
+				WHEN ft2.processo NOT LIKE '' THEN ft2.processo
+				ELSE fi.fifref
+				END )                                            AS obra,
+				Isnull((SELECT Sum(lin_recibos.val_recebido_civa) AS
+				val_recebido_civa
+				FROM   (
+				/* Linhas recibos */
+				SELECT ( CASE
+				WHEN Year(Isnull(rech.chdata, Cast(
+							'19000101' AS DATE)
+							)) =
+					1900
+				/* Sem titulos */
+				THEN rl.erec
+				ELSE ( CASE
+						WHEN
+				(SELECT Sum(chaux1.evalor)
+				FROM   ch AS chaux1(nolock)
+				WHERE  chaux1.restamp = re.restamp) <> 0
+						THEN
+						Round((
+						rl.erec * ch.evalor / (SELECT
+						Sum(chaux2.evalor)
+												FROM
+						ch AS chaux2(nolock)
+												WHERE
+				chaux2.restamp = re.restamp) ), 2)
+				ELSE 0.000
+				END )
+				END ) AS val_recebido_civa,
+				ftaux.ftstamp,
+				( CASE
+				WHEN Year(Isnull(rech.chdata, Cast(
+				'19000101' AS DATE)
+				)) =
+				1900
+				/* Sem titulos */
+				THEN re.procdata
+				ELSE ( CASE
+				WHEN Isnull(ch.jadepo, Cast(0 AS BIT))
+				= 1
+				/* Ja depositado */
+				THEN Isnull(ch.dataoy, Cast(
+				'19000101' AS DATE)
+				)
+				ELSE Cast('19000101' AS DATE)
+				END )
+				END ) AS dt_recebimento,
+				( CASE
+				WHEN Year(Isnull(rech.chdata, Cast(
+				'19000101' AS DATE)
+				)) =
+				1900
+				/* Sem titulos */
+				THEN Cast(1 AS BIT)
+				ELSE ( CASE
+				WHEN Isnull(ch.jadepo, Cast(0 AS BIT))
+				= 1
+				/* Ja depositado */
+				THEN Cast(1 AS BIT)
+				ELSE Cast(0 AS BIT)
+				END )
+				END ) AS jadepo
+				FROM   rl(nolock)
+				INNER JOIN cc AS ccaux(nolock)
+				ON rl.ccstamp = ccaux.ccstamp
+				INNER JOIN ft AS ftaux(nolock)
+				ON ftaux.ftstamp = ccaux.ftstamp
+				INNER JOIN re(nolock)
+				ON rl.restamp = re.restamp
+				LEFT JOIN ( rech(nolock)
+				INNER JOIN ch(nolock)
+				ON rech.restamp = ch.restamp
+				AND rech.tptit = ch.tptit
+				AND
+				rech.clcheque = ch.clcheque
+				AND
+				rech.echvalor = ch.evalor )
+				ON re.restamp = rech.restamp
+				WHERE  ( ( CASE
+				WHEN Year(Isnull(rech.chdata, Cast(
+				'19000101' AS DATE))) =
+				1900
+				/* Sem titulos */
+				THEN re.procdata
+				ELSE ( CASE
+				WHEN Isnull(ch.jadepo,
+				Cast(0 AS BIT)) = 1
+				/* Ja depositado */
+				THEN Isnull(ch.dataoy, Cast(
+				'19000101' AS DATE))
+				ELSE Cast('19000101' AS DATE)
+				END )
+				END ) <= Cast(Getdate() AS DATE)
+				OR ( CASE
+				WHEN Year(Isnull(rech.chdata, Cast(
+				'19000101' AS DATE)
+				)) =
+				1900
+				/* Sem titulos */
+				THEN Cast(1 AS BIT)
+				ELSE ( CASE
+				WHEN Isnull(ch.jadepo, Cast(0
+				AS BIT))
+				= 1
+				/* Ja depositado */
+				THEN Cast(1 AS BIT)
+				ELSE Cast(0 AS BIT)
+				END )
+				END ) = 1 )
+				AND re.process = 1) AS lin_recibos
+				WHERE  lin_recibos.ftstamp = ft.ftstamp
+				AND Year(lin_recibos.dt_recebimento) > 1900
+				AND lin_recibos.jadepo = 1), 0.000) AS val_recebido_civa
+				FROM   fi(nolock)
+				INNER JOIN ft(nolock)
+				ON fi.ftstamp = ft.ftstamp
+				INNER JOIN ft2(nolock)
+				ON ft.ftstamp = ft2.ft2stamp
+				INNER JOIN cc(nolock)
+				ON cc.ftstamp = ft.ftstamp
+				WHERE  ( ( fi.fifref IN (SELECT obras.processo
+				FROM   @myobras AS obras)
+				AND LEFT(fi.fifref, 8) <> '' )
+				OR ( ft2.processo IN (SELECT obras.processo
+				FROM   @myobras AS obras)
+				AND LEFT(ft2.processo, 8) <> '' ) )
+				AND fi.fifref <> '00000000'
+				/* Fat.SS, Fat.O, N.Credito */
+				AND ft.ndoc IN ( 13, 14, 4 )
+				AND ft.anulado = 0
+				AND ft.fno > 0
+				AND ( CASE
+				WHEN fi.ivaincl = 1 THEN
+				Round(( fi.etiliquido / ( 1 + ( fi.iva / 100 ) ) ), 2)
+				ELSE fi.etiliquido
+				END ) <> 0) AS fatur
+				GROUP  BY fatur.nmdoc,
+				fatur.fno,
+				fatur.obra,
+				fatur.tot_c_iva,
+				fatur.val_recebido_civa,
+				fatur.ftstamp) AS fatur2
+				GROUP  BY fatur2.obra
+				UNION ALL
+				SELECT Adiant.obra,
+				Round(Isnull(Sum(Adiant.val_emissao_siva), 0.000), 2) AS v_recebido
+				FROM
+				/* Fat. Adiant */
+				(SELECT rd.rdstamp,
+				bo2.processo                          AS obra,
+				rd.nome,
+				rd.nmdoc                              AS doc,
+				rd.rno                                AS nrdoc,
+				rd.rdata                              AS dt_doc,
+				rd.iva,
+				u_orcrd.evalassoc                     AS val_emissao_civa,
+				u_orcrd.evalsemiva                    AS val_emissao_siva,
+				rd.vendnm                             AS vendedor,
+				Isnull((SELECT cm3.area
+				FROM   cm3(nolock)
+				WHERE  cm = rd.vendedor), '') AS area,
+				Isnull(ch.jadepo, Cast(1 AS BIT))     AS jadepo
+				FROM   rd(nolock)
+				LEFT JOIN ch(nolock)
+				ON rd.rdstamp = ch.rdstamp
+				/* orcam associados */
+				INNER JOIN (u_orcrd(nolock)
+					INNER JOIN bo2(nolock)
+							ON u_orcrd.orcbostamp = bo2.bo2stamp )
+				ON rd.rdstamp = u_orcrd.rdstamp
+				WHERE  ( bo2.processo IN (SELECT obras.processo
+							FROM   @myobras AS obras) )
+				AND rd.anulado = 0
+				/* Ja depositado */
+				AND Isnull(ch.jadepo, Cast(1 AS BIT)) = 1) AS adiant
+				GROUP  BY Adiant.obra) AS recebido
+				GROUP  BY recebido.obra
+
+				/* Recebido em titulos nao depositado */
+				DECLARE @myrectit TABLE
+				(
+					obra     VARCHAR(20),
+					v_rectit NUMERIC(15, 3)
+				)
+
+				INSERT INTO @myrectit
+				SELECT rectit.obra,
+					Sum(rectit.v_rectit) AS v_rectit
+				FROM   (SELECT fatur2.obra,
+							Sum(fatur2.v_s_iva) AS v_rectit
+						FROM   (SELECT fatur.nmdoc,
+									fatur.fno,
+									fatur.obra,
+				Sum(Round(( fatur.v_s_iva *
+							( fatur.val_recebido_civa / fatur.tot_c_iva ) ), 2))
+				AS v_s_iva,
+				fatur.tot_c_iva,
+				fatur.val_recebido_civa,
+				fatur.ftstamp
+				FROM   (
+				/* Linhas faturas */
+				SELECT ft.nmdoc,
+					ft.fno,
+					fi.ref,
+					fi.design,
+					fi.qtt,
+					Cast(( CASE
+								WHEN fi.ivaincl = 1 THEN
+				Round(( fi.etiliquido / ( 1 + ( fi.iva / 100 ) ) ), 2)
+				ELSE fi.etiliquido
+				END ) AS DECIMAL(20, 5))                    AS v_s_iva,
+				ft.etotal                                          AS tot_c_iva,
+				cc.ccstamp,
+				ft.ftstamp,
+				( CASE
+				WHEN ft2.processo NOT LIKE '' THEN ft2.processo
+				ELSE fi.fifref
+				END )                                            AS obra,
+				Isnull((SELECT Sum(lin_recibos.val_recebido_civa) AS
+				val_recebido_civa
+				FROM   (
+				/* Linhas recibos */
+				SELECT ( CASE
+				WHEN Year(Isnull(rech.chdata, Cast(
+							'19000101' AS DATE)
+							)) =
+					1900
+				/* Sem titulos */
+				THEN rl.erec
+				ELSE ( CASE
+						WHEN
+				(SELECT Sum(chaux1.evalor)
+				FROM   ch AS chaux1(nolock)
+				WHERE  chaux1.restamp = re.restamp) <> 0
+						THEN
+						Round((
+						rl.erec * ch.evalor / (SELECT
+						Sum(chaux2.evalor)
+												FROM
+						ch AS chaux2(nolock)
+												WHERE
+				chaux2.restamp = re.restamp) ), 2)
+				ELSE 0.000
+				END )
+				END ) AS val_recebido_civa,
+				ftaux.ftstamp,
+				( CASE
+				WHEN Year(Isnull(rech.chdata, Cast(
+				'19000101' AS DATE)
+				)) =
+				1900
+				/* Sem titulos */
+				THEN re.procdata
+				ELSE ( CASE
+				WHEN Isnull(ch.jadepo, Cast(0 AS BIT))
+				= 1
+				/* Ja depositado */
+				THEN Isnull(ch.dataoy, Cast(
+				'19000101' AS DATE)
+				)
+				ELSE Cast('19000101' AS DATE)
+				END )
+				END ) AS dt_recebimento,
+				( CASE
+				WHEN Year(Isnull(rech.chdata, Cast(
+				'19000101' AS DATE)
+				)) =
+				1900
+				/* Sem titulos */
+				THEN Cast(1 AS BIT)
+				ELSE ( CASE
+				WHEN Isnull(ch.jadepo, Cast(0 AS BIT))
+				= 1
+				/* Ja depositado */
+				THEN Cast(1 AS BIT)
+				ELSE Cast(0 AS BIT)
+				END )
+				END ) AS jadepo
+				FROM   rl(nolock)
+				INNER JOIN cc AS ccaux(nolock)
+				ON rl.ccstamp = ccaux.ccstamp
+				INNER JOIN ft AS ftaux(nolock)
+				ON ftaux.ftstamp = ccaux.ftstamp
+				INNER JOIN re(nolock)
+				ON rl.restamp = re.restamp
+				INNER JOIN ( rech(nolock)
+				INNER JOIN ch(nolock)
+				ON rech.restamp = ch.restamp
+				AND rech.tptit = ch.tptit
+				AND
+				rech.clcheque = ch.clcheque
+				AND
+				rech.echvalor = ch.evalor )
+				ON re.restamp = rech.restamp
+				WHERE  ( ( CASE
+				WHEN Year(Isnull(rech.chdata, Cast(
+				'19000101' AS DATE))) =
+				1900
+				/* Sem titulos */
+				THEN Cast(0 AS BIT)
+				ELSE ( CASE
+				WHEN Isnull(ch.jadepo,
+				Cast(0 AS BIT)) = 0
+				/* Nao depositado */
+				THEN Cast(1 AS BIT)
+				ELSE Cast(0 AS BIT)
+				END )
+				END ) = 1 )
+				AND re.process = 1) AS lin_recibos
+				WHERE  lin_recibos.ftstamp = ft.ftstamp
+				AND lin_recibos.jadepo = 0), 0.000) AS val_recebido_civa
+				FROM   fi(nolock)
+				INNER JOIN ft(nolock)
+				ON fi.ftstamp = ft.ftstamp
+				INNER JOIN ft2(nolock)
+				ON ft.ftstamp = ft2.ft2stamp
+				INNER JOIN cc(nolock)
+				ON cc.ftstamp = ft.ftstamp
+				WHERE  ( ( fi.fifref IN (SELECT obras.processo
+				FROM   @myobras AS obras)
+				AND LEFT(fi.fifref, 8) <> '' )
+				OR ( ft2.processo IN (SELECT obras.processo
+				FROM   @myobras AS obras)
+				AND LEFT(ft2.processo, 8) <> '' ) )
+				AND fi.fifref <> '00000000'
+				/* Fat.SS, Fat.O, N.Credito */
+				AND ft.ndoc IN ( 13, 14, 4 )
+				AND ft.anulado = 0
+				AND ft.fno > 0
+				AND ( CASE
+				WHEN fi.ivaincl = 1 THEN
+				Round(( fi.etiliquido / ( 1 + ( fi.iva / 100 ) ) ), 2)
+				ELSE fi.etiliquido
+				END ) <> 0) AS fatur
+				GROUP  BY fatur.nmdoc,
+				fatur.fno,
+				fatur.obra,
+				fatur.tot_c_iva,
+				fatur.val_recebido_civa,
+				fatur.ftstamp) AS fatur2
+				GROUP  BY fatur2.obra
+				UNION ALL
+				SELECT Adiant.obra,
+				Round(Isnull(Sum(Adiant.val_emissao_siva), 0.000), 2) AS v_recebido
+				FROM
+				/* Fat. Adiant */
+				(SELECT rd.rdstamp,
+				bo2.processo                          AS obra,
+				rd.nome,
+				rd.nmdoc                              AS doc,
+				rd.rno                                AS nrdoc,
+				rd.rdata                              AS dt_doc,
+				rd.iva,
+				u_orcrd.evalassoc                     AS val_emissao_civa,
+				u_orcrd.evalsemiva                    AS val_emissao_siva,
+				rd.vendnm                             AS vendedor,
+				Isnull((SELECT cm3.area
+				FROM   cm3(nolock)
+				WHERE  cm = rd.vendedor), '') AS area,
+				Isnull(ch.jadepo, Cast(1 AS BIT))     AS jadepo
+				FROM   rd(nolock)
+				LEFT JOIN ch(nolock)
+				ON rd.rdstamp = ch.rdstamp
+				/* orcam associados */
+				INNER JOIN (u_orcrd(nolock)
+					INNER JOIN bo2(nolock)
+							ON u_orcrd.orcbostamp = bo2.bo2stamp )
+				ON rd.rdstamp = u_orcrd.rdstamp
+				WHERE  ( bo2.processo IN (SELECT obras.processo
+							FROM   @myobras AS obras) )
+				AND rd.anulado = 0
+				/* Ja depositado */
+				AND Isnull(ch.jadepo, Cast(1 AS BIT)) = 0) AS adiant
+				GROUP  BY Adiant.obra) AS rectit
+				GROUP  BY rectit.obra
+
+				/* Valores ja regularizados */
+				DECLARE @myregularizado TABLE
+				(
+					v_regul_siva NUMERIC(15, 3),
+					obra         VARCHAR(20)
+				)
+
+				INSERT INTO @myregularizado
+				SELECT Round(Isnull(Sum(recebido1.v_rec_siva), 0.000), 2) AS v_regul_siva,
+					recebido1.obra
+				FROM   (
+					/*********************************************
+					 
+					Total de Adiantamentos
+					
+					**********************************************/
+					SELECT Sum(AD_Liquidado.val_emissao_siva) AS v_rec_siva,
+							AD_Liquidado.obra
+					FROM   (
+							/* Fat. Adiant */
+							SELECT rd.rdstamp,
+									bo2.processo                          AS obra,
+									rd.nome,
+									rd.nmdoc                              AS doc,
+									rd.rno                                AS nrdoc,
+									rd.rdata                              AS dt_doc,
+									rd.iva,
+									u_orcrd.evalassoc                     AS val_emissao_civa,
+									u_orcrd.evalsemiva                    AS val_emissao_siva,
+									rd.vendnm                             AS vendedor,
+									Isnull((SELECT cm3.area
+											FROM   cm3(nolock)
+											WHERE  cm = rd.vendedor), '') AS area,
+									Isnull(ch.jadepo, Cast(1 AS BIT))     AS jadepo
+							FROM   rd(nolock)
+									LEFT JOIN ch(nolock)
+											ON rd.rdstamp = ch.rdstamp
+									/* orcam associados */
+									INNER JOIN (u_orcrd(nolock)
+												INNER JOIN bo2(nolock)
+														ON u_orcrd.orcbostamp = bo2.bo2stamp )
+											ON rd.rdstamp = u_orcrd.rdstamp
+							WHERE  ( bo2.processo IN (SELECT obras.processo
+														FROM   @myobras AS obras) )
+									AND rd.anulado = 0) AS AD_Liquidado
+					GROUP  BY AD_Liquidado.obra
+						UNION ALL
+						/*********************************************
+						
+						Total recebido de Faturas SS, Fatura O, Nt.Credito
+						
+						**********************************************/
+						SELECT Round(Isnull(Sum(Cast(Isnull(recebido.v_fat, 0.000000000) * (
+													CASE
+													WHEN
+						Isnull(recebido.val_emissao_civa,
+						0.000000000) = 0 THEN 0.000000000
+										ELSE
+						Cast(
+						recebido.val_recebido_civa / recebido.val_emissao_civa AS
+						DECIMAL(
+						20, 9))
+						END ) AS DECIMAL(20, 9))), 0.000000000), 2) AS
+						v_rec_siva,
+						Isnull(recebido.obra, '')
+							AS obra
+						FROM   (SELECT ( CASE
+										WHEN fi.ivaincl = 1 THEN Round((
+										Cast(fi.etiliquido
+												AS
+												DECIMAL(20, 9)) / ( 1
+										+
+										( fi.iva / 100 ) ) ), 2)
+										ELSE Cast(fi.etiliquido AS DECIMAL(20, 9))
+										END )                                         AS v_fat,
+									Isnull(Cast(rl.evori AS DECIMAL(20, 9)), 0.000) AS
+									val_emissao_civa,
+									( CASE
+										WHEN Isnull(Cast(rl.evori AS DECIMAL(20, 9)), 0.000)
+												<> 0
+										/* val_emissao_civa */
+										THEN ( CASE
+												WHEN Isnull(Cast(rech.echvalor AS
+																DECIMAL(20, 9)),
+													0.000) <=
+													0 THEN
+												Isnull(rl.erec, 0.000)
+												ELSE Cast(Cast(( Isnull(Cast(rech.echvalor AS
+																			DECIMAL
+																			(
+																			20, 9))
+																, 0.000)
+																/
+																Cast
+																(
+																re.etotal AS DECIMAL
+																(20, 9)
+																) ) AS
+																DECIMAL(20, 9)) *
+																		Isnull(Cast(
+																		rl.erec AS DECIMAL(
+																		20, 9)),
+																		0.000)
+															AS
+																DECIMAL(20, 9))
+												END )
+										ELSE 0.000
+										END )                                         AS
+									val_recebido_civa,
+									( CASE
+										WHEN fi.fifref NOT LIKE '' THEN fi.fifref
+										ELSE ft2.processo
+										END )                                         AS obra
+								FROM   fi(nolock)
+									INNER JOIN ft(nolock)
+											ON fi.ftstamp = ft.ftstamp
+									INNER JOIN ft2(nolock)
+											ON ft.ftstamp = ft2.ft2stamp
+									INNER JOIN cc(nolock)
+											ON cc.ftstamp = ft.ftstamp
+									LEFT JOIN (rl(nolock)
+												INNER JOIN re(nolock)
+														ON rl.restamp = re.restamp)
+											ON rl.ccstamp = cc.ccstamp
+									LEFT JOIN ( rech(nolock)
+												INNER JOIN ch(nolock)
+														ON rech.restamp = ch.restamp
+															AND rech.tptit = ch.tptit
+															AND rech.clcheque = ch.clcheque
+															AND rech.echvalor = ch.evalor )
+											ON rl.restamp = rech.restamp
+								WHERE  ft.anulado = 0
+									AND ft.fno > 0
+									/* Fatura SS(13), Fatura O(14), Nt. Credito(4) */
+									AND ft.ndoc IN ( 13, 14, 4 )
+									AND ( CASE
+											WHEN fi.ivaincl = 1 THEN
+				Round(( fi.etiliquido / ( 1 + ( fi.iva / 100 ) ) ), 2)
+				ELSE fi.etiliquido
+				END ) <> 0
+				AND ( ( fi.fifref IN (SELECT obras.processo
+							FROM   @myobras AS obras)
+				AND fi.fifref NOT LIKE '' )
+				OR ( ft2.processo IN (SELECT obras.processo
+									FROM   @myobras AS obras)
+					AND ft2.processo NOT LIKE '' ) )) AS recebido
+				GROUP  BY recebido.obra,
+				recebido.val_emissao_civa) AS recebido1
+				GROUP  BY recebido1.obra
+
+				/*** Valor Adj e Valor Qt. Anulada Enc. */
+				DECLARE @myadjanul TABLE
+				(
+					obra      VARCHAR(20),
+					v_adj     NUMERIC(15, 3),
+					v_qt_anul NUMERIC(15, 3)
+				)
+
+				INSERT INTO @myadjanul
+				SELECT ( CASE
+						WHEN LEFT(bi.bifref, 8) <> '' THEN bi.bifref
+						ELSE bo2.processo
+						END )                                                                AS
+					obra,
+					Sum(( CASE
+							WHEN bi2.u_qtmedida <> 0 THEN
+							( bi.ettdeb / bi.qtt ) * bi2.u_qtmedida
+							ELSE bi.ettdeb
+							END ) - ( ( bi.ettdeb / bi.qtt ) * bi2.u_qtanul ) - bi2.u_vanul) AS
+					V_Adj,
+					Sum(( ( bi.ettdeb / bi.qtt ) * bi2.u_qtanul ) + bi2.u_vanul)           AS
+					V_Qt_Anul
+				FROM   bi(nolock)
+					INNER JOIN bi2(nolock)
+							ON bi.bistamp = bi2.bi2stamp
+					INNER JOIN bo(nolock)
+							ON bi.bostamp = bo.bostamp
+					INNER JOIN bo2(nolock)
+							ON bo.bostamp = bo2.bo2stamp
+				WHERE
+				/** Enc. Cliente(1) */
+				bo.ndos IN ( 1 )
+				AND bo2.anulado = 0
+				AND bi.qtt <> 0
+				AND ( ( bi.bifref IN (SELECT obras.processo
+										FROM   @myobras AS obras)
+						AND LEFT(bi.bifref, 8) <> '' )
+						OR ( bo2.processo IN (SELECT obras.processo
+											FROM   @myobras AS obras)
+							AND LEFT(bo2.processo, 8) <> '' ) )
+				GROUP  BY ( CASE
+							WHEN LEFT(bi.bifref, 8) <> '' THEN bi.bifref
+							ELSE bo2.processo
+							END )
+
+				/** Valores Faturados **/
+				DECLARE @myfaturado TABLE
+				(
+					obra       VARCHAR(20),
+					v_faturado NUMERIC(15, 3)
+				)
+
+				INSERT INTO @myfaturado
+				SELECT ( CASE
+						WHEN LEFT(fi.fifref, 8) <> '' THEN fi.fifref
+						ELSE ft2.processo
+						END )                                               AS obra,
+					Isnull(Sum(Cast(( CASE
+										WHEN fi.ivaincl = 1 THEN
+				Round(( fi.etiliquido / ( 1 + ( fi.iva / 100 ) ) ), 2)
+				ELSE fi.etiliquido
+				END ) AS DECIMAL(20, 5))), 0.00000) AS V_Faturado
+				FROM   fi(nolock)
+					INNER JOIN ft(nolock)
+							ON fi.ftstamp = ft.ftstamp
+					INNER JOIN ft2(nolock)
+							ON ft.ftstamp = ft2.ft2stamp
+				WHERE
+				/* Fat.SS, Fat.O, N.Credito */
+				ft.ndoc IN ( 13, 14, 4 )
+				AND ft.anulado = 0
+				AND ft.fno > 0
+				AND ( ( fi.fifref IN (SELECT obras.processo
+										FROM   @myobras AS obras)
+						AND LEFT(fi.fifref, 8) <> '' )
+						OR ( ft2.processo IN (SELECT obras.processo
+											FROM   @myobras AS obras)
+							AND LEFT(ft2.processo, 8) <> '' ) )
+				GROUP  BY ( CASE
+							WHEN LEFT(fi.fifref, 8) <> '' THEN fi.fifref
+							ELSE ft2.processo
+							END )
+
+				SELECT dados3.opcstamp,
+					dados3.obra,
+					dados3.descricao,
+					dados3.dt_abertura,
+					dados3.dt_fecho,
+					dados3.cliente,
+					dados3.v_adj,
+					dados3.v_qt_anul,
+					dados3.v_faturado,
+					dados3.por_faturar,
+					dados3.v_recebido_dep,
+					dados3.v_rectit,
+					dados3.v_regularizado,
+					( CASE
+						WHEN dados3.v_faturado <> 0 THEN
+						( dados3.v_faturado - dados3.v_regularizado )
+						ELSE 0.000
+						END ) AS v_por_regularizar
+				FROM   (SELECT dados2.opcstamp,
+							dados2.obra,
+							dados2.descricao,
+							dados2.dt_abertura,
+							dados2.dt_fecho,
+							dados2.cliente,
+							dados2.v_adj,
+							dados2.v_qt_anul,
+							dados2.v_faturado,
+							( dados2.v_adj - v_faturado )                           AS
+							por_faturar,
+							Isnull((SELECT Sum(recebido_dep.v_recebido)
+									FROM   @myrecebido_dep AS recebido_dep
+									WHERE  recebido_dep.obra = dados2.obra), 0.000) AS
+									v_recebido_dep,
+							Isnull((SELECT Sum(rectit.v_rectit)
+									FROM   @myrectit AS rectit
+									WHERE  rectit.obra = dados2.obra), 0.000)       AS
+							v_rectit,
+							Isnull((SELECT Sum(regularizado.v_regul_siva)
+									FROM   @myregularizado AS regularizado
+									WHERE  regularizado.obra = dados2.obra), 0.000) AS
+									v_regularizado
+						FROM   (SELECT opc.processo                    AS obra,
+									opc.opcstamp,
+									opc.descricao,
+									( CASE
+										WHEN Year(opc.dataa) = 1900 THEN ''
+										ELSE CONVERT(CHAR, opc.dataa, 104)
+										END )                         AS dt_abertura,
+									( CASE
+										WHEN Year(opc.datafecho) = 1900 THEN ''
+										ELSE CONVERT(CHAR, opc.datafecho, 104)
+										END )                         AS dt_fecho,
+									opc.nome                        AS cliente,
+									/* Valor Adj */
+									Isnull(adjanul.v_adj, 0.00) +
+									/* Valor Adj. Eticadata */
+									( opc.u_vadj )                  AS V_adj,
+									/* Valor Qt. Anulada Enc. */
+									Isnull(adjanul.v_qt_anul, 0.00) AS V_Qt_Anul,
+									/* Valor Faturado  */
+									Isnull(faturado.v_faturado, 0.00) +
+									/* V. Faturado Eticadata */
+									( opc.u_vfatur )                AS V_Faturado
+								FROM   opc(nolock)
+									LEFT JOIN @myadjanul AS adjanul
+											ON opc.processo = adjanul.obra
+									LEFT JOIN @myfaturado AS faturado
+											ON opc.processo = faturado.obra
+								WHERE  opc.opcstamp IN (SELECT obras.opcstamp
+														FROM   @myobras AS obras)) AS dados2) AS
+					dados3
+				WHERE  ( dados3.v_adj <> 0
+						OR dados3.v_qt_anul <> 0
+						OR dados3.v_faturado <> 0
+						OR dados3.por_faturar <> 0
+						OR dados3.v_recebido_dep <> 0
+						OR dados3.v_rectit <> 0
+						OR dados3.v_regularizado <> 0 )  
+				ORDER BY ` + orderColumn + ` ` + orderType + paginacao + ``;
+		console.log(varMyQuery);
+		params.id = "xmltoquery";
+		params.select = varMyQuery;
+		$.ajax({
+			type: "POST",
+			url: "../api/code/run",
+			async: true,
+			data: JSON.stringify(params),
+			contentType: "application/json",
+		}).done(function (result, textStatus, jqXHR) {
+			try {
+				//console.log(result);
+				resposta = JSON.parse(result);
+			} catch {
+				resposta = JSON.parse('{"Dados":[]}');
+			}
+			if (buscarProjetos == 0 && resposta.Dados.length > 0) {
+				buscarProjetos = parseInt(resposta.Dados.length);
+				return getProjetos();
+			} else {
+				const totalRecords = buscarProjetos;
+				buscarProjetos = 0;
+				const totalPages = Math.ceil(totalRecords / pageSize);
+				if (totalRecords > 0) {
+					document.getElementById("totalPagesProjetos").innerHTML = totalPages;
+					for (var i = 0; i < resposta.Dados.length; ++i) {
+						Projetos.push(resposta.Dados[i]);
+					}
+				} else {
+					document.getElementById("totalPagesProjetos").innerHTML = 1;
+				}
+				dataGrid.dataset.totalrecords = totalRecords;
+				dataGrid.dataset.totalpages = totalPages;
+				buildProjetos(Projetos);
+				// After completing the asynchronous operation, hide the loading message
+				hideLoadingMessage();
+			}
+		});
+	}
+
+	function buildProjetos(data) {
+		let tBody = document.getElementById("tableBodyProjetos");
+		tBody.innerHTML = "";
+		let row = "";
+
+		let totals = {
+			V_Qt_Anul: 0,
+			V_Adj: 0,
+			V_Faturado: 0,
+			por_faturar: 0,
+			v_regularizado: 0,
+			v_por_regularizar: 0,
+			v_recebido_dep: 0,
+			v_rectit: 0
+		};
+
+		for (let i = 0; i < data.length; i++) {
+			row += "<tr>";
+			row += '<td style=" font-size:16px; padding:8px;">' + (data[i].obra).trim() + "</td>";
+			row += '<td style=" font-size:16px; padding:8px;">' + (data[i].descricao).trim() + "</td>";
+			row += '<td style=" font-size:16px; padding:8px">' + (data[i].cliente).trim() + "</td>";
+			row += '<td style=" font-size:16px; padding:8px">' + parseFloat(data[i].v_qt_anul).toFixed(2) + "</td>";
+			row += '<td style=" font-size:16px; padding:8px; background-color: #FFFF9B;">' + parseFloat(data[i].v_adj).toFixed(2) + "</td>";
+			row += '<td style=" font-size:16px; padding:8px; background-color: #AEAEFF;">' + parseFloat(data[i].v_faturado).toFixed(2) + "</td>";
+			row += '<td style=" font-size:16px; padding:8px; background-color: #FF8484">' + parseFloat(data[i].por_faturar).toFixed(2) + "</td>";
+			row += '<td style=" font-size:16px; padding:8px; background-color: #77FFBB">' + parseFloat(data[i].v_regularizado).toFixed(2) + "</td>";
+			row += '<td style=" font-size:16px; padding:8px; background-color: #FF8484">' + parseFloat(data[i].v_por_regularizar).toFixed(2) + "</td>";
+			row += '<td style=" font-size:16px; padding:8px; background-color: #77FFBB">' + parseFloat(data[i].v_recebido_dep).toFixed(2) + "</td>";
+			row += '<td style=" font-size:16px; padding:8px; background-color: #77FFBB">' + parseFloat(data[i].v_rectit).toFixed(2) + "</td>";
+			row += "</tr>";
+
+			// Update totals
+			totals.V_Qt_Anul += parseFloat(data[i].v_qt_anul);
+			totals.V_Adj += parseFloat(data[i].v_adj);
+			totals.V_Faturado += parseFloat(data[i].v_faturado);
+			totals.por_faturar += parseFloat(data[i].por_faturar);
+			totals.v_regularizado += parseFloat(data[i].v_regularizado);
+			totals.v_por_regularizar += parseFloat(data[i].v_por_regularizar);
+			totals.v_recebido_dep += parseFloat(data[i].v_recebido_dep);
+			totals.v_rectit += parseFloat(data[i].v_rectit);
+		}
+
+		// Display totals row
+		row += "<tr>";
+		row += '<td colspan="3" style="text-align: center;font-weight: bold;font-size: xx-large;">Totais</td>';
+		row += '<td style=" font-size:16px; padding:8px"> ' + totals.V_Qt_Anul.toFixed(2) + "</td>";
+		row += '<td style=" font-size:16px; padding:8px; background-color: #FFFF9B;">' + totals.V_Adj.toFixed(2) + "</td>";
+		row += '<td style=" font-size:16px; padding:8px; background-color: #AEAEFF;">' + totals.V_Faturado.toFixed(2) + "</td>";
+		row += '<td style=" font-size:16px; padding:8px; background-color: #FF8484;">' + totals.por_faturar.toFixed(2) + "</td>";
+		row += '<td style=" font-size:16px; padding:8px; background-color: #77FFBB;">' + totals.v_regularizado.toFixed(2) + "</td>";
+		row += '<td style=" font-size:16px; padding:8px; background-color: #FF8484;">' + totals.v_por_regularizar.toFixed(2) + "</td>";
+		row += '<td style=" font-size:16px; padding:8px; background-color: #77FFBB;">' + totals.v_recebido_dep.toFixed(2) + "</td>";
+		row += '<td style=" font-size:16px; padding:8px; background-color: #77FFBB;">' + totals.v_rectit.toFixed(2) + "</td>";
+		row += "</tr>";
+
+		tBody.innerHTML += row;
+	}
+
+	function showLoadingMessage() {
+		// Display the loading message div
+		document.getElementById("loadingMessage").style.display = "block";
+	}
+
+	function hideLoadingMessage() {
+		// Hide the loading message div
+		document.getElementById("loadingMessage").style.display = "none";
+	}
+
+	function pageGoToProjetos(page) {
+		let dataGrid = document.getElementById("DataGridProjetos");
+		let totalPages = parseInt(dataGrid.getAttribute("data-totalpages"));
+		let totalRecords = parseInt(dataGrid.getAttribute("data-totalrecords"));
+		let currentPage = parseInt(dataGrid.getAttribute("data-currentpage"));
+
+		switch (page) {
+			case "first":
+				currentPage = 1;
+				break;
+			case "previous":
+				currentPage--;
+				if (currentPage < 1) {
+					currentPage = 1;
+				}
+				break;
+			case "next":
+				currentPage++;
+				if (currentPage > totalPages) {
+					currentPage = totalPages;
+				}
+				break;
+			case "last":
+				currentPage = totalPages;
+				break;
+		}
+
+		changePageProjetos(currentPage);
+	}
+
+	function changePageProjetos(page) {
+		let dataGrid = document.getElementById("DataGridProjetos");
+		let currentPage = parseInt(dataGrid.getAttribute("data-currentpage"));
+
+		document.getElementById("currentPageProjetos").innerHTML = page;
+		dataGrid.setAttribute("data-currentpage", "" + page);
+		getProjetos();
+	}
+
+	function changePageSizeProjetos() {
+		let dataGrid = document.getElementById("DataGridProjetos");
+		let pageSize = document.getElementById("pageSizeProjetos").value;
+		dataGrid.setAttribute("data-pagesize", "" + pageSize);
+		changePageProjetos(1);
+	}
+
+	function filterTableProjetos() {
+		changePageProjetos(1);
+	}
+
+	function handleEnterKey(e) {
+		if (e.keyCode == 13) {
+			// enter pressed
+			try {
+				e.preventDefault ? e.preventDefault() : (e.returnValue = false);
+				//DO ALTERNATE ACTION RATHER THAN SEND ENTER
+				changePageSizeProjetos();
+			} catch (err) {
+				console.log(err.message);
+			}
+		}
+	}
+</script>

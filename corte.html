@@ -1,0 +1,1598 @@
+<link href="https://cdn.jsdelivr.net/gh/bbbootstrap/libraries@main/choices.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/gh/bbbootstrap/libraries@main/choices.min.js"></script>
+<script src="https://code.highcharts.com/gantt/highcharts-gantt.js"></script>
+<script src="https://code.highcharts.com/gantt/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/gantt/modules/accessibility.js"></script>
+<script src="https://code.highcharts.com/modules/stock.js"></script>
+<script src="https://blacklabel.github.io/custom_events/js/customEvents.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/tom-select@2.0.0-rc.4/dist/css/tom-select.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/tom-select@2.0.0-rc.4/dist/js/tom-select.complete.min.js"></script>
+<style type="text/css">
+  #main-container {
+    padding-top: 10px;
+  }
+
+  .inline {
+    display: inline;
+  }
+
+  .show {
+    display: block;
+  }
+
+  .hide {
+    display: none;
+  }
+
+  table {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+      Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
+      sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+  }
+
+  thead tr th {
+    background-color: #fafafa;
+  }
+
+  thead tr th:first-child {
+    border-left: 1px solid #dddddd;
+  }
+
+  thead tr th:last-child {
+    border-right: 1px solid #dddddd;
+  }
+
+  thead tr:first-child th {
+    border-top: 1px solid #dddddd;
+    padding-top: 8px;
+    cursor: pointer;
+  }
+
+  thead tr:first-child th div {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+  }
+
+  thead tr:last-child th {
+    border-bottom: 1px solid #dddddd;
+  }
+
+  thead tr,
+  thead th {
+    text-align: left;
+    padding-left: 8px;
+    padding-right: 8px;
+    color: #757575;
+    font-weight: normal;
+  }
+
+  tbody tr,
+  tbody td {
+    text-align: left;
+    font-weight: normal;
+
+    border: 1px solid #dddddd;
+  }
+
+  tbody tr:hover {
+    background-color: #cfd8dc55;
+  }
+
+  .column-filterCortesImp,
+  .column-vars-filter {
+    width: 100%;
+    background-color: #fafafa;
+    border: 0px solid #cccccc;
+    border-bottom: 1px solid #cccccc;
+    margin-bottom: 12px;
+    font-weight: normal;
+    padding: 5px;
+    color: #999999;
+  }
+
+  .column-filterCortesImp:focus,
+  .column-filterCortesImp-date:focus,
+  .column-vars-filter:focus,
+  .column-vars-filter-date:focus {
+    outline: none;
+  }
+
+  .column-filterDossier,
+  .column-vars-filterDossier {
+    width: 100%;
+    background-color: #fafafa;
+    border: 0px solid #cccccc;
+    border-bottom: 1px solid #cccccc;
+    margin-bottom: 12px;
+    font-weight: normal;
+    padding: 5px;
+    color: #999999;
+  }
+
+  .column-filterDossier:focus,
+  .column-filterCortesImp-dateDossier:focus,
+  .column-vars-filterDossier:focus,
+  .column-vars-filter-dateDossier:focus {
+    outline: none;
+  }
+
+  .column-filterPendentes,
+  .column-vars-filterPendentes {
+    width: 100%;
+    background-color: #fafafa;
+    border: 0px solid #cccccc;
+    border-bottom: 1px solid #cccccc;
+    margin-bottom: 12px;
+    font-weight: normal;
+    padding: 5px;
+    color: #999999;
+  }
+
+  .column-filterPendentes:focus,
+  .column-filterCortesImp-datePendentes:focus,
+  .column-vars-filterPendentes:focus,
+  .column-vars-filter-datePendentes:focus {
+    outline: none;
+  }
+
+  .input-date {
+    width: 100%;
+    position: relative;
+    background-color: #fafafa;
+    border: 0px solid #cccccc;
+    border-bottom: 1px solid #cccccc;
+    margin-bottom: 12px;
+    font-weight: normal;
+    padding: 5px;
+    color: #999999;
+  }
+
+  .input {
+    width: 100%;
+    height: 5rem;
+    border-radius: 10px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    border: none;
+    outline-color: #4086d1
+  }
+
+  .column-filterCortesImp-date {
+    background-color: #fafafa;
+    border: 0px solid #cccccc;
+    color: #999999;
+    padding: 0px;
+  }
+
+  .btn-no-background {
+    background-color: transparent;
+    color: #999999;
+    background-repeat: no-repeat;
+    border: none;
+    cursor: pointer;
+    overflow: hidden;
+    outline: none;
+    position: absolute;
+    right: 0;
+  }
+
+  .btn-no-background:hover {
+    color: #757575;
+  }
+
+  .dropdown-datafilter-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    background-color: #ffffff;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.5);
+    z-index: 1;
+    padding: 15px;
+  }
+
+  .input-daterange {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+  }
+
+  .dropdown-datafilter-content span {
+    background-color: transparent;
+    border: none;
+  }
+
+  .input-daterange label {
+    font-size: 12px;
+    color: #808080;
+  }
+
+  .input-daterange input {
+    font-size: 12px;
+    font-weight: 500;
+    border: 1px solid #a7b1c288;
+    color: #808080;
+    border-radius: 5px;
+    max-width: 115px;
+  }
+
+  .datefilters-buttongroup button {
+    display: block;
+    width: 100%;
+    border-radius: 5px;
+    background-color: none;
+    border: 1px solid #a7b1c288;
+    font-weight: 500;
+    padding: 5px;
+    color: #808080;
+    align-self: center;
+    margin-top: 10px;
+  }
+
+  .datefilters-buttongroup>div {
+    width: 100%;
+    display: flex;
+  }
+
+  .datefilters-buttongroup>div>button {
+    display: inline;
+  }
+
+  ::placeholder {
+    /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: #cccccc;
+    opacity: 1;
+    /* Firefox */
+  }
+
+  :-ms-input-placeholder {
+    /* Internet Explorer 10-11 */
+    color: #cccccc;
+  }
+
+  ::-ms-input-placeholder {
+    /* Microsoft Edge */
+    color: #cccccc;
+  }
+
+  .modal-input-container {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    padding-top: 100px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    overflow-y: initial;
+    background-color: rgb(0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.6);
+  }
+
+  .modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 40%;
+    overflow-y: auto;
+  }
+
+  .btn_verde {
+    background: #47cf73;
+    border: 1px solid #47cf73;
+    border-radius: 6px;
+    box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
+    box-sizing: border-box;
+    color: #ffffff;
+    cursor: pointer;
+    display: inline-block;
+    font-family: nunito, roboto, proxima-nova, "proxima nova", sans-serif;
+    font-size: 16px;
+    font-weight: 800;
+    line-height: 16px;
+    min-height: 40px;
+    outline: 0;
+    padding: 12px 14px;
+    text-align: center;
+    text-rendering: geometricprecision;
+    text-transform: none;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    vertical-align: middle;
+  }
+
+  .btn_verde:hover {
+    background-color: initial;
+    background-position: 0 0;
+    color: #47cf73;
+  }
+
+  .btn_azul {
+    background: #506ce8;
+    border: 1px solid #506ce8;
+    border-radius: 6px;
+    box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
+    box-sizing: border-box;
+    color: #ffffff;
+    cursor: pointer;
+    display: inline-block;
+    font-family: nunito, roboto, proxima-nova, "proxima nova", sans-serif;
+    font-size: 16px;
+    font-weight: 800;
+    line-height: 16px;
+    min-height: 40px;
+    outline: 0;
+    padding: 12px 14px;
+    text-align: center;
+    text-rendering: geometricprecision;
+    text-transform: none;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    vertical-align: middle;
+  }
+
+  .btn_azul:hover {
+    background-color: initial;
+    background-position: 0 0;
+    color: #506ce8;
+  }
+
+  .btn_azulesc {
+    background: #1e2d84;
+    border: 1px solid #1e2d84;
+    border-radius: 6px;
+    box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
+    box-sizing: border-box;
+    color: #ffffff;
+    cursor: pointer;
+    display: inline-block;
+    font-family: nunito, roboto, proxima-nova, "proxima nova", sans-serif;
+    font-size: 16px;
+    font-weight: 800;
+    line-height: 16px;
+    min-height: 40px;
+    outline: 0;
+    padding: 12px 14px;
+    text-align: center;
+    text-rendering: geometricprecision;
+    text-transform: none;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    vertical-align: middle;
+  }
+
+  .btn_azulesc:hover {
+    background-color: initial;
+    background-position: 0 0;
+    color: #1e2d84;
+  }
+
+  tfoot tr td {
+    background-color: #fafafa;
+    border: 1px solid #dddddd;
+    padding: 5px;
+    text-align: right;
+  }
+
+  #footer-span,
+  #footer-span * {
+    font-size: 14px;
+    font-weight: normal !important;
+  }
+
+  #footer-span>* {
+    margin-left: 10px;
+    text-align: center;
+  }
+
+  #footer-span input[type="number"] {
+    width: 35px;
+    border: 1px solid #dddddd;
+    text-align: center;
+  }
+
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  #toolbar-right {
+    display: flex;
+    justify-content: flex-end;
+    padding-bottom: 20px;
+  }
+
+  #toolbar-right button {
+    border-radius: 5px;
+    font-weight: 500;
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+
+  .modal-content1 {
+    height: 23rem;
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 50%;
+    overflow-y: auto;
+    border-radius: 10px;
+  }
+
+  .botoes {
+    display: flex;
+    justify-content: end;
+  }
+
+  .horas_botoes {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  #btnencomenda {
+    margin-bottom: 1.5rem;
+  }
+
+  b {
+    color: #1e2d84;
+  }
+
+  select {
+    width: 100%;
+    height: 5rem;
+    border-radius: 8px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    border: none;
+    outline-color: #4086d1;
+    margin-bottom: 1rem;
+  }
+
+  .datas {
+    display: flex;
+    justify-content: space-around;
+  }
+
+  .data_final {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .x {
+    font-size: 14px;
+    padding: 4px;
+  }
+
+  .chk {
+    margin-top: 2rem;
+  }
+
+  .footer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+  }
+
+  .close {
+    cursor: pointer;
+  }
+
+  /* Style the tab */
+  .tab {
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid #ccc;
+    background-color: #f1f1f1;
+  }
+
+  /* Style the buttons inside the tab */
+  .tab button {
+    background-color: inherit;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+    font-size: 17px;
+  }
+
+  /* Change background color of buttons on hover */
+  .tab button:hover {
+    background-color: #ddd;
+  }
+
+  /* Create an active/current tablink class */
+  .tab button.active {
+    background-color: #ccc;
+  }
+
+  /* Style the tab content */
+  .tabcontent {
+    display: none;
+    border-radius: 8px;
+    padding: 6px 12px;
+    border: 1px solid #ccc;
+    border-top: none;
+  }
+
+  #container,
+  #button-container {
+    margin: 1em auto;
+  }
+
+  /* .choices__input.choices__input--cloned{
+    width: 100%!important;
+  } */
+  #ts-control {
+    font-size: 18px !important;
+  }
+
+  #ts-dropdown.single {
+    font-size: 18px !important;
+  }
+</style>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+<div style="margin: 2rem;">
+  <h1 style="text-align: center; font-weight: bold; margin-bottom: 3rem;">Monitor de Corte</h1>
+
+  <div class="tab" style="margin-top: 3rem;">
+    <button class="tablinks" id="btn_Dossier" onclick="openTabs(event, 'Dossier')" type="button"><b>Ordens de
+        Produ&ccedil;&atilde;o</b></button>
+    <button class="tablinks" id="btn_CortesImp" onclick="openTabs(event, 'Cortes_Imp')"
+      type="button"><b>Cortes</b></button>
+  </div>
+
+  <div class="tabcontent" id="Dossier">
+    <button type="button" class="btn_azul" onclick="envioCortes()">Envio O. Produção</button>
+    <div id="grid-container">
+      <table data-currentpagedossier="1" data-ordercolumn="refprod" data-ordertype="DESC" data-pagesizedossier="10"
+        data-totalpagesdossier="1" data-totalrecordsdossier="10" id="DataGridDossier">
+        <thead>
+          <tr id="tableHeaderDossier">
+            <th data-column="nome" data-order="desc" scope="col" style="font-size: 16px;"><b>CLIENTE</b><span></span>
+            </th>
+            <th data-column="nof" data-order="desc" scope="col" style="font-size: 16px;"><b>OF.</b><span></span></th>
+            <th data-column="refprod" data-order="desc" scope="col" style="font-size: 16px;">
+              <b>REFEFERÊCIA</b><span></span>
+            </th>
+            <th data-column="designprod" data-order="desc" scope="col" style="font-size: 16px;">
+              <b>DESIGNA&Ccedil;&Atilde;O</b><span></span>
+            </th>
+            <th data-column="largura" data-order="desc" scope="col" style="font-size: 16px;"><b>COMP.
+                PAIN&Eacute;L</b><span></span></th>
+            <th data-column="partes" data-order="desc" scope="col" style="font-size: 16px;"><b>QUANT.
+                PAIN&Eacute;IS</b><span></span></th>
+            <th data-column="metrosP" data-order="desc" scope="col" style="font-size: 16px;"><b>METROS
+                PAIN&Eacute;L</b><span></span></th>
+            <th data-column="P_cortados" data-order="desc" scope="col" style="font-size: 16px;"><b>PAIN&Eacute;IS
+                CORTADOS</b><span></span></th>
+            <th data-column="u_corteexp" data-order="desc" scope="col" style="font-size: 16px;">
+              <b>ENVIADO</b><span></span>
+            </th>
+            <th data-column="marcar" data-order="desc" scope="col" style="font-size: 16px;"><b>MARCAR</b><span></span>
+            </th>
+          </tr>
+          <tr id="filtrosDossier" onkeypress="handleEnterKey(event)">
+            <th><input class="column-filterDossier" placeholder="Filtrar..." type="text" /></th>
+            <th><input class="column-filterDossier" placeholder="Filtrar..." type="text" /></th>
+            <th><input class="column-filterDossier" placeholder="Filtrar..." type="text" /></th>
+            <th><input class="column-filterDossier" placeholder="Filtrar..." type="text" /></th>
+            <th><input class="column-filterDossier" placeholder="Filtrar..." type="text" /></th>
+            <th><input class="column-filterDossier" placeholder="Filtrar..." type="text" /></th>
+            <th>&nbsp;</th>
+            <th><input class="column-filterDossier" placeholder="Filtrar..." type="text" /></th>
+            <th>&nbsp;</th>
+            <th>&nbsp;</th>
+
+          </tr>
+        </thead>
+        <tbody id="tableBodyDossier">
+        </tbody>
+        <tfoot>
+          <tr>
+            <td colspan="100">
+              <div class="footer" onkeypress="handleEnterKey(event)" style="margin-top: 1rem;">
+                <span id="footer-span">
+                  <span>
+                    <span>
+                      <input id="pageSizeDossier" onchange="changePageSizeDossier()" type="number" value="10" />
+                    </span>
+                    por p&aacute;gina
+                  </span>
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  <button class="btn_azulesc" onclick="pageGoToDossier('first')" type="button">
+                    <i aria-hidden="true" class="fa fa-step-backward fa-2xl"></i>
+                  </button>
+                  <button class="btn_verde" onclick="pageGoToDossier('previous')" type="button">
+                    <i aria-hidden="true" class="fa fa-chevron-left"></i>
+                  </button>
+                  <span> <span id="currentPagedossier">1 </span> de <span id="totalPagesDossier">1</span> p&aacute;ginas
+                  </span>
+                  <button class="btn_verde" onclick="pageGoToDossier('next')" type="button">
+                    <i aria-hidden="true" class="fa fa-chevron-right"></i>
+                  </button>
+                  <button class="btn_azulesc" onclick="pageGoToDossier('last')" type="button">
+                    <i aria-hidden="true" class="fa fa-step-forward fa-2xl"></i>
+                  </button>
+                </span>
+              </div>
+            </td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  </div>
+
+  <div class="tabcontent" id="Cortes_Imp">
+    <div id="grid-container">
+      <table data-currentpagecortesimp="1" data-ordercolumn="u_cortesimpID" data-ordertype="DESC"
+        data-pagesizecortesimp="10" data-totalpagescortesimp="1" data-totalrecordscortesimp="10" id="DataGridCortesImp">
+        <thead>
+          <tr id="tableHeaderCortesImp">
+            <th data-column="u_cortesimpID" data-order="desc" scope="col" style="font-size: 16px;"><b>ID Cortes
+                Imp</b><span></span></th>
+            <th data-column="nof" data-order="desc" scope="col" style="font-size: 16px;"><b>OF.</b><span></span></th>
+            <th data-column="comp" data-order="desc" scope="col" style="font-size: 16px;"><b>COMP</b><span></span></th>
+            <th data-column="data" data-order="desc" scope="col" style="font-size: 16px;"><b>DATA e
+                HORA</b><span></span></th>
+            <th data-column="manual" data-order="desc" scope="col" style="font-size: 16px;"><b>MANUAL</b><span></span>
+            </th>
+            <th data-column="incompleto" data-order="desc" scope="col" style="font-size: 16px;">
+              <b>INCOMPLETO</b><span></span>
+            </th>
+            <th data-column="destino" data-order="desc" scope="col" style="font-size: 16px;"><b>DESTINO</b><span></span>
+            </th>
+            <th data-column="duplicado" data-order="desc" scope="col" style="font-size: 16px;">
+              <b>DUPLICADO</b><span></span>
+            </th>
+            <th data-column="embalado" data-order="desc" scope="col" style="font-size: 16px;">
+              <b>EMBALADO</b><span></span>
+            </th>
+            <th data-column="fechado" data-order="desc" scope="col" style="font-size: 16px;"><b>FECHADO</b><span></span>
+            </th>
+            <th data-column="fimcorte" data-order="desc" scope="col" style="font-size: 16px;"><b>FIM
+                CORTE</b><span></span></th>
+            <th data-column="uniao" data-order="desc" scope="col" style="font-size: 16px;"><b>UNIAO</b><span></span>
+            </th>
+            <th data-column="lotesup" data-order="desc" scope="col" style="font-size: 16px;"><b>LOTE
+                SUP</b><span></span></th>
+            <th data-column="loteinf" data-order="desc" scope="col" style="font-size: 16px;"><b>LOTE
+                INF</b><span></span></th>
+            <th data-column="desperd" data-order="desc" scope="col" style="font-size: 16px;">
+              <b>DESPERD.</b><span></span>
+            </th>
+            <th data-column="refprod" data-order="desc" scope="col" style="font-size: 16px;">
+              <b>REFERÊNCIA</b><span></span>
+            </th>
+            <th data-column="loteprod" data-order="desc" scope="col" style="font-size: 16px;"><b>LOTE
+                PROD.</b><span></span></th>
+            <th data-column="comdesperd" data-order="desc" scope="col" style="font-size: 16px;">
+              <b>DESPERD&Iacute;CIO</b><span></span>
+            </th>
+            <th data-column="suspensolixo" data-order="desc" scope="col" style="font-size: 16px;"><b>SUSPENSO
+                LIXO</b><span></span></th>
+          </tr>
+          <tr id="filtrosCortesImp" onkeypress="handleEnterKey(event)">
+            <th><input class="column-filterCortesImp" placeholder="Filtrar..." type="text" /></th>
+            <th><input class="column-filterCortesImp" placeholder="Filtrar..." type="text" /></th>
+            <th><input class="column-filterCortesImp" placeholder="Filtrar..." type="text" /></th>
+            <th>&nbsp;</th>
+            <th>&nbsp;</th>
+            <th>&nbsp;</th>
+            <th><input class="column-filterCortesImp" placeholder="Filtrar..." type="text" /></th>
+            <th>&nbsp;</th>
+            <th>&nbsp;</th>
+            <th>&nbsp;</th>
+            <th>&nbsp;</th>
+            <th><input class="column-filterCortesImp" placeholder="Filtrar..." type="text" /></th>
+            <th><input class="column-filterCortesImp" placeholder="Filtrar..." type="text" /></th>
+            <th><input class="column-filterCortesImp" placeholder="Filtrar..." type="text" /></th>
+            <th><input class="column-filterCortesImp" placeholder="Filtrar..." type="text" /></th>
+            <th><input class="column-filterCortesImp" placeholder="Filtrar..." type="text" /></th>
+            <th><input class="column-filterCortesImp" placeholder="Filtrar..." type="text" /></th>
+            <th>&nbsp;</th>
+            <th>&nbsp;</th>
+            <!-- <th>
+              <div class="input-date"><input class="column-filterCortesImp-date inline" id="datainicio" placeholder="Filtrar..."
+                  readonly="readonly" type="text" /><button class="btn-no-background dropdownbutton" id="btn-datainicio"
+                  onclick="openDropdownFilterDate('start')" type="button"></button>
+                <div class="dropdown-datafilter-content" data-filtervalue="" id="dropdown-inicio">
+                  <div class="input-daterange" id="datepicker">
+                    <div><label for="datainicio-range-start">De</label> <input class="input-sm form-control"
+                        data-functiontype="datechange" data-tipo="inicio" id="datainicio-range-start"
+                        onchange="setFilterDate()" type="date" /></div>
+
+                    <div><label for="datainicio-range-end">At&eacute;</label> <input class="input-sm form-control"
+                        data-functiontype="datechange" data-tipo="inicio" id="datainicio-range-end"
+                        onchange="setFilterDate()" type="date" /></div>
+                  </div>
+
+                  <div class="datefilters-buttongroup"><button class="btn btn-default" data-functiontype="today"
+                      data-tipo="inicio" id="datefilter-inicio-radio-today" onclick="setFilterDate()"
+                      type="button">Hoje</button><button class="btn btn-default" data-functiontype="yesterday"
+                      data-tipo="inicio" id="datefilter-inicio-radio-yesterday" onclick="setFilterDate()"
+                      type="button">Ontem</button><button class="btn btn-default" data-functiontype="thismonth"
+                      data-tipo="inicio" id="datefilter-inicio-radio-thismonth" onclick="setFilterDate()"
+                      type="button">Este m&ecirc;s</button><button class="btn btn-default" data-functiontype="lastmonth"
+                      data-tipo="inicio" id="datefilter-inicio-radio-lastmonth" onclick="setFilterDate()"
+                      type="button">M&ecirc;s passado</button><button class="btn btn-default"
+                      data-functiontype="thisyear" data-tipo="inicio" id="datefilter-inicio-radio-thisyear"
+                      onclick="setFilterDate()" type="button">Este ano</button><button class="btn btn-default"
+                      data-functiontype="lastyear" data-tipo="inicio" id="datefilter-inicio-radio-lastyear"
+                      onclick="setFilterDate()" type="button">Ano passado</button>
+
+                    <div style="margin-top: 10px;"><button class="btn btn-default" data-functiontype="clear"
+                        data-tipo="inicio" id="datefilter-inicio-radio-clear" onclick="setFilterDate()"
+                        type="button">Limpar</button><button class="btn btn-primary" data-functiontype="apply"
+                        data-tipo="inicio" id="datefilter-inicio-radio-apply" onclick="setFilterDate()"
+                        style="color: #fafafa;" type="button">Aplicar</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </th> -->
+          </tr>
+        </thead>
+        <tbody id="tableBodyCortesImp">
+        </tbody>
+        <tfoot>
+          <tr>
+            <td colspan="100">
+              <div class="footer" onkeypress="handleEnterKey(event)" style="margin-top: 1rem;">
+                <span id="footer-span">
+                  <span>
+                    <span>
+                      <input id="pageSizeCortesImp" onchange="changePageSizeCortesImp()" type="number" value="10" />
+                    </span> por p&aacute;gina
+                  </span>
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button class="btn_azulesc" onclick="pageGoToCortesImp('first')"
+                    type="button"><i aria-hidden="true" class="fa fa-step-backward fa-2xl"></i></button>
+                  <button class="btn_verde" onclick="pageGoToCortesImp('previous')" type="button"><i aria-hidden="true"
+                      class="fa fa-chevron-left"></i></button>
+                  <span><span id="currentPageCortesImp">1</span> de <span id="totalPagesCortesImp">1</span>
+                    p&aacute;ginas</span>
+                  <button class="btn_verde" onclick="pageGoToCortesImp('next')" type="button"><i aria-hidden="true"
+                      class="fa fa-chevron-right"></i></button>
+                  <button class="btn_azulesc" onclick="pageGoToCortesImp('last')" type="button"><i aria-hidden="true"
+                      class="fa fa-step-forward fa-2xl"></i></button>
+                </span>
+              </div>
+            </td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  </div>
+</div>
+
+<p><iframe hidden="" src="/path/cache"></iframe>
+  <script>
+    //vai ter o equipamento que foi clicado para alterar
+    var equipamento
+
+    //limpa cache
+    if (!location.hash) {
+      location.hash = "#reloading";
+      location.reload(true);
+    } else {
+      location.hash = "#reloaded";
+    }
+    var buscarCortesImp = 0;
+    var buscarDossier = 0;
+
+    window.onload = function onLoadFunction() {
+      $(".headerZone").hide();
+      $(".dropdown-toggle btn btn-default btn-sm").hide();
+      $("#OptionsRecordDropDown").hide();
+      $(".navbar").hide();
+      document.getElementById('btn_Dossier').click();
+      getDossier();
+      getCortesImp();
+    };
+
+    //Add event listener for the filter inputs
+    document.addEventListener("DOMContentLoaded", function () {
+      var filterInputs = document.getElementsByClassName("column-filterCortesImp");
+      for (var i = 0; i < filterInputs.length; i++) {
+        filterInputs[i].addEventListener("change", filterTableCortesImp);
+      }
+      var filterInputsVars =
+        document.getElementsByClassName("column-vars-filter");
+      for (var i = 0; i < filterInputsVars.length; i++) {
+        filterInputsVars[i].addEventListener("change", filterTableCortesImp);
+      }
+    });
+
+    //Order the table
+    let tableHeaderCortesImp = document.getElementById("tableHeaderCortesImp");
+    let headers = tableHeaderCortesImp.getElementsByTagName("th");
+    for (let i = 0; i < headers.length; i++) {
+      headers[i].addEventListener("click", function () {
+        var column = $(this).data("column");
+        var order = $(this).data("order");
+        let dataGridCortesImp = document.getElementById("DataGridCortesImp");
+
+        if (order == "desc") {
+          $(this).data("order", "asc");
+          dataGridCortesImp.dataset.ordercolumn = column;
+          dataGridCortesImp.dataset.ordertype = "ASC";
+        } else {
+          $(this).data("order", "desc");
+          dataGridCortesImp.dataset.ordercolumn = column;
+          dataGridCortesImp.dataset.ordertype = "DESC";
+        }
+        // neste for está o -1 porque o último th da tabela é apenas um spacer, e ele atrofiava porque não tinha valores
+        // caso se adicionar novas colunas mudar isto (-1 no for) accordingly
+        for (let j = 0; j < headers.length/* - 1*/; j++) {
+          headers[j].getElementsByTagName("span")[0].innerHTML = "";
+        }
+        this.getElementsByTagName("span")[0].innerHTML = order == "desc" ? "&#9650" : "&#9660";
+        getCortesImp();
+      });
+    }
+
+    getCortesImp();
+
+    //Add event listener for the filter inputs
+    document.addEventListener("DOMContentLoaded", function () {
+      var filterInputsDossier = document.getElementsByClassName("column-filterDossier");
+      for (var i = 0; i < filterInputsDossier.length; i++) {
+        filterInputsDossier[i].addEventListener("change", filterTableDossier);
+      }
+      var filterInputsVarsDossier =
+        document.getElementsByClassName("column-vars-filterDossier");
+      for (var i = 0; i < filterInputsVarsDossier.length; i++) {
+        filterInputsVarsDossier[i].addEventListener("change", filterTableDossier);
+      }
+    });
+
+    //Order the table
+    let tableHeaderDossier = document.getElementById("tableHeaderDossier");
+    let headersDossier = tableHeaderDossier.getElementsByTagName("th");
+    for (let i = 0; i < headersDossier.length; i++) {
+      headersDossier[i].addEventListener("click", function () {
+        var column = $(this).data("column");
+        var order = $(this).data("order");
+        let dataGridDossier = document.getElementById("DataGridDossier");
+
+        if (order == "desc") {
+          $(this).data("order", "asc");
+          dataGridDossier.dataset.ordercolumn = column;
+          dataGridDossier.dataset.ordertype = "ASC";
+        } else {
+          $(this).data("order", "desc");
+          dataGridDossier.dataset.ordercolumn = column;
+          dataGridDossier.dataset.ordertype = "DESC";
+        }
+        // neste for está o -1 porque o último th da tabela é apenas um spacer, e ele atrofiava porque não tinha valores
+        // caso se adicionar novas colunas mudar isto (-1 no for) accordingly
+        for (let j = 0; j < headersDossier.length/* - 1*/; j++) {
+          headersDossier[j].getElementsByTagName("span")[0].innerHTML = "";
+        }
+        this.getElementsByTagName("span")[0].innerHTML = order == "desc" ? "&#9650" : "&#9660";
+        getDossier();
+      });
+    }
+
+    getDossier();
+
+
+
+    //Fechar as Dropdowns - FiltrosCortesImp de datas
+    window.onclick = function (event) {
+      if (!event.target.matches(
+        "#btn-datainicio, #btn-datainicio *, #dropdown-inicio, #dropdown-inicio *"
+      ) || event.target.matches(
+        "#datefilter-inicio-radio-clear, #datefilter-inicio-radio-apply"
+      )
+      ) {
+        var dropdowns = document.getElementsByClassName(
+          "dropdown-datafilter-content"
+        );
+        for (var i = 0; i < dropdowns.length; i++) {
+          var openDropdown = dropdowns[i];
+          if (
+            openDropdown.classList.contains("show") &&
+            openDropdown.id == "dropdown-inicio"
+          ) {
+            openDropdown.classList.remove("show");
+          }
+        }
+      }
+
+      if (
+        !event.target.matches(
+          "#btn-datafim, #btn-datafim *, #dropdown-fim, #dropdown-fim *"
+        ) ||
+        event.target.matches(
+          "#datefilter-fim-radio-clear, #datefilter-fim-radio-apply"
+        )
+      ) {
+        var dropdowns = document.getElementsByClassName(
+          "dropdown-datafilter-content"
+        );
+        for (var i = 0; i < dropdowns.length; i++) {
+          var openDropdown = dropdowns[i];
+          if (
+            openDropdown.classList.contains("show") &&
+            openDropdown.id == "dropdown-fim"
+          ) {
+            openDropdown.classList.remove("show");
+          }
+        }
+      }
+    };
+
+    function openDropdownFilterDate(tipo) {
+      if (tipo == "start") {
+        document.getElementById("dropdown-inicio").classList.toggle("show");
+      } else {
+        document.getElementById("dropdown-fim").classList.toggle("show");
+      }
+    }
+
+    function setFilterDate() {
+      let button = window.event.target;
+      let tipo = button.dataset.tipo;
+      let functionType = button.dataset.functiontype;
+      let inputRangeStart;
+      let inputRangeEnd;
+      let mainInputFilter;
+      let mainInputFilterValue;
+      let dropdownDiv;
+
+      // Get the input element
+      if (tipo == "inicio") {
+        inputRangeStart = document.getElementById("datainicio-range-start");
+        inputRangeEnd = document.getElementById("datainicio-range-end");
+        mainInputFilter = document.getElementById("datainicio");
+        mainInputFilterValue = mainInputFilter.value;
+        dropdownDiv = document.getElementById("dropdown-inicio");
+      } else {
+        inputRangeStart = document.getElementById("datafim-range-start");
+        inputRangeEnd = document.getElementById("datafim-range-end");
+        mainInputFilter = document.getElementById("datafim");
+        mainInputFilterValue = mainInputFilter.value;
+        dropdownDiv = document.getElementById("dropdown-fim");
+      }
+
+      // Get the values
+      switch (functionType) {
+        case "today":
+          inputRangeStart.value = moment().format("YYYY-MM-DD");
+          inputRangeEnd.value = moment().format("YYYY-MM-DD");
+          break;
+        case "yesterday":
+          inputRangeStart.value = moment()
+            .subtract(1, "days")
+            .format("YYYY-MM-DD");
+          inputRangeEnd.value = moment()
+            .subtract(1, "days")
+            .format("YYYY-MM-DD");
+          break;
+        case "thisweek":
+          inputRangeStart.value = moment().startOf("week").format("YYYY-MM-DD");
+          inputRangeEnd.value = moment().endOf("week").format("YYYY-MM-DD");
+          break;
+        case "lastweek":
+          inputRangeStart.value = moment()
+            .subtract(1, "weeks")
+            .startOf("week")
+            .format("YYYY-MM-DD");
+          inputRangeEnd.value = moment()
+            .subtract(1, "weeks")
+            .endOf("week")
+            .format("YYYY-MM-DD");
+          break;
+        case "thismonth":
+          inputRangeStart.value = moment()
+            .startOf("month")
+            .format("YYYY-MM-DD");
+          inputRangeEnd.value = moment().endOf("month").format("YYYY-MM-DD");
+          break;
+        case "lastmonth":
+          inputRangeStart.value = moment()
+            .subtract(1, "months")
+            .startOf("month")
+            .format("YYYY-MM-DD");
+          inputRangeEnd.value = moment()
+            .subtract(1, "months")
+            .endOf("month")
+            .format("YYYY-MM-DD");
+          break;
+        case "thisyear":
+          inputRangeStart.value = moment().startOf("year").format("YYYY-MM-DD");
+          inputRangeEnd.value = moment().endOf("year").format("YYYY-MM-DD");
+          break;
+        case "lastyear":
+          inputRangeStart.value = moment()
+            .subtract(1, "years")
+            .startOf("year")
+            .format("YYYY-MM-DD");
+          inputRangeEnd.value = moment()
+            .subtract(1, "years")
+            .endOf("year")
+            .format("YYYY-MM-DD");
+          break;
+        case "clear":
+          inputRangeStart.value = "";
+          inputRangeEnd.value = "";
+          mainInputFilterValue = "";
+          break;
+        default:
+          break;
+      }
+
+      // set value in dd/mm/yyyy format
+      if (inputRangeStart.value != "" && inputRangeEnd.value != "") {
+        mainInputFilterValue =
+          moment(inputRangeStart.value).format("DD/MM/YYYY") +
+          " - " +
+          moment(inputRangeEnd.value).format("DD/MM/YYYY");
+      } else if (inputRangeStart.value != "" && inputRangeEnd.value == "") {
+        mainInputFilterValue =
+          moment(inputRangeStart.value).format("DD/MM/YYYY") + " - ";
+      } else if (inputRangeEnd.value != "" && inputRangeStart.value == "") {
+        mainInputFilterValue = moment(inputRangeEnd.value).format("DD/MM/YYYY");
+      } else {
+        mainInputFilterValue = "";
+      }
+
+      if (functionType != "apply") {
+        dropdownDiv.dataset.filtervalue = mainInputFilterValue;
+      }
+
+      if (functionType == "clear" || functionType == "apply") {
+        mainInputFilter.value = dropdownDiv.dataset.filtervalue;
+        getDossier();
+      }
+    }
+
+    function filterTableCortesImp() {
+      changePageCortesImp(1);
+    }
+
+    function filterTableDossier() {
+      changePageDossier(1);
+    }
+
+    function getDossier() {
+      let dataGridDossier = document.getElementById("DataGridDossier");
+      const columnFilter = document.getElementsByClassName("column-filterDossier");
+      const numberColumns = document.getElementById("DataGridDossier").rows[0].cells.length;
+      let nomeFilter = columnFilter[0].value;
+      let nofFilter = columnFilter[1].value;
+      var refprodFilter = columnFilter[2].value;
+      var designprodFilter = columnFilter[3].value;
+      let larguraFilter = columnFilter[4].value;
+      let partesFilter = columnFilter[5].value;
+      var P_cortadosFilter = columnFilter[6].value;
+
+      //Get order
+      let orderColumn = dataGridDossier.dataset.ordercolumn;
+      let orderType = dataGridDossier.dataset.ordertype;
+      //Get Grid Attributes
+      let currentPageDossier = dataGridDossier.dataset.currentpagedossier;
+      let pageSizeDossier = dataGridDossier.dataset.pagesizedossier;
+
+      var offset = (currentPageDossier - 1) * pageSizeDossier;
+      var paginacao = "";
+      if (buscarDossier != 0) {
+        paginacao =
+          `   OFFSET ` + offset.toString() +
+          ` ROWS FETCH NEXT ` + pageSizeDossier.toString() + ` ROWS ONLY`;
+      }
+
+      const Dossier = [];
+      let params = {};
+      const queryString = window.location.search;
+      const urlParams = new URLSearchParams(queryString);
+      const posto = urlParams.get("posto");
+      let varMyQuery =
+        `select 
+          substring(st.familia,7,3) as largura,
+          bo.obrano as nof, 
+          bo.nome, 
+          ltrim(rtrim(bo.trab1))+' - '+ltrim(rtrim(bo.trab2)) as obsprod, 
+          bi.ref as refprod, 
+          bi.design as designprod,
+          /* Quantidade */ 
+          bi.qtt*1000 as qtt, 
+          /* NPaineis */
+          bi.partes, 
+          /* Comprim */ 
+          -- bi.altura*1000 as comp, 
+          
+          isnull(
+          (select sum(u_cortesimp.comp) as executado
+            from u_cortesimp(nolock) 
+            where u_cortesimp.nof=bo.obrano 
+            and u_cortesimp.data=cast(getdate() as date)
+            and u_cortesimp.comp/1000 = bi.altura 
+            and len(ltrim(rtrim(u_cortesimp.destino)))=0
+            and u_cortesimp.fimcorte=0 
+          ), 0.000) as executado,
+          
+          isnull(
+          (select count(*) as P_Cortados
+            from u_cortesimp(nolock) 
+            where u_cortesimp.nof=bo.obrano 
+            and u_cortesimp.data=cast(getdate() as date)
+            and u_cortesimp.comp/1000 = bi.altura
+            and len(ltrim(rtrim(u_cortesimp.destino)))=0 
+            and u_cortesimp.fimcorte=0
+          ), 0.000) as P_Cortados, 
+          
+          /*cast('Flat' as char(10)) as sheetstypesup, 
+          cast('Flat' as char(10)) as sheetstypeinf, 
+          cast(0.000 as numeric(14,3)) as startoffset, 
+          cast(0.000 as numeric(14,3)) as prssstep, */
+          bi.unidade as unidadeprod, 
+          bi.bostamp, 
+          bi.bistamp, 
+          bi.producao, 
+          bi.u_corteexp, 
+          cast(0 as bit) as marcar /*,
+          
+          isnull
+            (
+              (
+                Select  
+                  count(*)
+                From 
+                  u_cortesimp(nolock) 
+                Where 
+                  u_cortesimp.embsuspenso=1
+                  and (u_cortesimp.comp-u_cortesimp.desperd-u_cortesimp.qtembal)>0
+                  and len(ltrim(rtrim(u_cortesimp.destino)))=0
+                  and u_cortesimp.suspensolixo=0
+                  and u_cortesimp.refprod=bi.ref        
+                  and u_cortesimp.nof=bo.obrano 
+                  and u_cortesimp.data=bo.dataobra                                                      
+              )
+            ,0) as suspensos    */
+        From 
+          bi(nolock) inner join bo(nolock) on bi.bostamp=bo.bostamp 
+          inner join st(nolock) on bi.ref=st.ref
+        WHERE  
+          bo.ndos=12
+          -- and bo.dataobra=cast(getdate() as date)
+          And bi.producao=1 
+          and bo.nome like '%` + nomeFilter + `%'
+          and bo.obrano like '%` + nofFilter + `%'
+          and bi.ref like '%` + refprodFilter + `%'
+          and bi.design like '%` + designprodFilter + `%'
+          and largura like '%` + larguraFilter + `%'
+          and partes like '%` + partesFilter + `%'
+          and isnull(
+          (select count(*) as P_Cortados
+            from u_cortesimp(nolock) 
+            where u_cortesimp.nof=bo.obrano 
+            and u_cortesimp.data=cast(getdate() as date)
+            and u_cortesimp.comp/1000 = bi.altura
+            and len(ltrim(rtrim(u_cortesimp.destino)))=0 
+            and u_cortesimp.fimcorte=0
+          ), 0.000) like '%` + P_cortadosFilter + `%'
+        ORDER BY ` + orderColumn + ` ` + orderType + ` ` + paginacao;
+      console.log(varMyQuery);
+      params.id = "SELECTtoJSON";
+      params.select = varMyQuery;
+      $.ajax({
+        type: "POST",
+        url: "../api/code/run",
+        async: true,
+        data: JSON.stringify(params),
+        contentType: "application/json",
+      }).done(function (result, textStatus, jqXHR) {
+        try {
+          //console.log(result);
+          resposta = JSON.parse(result);
+        } catch {
+          resposta = JSON.parse('{"Dados":[]}');
+        }
+        if (buscarDossier == 0 && resposta.Dados.length > 0) {
+          buscarDossier = parseInt(resposta.Dados.length);
+          return getDossier();
+        } else {
+          let totalRecords = buscarDossier;
+          let totalPagesDossier = Math.ceil(totalRecords / pageSizeDossier);
+          if (totalRecords > 0) {
+            document.getElementById("totalPagesDossier").innerHTML = totalPagesDossier;
+            for (var i = 0; i < resposta.Dados.length; ++i) {
+              Dossier.push(resposta.Dados[i]);
+            }
+          } else {
+            document.getElementById("totalPagesDossier").innerHTML = 1;
+          }
+          dataGridDossier.dataset.totalrecordsdossier = totalRecords;
+          dataGridDossier.dataset.totalpagesdossier = totalPagesDossier;
+          buildDossier(Dossier);
+          buscarDossier = 0
+        }
+      });
+    }
+
+    function buildDossier(data) {
+      let tBody = document.getElementById("tableBodyDossier");
+      tBody.innerHTML = "";
+      let row = "";
+      for (var i = 0; i < data.length; i++) {
+        row += "<tr>";
+        row += '<td style="font-size:16px;padding:8px;display:none">' + data[i].bistamp.trim() + "</td>";
+        row += '<td style="font-size:16px;padding:8px">&nbsp;' + data[i].nome + "</td>";
+        row += '<td style="font-size:16px;padding:8px">&nbsp;' + data[i].nof + "</td>";
+        row += '<td style="font-size:16px;padding:8px">&nbsp;' + data[i].refprod + "</td>";
+        row += '<td style="font-size:16px;padding:8px">&nbsp;' + data[i].designprod + "</td>";
+        row += '<td style="font-size:16px;padding:8px">&nbsp;' + data[i].largura + "</td>";
+        row += '<td style="font-size:16px;padding:8px">&nbsp;' + data[i].partes.split("\.")[0] + "</td>";
+        let mul = parseFloat(data[i].largura) * parseFloat(data[i].partes.split("\.")[0])
+        row += '<td style="font-size:16px;padding:8px">&nbsp;' + mul + "</td>";
+        row += '<td style="font-size:16px;padding:8px">&nbsp;' + data[i].P_Cortados + "</td>";
+        //row += '<td style=" font-size:16px;padding:8px">&nbsp;' + data[i].producao + "</td>";
+        if (data[i].u_corteexp == "False") {
+          row += '<td style="font-size:16px;padding:8px;text-align:center">&nbsp;<input type="checkbox" onclick="return false;" readonly/></td>'
+        } else {
+          row += '<td style="font-size:16px;padding:8px;text-align:center">&nbsp;<input type="checkbox" onclick="return false;" readonly checked/></td>'
+        }
+        //row += '<td style=" font-size:16px;padding:8px">&nbsp;' + data[i].u_corteexp + "</td>";
+        row += '<td style="font-size:16px;padding:8px;text-align:center">&nbsp;<input type="checkbox"/></td>'
+        //row += '<td style=" font-size:16px;padding:8px">&nbsp;' + data[i].marcar + "</td>";
+        row += "</tr>";
+      }
+      tBody.innerHTML += row;
+    }
+
+    function envioCortes() {
+      //Order the table
+      let tableBodyDossier = document.getElementById("tableBodyDossier");
+      let rowsDossier = tableBodyDossier.getElementsByTagName("tr");
+      for (let j = 0; j < rowsDossier.length; j++) {
+        if (rowsDossier[j].getElementsByTagName("input")[1].checked) {
+          let bistamp = rowsDossier[j].getElementsByTagName("td")[0].innerText;
+          insertCorte(bistamp);
+        }
+      }
+
+      getDossier();
+    }
+
+    function insertCorte(bistamp) {
+      const ordemprod = []
+      let params = {};
+      let varMyQuery =
+        `SELECT *
+         FROM bi
+         WHERE bistamp = '` + bistamp + `'`;
+      console.log(varMyQuery);
+      params.id = "SELECTtoJSON";
+      params.select = varMyQuery;
+      $.ajax({
+        type: "POST",
+        url: "../api/code/run",
+        async: true,
+        data: JSON.stringify(params),
+        contentType: "application/json",
+      }).done(function (result, textStatus, jqXHR) {
+        try {
+          //console.log(result);
+          resposta = JSON.parse(result);
+        } catch {
+          return false
+        }
+        ordemprod.push(resposta.Dados[0]);
+      });
+      params = {}
+      console.log("../programs/gensel.aspx?cscript=insereCorte&nof=" + resposta.Dados[0].nof +
+          "&ref=" +  resposta.Dados[0].ref +
+          "&design=" +  resposta.Dados[0].design +
+          "&qtt=" +  resposta.Dados[0].qtt +
+          "&comp=" +  resposta.Dados[0].largura)
+      $.ajax({
+        type: "GET",
+        url:
+          "../programs/gensel.aspx?cscript=insereCorte&nof=" + ordemprod.obrano +
+          "&ref=" + ordemprod.ref +
+          "&design=" + ordemprod.design +
+          "&qtt=" + ordemprod.qtt +
+          "&comp=" + ordemprod.largura,
+        data: JSON.stringify(params),
+        contentType: "application/json",
+        success: function (response) {
+
+        },
+        error: function (response) {
+          alert("Erro a encontrar arVend por favor tente de novo!");
+        },
+      });
+    }
+
+    async function getCortesImp() {
+      let dataGridCortesImp = document.getElementById("DataGridCortesImp");
+      const columnFilter = document.getElementsByClassName("column-filterCortesImp");
+      const numberColumns = document.getElementById("DataGridCortesImp").rows[0].cells.length;
+      let u_cortesimpIDFilter = columnFilter[0].value;
+      let nofCFilter = columnFilter[1].value;
+      let compFilter = columnFilter[2].value;
+      let destinoFilter = columnFilter[3].value;
+      let uniaoFilter = columnFilter[4].value;
+      let lotesupFilter = columnFilter[5].value;
+      let loteinfFilter = columnFilter[6].value;
+      let desperdFilter = columnFilter[7].value;
+      let refprodCFilter = columnFilter[8].value;
+      let loteprodFilter = columnFilter[9].value;
+
+      //Get order
+      let orderColumn = dataGridCortesImp.dataset.ordercolumn;
+      let orderType = dataGridCortesImp.dataset.ordertype;
+      //Get Grid Attributes
+      let currentPageCortesImp = dataGridCortesImp.dataset.currentpagecortesimp;
+      let pageSizeCortesImp = dataGridCortesImp.dataset.pagesizecortesimp;
+
+      var offset = (currentPageCortesImp - 1) * pageSizeCortesImp;
+      var paginacao = "";
+      if (buscarCortesImp != 0) {
+        paginacao =
+          `   OFFSET ` + offset.toString() +
+          ` ROWS FETCH NEXT ` + pageSizeCortesImp.toString() + ` ROWS ONLY`;
+      }
+
+      const cortes = [];
+      let params = {};
+      const queryString = window.location.search;
+      const urlParams = new URLSearchParams(queryString);
+      const posto = urlParams.get("posto");
+      let varMyQuery =
+        `select *
+      FROM 
+        u_cortesimp
+      WHERE  
+        u_cortesimpID LIKE '%` + u_cortesimpIDFilter + `%'
+        AND nof LIKE '%` + nofCFilter + `%'
+        AND comp LIKE '%` + compFilter + `%'
+        AND destino LIKE '%` + destinoFilter + `%'
+        AND uniao LIKE '%` + uniaoFilter + `%'
+        AND lotesup LIKE '%` + lotesupFilter + `%'
+        AND loteinf LIKE '%` + loteinfFilter + `%'
+        AND desperd LIKE '%` + desperdFilter + `%'
+        AND refprod LIKE '%` + refprodCFilter + `%'
+        AND loteprod LIKE '%` + loteprodFilter + `%'
+      ORDER BY ` + orderColumn + ` ` + orderType + paginacao;
+      //console.log(varMyQuery);
+      params.id = "SELECTtoJSON";
+      params.select = varMyQuery;
+      $.ajax({
+        type: "POST",
+        url: "../api/code/run",
+        async: true,
+        data: JSON.stringify(params),
+        contentType: "application/json",
+      }).done(function (result, textStatus, jqXHR) {
+        try {
+          //console.log(result);
+          resposta = JSON.parse(result);
+        } catch {
+          resposta = JSON.parse('{"Dados":[]}');
+        }
+        if (buscarCortesImp == 0) {
+          buscarCortesImp = parseInt(resposta.Dados.length);
+          return getCortesImp();
+        } else {
+          let totalRecords = buscarCortesImp;
+          let totalPagesCortesImp = Math.ceil(totalRecords / pageSizeCortesImp);
+          if (totalRecords > 0) {
+            document.getElementById("totalPagesCortesImp").innerHTML = totalPagesCortesImp;
+            for (var i = 0; i < resposta.Dados.length; ++i) {
+              cortes.push(resposta.Dados[i]);
+            }
+            buildCortesImp(cortes);
+          } else {
+            document.getElementById("totalPagesCortesImp").innerHTML = 1;
+          }
+          dataGridCortesImp.dataset.totalrecords = totalRecords;
+          dataGridCortesImp.dataset.totalpagescortesimp = totalPagesCortesImp;
+        }
+      });
+    }
+
+    function buildCortesImp(data) {
+      let tBody = document.getElementById("tableBodyCortesImp");
+      tBody.innerHTML = "";
+      let row = "";
+      for (var i = 0; i < data.length; i++) {
+        row += '<td style="font-size:16px;padding:8px;text-align:center">&nbsp;' + data[i].u_cortesimpID + "</td>";
+        row += '<td style="font-size:16px;padding:8px;text-align:center">&nbsp;' + data[i].nof + "</td>";
+        row += '<td style="font-size:16px;padding:8px;text-align:center">&nbsp;' + data[i].comp.split("\.")[0] + "</td>";
+        row += '<td style="font-size:16px;padding:8px;text-align:center">&nbsp;' + data[i].data.split(" ")[0] + " " + data[i].hora + "</td>";
+        if (data[i].manual == "False") {
+          row += '<td style="font-size:16px;padding:8px;text-align:center">&nbsp;<input type="checkbox" onclick="return false;" readonly/></td>'
+        } else {
+          row += '<td style="font-size:16px;padding:8px;text-align:center">&nbsp;<input type="checkbox" onclick="return false;" readonly checked/></td>'
+        }
+        //row += '<td style="font-size:16px;padding:8px;text-align:center">&nbsp;' + data[i].manual + "</td>";
+        if (data[i].incompleto == "False") {
+          row += '<td style="font-size:16px;padding:8px;text-align:center">&nbsp;<input type="checkbox" onclick="return false;" readonly/></td>'
+        } else {
+          row += '<td style="font-size:16px;padding:8px;text-align:center">&nbsp;<input type="checkbox" onclick="return false;" readonly checked/></td>'
+        }
+        //row += '<td style="font-size:16px;padding:8px;text-align:center">&nbsp;' + data[i].incompleto + "</td>";
+        row += '<td style="font-size:16px;padding:8px;text-align:center">&nbsp;' + data[i].destino + "</td>";
+        if (data[i].duplicado == "False") {
+          row += '<td style="font-size:16px;padding:8px;text-align:center">&nbsp;<input type="checkbox" onclick="return false;" readonly/></td>'
+        } else {
+          row += '<td style="font-size:16px;padding:8px;text-align:center">&nbsp;<input type="checkbox" onclick="return false;" readonly checked/></td>'
+        }
+        //row += '<td style="font-size:16px;padding:8px;text-align:center">&nbsp;' + data[i].duplicado + "</td>";
+        if (data[i].embalado == "False") {
+          row += '<td style="font-size:16px;padding:8px;text-align:center">&nbsp;<input type="checkbox" onclick="return false;" readonly/></td>'
+        } else {
+          row += '<td style="font-size:16px;padding:8px;text-align:center">&nbsp;<input type="checkbox" onclick="return false;" readonly checked/></td>'
+        }
+        //row += '<td style="font-size:16px;padding:8px;text-align:center">&nbsp;' + data[i].embalado + "</td>";
+        if (data[i].fechado == "False") {
+          row += '<td style="font-size:16px;padding:8px;text-align:center">&nbsp;<input type="checkbox" onclick="return false;" readonly/></td>'
+        } else {
+          row += '<td style="font-size:16px;padding:8px;text-align:center">&nbsp;<input type="checkbox" onclick="return false;" readonly checked/></td>'
+        }
+        //row += '<td style="font-size:16px;padding:8px;text-align:center">&nbsp;' + data[i].fechado + "</td>";
+        if (data[i].fimcorte == "False") {
+          row += '<td style="font-size:16px;padding:8px;text-align:center">&nbsp;<input type="checkbox" onclick="return false;" readonly/></td>'
+        } else {
+          row += '<td style="font-size:16px;padding:8px;text-align:center">&nbsp;<input type="checkbox" onclick="return false;" readonly checked/></td>'
+        }
+        //row += '<td style="font-size:16px;padding:8px;text-align:center">&nbsp;' + data[i].fimcorte + "</td>";
+        row += '<td style="font-size:16px;padding:8px;text-align:center">&nbsp;' + data[i].uniao + "</td>";
+        row += '<td style="font-size:16px;padding:8px;text-align:center">&nbsp;' + data[i].lotesup + "</td>";
+        row += '<td style="font-size:16px;padding:8px;text-align:center">&nbsp;' + data[i].loteinf + "</td>";
+        row += '<td style="font-size:16px;padding:8px;text-align:center">&nbsp;' + data[i].desperd.split("\.")[0] + "</td>";
+        row += '<td style="font-size:16px;padding:8px;text-align:center">&nbsp;' + data[i].refprod + "</td>";
+        row += '<td style="font-size:16px;padding:8px;text-align:center">&nbsp;' + data[i].loteprod + "</td>";
+        if (data[i].comdesperd == "False") {
+          row += '<td style="font-size:16px;padding:8px;text-align:center">&nbsp;<input type="checkbox" onclick="return false;" readonly/></td>'
+        } else {
+          row += '<td style="font-size:16px;padding:8px;text-align:center">&nbsp;<input type="checkbox" onclick="return false;" readonly checked/></td>'
+        }
+        //row += '<td style="font-size:16px;padding:8px;text-align:center">&nbsp;' + data[i].comdesperd + "</td>";
+        if (data[i].suspensolixo == "False") {
+          row += '<td style="font-size:16px;padding:8px;text-align:center">&nbsp;<input type="checkbox" onclick="return false;" readonly/></td>'
+        } else {
+          row += '<td style="font-size:16px;padding:8px;text-align:center">&nbsp;<input type="checkbox" onclick="return false;" readonly checked/></td>'
+        }
+        //row += '<td style="font-size:16px;padding:8px;text-align:center">&nbsp;' + data[i].suspensolixo + "</td>";
+
+        row += "</tr>";
+      }
+      tBody.innerHTML += row;
+    }
+
+    function openTabs(evt, tarefa) {
+      var i, tabcontent, tablinks;
+      tabcontent = document.getElementsByClassName("tabcontent");
+      for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+      }
+      tablinks = document.getElementsByClassName("tablinks");
+      for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+      }
+      document.getElementById(tarefa).style.display = "block";
+      evt.currentTarget.className += " active";
+    }
+
+    function pageGoToCortesImp(page) {
+      let dataGridCortesImp = document.getElementById("DataGridCortesImp");
+      let totalPagesCortesImp = parseInt(dataGridCortesImp.getAttribute("data-totalpagescortesimp"));
+      let totalRecords = parseInt(dataGridCortesImp.getAttribute("data-totalrecordscortesimp"));
+      let currentPageCortesImp = parseInt(dataGridCortesImp.getAttribute("data-currentpagecortesimp"));
+
+      switch (page) {
+        case "first":
+          currentPageCortesImp = 1;
+          break;
+        case "previous":
+          currentPageCortesImp--;
+          if (currentPageCortesImp < 1) {
+            currentPageCortesImp = 1;
+          }
+          break;
+        case "next":
+          currentPageCortesImp++;
+          if (currentPageCortesImp > totalPagesCortesImp) {
+            currentPageCortesImp = totalPagesCortesImp;
+          }
+          break;
+        case "last":
+          currentPageCortesImp = totalPagesCortesImp;
+          break;
+      }
+
+      changePageCortesImp(currentPageCortesImp);
+    }
+
+    function pageGoToDossier(page) {
+      let dataGridCortesImp = document.getElementById("DataGridDossier");
+      let totalPagesCortesImp = parseInt(dataGridCortesImp.getAttribute("data-totalpagesdossier"));
+      let totalRecords = parseInt(dataGridCortesImp.getAttribute("data-totalrecordsdossier"));
+      let currentPageCortesImp = parseInt(dataGridCortesImp.getAttribute("data-currentpagedossier"));
+
+      switch (page) {
+        case "first":
+          currentPageCortesImp = 1;
+          break;
+        case "previous":
+          currentPageCortesImp--;
+          if (currentPageCortesImp < 1) {
+            currentPageCortesImp = 1;
+          }
+          break;
+        case "next":
+          currentPageCortesImp++;
+          if (currentPageCortesImp > totalPagesCortesImp) {
+            currentPageCortesImp = totalPagesCortesImp;
+          }
+          break;
+        case "last":
+          currentPageCortesImp = totalPagesCortesImp;
+          break;
+      }
+
+      changePageDossier(currentPageCortesImp);
+    }
+
+
+    function changePageCortesImp(page) {
+      let dataGridCortesImp = document.getElementById("DataGridCortesImp");
+      let currentPageCortesImp = parseInt(dataGridCortesImp.getAttribute("data-currentpagecortesimp"));
+
+      document.getElementById("currentPageCortesImp").innerHTML = page;
+      dataGridCortesImp.setAttribute("data-currentpagecortesimp", "" + page);
+
+      getCortesImp();
+    }
+
+    function changePageSizeCortesImp() {
+      let dataGridCortesImp = document.getElementById("DataGridCortesImp");
+      let pageSizeCortesImp = document.getElementById("pageSizeCortesImp").value;
+      dataGridCortesImp.setAttribute("data-pagesizecortesimp", "" + pageSizeCortesImp);
+      changePageCortesImp(1);
+    }
+
+    function changePageDossier(page) {
+      let dataGridCortesImp = document.getElementById("DataGridDossier");
+      let currentPageCortesImp = parseInt(dataGridCortesImp.getAttribute("data-currentpagedossier"));
+
+      document.getElementById("currentPagedossier").innerHTML = page;
+      dataGridCortesImp.setAttribute("data-currentpagedossier", "" + page);
+
+      getDossier();
+    }
+
+    function changePageSizeDossier() {
+      let dataGridCortesImp = document.getElementById("DataGridDossier");
+      let pageSizeCortesImp = document.getElementById("pageSizeDossier").value;
+      dataGridCortesImp.setAttribute("data-pagesizedossier", "" + pageSizeCortesImp);
+      changePageDossier(1);
+    }
+
+    function handleEnterKey(e) {
+      if (e.keyCode == 13) {
+        // enter pressed
+        try {
+          e.preventDefault ? e.preventDefault() : (e.returnValue = false);
+          //DO ALTERNATE ACTION RATHER THAN SEND ENTER
+          changePageSizeCortesImp();
+          changePageSizeDossier();
+        } catch (err) {
+          console.log(err.message);
+        }
+      }
+    }
+  </script>
+</p>

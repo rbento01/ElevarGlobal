@@ -1,0 +1,2945 @@
+<style type="text/css">
+	/* modal container */
+	.modal-input-container {
+		display: none;
+		position: fixed;
+		z-index: 1;
+		padding-top: 65px;
+		left: 0;
+		top: 0;
+		width: 100%;
+		height: 100%;
+		overflow: auto;
+		overflow-y: initial;
+		background-color: rgb(0, 0, 0);
+		background-color: rgba(0, 0, 0, 0.6);
+	}
+
+
+	.modal-content {
+		background-color: #fefefe;
+		margin: auto;
+		padding: 20px;
+		border: 1px solid #888;
+		width: 250px;
+		height: 390px;
+		overflow-y: auto;
+		margin-top: 0px;
+
+	}
+
+	.modal_content {
+		background-color: #fefefe;
+		margin: auto;
+		padding: 10px;
+		border: 1px solid #888;
+		width: 330px;
+		height: 180px;
+		overflow-y: auto;
+		border-radius: 10px;
+		box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+	}
+
+	.modal_adicionarLote {
+		background-color: #fefefe;
+		margin: auto;
+		padding: 10px;
+		border: 1px solid #888;
+		width: 330px;
+		height: 250px;
+		overflow-y: auto;
+		border-radius: 10px;
+		box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+	}
+
+	.modal_settings {
+		background-color: #fefefe;
+		margin: auto;
+		padding: 10px;
+		border: 1px solid #888;
+		width: 90%;
+		height: auto;
+		overflow-y: auto;
+		border-radius: 10px;
+		box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+
+	}
+
+	.modal_lote {
+		background-color: #fefefe;
+		margin: auto;
+		padding: 10px;
+		border: 1px solid #888;
+		width: 30%;
+
+		overflow-y: auto;
+		border-radius: 10px;
+		box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+	}
+
+	.close1 {
+		color: rgb(122, 122, 122);
+		float: right;
+		font-size: 20px;
+		cursor: pointer;
+	}
+
+	/* modal container */
+	.modal-input-container1 {
+		display: none;
+		position: fixed;
+		z-index: 1;
+		padding-top: 65px;
+		left: 0;
+		top: 0;
+		width: 100%;
+		height: 100%;
+		overflow: auto;
+		overflow-y: initial;
+		background-color: rgb(0, 0, 0);
+		background-color: rgba(0, 0, 0, 0.6);
+	}
+
+	.modal-content1 {
+		background-color: #fefefe;
+		margin: auto;
+		padding: 20px;
+		border: 1px solid #888;
+		width: 400px;
+		height: 150px;
+		overflow-y: auto;
+		border-radius: 10px;
+	}
+
+	.close1 {
+		color: rgb(122, 122, 122);
+		float: right;
+		font-size: 20px;
+	}
+
+	/* form PIN */
+	.form {
+
+		text-align: center;
+		box-shadow: 0px 5px 5px -0px rgba(0, 0, 0, 0.3);
+		border-radius: 5px;
+
+	}
+
+	.inp_pass {
+		padding: 0 40px;
+		border-radius: 5px;
+		width: 200px;
+		margin: auto;
+		border: 1px solid rgb(228, 220, 220);
+		outline: none;
+		font-size: 20px;
+		color: transparent;
+		text-shadow: 0 0 0 rgb(71, 71, 71);
+		text-align: center;
+		margin-bottom: 1rem;
+		height: 4rem;
+	}
+
+	.inp_pass:focus {
+		outline: none;
+
+	}
+
+
+	.pinButton {
+		border: none;
+		background: none;
+		font-size: 1em;
+		border-radius: 50%;
+		height: 35px;
+		font-weight: 550;
+		width: 35px;
+		color: transparent;
+		text-shadow: 0 0 0 rgb(102, 101, 101);
+		margin: 7px 11px;
+		padding: revert;
+	}
+
+	.clear,
+	.enter {
+		font-size: 1em !important;
+
+	}
+
+	.pinButton:hover {
+		box-shadow: #0765b7 0 0 1px 1px;
+	}
+
+	.pinButton:active {
+		background: #0765b7;
+		color: #fff;
+	}
+
+	.btn_clear {
+		background-color: white;
+		color: #ff3c41;
+		border: 1px solid #ff3c41;
+		border-radius: 6px;
+
+		box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
+
+
+	}
+
+	.btn_enter {
+		background-color: white;
+		color: #47cf73;
+		border: 1px solid #47cf73;
+		border-radius: 6px;
+
+		box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
+
+	}
+
+	.btn_clear:hover {
+		box-shadow: #ff3c41 0 0 1px 1px;
+	}
+
+	.btn_clear:active {
+		background: #ff3c41;
+		color: #fff;
+	}
+
+	.btn_enter:hover {
+		box-shadow: #47cf73 0 0 1px 1px;
+	}
+
+	.btn_enter:active {
+		background: #47cf73;
+		color: #fff;
+	}
+
+	#pinpad {
+		text-align: center;
+
+	}
+
+	.btn_cancel {
+		background: #ff3c41;
+		border: 1px solid #ff3c41;
+		border-radius: 6px;
+		box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
+		box-sizing: border-box;
+		color: #FFFFFF;
+		cursor: pointer;
+		display: inline-block;
+		font-family: nunito, roboto, proxima-nova, "proxima nova", sans-serif;
+		font-size: 16px;
+		font-weight: 800;
+		line-height: 16px;
+		min-height: 40px;
+		outline: 0;
+		padding: 12px 14px;
+		text-align: center;
+		text-rendering: geometricprecision;
+		text-transform: none;
+		user-select: none;
+		-webkit-user-select: none;
+		touch-action: manipulation;
+		vertical-align: middle;
+
+
+	}
+
+
+	.btn_cancel:hover {
+		background-color: initial;
+		background-position: 0 0;
+		color: #ff3c41;
+
+	}
+
+	.numeros {
+		display: contents;
+		flex-direction: column;
+	}
+
+	.btn_verde {
+		background: #47cf73;
+		border: 1px solid #47cf73;
+		border-radius: 6px;
+		box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
+		box-sizing: border-box;
+		color: #FFFFFF;
+		cursor: pointer;
+		display: inline-block;
+		font-family: nunito, roboto, proxima-nova, "proxima nova", sans-serif;
+		font-size: 16px;
+		font-weight: 800;
+		line-height: 16px;
+		min-height: 40px;
+		outline: 0;
+		padding: 12px 14px;
+		text-align: center;
+		text-rendering: geometricprecision;
+		text-transform: none;
+		user-select: none;
+		-webkit-user-select: none;
+		touch-action: manipulation;
+		vertical-align: middle;
+	}
+
+	.btn_verde:hover {
+		background-color: initial;
+		background-position: 0 0;
+		color: #47cf73;
+	}
+
+	.btn_validar {
+		background: #47cf73;
+		border: 1px solid #47cf73;
+		border-radius: 6px;
+		box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
+		box-sizing: border-box;
+		color: #FFFFFF;
+		cursor: pointer;
+		display: inline-block;
+		font-family: nunito, roboto, proxima-nova, "proxima nova", sans-serif;
+		font-size: 16px;
+		font-weight: 800;
+		line-height: 16px;
+		min-height: 40px;
+		outline: 0;
+		padding: 12px 14px;
+		text-align: center;
+		text-rendering: geometricprecision;
+		text-transform: none;
+		user-select: none;
+		-webkit-user-select: none;
+		touch-action: manipulation;
+		vertical-align: middle;
+
+
+	}
+
+	.btn_validar:hover {
+		background-color: initial;
+		background-position: 0 0;
+		color: #47cf73;
+	}
+
+	.btn_vermelho {
+		background: #ff3c41;
+		border: 1px solid #ff3c41;
+		border-radius: 6px;
+		box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
+		box-sizing: border-box;
+		color: #FFFFFF;
+		cursor: pointer;
+		display: inline-block;
+		font-family: nunito, roboto, proxima-nova, "proxima nova", sans-serif;
+		font-size: 16px;
+		font-weight: 800;
+		line-height: 16px;
+		min-height: 40px;
+		outline: 0;
+		padding: 12px 14px;
+		text-align: center;
+		text-rendering: geometricprecision;
+		text-transform: none;
+		user-select: none;
+		-webkit-user-select: none;
+		touch-action: manipulation;
+		vertical-align: middle;
+
+
+	}
+
+	.btn_vermelho:hover {
+		background-color: initial;
+		background-position: 0 0;
+		color: #ff3c41;
+
+	}
+
+	.btn_desvalidar {
+		background: #ff3c41;
+		border: 1px solid #ff3c41;
+		border-radius: 6px;
+		box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
+		box-sizing: border-box;
+		color: #FFFFFF;
+		cursor: pointer;
+		display: inline-block;
+		font-family: nunito, roboto, proxima-nova, "proxima nova", sans-serif;
+		font-size: 16px;
+		font-weight: 800;
+		line-height: 16px;
+		min-height: 40px;
+		outline: 0;
+		padding: 12px 14px;
+		text-align: center;
+		text-rendering: geometricprecision;
+		text-transform: none;
+		user-select: none;
+		-webkit-user-select: none;
+		touch-action: manipulation;
+		vertical-align: middle;
+
+
+	}
+
+	.btn_desvalidar:hover {
+		background-color: initial;
+		background-position: 0 0;
+		color: #ff3c41;
+
+	}
+
+	.btn_vermelho1 {
+		background: #ffffff;
+		border: 1px solid #ff3c41;
+		border-radius: 6px;
+		box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
+		box-sizing: border-box;
+		color: #FFFFFF;
+		cursor: pointer;
+		display: inline-block;
+		font-family: nunito, roboto, proxima-nova, "proxima nova", sans-serif;
+		font-size: 16px;
+		font-weight: 800;
+		line-height: 16px;
+		min-height: 40px;
+		outline: 0;
+		padding: 12px 14px;
+		text-align: center;
+		text-rendering: geometricprecision;
+		text-transform: none;
+		user-select: none;
+		-webkit-user-select: none;
+		touch-action: manipulation;
+		vertical-align: middle;
+
+
+	}
+
+	.btn_vermelho1:hover {
+		background-color: initial;
+		background-position: 0 0;
+		color: #ff3c41;
+
+	}
+
+	.btn_azul {
+		background: #0765b7;
+		border: 1px solid #0765b7;
+		border-radius: 6px;
+		box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
+		box-sizing: border-box;
+		color: #FFFFFF;
+		cursor: pointer;
+		display: inline-block;
+		font-family: nunito, roboto, proxima-nova, "proxima nova", sans-serif;
+		font-size: 16px;
+		font-weight: 800;
+		line-height: 16px;
+		min-height: 40px;
+		outline: 0;
+		padding: 12px 14px;
+		text-align: center;
+		text-rendering: geometricprecision;
+		text-transform: none;
+		user-select: none;
+		-webkit-user-select: none;
+		touch-action: manipulation;
+		vertical-align: middle;
+
+	}
+
+	.btn_azul:hover {
+		background-color: initial;
+		background-position: 0 0;
+		color: #0765b7;
+
+	}
+
+	.btn_azul1 {
+		background: #FFFFFF;
+		border: 1px solid #0765b7;
+		border-radius: 6px;
+		box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
+		box-sizing: border-box;
+		color: #FFFFFF;
+		cursor: pointer;
+		display: inline-block;
+		font-family: nunito, roboto, proxima-nova, "proxima nova", sans-serif;
+		font-size: 16px;
+		font-weight: 800;
+		line-height: 16px;
+		min-height: 40px;
+		outline: 0;
+		padding: 12px 14px;
+		text-align: center;
+		text-rendering: geometricprecision;
+		text-transform: none;
+		user-select: none;
+		-webkit-user-select: none;
+		touch-action: manipulation;
+		vertical-align: middle;
+
+	}
+
+	.btn_azul1:hover {
+		background-color: initial;
+		background-position: 0 0;
+		color: #0765b7;
+	}
+
+
+
+
+	input {
+		background-position: 10px 10px;
+		background-repeat: no-repeat;
+
+		font-size: 16px;
+		padding: 12px 20px 12px 40px;
+		border-radius: 8px;
+		box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+		border: none;
+		outline-color: #0765b7;
+
+	}
+
+	.div_filtro {
+		display: flex;
+		align-items: center;
+	}
+
+	.div_guardar {
+		display: flex;
+	}
+
+	.box {
+		width: 100%;
+		display: flex;
+		flex-direction: column;
+	}
+
+	.cliente {
+		display: flex;
+		justify-content: space-around;
+		align-items: center;
+
+	}
+
+	h2 {
+		margin-bottom: 3rem;
+		font-weight: bold;
+		font-size: 5rem
+	}
+
+	.input_box {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		margin-top: 4rem;
+	}
+
+	#inp_lote {
+		width: 80%;
+	}
+
+	.column-filter {
+		width: 100%;
+		background-color: #FAFAFA;
+		border: 0px solid #cccccc;
+		border-bottom: 1px solid #cccccc;
+		margin-bottom: 12px;
+		font-weight: normal;
+		padding: 5px;
+		color: #999999;
+	}
+
+	.column-filter:focus,
+	.column-filter-date:focus {
+		outline: none;
+	}
+
+	.filtros {
+		display: flex;
+		width: 100%;
+		justify-content: space-between;
+	}
+
+	.header {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
+
+	.btns {
+		display: flex;
+		margin-top: 1rem;
+
+	}
+
+	.btns_settings {
+		display: flex;
+		margin-top: 1rem;
+		justify-content: space-between;
+		margin: 1rem;
+
+
+	}
+
+	.caixa {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		margin-top: 3rem;
+		margin: 2rem;
+		margin-top: 2rem;
+	}
+
+	.input {
+		width: 80%;
+		height: 5rem;
+		border-radius: 10px;
+		box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+		border: none;
+		outline-color: #4086d1
+	}
+
+	.titulo_selc {
+		display: flex;
+		align-items: center;
+		width: 80%;
+
+	}
+
+	.botoes {
+		display: flex;
+		align-items: flex-end;
+		justify-content: space-between;
+		width: 100%;
+
+	}
+
+	.celula1 {
+
+		display: flex;
+		justify-content: space-between;
+		align-items: flex-start;
+	}
+
+	.fa-pencil:before {
+		color: #0765b7;
+	}
+
+
+	.fa-trash:before {
+		color: #ff3c41;
+	}
+
+	.settings {
+		display: flex;
+	}
+
+	.close1 {
+		color: rgb(122, 122, 122);
+		float: right;
+		font-size: 20px;
+		margin-bottom: 1rem;
+	}
+
+	.modalAdiSetttings {
+		background-color: #fefefe;
+		margin: auto;
+		padding: 10px;
+		border: 1px solid #888;
+		width: 70%;
+
+		overflow-y: auto;
+		border-radius: 10px;
+		box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+	}
+
+	.inputs {
+		display: flex;
+		justify-content: space-around;
+
+	}
+
+	.ordem_titulo {
+		width: 60%;
+
+	}
+
+	.query_campo {
+		width: 60%;
+	}
+
+	#inp_sql {
+		height: 14rem;
+	}
+
+	textarea::placeholder {
+		padding-left: 3.8rem;
+		padding-top: 1rem;
+	}
+
+	.btnsNovoRegisto {
+		display: flex;
+		justify-content: flex-end;
+	}
+</style>
+<div class="header">
+	<div class="titulo_selc">
+		<h2>Monitor de Rece&ccedil;&otilde;es</h2>
+		<select class="input" id="sel_desc" style="margin-left: 2rem; width: 20%; height: 3.5rem;">
+			<option value="opcao1">Opcao1</option>
+			<option value="opcao2">Opcao2</option>
+		</select><a onclick=" openModalSetting()" style="margin-left: 1.5rem; border-radius: 50%;" title="Criar"
+			type="button"><i class="fa fa-gear"></i></a>
+	</div>
+
+	<div><button class="btn_azul" id="btnGravarDossier" onclick="openModalFatura()" style="float:right"
+			type="button">&nbsp;Gravar Dossier</button></div>
+</div>
+
+<div class="filtros"><input class="column-filter" id="filtroFornecedor" onkeypress="handleEnterKey(event)"
+		placeholder="Filtrar Fornecedor..." style="width: 49%;" type="text" /> <input class="column-filter"
+		id="filtroArtigo" onkeypress="handleEnterKey(event)" placeholder="Filtrar Artigo..." style="width: 49%;"
+		type="text" /></div>
+
+<div class="div_filtro"><!--<label for="Filtro">Filtro:</label> <input id="filtro" name="filtro" type="text"
+			style="margin-left: 1rem;" /> <button class="btn_verde" id="btnPesquisar" onclick="getRececoes()"
+			style="margin-left: 1rem;" type="button">Pesquisar</button> 
+			<button class="btn_vermelho" id="btnLimpar"
+			onclick="limpaPesquisaETabela()" style="margin-left: 1rem;" type="button">Limpar</button> </div>-->
+	<div style="float: right">&nbsp;</div>
+
+	<p><input id="noFornecedor" name="noFornecedor" style="display:none" type="text" value="" /></p>
+
+	<div class="box">
+		<div>
+			<table class="table table-hover" id="tabelaRececoes" style="margin-top:10px">
+				<thead>
+					<tr style="background-color: #eff0f1;">
+						<th scope="col" style="width: 30%; text-align: center"><b>ARTIGO</b></th>
+						<th scope="col" style=" width: 5%; text-align: center">&nbsp;</th>
+						<th scope="col" style="width: 15%;text-align: center"><b>QTT</b></th>
+						<th scope="col" style="width: 20%; text-align: center"><b>REC</b></th>
+						<th scope="col" style="width: 20%;text-align: center"><b>PEND</b></th>
+						<th scope="col" style="width: 10%;text-align: center"><b>A LAN&Ccedil;AR</b></th>
+						<!-- <th scope="col" style="width: 17%;"><b>Lote</b></th>
+						<th scope="col" style="width: 10%;"><b>A&ccedil;&otilde;es</b></th>-->
+					</tr>
+				</thead>
+				<tbody id="tbodyRececoes">
+				</tbody>
+			</table>
+		</div>
+
+		<div><button class="btn_azul" id="btnGravarDossierBottom" onclick="openModalFatura()" style="float: right;"
+				type="button">&nbsp;Gravar Dossier</button></div>
+	</div>
+</div>
+
+<div class="modal-input-container1" id="modal-input1">
+	<div class="modal-content1"><span class="close1" id="" onclick="closeIput()">&times;</span>
+
+		<div class="input_box"><input class="input" id="inp_lote" placeholder="Lote:" type="text" /><br />
+			<button class="btn_verde" id="enter" onclick="novoLote()" type="button"></button>
+		</div>
+	</div>
+</div>
+
+<div class="modal-input-container" id="modalfatura">
+	<div class="modal_content">
+		<div class="caixa"><input class="input" id="inp_fatura" name="fname" placeholder="Nº de Documento:"
+				style="border-radius: 8px; margin-top: 2rem;" type="text" />
+			<div class="btns"><button class="btn_vermelho" id="bnt_cancelar" onclick="closeModalFatura()"
+					type="button">&nbsp;Cancelar</button>&nbsp;<button class="btn_verde" id="btn_guardar"
+					onclick="gravarDossier()" type="button">&nbsp;Guardar</button></div>
+		</div>
+	</div>
+</div>
+
+<div class="modal-input-container" id="modal-input">
+	<div class="modal-content"><span class="close1" id="" onclick="closeModal()">&times;</span>
+
+		<div class="numeros">
+			<div id="pinpad">
+				<form class="form"><input class="inp_pass" id="password" onkeypress="return isNumberKey(event)" /><br />
+					<input class="pinButton calc" id="1" type="button" value="1" /> <input class="pinButton calc" id="2"
+						type="button" value="2" /> <input class="pinButton calc" id="3" type="button" value="3" /><br />
+					<input class="pinButton calc" id="4" type="button" value="4" /> <input class="pinButton calc" id="5"
+						type="button" value="5" /> <input class="pinButton calc" id="6" type="button" value="6" /><br />
+					<input class="pinButton calc" id="7" type="button" value="7" /> <input class="pinButton calc" id="8"
+						type="button" value="8" /> <input class="pinButton calc" id="9" type="button" value="9" /><br />
+					<input class="pinButton calc" id="." type="button" value="." /><input class="pinButton calc" id="0 "
+						type="button" value="0" /> &nbsp;<br />
+					&nbsp;
+				</form>
+			</div>
+			<button class="btn_vermelho" id="clear" type="button">apagar</button><button class="btn_verde" id="enter"
+				onclick="novoLancar()" type="button">guardar</button>
+		</div>
+	</div>
+</div>
+
+<div class="modal-input-container" id="modal_usalote">
+	<div class="modal_lote">
+		<div class="caixa">
+			<table class="table table-hover" id="tabelaLotes" style="margin-top:10px;">
+				<thead>
+					<tr style="background-color: #eff0f1;">
+						<th scope="col" style="text-align: center; width: 40%;"><b>LOTE</b></th>
+						<th scope="col" style="text-align: center;  width: 40%;"><b>QTT</b></th>
+						<th scope="col" style="text-align: center;  width: 10%;">&nbsp;</th>
+						<th scope="col" style="text-align: center;  width: 10%;">&nbsp;</th>
+					</tr>
+				</thead>
+				<tbody id="tbodyLotes">
+				</tbody>
+			</table>
+
+			<div class="botoes"><button class="btn_verde" id="bnt_adicionarLote" onclick=" openModalAdicionarLote(-1)"
+					type="button" value=""><i class="fa fa-plus"></i></button>
+
+				<div class="btns"><button class="btn_vermelho" id="bnt_cancelar" onclick=" closeModalLote()"
+						type="button">&nbsp;Cancelar</button>&nbsp;<button class="btn_verde" id="btn_guardar"
+						onclick="guardarLote()" type="button">&nbsp;Guardar</button></div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal-input-container" id="modalAdicionarLote">
+	<div class="modal_adicionarLote">
+		<div class="caixa"><input class="input" id="inp_loteadi" name="fname" placeholder="Lote:"
+				style="border-radius: 8px; margin-top: 2rem;" type="text" /> <input class="input" id="inp_qtt"
+				name="fname" placeholder="Quantidade:" style="border-radius: 8px; margin-top: 2rem;" type="number" />
+			<div class="btns"><button class="btn_vermelho" id="bnt_cancelarLote" onclick="closeModalAcionarLote()"
+					type="button">&nbsp;Cancelar</button>&nbsp;<button class="btn_verde" id="btn_guardarLote"
+					onclick="loteNaTabela(-1) " type="button">&nbsp;Guardar</button></div>
+		</div>
+	</div>
+</div>
+
+<div class="modal-input-container" id="modalSettings">
+	<div class="modal_settings"><span class="close1" onclick="closeModalSettings()"
+			style="margin-bottom: 1rem;">&times;</span>
+
+		<div class="caixa">
+			<table class="table table-hover" id="tabelaLotes" style="margin-top:10px;">
+				<thead>
+					<tr style="background-color: #eff0f1;">
+						<th scope="col" style="text-align: center;  width: 10%;"><b>DESCRI&Ccedil;&Atilde;O</b></th>
+						<th scope="col" style="text-align: center;  width: 32%;"><b>SQL</b></th>
+						<th scope="col" style="text-align: center; width: 8,33%; "><b>VAR 1</b></th>
+						<th scope="col" style="text-align: center;  width: 8,33%;"><b>VAR 2</b></th>
+						<th scope="col" style="text-align: center; width: 8,33%; "><b>VAR 3</b></th>
+						<th scope="col" style="text-align: center; width: 8,33%; "><b>VAR 4</b></th>
+						<th scope="col" style="text-align: center;  width: 8,33%;"><b>VAR 5</b></th>
+						<th scope="col" style="text-align: center;  width: 8,33%;"><b>VAR 6</b></th>
+						<th scope="col" style="text-align: center;  width: 7%;"><b>OBJETO</b></th>
+						<th scope="col" style="text-align: center;  width: 2%;">&nbsp;</th>
+						<th scope="col" style="text-align: center;  width: 2%;">&nbsp;</th>
+						<th scope="col" style="text-align: center;  width: 2%;">&nbsp;</th>
+					</tr>
+				</thead>
+				<tbody id="tbodySettings">
+				</tbody>
+			</table>
+		</div>
+		<button class="btn_verde" id="btn_adicionarSettings" onclick="openModalAdiSetting() "
+			style="float: left; margin-left: 1rem; margin-bottom: 1rem;" type="button">&nbsp;Adicionar</button><button
+			class="btn_vermelho" id="bnt_sairSettings" onclick="closeModalSettings()"
+			style="float: right; margin-right: 1rem;margin-bottom: 1rem;" type="button">&nbsp;Sair</button>&nbsp;
+	</div>
+</div>
+
+<div class="modal-input-container" id="modalAdicionarSettings">
+	<div class="modalAdiSetttings"><span class="close1" id="" onclick="closeModalAdiSettings()"
+			style="margin-bottom: 1rem;">&times;</span>
+
+		<div style="margin: 2rem;  padding: 1rem;">
+			<p style="margin-bottom: 2rem;
+						margin-top: 2rem;
+						font-size: 30px;
+						color:#1e2d84; 
+						font-weight: bold;
+						text-align: center;"><label id="label-titulo">Adicionar Registo</label></p>
+
+			<div class="inputs">
+				<div class="ordem_titulo">
+					<div style="display: flex; flex-direction: column;"><label>Descri&ccedil;&atilde;o:</label> <input
+							class="input" id="inp_descricao" name="fname" placeholder="Descrição:" type="text" /></div>
+
+					<div style="display: flex; flex-direction: column;"><label>SQL:</label><textarea class="input"
+							cols="50" id="inp_sql" placeholder="Query:"> </textarea></div>
+
+					<div style="display: flex; flex-direction: column;"><label>Objeto:</label> <input class="input"
+							id="inp_objeto" name="fname" placeholder="Objeto:" type="text" /></div>
+				</div>
+
+				<div class="query_campo">
+					<div class="var1_var2" style="display: flex;">
+						<div style="display: flex; flex-direction: column;"><label>Var 1:</label> <input class="input"
+								id="inp_var1" name="fname" placeholder="Var 1:" style="width: 90%;" type="text" /></div>
+
+						<div style="display: flex; flex-direction: column;"><label>Var 2:</label> <input class="input"
+								id="inp_var2" name="fname" placeholder="Var 2:" style="width: 90%; margin-left: 1.5rem;"
+								type="text" /></div>
+					</div>
+
+					<div class="var3_var4" style="display: flex;">
+						<div style="display: flex; flex-direction: column;"><label>Var 3:</label> <input class="input"
+								id="inp_var3" name="fname" placeholder="Var 3:" style="width: 90%;" type="text" /></div>
+
+						<div style="display: flex; flex-direction: column;"><label>Var 4:</label> <input class="input"
+								id="inp_var4" name="fname" placeholder="Var 4:" style="width: 90%; margin-left: 1.5rem;"
+								type="text" /></div>
+					</div>
+
+					<div class="var5_var6" style="display: flex;">
+						<div style="display: flex; flex-direction: column;"><label>Var 5:</label> <input class="input"
+								id="inp_var5" name="fname" placeholder="Var 5:" style="width: 90%;" type="text" /></div>
+
+						<div style="display: flex; flex-direction: column;"><label>Var 6:</label> <input class="input"
+								id="inp_var6" name="fname" placeholder="Var 6:" style="width: 90%; margin-left: 1.5rem;"
+								type="text" /></div>
+					</div>
+				</div>
+			</div>
+			&nbsp;
+
+			<div class="btnsNovoRegisto"><button class="btn_vermelho" id="btn_del_campos" onclick=" limparCampos()"
+					style="margin-bottom: 1rem;" type="button">&nbsp;Limpar Campos</button>&nbsp;&nbsp;<button
+					class="btn_verde" id="btn_adi_setting" onclick="adicionarRegistoSetting()"
+					style="margin-bottom: 1rem;" type="button">&nbsp;Adicionar Registo</button></div>
+		</div>
+	</div>
+</div>
+
+<div class="modal-input-container" id="modalParealizar">
+	<div class="modal-content" style="width: 400px; height: fit-content;"><span class="close" id="close"
+			onclick="closeModalParealizar()">&times;</span>
+
+		<p style="margin-bottom: 1rem; margin-top: 1rem; font-size: 25px; color: #1e2d84; font-weight: bold;">
+			<label>Parear Campos</label>
+		</p>
+		<label id="sqlsID" style="display: none;"></label>
+
+		<div style="margin: 2rem;">
+			<input class="input" id="campoORI" placeholder="Campo ORI" type="text" /><br />
+			<input class="input" id="tabelaDest" placeholder="Tabela Destino" style="margin-top: 15px;" type="text" /><br />
+			<input class="input" id="campoDest" placeholder="Campo Destino" style="margin-top: 15px;" type="text" /><br />
+			<input class="input" id="ordem" placeholder="Ordem" style="margin-top: 15px;" type="text" /><br />
+			<label>Campo Obrigatório: </label>
+			<input id="obrigatorio" style="margin-top: 15px;" type="checkbox" />
+		</div>
+
+		<button class="btn_azul" onclick="guardarPareamento()" style="float: right;"
+			type="button">Adicionar</button><button class="btn_verde" onclick="getTabelaPareamento()"
+			style="float: left;" type="button">Refresh Tabela</button><br />
+		<br />
+		&nbsp;
+		<table class="table table-hover" id="tabelaPareamento" style="margin-top:10px">
+			<thead>
+				<tr style="background-color: #eff0f1;">
+					<th scope="col" style="text-align: center"><b>Campo ORI</b></th>
+					<th scope="col" style="text-align: center"><b>Tabela Destino</b></th>
+					<th scope="col" style="text-align: center"><b>Campo Destino</b></th>
+					<th scope="col" style="text-align: center"><b>Campo Obrigatório</b></th>
+					<th scope="col" style="text-align: center"><b>Ordem</b></th>
+					<th scope="col" style="text-align: center">&nbsp;</th>
+					<!-- <th scope="col" style="width: 17%;"><b>Lote</b></th>
+						<th scope="col" style="width: 10%;"><b>A&ccedil;&otilde;es</b></th>-->
+				</tr>
+			</thead>
+			<tbody id="tbodyPareamento">
+			</tbody>
+		</table>
+	</div>
+</div>
+
+<div class="modal-input-container" id="modalEditarSettings">
+	<div class="modalAdiSetttings"><span class="close1" id="" onclick="closeModalEdiSettings()"
+			style="margin-bottom: 1rem;">&times;</span>
+
+		<div style="margin: 2rem;  padding: 1rem;">
+			<p style="margin-bottom: 2rem;
+						margin-top: 2rem;
+						font-size: 30px;
+						color:#1e2d84; 
+						font-weight: bold;
+						text-align: center;"><label id="label-titulo">Editar Registo</label></p>
+
+			<div class="inputs"><label id="idSetting" style="display: none;"></label>
+
+				<div class="ordem_titulo">
+					<div style="display: flex; flex-direction: column;"><label>Descri&ccedil;&atilde;o:</label> <input
+							class="input" id="inp_descricaoE" name="fname" placeholder="Descrição:" type="text" /></div>
+
+					<div style="display: flex; flex-direction: column;"><label>SQL:</label><textarea class="input"
+							cols="50" id="inp_sqlE" placeholder="Query:"> </textarea></div>
+
+					<div style="display: flex; flex-direction: column;"><label>Objeto:</label> <input class="input"
+							id="inp_objetoE" name="fname" placeholder="Objeto:" type="text" /></div>
+				</div>
+
+				<div class="query_campo">
+					<div class="var1_var2" style="display: flex;">
+						<div style="display: flex; flex-direction: column;"><label>Var 1:</label> <input class="input"
+								id="inp_var1E" name="fname" placeholder="Var 1:" style="width: 90%;" type="text" />
+						</div>
+
+						<div style="display: flex; flex-direction: column;"><label>Var 2:</label> <input class="input"
+								id="inp_var2E" name="fname" placeholder="Var 2:"
+								style="width: 90%; margin-left: 1.5rem;" type="text" /></div>
+					</div>
+
+					<div class="var3_var4" style="display: flex;">
+						<div style="display: flex; flex-direction: column;"><label>Var 3:</label> <input class="input"
+								id="inp_var3E" name="fname" placeholder="Var 3:" style="width: 90%;" type="text" />
+						</div>
+
+						<div style="display: flex; flex-direction: column;"><label>Var 4:</label> <input class="input"
+								id="inp_var4E" name="fname" placeholder="Var 4:"
+								style="width: 90%; margin-left: 1.5rem;" type="text" /></div>
+					</div>
+
+					<div class="var5_var6" style="display: flex;">
+						<div style="display: flex; flex-direction: column;"><label>Var 5:</label> <input class="input"
+								id="inp_var5E" name="fname" placeholder="Var 5:" style="width: 90%;" type="text" />
+						</div>
+
+						<div style="display: flex; flex-direction: column;"><label>Var 6:</label> <input class="input"
+								id="inp_var6E" name="fname" placeholder="Var 6:"
+								style="width: 90%; margin-left: 1.5rem;" type="text" /></div>
+					</div>
+				</div>
+			</div>
+			&nbsp;
+
+			<div class="btnsNovoRegisto"><button class="btn_vermelho" id="btn_del_campos" onclick=" limparCampos()"
+					style="margin-bottom: 1rem;" type="button">&nbsp;Limpar Campos</button>&nbsp;&nbsp;<button
+					class="btn_verde" id="btn_adi_setting" onclick="EditarRegistoSetting()" style="margin-bottom: 1rem;"
+					type="button">&nbsp;Editar Registo</button></div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+	var lotes = []
+	var lotesNovos = []
+	var lotesVelhos = []
+	var vars = []
+	var bistampsLancar = []
+
+	var emEdicao = 0
+	window.onload = function onLoadFunction() {
+		$(".headerZone").hide();
+		$("#OptionsRecordDropDown").hide();
+		getSetting()
+		filtroFornecedor()
+		filtroArtigo()
+		window.localStorage.removeItem('lancamentos')
+		$('#filtroFornecedor, #filtroArtigo').bind("input, change", function (e) {
+		});
+		$('#filtroFornecedor').on('input', function (e) {
+			filtroFornecedor()
+		});
+		$('#filtroArtigo').on('input', function (e) {
+			filtroArtigo()
+		});
+		dadosDropdown()
+		//document.getElementById("btnPesquisar").click();
+	}
+
+
+	$(document).ready(function () {
+		$('#sel_desc').change(function (event) {
+			getRececoes()
+		});
+
+		$('#filtroArtigo, #filtroFornecedor').change(function (event) {
+			$(this).trigger("filtroFornecedor");
+			$(this).trigger("filtroArtigo");
+		});
+	});
+	function handleEnterKey(e) {
+		if (e.keyCode == 13) { // enter pressed
+			try {
+				e.preventDefault ? e.preventDefault() : (e.returnValue = false);
+				//DO ALTERNATE ACTION RATHER THAN SEND ENTER
+				getRececoes()
+			} catch (err) {
+				console.log(err.message);
+			}
+		}
+	}
+
+	function openModalEdiSettings(id) {
+		document.getElementById('modalEditarSettings').style.display = "block";
+		let params = {};
+		let varMyQuery = "select * from u_sqls where objecto = 'recform' and id=" + id;
+		params.id = 'xmltoquery'
+		params.select = varMyQuery
+		$.ajax({
+			type: 'POST',
+			url: '../api/code/run',
+			async: true,
+			data: JSON.stringify(params),
+			contentType: 'application/json'
+		})
+			.done(function (result, textStatus, jqXHR) {
+				var result2 = result.replaceAll("\n", "")
+				var resposta = JSON.parse(result2)
+				var descricao = $.trim(resposta.Dados[0].descricao);
+				var id = $.trim(resposta.Dados[0].id);
+				var sql = $.trim(resposta.Dados[0].SQL);
+				var var1 = $.trim(resposta.Dados[0].var1);
+				var var2 = $.trim(resposta.Dados[0].var2);
+				var var3 = $.trim(resposta.Dados[0].var3);
+				var var4 = $.trim(resposta.Dados[0].var4);
+				var var5 = $.trim(resposta.Dados[0].var5);
+				var var6 = $.trim(resposta.Dados[0].var6);
+				var objecto = $.trim(resposta.Dados[0].objecto);
+				document.getElementById("inp_descricaoE").value = descricao;
+				document.getElementById("inp_sqlE").value = sql;
+				document.getElementById("inp_objetoE").value = objecto;
+				document.getElementById("inp_var1E").value = var1;
+				document.getElementById("inp_var2E").value = var2;
+				document.getElementById("inp_var3E").value = var3;
+				document.getElementById("inp_var4E").value = var4;
+				document.getElementById("inp_var5E").value = var5;
+				document.getElementById("inp_var6E").value = var6;
+				document.getElementById("idSetting").value = id;
+			})
+	}
+
+	function EditarRegistoSetting() {
+
+		try {
+			var id = document.getElementById("idSetting").value;
+			if (document.getElementById("inp_descricaoE").value == "") {
+				throw ("Por favor introduza a descricao")
+			} else {
+				var descricao = document.getElementById("inp_descricaoE").value
+			}
+			if (document.getElementById("inp_sqlE").value == "") {
+				throw ("Por favor introduza o sql")
+			} else {
+				var sql = document.getElementById("inp_sqlE").value
+			}
+			var var1 = document.getElementById("inp_var1E").value
+			var var2 = document.getElementById("inp_var2E").value
+			var var3 = document.getElementById("inp_var3E").value
+			var var4 = document.getElementById("inp_var4E").value
+			var var5 = document.getElementById("inp_var5E").value
+			var var6 = document.getElementById("inp_var6E").value
+			var objeto = document.getElementById("inp_objetoE").value
+			var params = {};
+			// var link = `../programs/gensel.aspx?cscript=insertSQLMonitorTempos&id=&descricao=` + descricao + `&sql=` + encodeURIComponent(sql) + `&var1=`
+			// 	+ var1 + `&var2=` + var2 + `&var3=` + var3 + `&var4=` + var4 + `&var5=` + var5 + `&var6=` + var6 + `&objeto=` + objeto
+			var xml = `<insert id='` + id + `' descricao='` + descricao + `' var1='` + var1 + `' var2='` + var2 + `'`
+			xml += ` var3='` + var3 + `' var4='` + var4 + `' var5='` + var5 + `' var6='` + var6 + `'`
+			xml += ` objeto='` + objeto + `' sql='` + sql.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '`').replaceAll("'", "''").replace(/'/g, '&apos;') + `'>`
+			xml += `</insert>`
+
+			params.id = 'insertSQLMonitorTempos'
+			params.xml = xml
+			$.ajax({
+				type: "POST",
+				url: '../api/code/run',
+				data: JSON.stringify(params),
+				async: false,
+				contentType: 'application/json',
+				success: function (response) {
+					alert("O registo foi alterado com sucesso!")
+					let tBody = document.getElementById('tbodySettings')
+					tBody.innerHTML = ''
+					document.getElementById('modalEditarSettings').style.display = "none";
+				}
+			})
+			getSetting();
+		} catch (err) {
+
+			console.log(err)
+		}
+	}
+
+	function openModalParealizar(id) {
+		document.getElementById('modalParealizar').style.display = "block";
+		document.getElementById('sqlsID').textContent = id;
+		getTabelaPareamento();
+	}
+
+	function closeModalParealizar() {
+		document.getElementById("modalParealizar").style.display = "none";
+	}
+
+	function openModalSetting() {
+		document.getElementById('modalSettings').style.display = "block"
+
+	}
+	function closeModalSettings() {
+		document.getElementById("modalSettings").style.display = "none";
+	}
+
+	function openModalAdiSetting() {
+		document.getElementById('modalAdicionarSettings').style.display = "block"
+		limparCampos()
+
+	}
+	function closeModalAdiSettings() {
+		document.getElementById("modalAdicionarSettings").style.display = "none";
+	}
+
+	function closeModalEdiSettings() {
+		document.getElementById("modalEditarSettings").style.display = "none";
+	}
+
+
+	function openModalFatura() {
+		document.getElementById('modalfatura').style.display = "block"
+		document.getElementById("inp_fatura").value = ""
+
+	}
+
+	function closeModalFatura() {
+		document.getElementById("modalfatura").style.display = "none";
+	}
+
+	function openModalLote(bistamp) {
+		let tBody = document.getElementById('tbodyLotes')
+		document.getElementById('modal_usalote').style.display = "block"
+		var validar = document.getElementById("btn_validar" + bistamp)
+		validar = bistamp
+
+		var alterar = document.getElementById("btn_alterar" + bistamp).value
+		alterar = bistamp
+
+		document.getElementById("bnt_adicionarLote").value = bistamp
+
+		for (let index = 0; index < lotes.length; index++) {
+			if (lotes[index].bistamp == bistamp && lotes[index].bistamp == alterar) {
+				var objecto = new Object()
+
+
+				objecto.lote = lotes[index].lote
+				objecto.bistamp = bistamp
+				objecto.qtt = lotes[index].qtt
+
+				lotesNovos.push(objecto)
+				lotesVelhos.push(objecto)
+
+
+				let row = ""
+				row += "<tr>"
+				row += "<td id=\"lote" + tBody.children.length + "\">" + lotes[index].lote + "</td>"
+				row += "<td id=\"qtt" + tBody.children.length + "\">" + lotes[index].qtt + "</td>"
+				row += "<td id=\"trash" + tBody.children.length + "\" onclick=\"apagarLinhaLotes(" + tBody.children.length + ")\"><i class=\"fa fa-trash \"></td>"
+				row += "<td id=\"change1" + tBody.children.length + "\" onclick=\" openModalAdicionarLote(" + tBody.children.length + ")\"><i class=\"fa fa-pencil\"></td>"
+				row += "</tr>"
+				tBody.innerHTML += row
+
+			}
+		}
+
+
+	}
+
+	function closeModalLote() {
+		document.getElementById("modal_usalote").style.display = "none";
+		var bistamp_btn = document.getElementById("bnt_adicionarLote").value
+		let tBody = document.getElementById('tbodyLotes')
+		tBody.innerHTML = ''
+		lotesNovos = []
+		lotesVelhos = []
+
+
+	}
+
+	function openModalAdicionarLote(linha) {
+		document.getElementById('modalAdicionarLote').style.display = "block"
+
+		var bistamp = document.getElementById("bnt_adicionarLote").value
+		//console.log(bistamp);
+		let tBody = document.getElementById('tbodyLotes')
+
+
+		if (linha != -1) {
+			var loteArray = tBody.rows[linha].cells[0].textContent
+			var qttArray = tBody.rows[linha].cells[1].textContent
+			document.getElementById('inp_loteadi').value = loteArray
+			document.getElementById('inp_qtt').value = qttArray
+			document.getElementById('btn_guardarLote').setAttribute("onclick", "loteNaTabela(" + linha + ") ")
+		} else {
+			document.getElementById('inp_loteadi').value = ""
+			document.getElementById('inp_qtt').value = ""
+			document.getElementById('btn_guardarLote').setAttribute("onclick", "loteNaTabela(-1) ")
+		}
+
+	}
+	//how to make a checkbox
+
+
+	function guardarPareamento() {
+		let sqslsID = document.getElementById('sqlsID').textContent;
+		let campoORI = document.getElementById('campoORI').value;
+		let tabelaDest = document.getElementById('tabelaDest').value;
+		let campoDest = document.getElementById('campoDest').value;
+		let obrigatorio = document.getElementById('obrigatorio').checked;
+		let ordem = document.getElementById('ordem').value;
+		if (obrigatorio) {
+			obrigatorio = 1;
+		} else {
+			obrigatorio = 0;
+		}
+
+		var params = {};
+		$.ajax({
+			type: "GET",
+			url:
+				"../programs/gensel.aspx?cscript=insereRecCampos&sqlsID=" + sqslsID +
+				"&campoORI=" + campoORI +
+				"&tabeladest=" + tabelaDest +
+				"&campodest=" + campoDest +
+				"&obrigatorio=" + obrigatorio +
+				"&ordem=" + ordem,
+			data: JSON.stringify(params),
+			contentType: "application/json",
+			success: function (response) { },
+			error: function (response) {
+				alert("Erro a encontrar arVend por favor tente de novo!");
+			},
+		});
+		getTabelaPareamento();
+		document.getElementById('campoORI').value = "";
+		document.getElementById('tabelaDest').value = "";
+		document.getElementById('campoDest').value = "";
+		document.getElementById('obrigatorio').checked = false;
+		document.getElementById('ordem').value = "";
+	}
+
+	function getTabelaPareamento() {
+		let sqslsID = document.getElementById('sqlsID').textContent;
+		let params = {};
+		let varMyQuery = "select * from u_rececoescampos where sqlsID = " + sqslsID;
+		params.id = 'SELECTtoJSON'
+		params.select = varMyQuery
+		$.ajax({
+			type: 'POST',
+			url: '../api/code/run',
+			async: false,
+			data: JSON.stringify(params),
+			contentType: 'application/json'
+		}).done(function (result, textStatus, jqXHR) {
+			try {
+				var resposta = JSON.parse(result);
+			} catch {
+				resposta = JSON.parse("{\"Dados\":[]}");
+			}
+			var DadosJSON = resposta.Dados;
+			var escolhas = "";
+			for (var i = 0; i < DadosJSON.length; ++i) {
+				escolhas += "<tr>";
+				escolhas += '<td style="font-size:16px;padding:8px;text-align:left;">' + $.trim(DadosJSON[i].campoORI); + "</td>";
+				escolhas += '<td style="font-size:16px;padding:8px;text-align:left;">' + $.trim(DadosJSON[i].tabeladest); + "</td>";
+				escolhas += '<td style="font-size:16px;padding:8px;text-align:left;">' + $.trim(DadosJSON[i].campodest); + "</td>";
+				if ($.trim(DadosJSON[i].obrigatorio) == "True") {
+					escolhas += '<td style="font-size:16px;padding:8px;text-align:center;"><input type="checkbox" onclick="return false" id="mostrar" checked> </td>';
+				} else {
+					escolhas += '<td style="font-size:16px;padding:8px;text-align:center;"><input type="checkbox" onclick="return false" id="mostrar"> </td>';
+				}
+				escolhas += '<td style="font-size:16px;padding:8px;text-align:left;"><button type="button" class="btn_vermelho1" onclick="deleteLinePareamento(' + $.trim(DadosJSON[i].id) + ')"><i class="fa fa-trash"></i></button></td>';
+				escolhas += "</tr>"
+
+			}
+			document.getElementById("tbodyPareamento").innerHTML = escolhas;
+		})
+	}
+
+	function deleteLinePareamento(id) {
+		var params = {};
+		$.ajax({
+			type: "GET",
+			url:
+				"../programs/gensel.aspx?cscript=deleteLinePareamento&id=" + id,
+			data: JSON.stringify(params),
+			contentType: "application/json",
+			success: function (response) { },
+			error: function (response) {
+				alert("Erro a encontrar arVend por favor tente de novo!");
+			},
+		});
+		getTabelaPareamento();
+	}
+
+	function guardarLote() {
+		var bistamp_btn = document.getElementById("bnt_adicionarLote").value
+		for (let index = 0; index < lotes.length; index++) {
+			for (let j = 0; j < lotesVelhos.length; j++) {
+				if (lotes[index].lote == lotesVelhos[j].lote && lotes[index].bistamp == lotesVelhos[j].bistamp) {
+					lotes.splice(index, 1)
+				}
+			}
+		}
+		for (let index = 0; index < lotesNovos.length; index++) {
+			var objecto = new Object()
+			objecto.lote = lotesNovos[index].lote
+			objecto.bistamp = lotesNovos[index].bistamp
+			objecto.qtt = lotesNovos[index].qtt
+			lotes.push(objecto)
+		}
+
+		lotesNovos = []
+		lotesVelhos = []
+		document.getElementById("modal_usalote").style.display = "none";
+		let tBody = document.getElementById('tbodyLotes')
+		var table = document.getElementById("tbodyLotes"),
+			sumVal = 0;
+		for (var i = 0; i < table.rows.length; i++) {
+			sumVal = (sumVal + parseFloat(table.rows[i].cells[1].innerHTML));
+		}
+
+		document.getElementById('valorLancar_' + bistamp_btn).innerHTML = sumVal
+
+		tBody.innerHTML = ''
+
+	}
+
+
+	function closeModalAcionarLote() {
+		document.getElementById("modalAdicionarLote").style.display = "none";
+		//document.getElementById("inp_loteadi").value = ''
+		//document.getElementById("inp_qtt").value = ''
+	}
+
+
+
+	function dadosDropdown() {
+		$("#sel_desc").empty();
+		let params = {};
+		let varMyQuery = "select id, descricao, sql from u_sqls where objecto='recform'"
+		params.id = 'SELECTtoJSON'
+		params.select = varMyQuery
+		$.ajax({
+			type: 'POST',
+			url: '../api/code/run',
+			async: false,
+			data: JSON.stringify(params),
+			contentType: 'application/json'
+		})
+			.done(function (result, textStatus, jqXHR) {
+				var result2 = result.replaceAll("\n", " ")
+				resposta = JSON.parse(result2);
+				dados = resposta.Dados
+				//console.log(dados);
+
+				for (var i = 0; i < dados.length; ++i) {
+
+					var option = document.createElement("option");
+					option.textContent = dados[i].descricao
+					//option.value = dados[i].sql
+					option.value = dados[i].id
+
+					var select = document.getElementById("sel_desc");
+					select.appendChild(option);
+
+					var descricao = select.options[select.selectedIndex].value
+
+				}
+
+				//$("#sel_desc").val(0).change()
+			})
+
+	}
+
+	function loteNaTabela(linha) {
+
+
+		var bistamp = document.getElementById("bnt_adicionarLote").value
+
+
+		let tBody = document.getElementById("tbodyLotes")
+
+		try {
+
+			if (document.getElementById("inp_loteadi").value == "") {
+				throw ("Por favor introduza o lote")
+			} else {
+				var lote = document.getElementById("inp_loteadi").value
+			}
+			if (document.getElementById("inp_qtt").value == "") {
+				throw ("Por favor introduza a quantidade")
+			} else {
+				var qtt = document.getElementById("inp_qtt").value
+			}
+
+			let tBody = document.getElementById('tbodyLotes')
+
+			var objecto = new Object()
+			if (linha == -1) {
+
+
+				objecto.lote = lote
+				objecto.bistamp = bistamp
+				objecto.qtt = qtt
+
+				lotesNovos.push(objecto)
+
+				let row = ""
+				row += "<tr>"
+				row += "<td id=\"lote" + tBody.children.length + "\">" + lote + "</td>"
+				row += "<td id=\"qtt" + tBody.children.length + "\">" + qtt + "</td>"
+				row += "<td id=\"trash" + tBody.children.length + "\" onclick=\"apagarLinhaLotes(" + tBody.children.length + ")\"><i class=\"fa fa-trash \"></td>"
+				row += "<td id=\"change1" + tBody.children.length + "\" onclick=\" openModalAdicionarLote(" + tBody.children.length + ")\"><i class=\"fa fa-pencil\"></td>"
+				row += "</tr>"
+				tBody.innerHTML += row
+			} else {
+				let loteVelho = tBody.rows[linha].cells[0].textContent
+				let qttVelho = tBody.rows[linha].cells[1].textContent
+
+				for (let index = 0; index < lotesNovos.length; index++) {
+					if (lotesNovos[index].qtt == qttVelho && lotesNovos[index].lote == loteVelho && lotesNovos[index].bistamp == bistamp) {
+						lotesNovos[index].qtt = qtt
+						lotesNovos[index].lote = lote
+					}
+
+				}
+				tBody.rows[linha].cells[0].textContent = lote
+				tBody.rows[linha].cells[1].textContent = qtt
+			}
+			document.getElementById("modalAdicionarLote").style.display = "none";
+			//console.log(lotes);
+		} catch (err) {
+
+			//alert(err)
+		}
+
+	}
+	function apagarLinhaLotes(id) {
+		let tBody = document.getElementById('tbodyLotes')
+		document.getElementById("tbodyLotes").deleteRow(id);
+
+		for (let index = id; index < tBody.children.length; index++) {
+			//console.log("boom");
+
+			var lote = document.getElementById("lote" + (index + 1).toString())
+			lote.id = "lote" + index
+
+
+			var qtt = document.getElementById("qtt" + (index + 1).toString())
+			//console.log(qtt);
+			qtt.id = "qtt" + index
+
+			var trash = document.getElementById("trash" + (index + 1).toString())
+			trash.id = "trash" + index
+			trash.setAttribute("onClick", "apagarLinhaLotes(" + index + ")");
+
+			var change = document.getElementById("change1" + (index + 1).toString())
+			change.id = "change1" + index
+			change.setAttribute("onClick", "openModalAdicionarLote(" + index + ")");
+
+		}
+
+		lotesNovos.splice(id, 1)
+
+
+	}
+
+
+	function getSetting() {
+		let tBody = document.getElementById('tbodySettings')
+
+		let params = {};
+		let varMyQuery = "select * from u_sqls where objecto = 'recform'"
+		params.id = 'xmltoquery'
+		params.select = varMyQuery
+		$.ajax({
+			type: 'POST',
+			url: '../api/code/run',
+			async: true,
+			data: JSON.stringify(params),
+			contentType: 'application/json'
+		})
+			.done(function (result, textStatus, jqXHR) {
+				var result2 = result.replaceAll("\n", " ")
+				var resposta = JSON.parse(result2)
+				for (var i = 0; i < resposta.Dados.length; i++) {
+					var descricao = $.trim(resposta.Dados[i].descricao)
+					var id = $.trim(resposta.Dados[i].id)
+					var sql = $.trim(resposta.Dados[i].SQL)
+					var var1 = $.trim(resposta.Dados[i].var1)
+					var var2 = $.trim(resposta.Dados[i].var2)
+					var var3 = $.trim(resposta.Dados[i].var3)
+					var var4 = $.trim(resposta.Dados[i].var4)
+					var var5 = $.trim(resposta.Dados[i].var5)
+					var var6 = $.trim(resposta.Dados[i].var6)
+					var objecto = $.trim(resposta.Dados[i].objecto)
+
+					var objecto1 = new Object()
+
+					objecto1.var1 = var1
+					objecto1.var2 = var2
+					objecto1.var3 = var3
+					objecto1.var4 = var4
+
+
+					vars.push(objecto1)
+
+
+					let row = ""
+					row += "<tr>"
+					row += "<td id=\"descricao" + tBody.children.length + "\"  style=\"text-align: center;\">" + descricao + "</td>"
+					row += "<td id=\"sql" + tBody.children.length + "\">" + sql + "</td>"
+					row += "<td id=\"var1" + tBody.children.length + "\" style=\"text-align: center;\">" + var1 + "</td>"
+					row += "<td id=\"var2" + tBody.children.length + "\" style=\"text-align: center;\">" + var2 + "</td>"
+					row += "<td id=\"var3" + tBody.children.length + "\"style=\"text-align: center;\">" + var3 + "</td>"
+					row += "<td id=\"var4" + tBody.children.length + "\"style=\"text-align: center;\">" + var4 + "</td>"
+					row += "<td id=\"var5" + tBody.children.length + "\"style=\"text-align: center;\">" + var5 + "</td>"
+					row += "<td id=\"var6" + tBody.children.length + "\"style=\"text-align: center;\">" + var6 + "</td>"
+					row += "<td id=\"objecto" + tBody.children.length + "\"style=\"text-align: center;\">" + objecto + "</td>"
+					row += "<td id=\"editar" + tBody.children.length + "\" style=\"text-align: center;\" ><button class=\"btn_azul1\" type=\"button\" onclick=\"openModalEdiSettings(" + id + ")\"><i class=\"fa fa-pencil\" style=\"color:white\"></i></button></td>"
+					row += "<td id=\"trash" + tBody.children.length + "\" style=\"text-align: center;\" ><button class=\"btn_vermelho1\" type=\"button\" onclick=\"apagarLinhaSettings(" + id + ")\"><i class=\"fa fa-trash\"</i></button></td>"
+					row += "<td id=\"parealizar" + tBody.children.length + "\" style=\"text-align: center;\" ><button class=\"btn_azul\" type=\"button\" onclick=\"openModalParealizar(" + id + ")\"><i class=\"fa fa-file-text\"</i></button></td>"
+					row += "</tr>"
+					tBody.innerHTML += row
+
+
+				}
+			})
+	}
+
+	function adicionarRegistoSetting() {
+		try {
+
+			if (document.getElementById("inp_descricao").value == "") {
+				throw ("Por favor introduza a descricao")
+			} else {
+				var descricao = document.getElementById("inp_descricao").value
+			}
+			if (document.getElementById("inp_sql").value == "") {
+				throw ("Por favor introduza a sql")
+			} else {
+				var sql = document.getElementById("inp_sql").value
+			}
+
+
+			var var1 = document.getElementById("inp_var1").value
+			var var2 = document.getElementById("inp_var2").value
+			var var3 = document.getElementById("inp_var3").value
+			var var4 = document.getElementById("inp_var4").value
+			var var5 = document.getElementById("inp_var5").value
+			var var6 = document.getElementById("inp_var6").value
+			var objeto = document.getElementById("inp_objeto").value
+
+			var params = {};
+			// var link = `../programs/gensel.aspx?cscript=insertSQLMonitorTempos&id=&descricao=` + descricao + `&sql=` + encodeURIComponent(sql) + `&var1=`
+			// 	+ var1 + `&var2=` + var2 + `&var3=` + var3 + `&var4=` + var4 + `&var5=` + var5 + `&var6=` + var6 + `&objeto=` + objeto
+			var xml = `<insert id='' descricao='` + descricao + `' var1='` + var1 + `' var2='` + var2 + `'`
+			xml += ` var3='` + var3 + `' var4='` + var4 + `' var5='` + var5 + `' var6='` + var6 + `'`
+			xml += ` objeto='` + objeto + `' sql='` + sql.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '`').replaceAll("'", "''").replace(/'/g, '&apos;') + `'>`
+			xml += `</insert>`
+
+			params.id = 'insertSQLMonitorTempos'
+			params.xml = xml
+			$.ajax({
+				type: "POST",
+				url: '../api/code/run',
+				data: JSON.stringify(params),
+				async: false,
+				contentType: 'application/json',
+				success: function (response) {
+					alert("O registo foi criado com sucesso!")
+					let tBody = document.getElementById('tbodySettings')
+					tBody.innerHTML = ''
+
+
+					document.getElementById("modalAdicionarSettings").style.display = "none";
+
+
+				}
+			})
+			getSetting()
+		} catch (err) {
+
+			console.log(err)
+		}
+	}
+
+	function apagarLinhaSettings(id) {
+		var params = {};
+
+		var xml = `<insert id='` + id + `' descricao='' var1='' var2=''`
+		xml += ` var3='' var4='' var5='' var6=''`
+		xml += ` objeto='' sql=''>`
+		xml += `</insert>`
+
+		params.id = 'insertSQLMonitorTempos'
+		params.xml = xml
+		$.ajax({
+			type: "POST",
+			url: '../api/code/run',
+			data: JSON.stringify(params),
+			async: false,
+			contentType: 'application/json',
+			success: function (response, jqXHR, settings) {
+				alert("Registo apagado com sucesso!")
+				let tBody = document.getElementById('tbodySettings')
+				tBody.innerHTML = ''
+
+
+			},
+			error: function (xhr, status, error) {
+				console.log("xhr -> " + xhr.responseText + " | status -> " + status + " | " + error);
+				alert("Erro ao apagar o registo!")
+			}
+		});
+		getSetting()
+
+
+
+	}
+	function limparCampos() {
+		document.getElementById("inp_descricao").value = ''
+		document.getElementById("inp_sql").value = ''
+		document.getElementById("inp_var1").value = ''
+		document.getElementById("inp_var2").value = ''
+		document.getElementById("inp_var3").value = ''
+		document.getElementById("inp_var4").value = ''
+		document.getElementById("inp_var5").value = ''
+		document.getElementById("inp_var6").value = ''
+		document.getElementById("inp_objeto").value = ''
+
+		document.getElementById("inp_descricaoE").value = ''
+		document.getElementById("inp_sqlE").value = ''
+		document.getElementById("inp_var1E").value = ''
+		document.getElementById("inp_var2E").value = ''
+		document.getElementById("inp_var3E").value = ''
+		document.getElementById("inp_var4E").value = ''
+		document.getElementById("inp_var5E").value = ''
+		document.getElementById("inp_var6E").value = ''
+		document.getElementById("inp_objetoE").value = ''
+	}
+
+
+
+	function isNumberKey(evt) {
+		var charCode = (evt.which) ? evt.which : event.keyCode
+		if (charCode > 31 && (charCode < 48 || charCode > 57))
+			return false;
+		return true;
+	}
+
+	function limpaPesquisaETabela() {
+		//limpa tabela
+		var Parent = document.getElementById("tbodyRececoes");
+		while (Parent.hasChildNodes()) {
+			Parent.removeChild(Parent.firstChild);
+		}
+		window.localStorage.removeItem('lancamentos')
+
+		$('#filtro').val('');
+		$('#noFornecedor').val('');
+
+		getRececoes()
+
+	}
+
+	function mostraInputLancar(bistamp, i) {
+
+		if (emEdicao == 1) {
+			alert("Tem uma linha em edição!")
+			return
+		}
+
+		var lancarText = 'lancarText_' + bistamp
+		document.getElementById(lancarText).setAttribute('style', 'display: none;')
+
+		var divLancar = 'divLancar_' + bistamp
+		var inputLancar = 'inputLancar_' + bistamp
+		document.getElementById(divLancar).setAttribute('style', 'display: inline;')
+		document.getElementById(inputLancar).focus()
+		document.getElementById(inputLancar).select()
+
+
+		var lancarLoteText = 'lancarLoteText_' + bistamp
+		document.getElementById(lancarLoteText).setAttribute('style', 'display: none;')
+
+		var divLancarLote = 'divLancarLote_' + bistamp
+		var inputLancarLote = 'inputLancarLote_' + bistamp
+		document.getElementById(divLancarLote).setAttribute('style', 'display: inline;')
+
+		emEdicao = 1
+
+	}
+
+	function getAllIndexes(arr, val) {
+		var indexes = [], i;
+		for (i = 0; i < arr.length; i++)
+			if (arr[i].stamp == val)
+				indexes.push(i);
+		return indexes;
+	}
+
+	function obtemFornecedor(bistamp) {
+		var noFornecedor = function () {
+			var params = {};
+			$.ajax({
+				type: 'GET',
+				url: '../programs/gensel.aspx?cscript=getfornecedorajax&bistamp=' + bistamp,
+				data: JSON.stringify(params),
+				contentType: 'application/json',
+				success: function (response) {
+					noFornecedor = response.fornecedor[0].no
+					$('#noFornecedor').val(noFornecedor);
+				},
+				error: function (response) {
+					alert("Erro a encontrar Rececoes por favor tente de novo!")
+					console.log(response.error);
+				}
+			});
+		}();
+
+		return noFornecedor
+	}
+
+
+
+	function openDiv(bistamp) {
+
+		localStorage.setItem("bistamp", bistamp)
+		document.getElementById('modal-input').style.display = "block"
+
+	}
+
+	function openInput(bistamp) {
+
+		localStorage.setItem("bistamp", bistamp)
+		document.getElementById('modal-input1').style.display = "block"
+
+	}
+	// Close Modal
+	function closeIput() {
+
+
+		document.getElementById("modal-input1").style.display = "none";
+		var input = document.getElementById("inp_lote").value = ""
+
+	}
+
+
+	// Close Modal
+	function closeModal() {
+
+
+		document.getElementById("modal-input").style.display = "none";
+		var input = document.getElementById("password").value = ""
+
+	}
+
+	function novoLancar() {
+		var bistamp = localStorage.getItem("bistamp")
+
+		const dados = localStorage.getItem('dadosNovos')
+		let newDados = JSON.parse(dados)
+
+
+		for (var i = 0; i < newDados.length; ++i) {
+
+
+			var lancar = $.trim(newDados[i].lancar)
+		}
+
+		var input = document.getElementById("password").value
+
+		document.getElementById('valorLancar_' + bistamp).innerHTML = input
+
+
+
+
+
+		document.getElementById('modal-input').style.display = "none"
+		var input = document.getElementById("password").value = ""
+
+
+	}
+	function novoLote() {
+		var bistamp = localStorage.getItem("bistamp")
+
+		var input = document.getElementById("inp_lote").value
+		document.getElementById('loteLancar_' + bistamp).innerHTML = input
+		document.getElementById('modal-input1').style.display = "none"
+		var input = document.getElementById("inp_lote").value = ""
+
+
+	}
+	function trocaLancar() {
+		const dados = localStorage.getItem('dadosNovos')
+		let newDados = JSON.parse(dados)
+
+		for (var i = 0; i < newDados.length; ++i) {
+
+			var lancar = $.trim(newDados[i].lancar)
+		}
+		const found = newDados.find(bi => element > 10);
+	}
+
+
+	$(document).ready(function () {
+
+		const input_value = $("#password");
+
+		//disable input from typing
+		$("#password").keypress(function () {
+			return false;
+		});
+
+		//add password
+		$(".calc").click(function () {
+			let value = $(this).val();
+			field(value);
+
+		});
+		function field(value) {
+			input_value.val(input_value.val() + value);
+		}
+
+		$("#clear").click(function () {
+			input_value.val("");
+		});
+
+	});
+
+
+	function getRececoes() {
+		lotes = []
+		var noFornecedor = $("#noFornecedor").val()
+
+		//limpa tabela
+		var Parent = document.getElementById("tbodyRececoes");
+		while (Parent.hasChildNodes()) {
+			Parent.removeChild(Parent.firstChild);
+		}
+		var filtroFornecedor = $("#filtroFornecedor").val()
+		var filtroArtigo = $("#filtroArtigo").val()
+		var params = {};
+
+		// if(fornecedor existe){
+
+		// 	queryAUX = " AND bo.no="+nofornecedor+" "
+		// }else{
+		var queryAUX = ''
+			// }
+			
+		var varMyQuery = `select ROW_NUMBER() OVER(order by dados.destino, dados.dtentrega, dados.nome, dados.design) AS numero, 
+    dados.n_encfor, dados.enc_for_ori, dados.data, 
+    dados.nome, dados.no, dados.estab, 
+    dados.moeda, 
+    dados.novaref, 
+    (case when len(ltrim(rtrim(dados.novaref)))>0 then dados.novaref else dados.ref end) as ref, 
+    dados.novadesign, 
+    (case when len(ltrim(rtrim(dados.novaref)))>0 then dados.novadesign else dados.design end) as design, 
+    dados.qttenc, 
+    dados.qt_entregue, 
+    dados.qttpend, 
+    dados.obra, 
+    dados.destino, dados.nome_destino, dados.no_destino, 
+    dados.dtentrega, 
+    dados.edebito, dados.desconto, dados.desc2, dados.desc3, dados.ettdeb, 
+    dados.vumoeda, dados.ttmoeda, 
+    dados.qt_recebida, 
+    dados.marcar, 
+    dados.ccusto, 
+    dados.bistamp, 
+    dados.vencargo, dados.N_GRecep, 
+    dados.cliente, dados.nocliente, 
+
+    0 as iva, 
+    1 as tabiva, 
+    dados.u_BISTPFMT, 
+    dados.u_NOencCL, 
+    dados.u_BISTPECL, 
+    dados.u_bistpefl, 
+    dados.u_noencfl, 
+
+    dados.bostamp 
+
+    from 
+        (
+        select 
+        bo.obrano as n_encfor, '' as enc_for_ori, 
+        bo.dataobra as data, 
+        bo.nome, bo.no, bo.estab, 
+        bo.moeda, 
+
+        '' as novaref,
+
+        bi.ref, 
+
+        '' as novadesign, 
+        bi.design, bi.qtt as qttenc, 
+        bi.qtt2 as qt_entregue, 
+        (bi.qtt-bi.qtt2) as qttpend, 
+        bi.bifref as obra, 
+        bi2.u_efdestin as destino, bi2.u_nmdestin as nome_destino, bi2.u_nodestin as no_destino, 
+        bi.rdata as dtentrega, 
+        bi.edebito, bi.desconto, bi.desc2, bi.desc3, bi.ettdeb, 
+        bi.vumoeda, bi.ttmoeda, 
+
+        cast(0.000 as float) as Qt_recebida, 
+        cast(0 as bit) as marcar, 
+        bi.ccusto, 
+        bi.bistamp, 
+        cast(0.000 as float) as vencargo, 
+        cast('' as char(20)) as N_GRecep, 
+
+        (case when len(ltrim(rtrim(bi.bifref)))>0 
+        then
+            isnull((select opc.nome from opc(nolock) where ltrim(rtrim(opc.processo))=ltrim(rtrim(bi.bifref)) ), '')
+        else
+            ''
+        end
+        ) as cliente, 
+
+        (case when len(ltrim(rtrim(bi.bifref)))>0 
+        then
+            (select opc.no from opc(nolock) where ltrim(rtrim(opc.processo))=ltrim(rtrim(bi.bifref)) )
+        else
+            0
+        end
+        ) as nocliente, 
+
+        bi.u_BISTPFMT, 
+        bi.u_NOencCL, 
+        bi.u_BISTPECL, 
+        bi.u_bistpefl, 
+        bi.u_noencfl, 
+
+        bo.bostamp 
+
+        from bi(nolock) inner join bo(nolock) on bi.bostamp=bo.bostamp 
+        inner join bi2(nolock) on bi.bistamp=bi2.bi2stamp 
+        /* Enc. Fornec.(2) */ 
+        where bo.ndos=2 
+        and bo.fechada=0
+        and (bi.qtt-bi.qtt2)>0 
+        and 
+        (
+            /** CPOC 330001 ou CPOC 330002 ou CPOC=0 **/
+            bi.cpoc=330001 or bi.cpoc=330002 or bi.cpoc=0 
+            /** Ref EC ou MR **/ 
+            or left(bi.ref,2)='EC' or left(bi.ref,2)='MR' or bi.ref like '' 
+        )
+
+        union all
+
+        /* Pendentes Enc Fornec Eticadata 122*/
+        select 
+        bo.obrano as n_encfor, bo.maquina as enc_for_ori, 
+        bo.dataobra as data, 
+        bo.nome, bo.no, bo.estab, 
+        bo.moeda, 
+
+        (case when len(ltrim(rtrim(bi.ref)))=0 
+        then 
+            isnull((select top 1 st.ref 
+                from st(nolock) inner join stobs(nolock) on st.ref=stobs.ref  
+                where ltrim(rtrim(stobs.u_refant))=ltrim(rtrim(bi.design)) 
+                order by st.ref 
+            ), '') 
+        else 
+            bi.ref
+        end) as novaref,
+
+        bi.ref, 
+
+        (case when len(ltrim(rtrim(bi.ref)))=0 
+        then 
+            isnull((select top 1 st.design  
+                from st(nolock) inner join stobs(nolock) on st.ref=stobs.ref  
+                where ltrim(rtrim(stobs.u_refant))=ltrim(rtrim(bi.design)) 
+                order by st.ref 
+            ), '') 
+        else 
+            bi.ref
+        end) as novadesign,
+
+        bi.design, bi.qtt as qttenc, 
+        bi.qtt2 as qt_entregue, 
+        (bi.qtt-bi.qtt2) as qttpend, 
+        bi.bifref as obra, 
+        bi2.u_efdestin as destino, bi2.u_nmdestin as nome_destino, bi2.u_nodestin as no_destino, 
+        bi.rdata as dtentrega, 
+        bi.edebito, bi.desconto, bi.desc2, bi.desc3, bi.ettdeb, 
+        bi.vumoeda, bi.ttmoeda, 
+
+        cast(0.000 as float) as Qt_recebida, 
+        cast(0 as bit) as marcar, 
+        bi.ccusto, 
+        bi.bistamp, 
+        cast(0.000 as float) as vencargo, 
+        cast('' as char(20)) as N_GRecep, 
+
+        (case when len(ltrim(rtrim(bi.bifref)))>0 
+        then
+            (select opc.nome from opc(nolock) where ltrim(rtrim(opc.processo))=ltrim(rtrim(bi.bifref)) )
+        else
+            ''
+        end
+        ) as cliente, 
+
+        (case when len(ltrim(rtrim(bi.bifref)))>0 
+        then
+            (select opc.no from opc(nolock) where ltrim(rtrim(opc.processo))=ltrim(rtrim(bi.bifref)) )
+        else
+            0
+        end
+        ) as nocliente, 
+
+        bi.u_BISTPFMT, 
+        bi.u_NOencCL, 
+        bi.u_BISTPECL, 
+        bi.u_bistpefl, 
+        bi.u_noencfl, 
+
+        bo.bostamp 
+
+        from bi(nolock) inner join bo(nolock) on bi.bostamp=bo.bostamp 
+        inner join bi2(nolock) on bi.bistamp=bi2.bi2stamp
+        where bo.ndos=122 
+        and bo.fechada=0
+        and (bi.qtt-bi.qtt2)>0 
+
+        ) as dados
+			--anomesdia: 20230615
+    where bi.dataobra between 'dataInicial' and 'dataFinal' AND 
+	(bi.ref LIKE '%filtroArtigo%'  or bi.design LIKE '%filtroArtigo%') and bi.nome LIKE '%filtroFornecedor%' 
+
+    order by dados.n_encfor, dados.destino, dados.dtentrega, dados.nome, dados.design`
+		
+		varMyQuery = myQuery.replace('filtroArtigo', filtroArtigo);
+		varMyQuery = varMyQuery.replace('filtroFornecedor', filtroFornecedor);
+		params.id = 'xmltoquery'
+		params.select = varMyQuery
+		$.ajax({
+			type: 'POST',
+			url: '../api/code/run',
+			async: false,
+			data: JSON.stringify(params),
+			contentType: 'application/json'
+		}).done(function (response) {
+			try {
+				resposta = JSON.parse(response);
+			} catch {
+				resposta = JSON.parse("{\"Dados\":[]}")
+			}
+			var rececoes = resposta.Dados
+
+			localStorage.setItem('dadosNovos', JSON.stringify(rececoes))
+
+
+
+			for (var i = 0; i < rececoes.length; ++i) {
+
+
+				var bistamp = $.trim(rececoes[i].bistamp)
+				var nomeCliente = $.trim(rececoes[i].nomeCliente)
+				var encomenda = $.trim(rececoes[i].encomenda)
+				var design = $.trim(rececoes[i].design)
+				var nome = $.trim(rececoes[i].nome)
+				var ref = $.trim(rececoes[i].ref)
+				var qtt = $.trim(rececoes[i].qtt)
+				var recebido = $.trim(rececoes[i].recebido)
+				var qtt_entreg = $.trim(rececoes[i].qtt_entreg)
+				var pendente = $.trim(rececoes[i].pendente)
+				var lancar = $.trim(rececoes[i].lancar)
+				var desc2 = $.trim(rececoes[i].desc2)
+				var desconto = $.trim(rececoes[i].desconto)
+				var edebito = $.trim(rececoes[i].edebito)
+				var no = $.trim(rececoes[i].no)
+				var usalote = $.trim(rececoes[i].usalote)
+
+				var cliente = '<b>' + nome + '</b><br>' + encomenda + '<br>'
+				var designacao = ref + ' - ' + design
+
+				if (usalote != 1) {
+					var btnEdit = '<button type=\"button\" class="btn_azul" id=\"btn_alterar' + bistamp + '\" onclick=\"openDiv(\'' + bistamp + '\')\"  style=\" display:none; float:right; background: #ffffff;\"><i class=\"fa fa-pencil\" ></i></button>'
+
+				} else {
+					var btnEdit = '<button type=\"button\" class="btn_azul1" id=\"btn_alterar' + bistamp + '\" onclick=\" openModalLote(\'' + bistamp + '\')\"  style=\" display:none; float:right; \"><i class=\"fa fa-pencil\" \"style="color:white"\" ></i></button>'
+				}
+
+				var lancamento = '<div id="divLancar_' + bistamp + '" style="display: none">'
+
+				var inputLancar = '<input id="inputLancar_' + bistamp + '" value="' + pendente + '" step="0.01" class="input" type="number" style="max-width:150px; display:inline;" min="0" name="inputLancar_' + bistamp + '" />'
+
+				var btnLancar = '<button type=\"button\" class="btn_verde"  style= float: left; id="btnLancar_' + bistamp + '" onclick="lancamento(\'' + bistamp + '\')"><i  class="fa fa-check"></i></button>'
+
+				lancamento += inputLancar + btnLancar + '</div>'
+
+				lancar = '<div id="lancarText_' + bistamp + '" style="display: flex; align-items: flex-start;justify-content: space-around; ">' + '<span class=\"spn_lancar\" id="valorLancar_' + bistamp + '">' + lancar + '</span> ' + btnEdit + '</div>'
+
+
+				//var adicionarLinha = '<a class="btn" onclick="criaLinha"><i class="fa fa-plus" style="font-size: 20px; color:green;"></i></a>'
+
+				var colunasTabela = ""
+				colunasTabela += '<td  class =\"celula\">' + cliente + designacao + '</td>'
+				colunasTabela += '<td> <div><button   type=\"button\" id=\"btn_validar' + bistamp + '\" class= \"btn_validar\"  onclick=\"validarOnclick(' + i.toString() + ',\'' + bistamp + '\',\'' + pendente + '\',\'' + usalote + '\',\'' + nome + '\')\"><i class=\"fa fa-check\"></i></button><button  type=\"button\" id=\"btn_desvalidar' + i.toString() + '\" class= \"btn_desvalidar\"  onclick=\"desvalidarOnclick(' + i.toString() + ',\'' + bistamp + '\',\'' + usalote + '\' )\" style=\"display:none;\"><i class=\"fa fa-times\"></i></button></td></div></div></td>'
+				colunasTabela += '<td   style=\"text-align: center\">' + qtt + '</td>'
+				colunasTabela += '<td   style=\"text-align: center\">' + qtt_entreg + '</td>'
+				colunasTabela += '<td   style=\"text-align: center\">' + pendente + '</td>'
+				colunasTabela += '<td style =\"text-align: center;\">' + lancar + lancamento + '</td>'
+
+				// var loteDiv = '<div id="divLancarLote_' + bistamp + '" style="display: none">'
+				// var inputLote = '<input id="inputLancarLote_' + bistamp + '"  class="input" style="max-width:150px; display:inline;" type="text"  name="inputLancarLote_' + bistamp + '" />'
+				// loteDiv += inputLote + '</div>'
+
+				/*var btnLote = '<button type=\"button\" class="btn_azul" id=\"btn_editar' + i.toString() + '\" onclick=\"openInput(\'' + bistamp + '\')\"  style=\" display:none; float:right;\"><i class=\"fa fa-pencil\" ></i></button>'
+	
+				var lancarLote = '<div id="lancarLoteText_' + bistamp + '" style="display: flex; align-items: flex-start;justify-content: space-around; ">' + '<span id="loteLancar_' + bistamp + '">' + usalote + '</span>' + btnLote + '</div>'
+	
+				if (usalote >= "0" ) {
+					colunasTabela += '<td id="">' + lancarLote + loteDiv + '</td>'
+	
+					//var adicionarLinha = '<a class="btn" onclick="criaLinha(\'' + bistamp + '\')"><i class="fa fa-plus" style="font-size: 20px; color:green;"></i></a>'
+					//colunasTabela += '<td>' + adicionarLinha + '</td>'
+				} else  {
+					colunasTabela += '<td>-</td>'
+					colunasTabela += '<td>-</td>'
+				}*/
+
+
+				//var adicionarLinha = '<a class="btn" onclick="criaLinha"><i class="fa fa-plus" style="font-size: 20px; color:green;"></i></a>'
+
+				$('#tabelaRececoes > tbody').append('<tr>' + colunasTabela + '</tr>');
+
+
+				//coloca valores conforme já estão na localstorage
+				var arrayLancamentos = JSON.parse(window.localStorage.getItem('lancamentos'))
+				document.getElementById('divLancar_' + bistamp).setAttribute('data-valorOriginal', pendente)
+
+				//se existirem vai adicionar nesse mesmo array ou alterar um desse array
+				if (arrayLancamentos != null) {
+
+					//vai verificar se existe já algum lançamento com este bistamp
+					var indiceLinha = arrayLancamentos.findIndex(lancamento => lancamento.stamp == bistamp)
+
+					//se existir vai retirá-lo com o splice e adicionar no fim do array o novo lançamento
+					if (indiceLinha != -1) {
+
+						var inputValorLancar = 'valorLancar_' + bistamp
+
+						var valor = arrayLancamentos[indiceLinha].valor
+						document.getElementById(inputValorLancar).innerHTML = valor
+						if (usalote == 1 && arrayLancamentos[indiceLinha].lote != "undefined") {
+							var inputLoteLancar = 'loteLancar_' + bistamp
+							document.getElementById(inputLoteLancar).innerHTML = arrayLancamentos[indiceLinha].lote
+
+
+							//     criaLinha(nomeCliente, encomenda, design, ref, qtt, recebido, pendente - valor, lancar, bistamp, usalote) 
+
+						}
+
+						// var qttLinhasComBistampIgual = arrayLancamentos.filter(function(item){
+						//     return item.stamp == bistamp;
+						// }).length;
+
+						// if(qttLinhasComBistampIgual > 1) {
+						//     var arrayIndexes = getAllIndexes(arrayLancamentos, bistamp);
+						//     //remover primeiro pois já foi inserido
+						//     arrayIndexes = arrayIndexes.shift();
+
+						//     for(var i = 0; i < arrayIndexes.length; i++) {
+
+						//         valor = lancamento.valor
+						//         var lote = lancamento.lote
+
+						//         conosle.log(index)
+						//         console.log(valor)
+						//         console.log(lote)
+						//         // criaLinha(nomeCliente, encomenda, design, ref, qtt, recebido, pendente, valor, lote, bistamp, usalote) 
+						//     }
+						// } 
+
+
+					}
+				}
+			}
+		}).error(function (response) {
+			alert("Erro a encontrar Rececoes por favor tente de novo!")
+			console.log(response.error);
+		})
+	}
+
+	function getValueORIFO() {
+		var e = document.getElementById("sel_desc");
+		var sqlsID = e.value;
+		var params = {};
+		let varMyQuery = "select SQL from u_SQLs where id = " + sqlsID;
+		params.id = 'SELECTtoJSON';
+		params.select = varMyQuery;
+		var newQuery;
+		$.ajax({
+			type: 'POST',
+			url: '../api/code/run',
+			async: false,
+			data: JSON.stringify(params),
+			contentType: 'application/json'
+		}).done(function (result, textStatus, jqXHR) {
+			var result2 = result.replaceAll("\n", " ")
+			try {
+				var resposta = JSON.parse(result2);
+			} catch {
+				resposta = JSON.parse("{\"Dados\":[]}");
+			}
+			var DadosJSON = resposta.Dados;
+			for (var i = 0; i < DadosJSON.length; ++i) {
+				newQuery = $.trim(DadosJSON[i].SQL)
+			}
+		})
+		params = {};
+		varMyQuery = newQuery;
+		params.id = 'SELECTtoJSON';
+		params.select = varMyQuery;
+		const object = [];
+		$.ajax({
+			type: 'POST',
+			url: '../api/code/run',
+			async: false,
+			data: JSON.stringify(params),
+			contentType: 'application/json'
+		}).done(function (result, textStatus, jqXHR) {
+			try {
+				var resposta = JSON.parse(result);
+			} catch {
+				resposta = JSON.parse("{\"Dados\":[]}");
+			}
+			var DadosJSON = resposta.Dados;
+			for (let index = 0; index < bistampsLancar.length; index++) {
+				for (let i = 0; i < DadosJSON.length; ++i) {
+					if (bistampsLancar[index] == $.trim(DadosJSON[i].bistamp)) {
+						let seriesMap = {
+							nome: $.trim(DadosJSON[i].nome),
+							encomenda: $.trim(DadosJSON[i].encomenda),
+							design: $.trim(DadosJSON[i].design),
+							ref: $.trim(DadosJSON[i].ref),
+							qtt: $.trim(DadosJSON[i].qtt),
+							recebido: $.trim(DadosJSON[i].recebido),
+							pendente: $.trim(DadosJSON[i].pendente),
+							lancar: $.trim(DadosJSON[i].lancar),
+							bistamp: $.trim(DadosJSON[i].bistamp),
+							usalote: $.trim(DadosJSON[i].usalote),
+							ncont: $.trim(DadosJSON[i].ncont),
+							edebito: $.trim(DadosJSON[i].edebito),
+							desconto: $.trim(DadosJSON[i].desconto),
+							desc2: $.trim(DadosJSON[i].desc2),
+							desc3: $.trim(DadosJSON[i].desc3),
+							despa: $.trim(DadosJSON[i].despa),
+							existecambio: $.trim(DadosJSON[i].existecambio),
+							moeda: $.trim(DadosJSON[i].moeda),
+							no: $.trim(DadosJSON[i].no),
+							doccode: $.trim(DadosJSON[i].doccode),
+						};
+						object.push(seriesMap);
+					}
+
+				}
+			}
+		})
+		return object;
+	}
+
+	function getValueORIBO() {
+		var e = document.getElementById("sel_desc");
+		var sqlsID = e.value;
+		var params = {};
+		let varMyQuery = "select SQL from u_SQLs where id = " + sqlsID;
+		params.id = 'SELECTtoJSON';
+		params.select = varMyQuery;
+		var newQuery;
+		$.ajax({
+			type: 'POST',
+			url: '../api/code/run',
+			async: false,
+			data: JSON.stringify(params),
+			contentType: 'application/json'
+		}).done(function (result, textStatus, jqXHR) {
+			var result2 = result.replaceAll("\n", " ")
+			try {
+				var resposta = JSON.parse(result2);
+			} catch {
+				resposta = JSON.parse("{\"Dados\":[]}");
+			}
+			var DadosJSON = resposta.Dados;
+			for (var i = 0; i < DadosJSON.length; ++i) {
+				newQuery = $.trim(DadosJSON[i].SQL)
+			}
+		})
+		params = {};
+		varMyQuery = newQuery;
+		params.id = 'SELECTtoJSON';
+		params.select = varMyQuery;
+		const object = [];
+		$.ajax({
+			type: 'POST',
+			url: '../api/code/run',
+			async: false,
+			data: JSON.stringify(params),
+			contentType: 'application/json'
+		}).done(function (result, textStatus, jqXHR) {
+			try {
+				var resposta = JSON.parse(result);
+			} catch {
+				resposta = JSON.parse("{\"Dados\":[]}");
+			}
+			var DadosJSON = resposta.Dados;
+			for (let index = 0; index < bistampsLancar.length; index++) {
+				for (let i = 0; i < DadosJSON.length; ++i) {
+					if (bistampsLancar[index] == $.trim(DadosJSON[i].bistamp)) {
+						let seriesMap = {
+							nome: $.trim(DadosJSON[i].nome),
+							encomenda: $.trim(DadosJSON[i].encomenda),
+							design: $.trim(DadosJSON[i].design),
+							ref: $.trim(DadosJSON[i].ref),
+							qtt: $.trim(DadosJSON[i].qtt),
+							recebido: $.trim(DadosJSON[i].recebido),
+							pendente: $.trim(DadosJSON[i].pendente),
+							lancar: $.trim(DadosJSON[i].lancar),
+							bistamp: $.trim(DadosJSON[i].bistamp),
+							usalote: $.trim(DadosJSON[i].usalote),
+							ncont: $.trim(DadosJSON[i].ncont),
+							edebito: $.trim(DadosJSON[i].edebito),
+							desconto: $.trim(DadosJSON[i].desconto),
+							desc2: $.trim(DadosJSON[i].desc2),
+							desc3: $.trim(DadosJSON[i].desc3),
+							despa: $.trim(DadosJSON[i].despa),
+							existecambio: $.trim(DadosJSON[i].existecambio),
+							moeda: $.trim(DadosJSON[i].moeda),
+							no: $.trim(DadosJSON[i].no),
+							ndos: $.trim(DadosJSON[i].ndos),
+						};
+						object.push(seriesMap);
+					}
+
+				}
+			}
+		})
+		return object;
+	}
+
+	function gravarDossier() {
+		try {
+			var cabecalhoFO = []
+			var cabecalhoBO = []
+			var linhas = []
+
+			const dados = localStorage.getItem('dadosNovos')
+			let newDados = JSON.parse(dados)
+
+			var postoSelecionado = document.getElementById("sel_desc").selectedIndex
+			var var1 = vars[postoSelecionado].var1
+			//var var2 = vars[i].var2
+			var var2 = vars[postoSelecionado].var2
+			var var3 = vars[postoSelecionado].var3
+			var var4 = vars[postoSelecionado].var4
+
+			var n_documento = document.getElementById("inp_fatura").value
+
+			var sel = document.getElementById("sel_desc");
+			var sqlsID = sel.value;
+			var stringAcumFO = "";
+			var stringAcumFN = "";
+			var params = {};
+			var campoORIFN = [];
+			var campoORIFO = [];
+			var campoORIBO = [];
+			var campoORIBI = [];
+			var objectFO;
+			var objectBO;
+			//vai buscar os campos que estão no pareamento
+			let varMyQuery = "select * from u_rececoescampos where sqlsID = " + sqlsID;
+			params.id = 'SELECTtoJSON'
+			params.select = varMyQuery
+			$.ajax({
+				type: 'POST',
+				url: '../api/code/run',
+				async: false,
+				data: JSON.stringify(params),
+				contentType: 'application/json'
+			}).done(function (result, textStatus, jqXHR) {
+				try {
+					var resposta = JSON.parse(result);
+				} catch {
+					resposta = JSON.parse("{\"Dados\":[]}");
+				}
+				var DadosJSON = resposta.Dados;
+				var escolhas = "";
+				//se têm pareamento
+				if (DadosJSON.length >= 1) {
+					for (var i = 0; i < DadosJSON.length; ++i) {
+						//vai meter no array os campos que estão na tabela fo
+						if ($.trim(DadosJSON[i].tabeladest) == "fo") {
+							let aux = $.trim(DadosJSON[i].campoORI)
+							campoORIFO.push(aux);
+						}
+						//vai meter no array os campos que estão na tabela fn
+						if ($.trim(DadosJSON[i].tabeladest) == "fn") {
+							let aux = $.trim(DadosJSON[i].campoORI)
+							campoORIFN.push(aux);
+
+						}
+						//vai meter no array os campos que estão na tabela bo
+						if ($.trim(DadosJSON[i].tabeladest) == "bo") {
+							let aux = $.trim(DadosJSON[i].campoORI)
+							campoORIBO.push(aux);
+						}
+						//vai meter no array os campos que estão na tabela bi
+						if ($.trim(DadosJSON[i].tabeladest) == "bi") {
+							let aux = $.trim(DadosJSON[i].campoORI)
+							campoORIBI.push(aux);
+						}
+					}
+
+				}
+			})
+			//se a tabela for fo
+			if (var1 != "BO") {
+				objectFO = getValueORIFO();
+				//se a tabela for bo
+			} else {
+				objectBO = getValueORIBO();
+			}
+			let arrayFO = [];
+			let arrayFN = [];
+			let arrayBO = [];
+			let arrayBI = [];
+			//vai buscar quantas encomendas o utilizador selecionou
+			let lenghtArrays
+			if (var1 != "BO") {
+				lenghtArrays = objectFO.length
+			} else {
+				lenghtArrays = objectBO.length
+			}
+			//vai buscar os campos que estão no pareamento e que estão obrigatórios
+			varMyQuery = "select campoORI from u_rececoescampos where obrigatorio = 1 and sqlsID = " + sqlsID;
+			var obrigatorio = [];
+			params.id = 'SELECTtoJSON'
+			params.select = varMyQuery
+			$.ajax({
+				type: 'POST',
+				url: '../api/code/run',
+				async: false,
+				data: JSON.stringify(params),
+				contentType: 'application/json'
+			}).done(function (result, textStatus, jqXHR) {
+				try {
+					var resposta = JSON.parse(result);
+				} catch {
+					resposta = JSON.parse("{\"Dados\":[]}");
+				}
+				var DadosJSON = resposta.Dados;
+				var escolhas = "";
+				for (var i = 0; i < DadosJSON.length; ++i) {
+					obrigatorio.push($.trim(DadosJSON[i].campoORI));
+				}
+			})
+			for (var i = 0; i < lenghtArrays; ++i) {
+				//se a tabela for fo e vai adicionar ao array arrayFO o objeto, ex: {no : 1, ndos : 1}
+				for (let b = 0; b < campoORIFO.length; b++) {
+					if (campoORIFO[b].includes("@")) {
+					} else {
+						const newObj = {};
+						newObj[campoORIFO[b]] = objectFO[i][campoORIFO[b]];
+						arrayFO.push(newObj);
+					}
+				}
+				for (let a = 0; a < campoORIFN.length; a++) {
+					if (campoORIFN[a].includes("@")) {
+					} else {
+						const newObj = {};
+						newObj[campoORIFN[a]] = objectFO[i][campoORIFN[a]];
+						arrayFN.push(newObj);
+					}
+				}
+				for (let b = 0; b < campoORIBO.length; b++) {
+					if (campoORIBO[b].includes("@")) {
+					} else {
+						const newObj = {};
+						newObj[campoORIBO[b]] = objectBO[i][campoORIBO[b]];
+						arrayBO.push(newObj);
+					}
+				}
+				for (let b = 0; b < campoORIBI.length; b++) {
+					if (campoORIBI[b].includes("@")) {
+					} else {
+						const newObj = {};
+						newObj[campoORIBI[b]] = objectBO[i][campoORIBI[b]];
+						arrayBI.push(newObj);
+					}
+				}
+
+				if (var1 != "BO") {
+					for (let index = 0; index < obrigatorio.length; index++) {
+						if (objectFO[i][obrigatorio[index]] == "" || objectFO[i][obrigatorio[index]] == null) {
+							alert("Preencha o campo " + obrigatorio[index])
+							closeModalFatura()
+							return
+						}
+					}
+				} else {
+					for (let index = 0; index < obrigatorio.length; index++) {
+						if (objectBO[i][obrigatorio[index]] == "" || objectBO[i][obrigatorio[index]] == null) {
+							alert("Preencha o campo " + obrigatorio[index])
+							closeModalFatura()
+							return
+						}
+					}
+				}
+
+				let bistamp
+				if (var1 != "BO") {
+					bistamp = objectFO[i]["bistamp"];
+				} else {
+					bistamp = objectBO[i]["bistamp"];
+				}
+				//Vai buscar a quantidade a lancar
+				var quantidadelancar = document.getElementById("valorLancar_" + bistamp.toString()).innerText
+				if (var1 != "BO" && lotes.length == 0) {
+					//vai buscar o numero da fatura para meter no cabeçalho
+					arrayFO.push({ adoc: document.getElementById("inp_fatura").value });
+					//junta o array todo num objeto
+					const cabecalhoaux = Object.assign({}, ...arrayFO);
+					cabecalhoFO.push(cabecalhoaux);
+					//vai meter a quantidade nas linhas
+					arrayFN.push({ 'qtt': quantidadelancar });
+					//junta o array todo num objeto
+					const linhasaux = Object.assign({}, ...arrayFN);
+					linhas.push(linhasaux);
+				} else if (var1 != "BO" && lotes.length != 0) {
+					arrayFO.push({ adoc: document.getElementById("inp_fatura").value });
+					const cabecalhoaux = Object.assign({}, ...arrayFO);
+					cabecalhoFO.push(cabecalhoaux);
+					//se tiver lotes vai buscar os lotes e mete no array linhas, a quantidade e os lotes
+					for (let index = 0; index < lotes.length; index++) {
+						arrayFN.push({ 'qtt': lotes[index]["qtt"], 'lote': lotes[index]["lote"] });
+						const linhasaux = Object.assign({}, ...arrayFN);
+						linhas.push(linhasaux);
+					}
+				} else if (var1 == "BO" && lotes.length == 0) {
+					const cabecalhoaux = Object.assign({}, ...arrayBO);
+					cabecalhoBO.push(cabecalhoaux);
+					arrayBI.push({ 'qtt': quantidadelancar });
+					const linhasaux = Object.assign({}, ...arrayBI);
+					linhas.push(linhasaux);
+				} else {
+					const cabecalhoaux = Object.assign({}, ...arrayBO);
+					cabecalhoBO.push(cabecalhoaux);
+					for (let index = 0; index < lotes.length; index++) {
+						arrayBI.push({ 'qtt': lotes[index]["qtt"], 'lote': lotes[index]["lote"] });
+						const linhasaux = Object.assign({}, ...arrayBI);
+						linhas.push(linhasaux);
+					}
+				}
+				var table = document.getElementById("tbodyRececoes")
+				if (document.getElementById("inp_fatura").value == "") {
+					alert("Por favor introduza o número de documento.")
+					return ""
+				}
+			}
+			if (var1 != "BO") {
+				if (lotes.length == 0) {
+					if (linhas != null) {
+						params = {};
+						params.id = 'jsontofo'
+						params.cabecalho = cabecalhoFO
+						params.lancamentos = linhas
+						$.ajax({
+							type: 'POST',
+							url: '../api/code/run',
+							async: true,
+							data: JSON.stringify(params),
+							contentType: 'application/json',
+							success: function (response) {
+								closeModalFatura()
+							},
+							error: function (response) {
+								alert("Erro a cria compra!")
+								console.log(response.error);
+
+							}
+						});
+					} else {
+						alert("Não existem dados para gravar a compra!")
+					}
+				} else {
+					for (var j = 0; j < lotes.length; j++) {
+						let params = {};
+						let varMyQuery = "select count(*) as total from se where ref='" + objectFO[0]["ref"] + "' and lote='" + lotes[j].lote + "'"
+						params.id = 'SELECTtoJSON'
+						params.select = varMyQuery
+						$.ajax({
+							type: 'POST',
+							url: '../api/code/run',
+							async: false,
+							data: JSON.stringify(params),
+							contentType: 'application/json'
+						}).done(function (result, textStatus, jqXHR) {
+							var resposta = JSON.parse(result)
+							if (resposta.Dados[0].total == 0) {
+								var params = {};
+								var xml = `<loteinserir ref='` + objectFO[0]["ref"] + `' design='` + objectFO[0]["design"] + `' qtt='` + lotes[j].qtt + `' lote='` + lotes[j].lote + `'>`
+								xml += `</loteinserir>`
+
+								params.id = 'inserirLote'
+								params.xml = xml
+								$.ajax({
+									type: 'POST',
+									url: '../api/code/run',
+									async: false,
+									data: JSON.stringify(params),
+									contentType: 'application/json',
+									success: function (response) {
+									},
+									error: function (response) {
+										alert("Erro a criar dossier!")
+										console.log(response.error);
+
+									}
+								});
+							}
+						})
+					}
+					if (linhas != null) {
+						var params = {};
+						params.id = 'jsontofo'
+						params.cabecalho = cabecalhoFO
+						params.lancamentos = linhas
+						$.ajax({
+							type: 'POST',
+							url: '../api/code/run',
+							async: true, data: JSON.stringify(params),
+							contentType: 'application/json',
+							success: function (response) {
+								closeModalFatura()
+							}, error: function (response) {
+								alert("Erro a cria compra!")
+								console.log(response.error);
+							}
+						});
+					} else {
+						alert("Não existem dados para gravar a compra!")
+					}
+				}
+			} else {
+				if (lotes.length == 0) {
+					if (linhas != null) {
+						var params = {};
+						params.id = 'JSONTOBO'
+						params.BO = cabecalhoBO
+						params.BI = linhas
+						$.ajax({
+							type: 'POST',
+							url: '../api/code/run',
+							async: true, data: JSON.stringify(params),
+							contentType: 'application/json',
+							success: function (response) {
+
+								closeModalFatura()
+							},
+							error: function (response) {
+								alert("Erro a criar dossier!")
+								console.log(response.error);
+
+							}
+						});
+					} else {
+						alert("Não existem dados para gravar o dossier!")
+					}
+				} else {
+					for (var j = 0; j < lotes.length; j++) {
+						let params = {};
+						let varMyQuery = "select count(*) as total from se where ref='" + objectBO[0]["ref"] + "' and lote='" + lotes[j].lote + "'"
+						params.id = 'SELECTtoJSON'
+						params.select = varMyQuery
+						$.ajax({
+							type: 'POST',
+							url: '../api/code/run',
+							async: false,
+							data: JSON.stringify(params),
+							contentType: 'application/json'
+						}).done(function (result, textStatus, jqXHR) {
+							var resposta = JSON.parse(result)
+							if (resposta.Dados[0].total == 0) {
+								var params = {};
+								var xml = `<loteinserir ref='` + objectBO[0]["ref"] + `' design='` + objectBO[0]["design"] + `' qtt='` + lotes[j].qtt + `' lote='` + lotes[j].lote + `'>`
+								xml += `</loteinserir>`
+
+								params.id = 'inserirLote'
+								params.xml = xml
+								$.ajax({
+									type: 'POST',
+									url: '../api/code/run',
+									async: false,
+									data: JSON.stringify(params),
+									contentType: 'application/json',
+									success: function (response) {
+									},
+									error: function (response) {
+										alert("Erro a criar dossier!")
+										console.log(response.error);
+
+									}
+								});
+							}
+						})
+					}
+
+					if (linhas != null) {
+						var params = {};
+						params.id = 'JSONTOBO'
+						params.BO = cabecalhoBO
+						params.BI = linhas
+						$.ajax({
+							type: 'POST',
+							url: '../api/code/run',
+							async: true, data: JSON.stringify(params),
+							contentType: 'application/json',
+							success: function (response) {
+								closeModalFatura()
+							},
+							error: function (response) {
+								alert("Erro a criar dossier!")
+								console.log(response.error);
+
+							}
+						});
+					} else {
+						alert("Não existem dados para gravar o dossier!")
+					}
+				}
+			}
+			linhas = [];
+
+
+		}
+		catch (e) {
+			closeModalFatura()
+			console.log(e);
+		} finally {
+			bistampsLancar = []
+			linhas = []
+			document.getElementById('filtroFornecedor').value = ""
+			getRececoes()
+		}
+	}
+
+	function filtroFornecedor() {
+		var input, filter, tr, td, i, txtValue;
+		var tabela = document.getElementById('tbodyRececoes')
+		var inputFornecedor = document.getElementById("filtroFornecedor")
+		filter = inputFornecedor.value.toUpperCase();
+		tr = tabela.getElementsByTagName("tr");
+		for (i = 0; i < tr.length; i++) {
+			td = tr[i].getElementsByTagName("td")[0];
+			if (td) {
+				txtValue = td.textContent || td.innerText;
+				if (txtValue.toUpperCase().indexOf(filter) > -1) {
+					tr[i].style.display = "";
+				} else {
+					tr[i].style.display = "none";
+				}
+			}
+		}
+	}
+	function filtroArtigo() {
+
+		var input, filter, tr, td, i, txtValue;
+		var tabela = document.getElementById('tbodyRececoes')
+		var inputFornecedor = document.getElementById("filtroArtigo")
+		filter = inputFornecedor.value.toUpperCase();
+		tr = tabela.getElementsByTagName("tr");
+		for (i = 0; i < tr.length; i++) {
+			td = tr[i].getElementsByTagName("td")[0];
+			if (td) {
+				txtValue = td.textContent || td.innerText;
+				if (txtValue.toUpperCase().indexOf(filter) > -1) {
+					tr[i].style.display = "";
+				} else {
+					tr[i].style.display = "none";
+				}
+			}
+		}
+	}
+
+
+
+	function validarOnclick(i, bistamp, pendente, usalote, fornecedor) {
+
+		document.getElementById('valorLancar_' + bistamp).innerHTML = pendente
+		//document.getElementById('btn_editar' + i.toString()).style.display = 'block'
+		document.getElementById('filtroFornecedor').value = fornecedor
+		document.getElementById('filtroFornecedor').disabled = true
+		document.getElementById('btn_alterar' + bistamp).style.display = 'block'
+		document.getElementById('btn_desvalidar' + i.toString()).style.display = 'block'
+		document.getElementById("btn_validar" + bistamp).style.display = "none"
+		bistampsLancar.push(bistamp)
+		if (usalote == 1) {
+			openModalLote(bistamp)
+
+		}
+		filtroArtigo()
+		filtroFornecedor()
+
+	}
+
+	function desvalidarOnclick(i, bistamp, usalote) {
+
+		var tamanho = lotes.length
+		for (let index = 0; index < tamanho; index++) {
+			if (lotes[index].bistamp == bistamp) {
+				lotes.splice(index, 1)
+				tamanho = lotes.length
+				index = -1
+			}
+		}
+
+
+
+		document.getElementById('valorLancar_' + bistamp).innerHTML = "0"
+		document.getElementById('inputLancar_' + bistamp).value = '0'
+		// //document.getElementById('loteLancar_' + bistamp).innerHTML = usalote
+
+		document.getElementById('btn_desvalidar' + i.toString()).style.display = 'none'
+		document.getElementById("btn_validar" + bistamp).style.display = "block"
+		document.getElementById('btn_alterar' + bistamp).style.display = 'none'
+
+		var desbloquear = 1
+		var botoesDesvalidar = document.querySelectorAll(".btn_desvalidar")
+		botoesDesvalidar.forEach(element => {
+			if (element.style.display == 'block') {
+				desbloquear = 0
+			}
+		});
+
+		if (desbloquear == 1) {
+			document.getElementById('filtroFornecedor').value = ''
+			document.getElementById('filtroFornecedor').disabled = false
+			getRececoes()
+		}
+
+		//remover bistamp porque ja nao é um bistamp a ser lançado
+		for (var i = 0; i < bistampsLancar.length; i++) {
+			if (bistampsLancar[i] == bistamp) {
+				bistampsLancar.splice(i, 1)
+			}
+		}
+
+		//document.getElementById('btn_editar' + i.toString()).style.display = 'none'
+
+
+	}
+</script>

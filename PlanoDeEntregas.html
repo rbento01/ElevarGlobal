@@ -1,0 +1,1285 @@
+<style type="text/css">
+    @media print,
+    screen {
+        .hidden-print {
+            display: none !important;
+        }
+    }
+
+    tr {
+        display: table;
+        /* display purpose; th's border */
+        width: 100%;
+    }
+
+
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 1;
+        padding-top: 100px;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        overflow-y: initial;
+        background-color: rgb(0, 0, 0);
+        background-color: rgba(0, 0, 0, 0.6);
+    }
+
+    .modal_content {
+        background-color: #fefefe;
+        margin: auto;
+        padding: 10px;
+        border: 1px solid #888;
+        width: 660px;
+        height: 300px;
+        overflow-y: auto;
+        border-radius: 10px;
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    }
+
+    .btn_verde {
+        background: #47cf73;
+        border: 1px solid #47cf73;
+        border-radius: 6px;
+        box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
+        box-sizing: border-box;
+        color: #FFFFFF;
+        cursor: pointer;
+        display: inline-block;
+        font-family: nunito, roboto, proxima-nova, "proxima nova", sans-serif;
+        font-size: 16px;
+        font-weight: 800;
+        line-height: 16px;
+        min-height: 40px;
+        outline: 0;
+        padding: 12px 14px;
+        text-align: center;
+        text-rendering: geometricprecision;
+        text-transform: none;
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+        vertical-align: middle;
+    }
+
+    .btn_verde:hover {
+        background-color: initial;
+        background-position: 0 0;
+        color: #47cf73;
+    }
+
+    .btn_vermelho {
+        background: #ff3c41;
+        border: 1px solid #ff3c41;
+        border-radius: 6px;
+        box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
+        box-sizing: border-box;
+        color: #FFFFFF;
+        cursor: pointer;
+        display: inline-block;
+        font-family: nunito, roboto, proxima-nova, "proxima nova", sans-serif;
+        font-size: 16px;
+        font-weight: 800;
+        line-height: 16px;
+        min-height: 40px;
+        outline: 0;
+        padding: 12px 14px;
+        text-align: center;
+        text-rendering: geometricprecision;
+        text-transform: none;
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+        vertical-align: middle;
+    }
+
+    .btn_vermelho:disabled {
+        background-color: initial;
+        background-position: 0 0;
+        color: #725b5b;
+        opacity: 0.5;
+    }
+
+    .btn_vermelho:hover {
+        background-color: initial;
+        background-position: 0 0;
+        color: #ff3c41;
+    }
+
+    .btn_azul {
+        background: #026cad;
+        border: 1px solid #026cad;
+        border-radius: 6px;
+        box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
+        box-sizing: border-box;
+        color: #FFFFFF;
+        cursor: pointer;
+        display: inline-block;
+        font-family: nunito, roboto, proxima-nova, "proxima nova", sans-serif;
+        font-size: 16px;
+        font-weight: 800;
+        line-height: 16px;
+        min-height: 40px;
+        outline: 0;
+        padding: 12px 14px;
+        text-align: center;
+        text-rendering: geometricprecision;
+        text-transform: none;
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+        vertical-align: middle;
+    }
+
+    .btn_azul:hover {
+        background-color: initial;
+        background-position: 0 0;
+        color: #026cad;
+    }
+
+    .btn_azulesc {
+        background: #014772;
+        border: 1px solid #014772;
+        border-radius: 6px;
+        box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
+        box-sizing: border-box;
+        color: #FFFFFF;
+        cursor: pointer;
+        display: inline-block;
+        font-family: nunito, roboto, proxima-nova, "proxima nova", sans-serif;
+        font-size: 16px;
+        font-weight: 800;
+        line-height: 16px;
+        min-height: 40px;
+        outline: 0;
+        padding: 12px 14px;
+        text-align: center;
+        text-rendering: geometricprecision;
+        text-transform: none;
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+        vertical-align: middle;
+    }
+
+    .btn_azulesc:hover {
+        background-color: initial;
+        background-position: 0 0;
+        color: #014772;
+
+    }
+
+    select {
+        width: 100%;
+        height: 5rem;
+        border-radius: 8px;
+        box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+        border: none;
+        outline-color: #4086d1;
+        margin-bottom: 1rem;
+    }
+
+    .input {
+        width: 100%;
+        height: 5rem;
+        border-radius: 10px;
+        box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+        border: none;
+        outline-color: #4086d1
+    }
+
+    .caixa {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 5rem;
+    }
+
+    h3 {
+        font-weight: bold;
+        font-size: 6rem;
+        margin-top: 4rem;
+        margin-bottom: 4rem;
+        text-align: center;
+
+    }
+
+    .tabela {
+        margin: 1rem;
+    }
+
+    .btns {
+        margin-top: 2rem;
+        display: flex;
+    }
+
+    #inp_qtt {
+        border-radius: 8px;
+    }
+
+    input::placeholder {
+        font-size: 30px;
+        padding-left: 3rem;
+        padding-top: 1rem;
+        color: #181446;
+        ;
+
+    }
+
+    .btn {
+        display: flex;
+
+    }
+
+    .row sectionToPrint {
+        background: white;
+    }
+
+    .fundoPreto_modalGeral {
+        display: none;
+        position: fixed;
+        z-index: 1;
+        padding-top: 100px;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        overflow-y: initial;
+        background-color: rgb(0, 0, 0);
+        background-color: rgba(0, 0, 0, 0.6);
+    }
+
+    .close {
+        cursor: pointer;
+        color: rgb(122, 122, 122);
+        float: right;
+        font-size: 20px;
+    }
+
+    .modalTamanho {
+        background-color: #fefefe;
+        margin: auto;
+        padding: 20px;
+        border: 1px solid #888;
+        overflow-y: auto;
+        border-radius: 10px;
+    }
+
+
+    .column-filter {
+        width: 100%;
+        background-color: #ffffff;
+        border: 0px solid #cccccc;
+        border-bottom: 1px solid #cccccc;
+        margin-bottom: 12px;
+        font-weight: normal;
+        padding: 5px;
+        color: #656565;
+    }
+
+    /* Loading */
+
+    .loader3 {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .bars {
+        width: 10px;
+        height: 20px;
+        margin: 0 2px;
+        border-radius: 4px;
+        animation: loader3 3s ease-in-out infinite;
+    }
+
+    .bar1 {
+        background-color: #026cad;
+        animation-delay: -0.8s;
+    }
+
+    .bar2 {
+        background-color: #026cad;
+        animation-delay: -0.7s;
+    }
+
+    .bar3 {
+        background-color: #026cad;
+        animation-delay: -0.6s;
+    }
+
+    .bar4 {
+        background-color: #026cad;
+        animation-delay: -0.5s;
+    }
+
+    .bar5 {
+        background-color: #026cad;
+        animation-delay: -0.4s;
+    }
+
+    .bar6 {
+        background-color: #026cad;
+        animation-delay: -0.3s;
+    }
+
+    .bar7 {
+        background-color: #026cad;
+        animation-delay: -0.2s;
+    }
+
+    .bar8 {
+        background-color: #026cad;
+        animation-delay: -0.1s;
+    }
+
+    .bar9 {
+        background-color: #026cad;
+        animation-delay: 0s;
+    }
+
+    .bar10 {
+        background-color: #026cad;
+        animation-delay: 0.1s;
+    }
+
+    @keyframes loader3 {
+        0% {
+            transform: scale(1);
+        }
+
+        20% {
+            transform: scale(1, 2.32);
+        }
+
+        40% {
+            transform: scale(1);
+        }
+    }
+
+
+
+    /* Loading End*/
+</style>
+<div class="main" style="background: white;">
+    <div class="fundoPreto_modalGeral" id="modal_mainFiltro">
+        <div class="modalTamanho" style="height: fit-content;width: 40%;"><span class="close" id="close"
+                onclick="closeModalMainFiltro()" style="display: none;">&times;</span>
+            <div style="display: flex;flex-direction: column; padding: 2rem;"><label>At&eacute;(Conf.Cliente):</label>
+                <input class="input" id="inp_ate" style="margin-bottom: 1rem;" type="date" />
+                <label>Ordena&ccedil;&atilde;o:</label> <select class="select" id="inp_ordenacao"
+                    style="margin-bottom: 1rem;" type="text">
+                    <option>Cliente</option>
+                    <option>Data Confirma&ccedil;&atilde;o ao Cliente</option>
+                </select> <label>Marca:</label> <select class="select" id="inp_marca" style="margin-bottom: 1rem;"
+                    type="text">
+                    <option></option>
+                    <option>DME</option>
+                    <option>MM</option>
+                    <option>MF</option>
+                    <option>VEGA</option>
+                    <option>US</option>
+                    <option>WR</option>
+                </select>
+            </div>
+
+            <div style="display: flex;align-items: center;justify-content: end;margin-top: 1rem;"><button
+                    class="btn_vermelho" id="novoStic" onclick="addStil()" style="float: right; display: none;"
+                    type="button"><i aria-hidden="true" class="fa fa-times"></i>&nbsp;Cancelar</button><button
+                    class="btn_verde" id="novoStic" onclick="getDados()" type="button"><i aria-hidden="true"
+                        class="fa fa-check"></i>&nbsp;Guardar</button></div>
+        </div>
+    </div>
+
+    <div class="fundoPreto_modalGeral" id="modal_checks">
+        <div class="modalTamanho" style="height: fit-content;width: 20%;"><span class="close" id="close"
+                onclick="closeModalChecks()" style="display: none;">&times;</span>
+
+            <div style="display: flex;flex-direction: column; padding: 2rem;">
+                <div style="display: flex;align-items: baseline;margin-bottom: 1rem;"><input id="chk_rececao"
+                        style="margin-right: 1.5rem;" type="checkbox" /><label>Rece&ccedil;&atilde;o</label></div>
+
+                <div style="display: flex;align-items: baseline;margin-bottom: 1rem;"><input id="chk_verificacao"
+                        style="margin-right: 1.5rem;" type="checkbox" /><label>Verifica&ccedil;&atilde;o</label></div>
+
+                <div style="display: flex;align-items: baseline;margin-bottom: 1rem;"><input id="chk_infCliente"
+                        style="margin-right: 1.5rem;" type="checkbox" /><label>Informar Cliente</label></div>
+
+                <div style="display: flex;align-items: baseline;margin-bottom: 1rem;"><input id="chk_envio"
+                        style="margin-right: 1.5rem;" type="checkbox" /><label>Envio</label></div>
+            </div>
+
+            <div style="display: flex;align-items: center;justify-content: space-between;margin-top: 1rem;"><button
+                    class="btn_vermelho" id="novoStic" onclick="closeModalChecks()" style="float: right;"
+                    type="button"><i aria-hidden="true" class="fa fa-times"></i>&nbsp;Cancelar</button><button
+                    class="btn_verde" id="novoStic" onclick="guardarChecks()" type="button"><i aria-hidden="true"
+                        class="fa fa-check"></i>&nbsp;Guardar</button></div>
+        </div>
+    </div>
+
+    <div class="fundoPreto_modalGeral" id="loading" style="display: none;">
+        <div class="modalTamanho" style="height: fit-content;width: 15%;">
+            <div class="loader3" style="margin:auto">
+                <div class="bars bar1">&nbsp;</div>
+
+                <div class="bars bar2">&nbsp;</div>
+
+                <div class="bars bar3">&nbsp;</div>
+
+                <div class="bars bar4">&nbsp;</div>
+
+                <div class="bars bar5">&nbsp;</div>
+
+                <div class="bars bar6">&nbsp;</div>
+
+                <div class="bars bar7">&nbsp;</div>
+
+                <div class="bars bar8">&nbsp;</div>
+
+                <div class="bars bar9">&nbsp;</div>
+
+                <div class="bars bar10">&nbsp;</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="tabela" id="mainTabela" style="display: none;">
+        <button class="btn_azul" onclick="openModalMainFiltro()"
+            type="button"><i class="fa fa-filter"></i>&nbsp;Filtro</button>
+
+        <table class="table table-hover" id="tabelaDados"
+            style="margin-top:10px; width: 100%;border-collapse: collapse;">
+            <thead
+                style="display: table; width: calc(100% - 17px);  background-color: aliceblue;box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;border-radius: 8px;">
+                <tr>
+                    <th scope="col" style="width: 30%; ">Cliente<br />
+                        Cliente Entrega</th>
+                    <th scope="col" style="text-align:center; width: 2%; ">&nbsp;</th>
+                    <th scope="col" style="text-align:center; width: 15%;  ">NREF<br />
+                        Molde<br />
+                        Cod Prod</th>
+                    <th scope="col" style="text-align:center; width: 20%;  ">Data Conf<br />
+                        Ped Cli<br />
+                        Local</th>
+                    <th scope="col" style="text-align:center; width: 18%;  ">Data Emb<br />
+                        Pronto Ent<br />
+                        Verif<br />
+                        EntregarCom</th>
+                    <th scope="col" style="text-align:center; width: 6%;">P/T<br />
+                        E.D.<br />
+                        Class<br />
+                        Inf</th>
+                    <th scope="col" style="text-align:center; width: 9%; ">&nbsp;</th>
+                </tr>
+                <tr>
+                    <th style="width:30%"><input class="input" id="inp_filtro_1" onkeyup="filtrarTabela()"
+                            style="box-shadow: rgba(3, 102, 214, 0.3) 0px 0px 0px 3px; height:2rem; background-color: #ffffff;"
+                            type="text" /></th>
+                    <th style="width:2%">&nbsp;</th>
+                    <th style="width:15%"><input class="input" id="inp_filtro_2" onkeyup="filtrarTabela()"
+                            style="box-shadow: rgba(3, 102, 214, 0.3) 0px 0px 0px 3px; height:2rem; background-color: #ffffff;"
+                            type="text" /></th>
+                    <th style="width:20%"><input class="input" id="inp_filtro_3" onkeyup="filtrarTabela()"
+                            style="box-shadow: rgba(3, 102, 214, 0.3) 0px 0px 0px 3px; height:2rem; background-color: #ffffff;"
+                            type="text" /></th>
+                    <th style="width:18%"><input class="input" id="inp_filtro_4" onkeyup="filtrarTabela()"
+                            style="box-shadow: rgba(3, 102, 214, 0.3) 0px 0px 0px 3px; height:2rem; background-color: #ffffff;"
+                            type="text" /></th>
+                    <th style="width:6%"><input class="input" id="inp_filtro_5" onkeyup="filtrarTabela()"
+                            style="box-shadow: rgba(3, 102, 214, 0.3) 0px 0px 0px 3px; height:2rem; background-color: #ffffff;"
+                            type="text" /></th>
+                    <th style="width:9%">&nbsp;</th>
+                </tr>
+            </thead>
+            <tbody id="tableBody" style="display: block; max-height: 400px; overflow-y: scroll;">
+            </tbody>
+        </table>
+    </div>
+</div>
+<script>
+    window.onload = function onLoadFunction() {
+        $("#OptionsRecordDropDown").hide();
+        $(".headerZone").hide();
+        $(".navbar").hide();
+        if (document.querySelectorAll("span.hidden-print").length > 0) { //logs do monitor de sistema
+            document.querySelectorAll("span.hidden-print")[0].hidden = true
+        }
+        var elements = document.querySelectorAll('.row.hidden-print');
+        for (var i = 0; i < elements.length; i++) {
+            elements[i].style.display = 'none';
+        }
+
+        document.getElementById("inp_ate").value = new Date().toLocaleDateString('en-CA')//CA?
+        document.getElementById("master-content").style.background = 'white'
+        openModalMainFiltro()
+        //getDados()
+    }
+
+    filtrarTabela = (posicao) => {
+        var input, filter, tr, td, i, txtValue;
+        var tabela = document.getElementById('tableBody')
+        for (let i = 0; i < tabela.children.length; i++) {
+            const element = tabela.children[i];
+            element.style.display = "block"
+        }
+        var input1 = document.getElementById("inp_filtro_1").value.toUpperCase()
+        var input2 = document.getElementById("inp_filtro_2").value.toUpperCase()
+        var input3 = document.getElementById("inp_filtro_3").value.toUpperCase()
+        var input4 = document.getElementById("inp_filtro_4").value.toUpperCase()
+        var input5 = document.getElementById("inp_filtro_5").value.toUpperCase()
+        tr = tabela.getElementsByTagName("tr");
+        for (i = 0; i < tr.length; i++) {
+            td1 = tr[i].getElementsByTagName("td")[0];
+            td2 = tr[i].getElementsByTagName("td")[2];
+            td3 = tr[i].getElementsByTagName("td")[3];
+            td4 = tr[i].getElementsByTagName("td")[4];
+            td5 = tr[i].getElementsByTagName("td")[5];
+            txtValue1 = td1.textContent || td1.innerText;
+            txtValue2 = td2.textContent || td2.innerText;
+            txtValue3 = td3.textContent || td3.innerText;
+            txtValue4 = td4.textContent || td4.innerText;
+            txtValue5 = td5.textContent || td5.innerText;
+            if ((txtValue1.toUpperCase().indexOf(input1) > -1) && (td1.parentNode.style.display != "none")
+                && (txtValue2.toUpperCase().indexOf(input2) > -1) && (td2.parentNode.style.display != "none")
+                && (txtValue3.toUpperCase().indexOf(input3) > -1) && (td3.parentNode.style.display != "none")
+                && (txtValue4.toUpperCase().indexOf(input4) > -1) && (td4.parentNode.style.display != "none")
+                && (txtValue5.toUpperCase().indexOf(input5) > -1) && (td5.parentNode.style.display != "none")
+            ) {
+                tr[i].style.display = "";
+            } else {
+                tr[i].style.display = "none";
+            }
+        }
+    }
+
+    openModalMainFiltro = () => {
+        document.getElementById('modal_mainFiltro').style.display = 'block';
+        document.getElementById('mainTabela').style.display = 'none';
+    }
+    closeModalMainFiltro = () => {
+        document.getElementById('modal_mainFiltro').style.display = 'none';
+    }
+    openModalChecks = () => {
+        document.getElementById('modal_checks').style.display = 'block';
+    }
+    closeModalChecks = () => {
+        document.getElementById('modal_checks').style.display = 'none';
+    }
+    /*function fullScreen() {
+    
+        if ( document.querySelector("body").requestFullscreen()) {
+    
+            document.querySelector("body").requestFullscreen()
+        } else {
+            document.querySelector("body").exitFullscreen()
+    
+        }
+    
+    }*/
+
+
+
+    document.addEventListener('click', function (event) {
+
+        // Ignore clicks that weren't on the toggle button
+        if (!event.target.hasAttribute('data-toggle-fullscreen')) return;
+
+        // If there's an element in fullscreen, exit
+        // Otherwise, enter it
+        if (document.fullscreenElement) {
+            document.exitFullscreen();
+        } else {
+            document.documentElement.requestFullscreen();
+        }
+
+    }, false);
+
+
+    function toggleAutoRefreshTimer() {
+
+        window.setInterval(function () {
+
+            getDados()
+
+        }, 300000);
+
+    }
+
+    var dadosTabela = [];
+
+    function openModal(i) {
+
+        document.getElementById("btn_guardar").disabled = false
+        document.getElementById('modalqtt').style.display = "block"
+        document.getElementById("inp_qtt").value = ""
+        document.getElementById("btn_guardar").value = i
+        document.getElementById("btn_guardar").style.display = "block"
+        document.getElementById("btn_imprimir").style.display = "none"
+        document.getElementById("inp_qtt").placeholder = "Quantidade"
+    }
+
+    function closeModal() {
+        document.getElementById("modalqtt").style.display = "none";
+    }
+
+    function openImprimir() {
+
+        document.getElementById("btn_imprimir").disabled = false
+        document.getElementById('modalqtt').style.display = "block"
+        document.getElementById("inp_qtt").value = ""
+        document.getElementById("btn_guardar").style.display = "none"
+        document.getElementById("btn_imprimir").style.display = "block"
+        document.getElementById("inp_qtt").placeholder = "Nº Produto"
+    }
+
+
+
+    function loading() {
+        document.getElementById("loading").style.display = (document.getElementById("loading").style.display == 'none' ? 'block' : 'none')
+    }
+
+
+    function getDados() {
+        (async () => {
+            loading()
+            let tBody = document.getElementById('tableBody')
+            tBody.innerHTML = ''
+            var params = {};
+
+            let ate = document.getElementById("inp_ate").value
+            let ordenacaoInp = document.getElementById("inp_ordenacao").value
+            let marca = document.getElementById("inp_marca").value
+
+            //var varMyQuery = "select *,cast(cast(round(qttprod*conversao,0) as int) as varchar(15)) as tabuasproduzidas from (Select biof.ref,biof.bistamp,biof.qtt,cast(cast(isnull((select sum(qtt) from bi where bi.obistamp=biof.bistamp and bi.ndos=13 and producao=1),0) as int) as varchar(15)) as qttprod, biof.obrano,st.conversao,biof.nome,biof.no,biof.design,varsrolaria.valor,isnull(u_mserrada.qtt,0) as fator, varsnome.valor as linha,cast(cast(round(biof.qtt*st.conversao,0) as int) as varchar(15)) as tabuasnecessarias from bi biof inner join u_liglinhaof on biof.obrano=u_liglinhaof.obrano and biof.ndos=7 left join st on st.ref=biof.ref inner join u_vars varsnome on varsnome.id=u_liglinhaof.idlinha inner join u_vars varsrolaria on left(varsrolaria.var,7)= left(varsnome.var,7) and varsrolaria.var like 'linha%RL' left join u_mserrada on u_mserrada.ref=varsrolaria.valor and u_mserrada.ststamp=st.ststamp) as t"
+            var varMyQuery = `declare @ate date, @tipo nvarchar(55),@marca varchar(5);
+ set @ate=cast('`+ ate + `' as date)
+ set @tipo='`+ ordenacaoInp + `'
+ set @marca='`+ marca + `'
+--Até (Conf.Cliente) : Data                     
+--Ordenação : Cliente,Data Confirmação ao Cliente
+--Marca : ,DME,MM,MF,VEGA,US,WR
+-- set @ate=getdate()
+-- set @tipo='Cliente'
+-- set @marca=''
+if @tipo='Data Confirmação ao Cliente'
+	select		
+		    clienteBloqueado=(
+			    select count(ccstamp) 
+				from cc (nolock)
+					where cc.no=NumCli
+					and dateadd(dd,(select cl.alimite as dias from cl(nolock) where cl.no=NumCli and cl.estab=0),cc.datalc)<getdate() 
+					and  (case when cc.moeda='PTE OU EURO' or cc.moeda=space(11) then (cc.edeb-cc.edebf)-(cc.ecred-cc.ecredf) else (cc.debm-cc.debfm)-(cc.credm-cc.credfm) end) > (case when cc.moeda='PTE OU EURO' or cc.moeda=space(11) then 0.010000 else 0 end)	
+			    ),
+			'Até : '+ convert(varchar,convert(datetime,@ate,104),104) + '   Ordenação : '+ @tipo as ordenacao,
+			case when u_DTCONFCL <=@ate then nome else '___'+ltrim(rtrim(nome)) end as Nome,
+			Molde,
+			nref,
+			PrazoPedCliente,
+			u_DTCONFCL, 
+			LocalEntrega,
+			ClienteEntrega,
+			case when pronto is null then '' else convert(char,pronto,104) end as pronto,
+			case when Verif is null then '' else convert(char,Verif,104) end as Verif,
+			HOLD,
+			ed,
+			pt,
+			inf,
+			Class,
+			atrasado,
+			entregarcom,
+			u_obsproc,
+			codprod,
+			CASE 
+				WHEN ClassData <  2 THEN '1'  
+				WHEN ClassData >= 2 and ClassData < 5 THEN '2'  
+				WHEN ClassData >= 5 and ClassData < 10 THEN '3'  
+				WHEN ClassData >= 10 THEN '4'       
+			end as ClassData,
+			dtembarque,
+			convert(varchar,cast(dtembarque as date),104) as dataembarqueVer,
+			estosck
+		from
+			(
+					select 
+						bo.nome as Nome,
+						bo.no as NumCli,
+						bo2.u_RefCliMl as Molde,			
+						'E' + Ltrim(str(bo.obrano)) + '-' + bo3.u_familia + '-'+bo.tabela1  as nref,
+						bo.dataopen as PrazoPedCliente,
+						bo3.u_DTCONFCL as u_DTCONFCL, --adicionei
+						case when dateadd(day, 30, bo.dataopen) < getdate() then 1 else 0 end as atrasado,				
+						(case when 
+							(select count(*) FROM szadrs where ltrim(rtrim(szadrsdesc)) = ltrim(rtrim(bo2.descar))) > 0
+						then 
+							(select local FROM szadrs where szadrsdesc=bo2.descar)  
+						else 					
+							(case when 
+								(ltrim(rtrim(bo2.descar)) = 'Morada do Cliente' or ltrim(rtrim(bo2.descar)) = 'É definido nos parâmetros ') 
+							then 
+								bo2.local 
+							else 
+								bo2.descar 
+							end) 
+						end)
+						as LocalEntrega,
+						(					
+							(case when 
+								(ltrim(rtrim(bo2.descar)) = ltrim(rtrim(bo.nome)) or ltrim(rtrim(bo2.descar)) = 'Morada do Cliente' or ltrim(rtrim(bo2.descar)) = 'É definido nos parâmetros ') 
+							then 
+								''
+							else 
+								bo2.descar 
+							end) 
+						)
+						as ClienteEntrega,
+
+						(case when (trf65.no is not null or trf65.no=65) then 
+							(select max(trfvrf.Datafim) from u_tarefas as trfvrf where trfvrf.no=80 and trfvrf.fechada=1 and trfvrf.oristamp=bo.bostamp and trfvrf.repeticao=trf95.repeticao)
+						else
+							(select max(trfvrf.dataini) from u_tarefas as trfvrf where trfvrf.no=80 and trfvrf.fechada=0 and trfvrf.oristamp=bo.bostamp and trfvrf.repeticao=trf95.repeticao)
+						end)
+						as pronto,
+						(case when (trf65.no is not null or trf65.no=65) then 
+							(select max(trfrec.Datafim) from u_tarefas as trfrec where trfrec.no=70 and trfrec.fechada=1 and trfrec.oristamp=bo.bostamp and trfrec.repeticao=trf95.repeticao) 
+						else
+							(select max(trfvrf.datafim) from u_tarefas as trfvrf where trfvrf.no=80 and trfvrf.fechada=1 and trfvrf.oristamp=bo.bostamp and trfvrf.repeticao=trf95.repeticao)
+						end)
+						as Verif,
+						(case when exists(select bi.u_direta from bi where bi.bostamp = bo.bostamp and bi.u_direta = 1) then 1 else 0 end) as ed,
+						(case when exists(select * from u_tarefas where u_tarefas.no=900 and u_tarefas.oristamp=bo.bostamp and u_tarefas.fechada=0) then 1 else 0 end) as HOLD,				
+			
+						(case when 1 >= (select count(*) from u_tarefas as trfP where trfP.no=65 and trfP.oristamp=bo.bostamp ) then 'T' else (case when trf65.repeticao = (select max(trfP.repeticao) from u_tarefas as trfP where trfP.no=65 and trfP.oristamp=bo.bostamp ) then 'T' else 'P' end) end) as PT,
+				
+						(case when exists(select * from u_tarefas as trfinf where trfinf.no=81 and trfinf.oristamp=bo.bostamp and trfinf.fechada=1 and trfinf.repeticao=trf95.repeticao) then 1 else 0 end) as inf,
+						SUBSTRING(cl.tipo,0, CHARINDEX('-',cl.tipo)) as Class,
+						BO3.U_ENTRCOM as entregarcom,
+						bo.marca as codprod,
+						bo3.u_obsproc,
+						DATEDIFF(day,getdate(),BO.dataopen) as ClassData,					
+						isnull((case when ltrim(rtrim(trf65.resposta))='' then 
+							convert(varchar,ltrim(rtrim(trf65.datafim)),112) 
+							else 
+							right(ltrim(rtrim(trf65.resposta)),4)+substring(ltrim(rtrim(trf65.resposta)),4,2)+left(ltrim(rtrim(trf65.resposta)),2) 
+							end),isnull(convert(varchar,trf80.dataini,112),convert(varchar,trf95.dataini,112))) 
+							as dtembarque,
+						(case when (trf65.no is not null or trf65.no=65) then 0 else 1 end) as estosck
+					from 
+						bo(nolock) 
+						left join bo2(nolock) on bo.bostamp=bo2.bo2stamp 
+						left join bo3(nolock) on bo.bostamp=bo3.bo3stamp 
+						left join cl(nolock) on bo.no=cl.no and cl.estab=0 
+						left join u_tarefas(nolock) as trf95 on bo.bostamp=trf95.oristamp and trf95.no=(case when bo.no=619 then 80 else 95 end) 
+						left join u_tarefas(nolock)  as trf65 on bo.bostamp=trf65.oristamp and trf65.no=65 and trf65.repeticao=(case when trf95.repeticao is null then 0 else trf95.repeticao end)	
+						left join u_tarefas(nolock)  as trf80 on bo.bostamp=trf80.oristamp and trf80.no=80 and trf80.repeticao=(case when trf95.repeticao is null then 0 else trf95.repeticao end)	 
+					where 
+						bo.ndos=11 and (select count(tarefas2.trfstamp) from u_tarefas(nolock) as tarefas2 where tarefas2.oristamp=bo.bostamp and tarefas2.fechada=0)>0 and
+						bo3.u_familia=(case when @marca <> '' then @marca else bo3.u_familia end) 
+						and 0=(case when trf95.no is null then 0 else trf95.fechada end)
+		
+						and 1=(case when trf65.no is null then (case when (trf80.no is null or (trf80.no is not null)) then 1 else 0 end)  else trf65.fechada end) 
+						and
+						(
+							bo.dataopen <= @ate
+							or
+							(bo.dataopen >= @ate
+								and 
+								(
+										select 
+											count(booutro.bostamp)
+										from
+											bo as booutro(nolock) 
+											left join u_tarefas(nolock) as trf952 on booutro.bostamp=trf952.oristamp and trf952.no=(case when booutro.no=619 then 80 else 95 end)
+											left join u_tarefas(nolock)  as trf652 on booutro.bostamp=trf652.oristamp and trf652.no=65 and trf652.repeticao=(case when trf952.repeticao is null then 0 else trf952.repeticao end)	
+											left join u_tarefas(nolock)  as trf802 on bo.bostamp=trf802.oristamp and trf802.no=80 and trf802.repeticao=(case when trf952.repeticao is null then 0 else trf952.repeticao end)
+										where
+											booutro.ndos=11 and  (select count(tarefas2.trfstamp) from u_tarefas(nolock) as tarefas2 where tarefas2.oristamp=booutro.bostamp and tarefas2.fechada=0)>0 and
+											booutro.no=bo.no and 
+								
+											0=(case when trf952.no is null then 0 else trf952.fechada end) 
+								
+											and 1=(case when trf652.no is null then (case when (trf802.no is null or (trf802.no is not null)) then 1 else 0 end)  else trf652.fechada end) 
+											and booutro.dataopen <= @ate
+								)>0
+							)
+						)
+
+                union all
+
+                --PATS
+                select 
+					pa.nome as Nome,
+					pa.no as NumCli,
+					pa.serie2 as Molde,			
+					'R' + Ltrim(str(pa.nopat)) + '-' + pa.u_marca + '-'+pa.u_refprod  as nref
+					,pa.u_dtfimcl as PrazoPedCliente,
+					pa.u_dtfimcl as u_DTCONFCL,				
+                    0 as atrasado,						
+					'' as LocalEntrega,
+					'' as ClienteEntrega
+					,trf57.datafim as pronto,
+					 trf57.datafim  as Verif,
+					0 as ed,
+					--tarefa 900 processos -HOLD  
+					(case when exists(select * from u_tarefas where u_tarefas.no=900 and u_tarefas.oristamp=pa.pastamp and u_tarefas.fechada=0) then 1 else 0 end) as HOLD,	
+					'T' as PT,
+					--tarefa 81 processos -Informar o cliente
+					--tarefa 80 pats - Informar cliente da reparação concluída  
+					(case when exists(select * from u_tarefas as trfinf where trfinf.no=80 and trfinf.oristamp=pa.pastamp and trfinf.fechada=1 and trfinf.repeticao=0) then 1 else 0 end) as inf,
+					SUBSTRING(cl.tipo,0, CHARINDEX('-',cl.tipo)) as Class,
+					'' as entregarcom,
+					'' as codprod,
+					'TAREFA '
+					+(case when trf40.no is null then '' else ltrim(str(trf40.no))+' '+ltrim(trf40.descricao) end)
+					+(case when trf57.no is null then '' else ltrim(str(trf57.no))+' '+ltrim(trf57.descricao) end)
+					+(case when trf79.no is null then '' else ltrim(str(trf79.no))+' '+ltrim(trf79.descricao) end)
+					+(case when trf150.no is null then '' else ltrim(str(trf150.no))+' '+ltrim(trf150.descricao) end)
+					+' OBS:' +cast(pa.solucao as varchar(200))
+					as u_obsproc, 
+					DATEDIFF(day,getdate(),pa.u_dtfimcl) as ClassData,					
+					@ate as dtembarque,					
+					0 as estosck
+				from 
+					pa(nolock) 
+					left join cl(nolock) on pa.no=cl.no and cl.estab=0 
+					--tarefa 40 pats - Envio para o fornecedor
+					left join u_tarefas(nolock)  as trf40 on pa.pastamp=trf40.oristamp and trf40.no=40 and trf40.repeticao=0 and trf40.fechada=0
+					--tarefa 79 pats - Envio de equipamento reparado ao cliente | tarefa 74 pats - Envio de equipamento não reparado ao cliente 
+					left join u_tarefas(nolock)  as trf79 on pa.pastamp=trf79.oristamp and (trf79.no=79 or trf79.no=74)  and trf79.repeticao=0 and trf79.fechada=0
+					--tarefa 57 pats - Receção de equipamento reparado do fornecedor | tarefa 59 pats - Receção de equipamento não reparado no fornecedor      
+					left join u_tarefas(nolock)  as trf57 on pa.pastamp=trf57.oristamp and (trf57.no=57 or trf57.no=59) and trf57.repeticao=0 and trf57.fechada=0
+					--tarefa 150 pats - Envio de material para testes                                                                       
+					left join u_tarefas(nolock)  as trf150 on pa.pastamp=trf150.oristamp and trf150.no=150 and trf150.repeticao=0 and trf150.fechada=0
+				where 
+					(select count(tarefas2.trfstamp) from u_tarefas(nolock) as tarefas2 where tarefas2.oristamp=pa.pastamp and tarefas2.no in (40,57,59,74,79,150) and tarefas2.fechada=0)>0 
+					and pa.U_MARCA=(case when @marca <> '' then @marca else pa.U_MARCA end) 
+					and (
+							0=(case when trf40.no is null then 1 else trf40.fechada end) 
+							or
+							0=(case when trf79.no is null then 1 else trf79.fechada end) 
+							or 
+							0=(case when trf57.no is null then 1 else trf57.fechada end) 
+							or 
+							0=(case when trf150.no is null then 1 else trf150.fechada end)
+						)
+				
+					and
+					(
+						pa.u_dtfimcl <= @ate
+						or
+						(pa.u_dtfimcl >= @ate
+							and 
+							(
+									select 
+										count(paoutro.pastamp)
+									from
+										pa as paoutro(nolock) 										
+										--tarefa 40 pats - Envio para o fornecedor
+										left join u_tarefas(nolock)  as trf402 on paoutro.pastamp=trf402.oristamp and trf402.no=40 and trf402.repeticao=0 and trf402.fechada=0
+										--tarefa 79 pats - Envio de equipamento reparado ao cliente | tarefa 74 pats - Envio de equipamento não reparado ao cliente 
+										left join u_tarefas(nolock)  as trf792 on paoutro.pastamp=trf792.oristamp and (trf792.no=79 or trf792.no=74)  and trf792.repeticao=0 and trf792.fechada=0
+										--tarefa 57 pats - Receção de equipamento reparado do fornecedor | tarefa 59 pats - Receção de equipamento não reparado no fornecedor      
+										left join u_tarefas(nolock)  as trf572 on paoutro.pastamp=trf572.oristamp and (trf572.no=57 or trf572.no=59) and trf572.repeticao=0 and trf572.fechada=0
+										--tarefa 150 pats - Envio de material para testes       
+										left join u_tarefas(nolock)  as trf1502 on paoutro.pastamp=trf1502.oristamp and (trf1502.no=150) and trf1502.repeticao=0 and trf1502.fechada=0
+									where
+										(select count(tarefas2.trfstamp) from u_tarefas(nolock) as tarefas2 where tarefas2.oristamp=paoutro.pastamp and tarefas2.no in (40,57,59,74,79,150) and tarefas2.fechada=0)>0 and
+										paoutro.no=pa.no 									
+										and
+										(
+										0=(case when trf402.no is null then 1 else trf402.fechada end) 
+										or 
+										0=(case when trf792.no is null then 1 else trf792.fechada end) 
+										or 
+										0=(case when trf572.no is null then 1 else trf572.fechada end) 
+										or 
+										0=(case when trf1502.no is null then 1 else trf1502.fechada end) 
+										)																		
+										and paoutro.u_dtfimcl <= @ate
+							)>0
+						)
+					)
+				
+		) as tabela1
+	where	
+	tabela1.dtembarque is not null and tabela1.dtembarque<>'19000101'
+	order by 
+	tabela1.u_DTCONFCL, 
+	tabela1.dtembarque,
+	tabela1.nome,		
+	tabela1.nref
+else
+	select		
+		(
+			select count(ccstamp) 
+			from cc (nolock)
+			 where cc.no=NumCli
+			 and dateadd(dd,(select cl.alimite as dias from cl(nolock) where cl.no=NumCli and cl.estab=0),cc.datalc)<getdate() 
+			 and  (case when cc.moeda='PTE OU EURO' or cc.moeda=space(11) then (cc.edeb-cc.edebf)-(cc.ecred-cc.ecredf) else (cc.debm-cc.debfm)-(cc.credm-cc.credfm) end) > (case when cc.moeda='PTE OU EURO' or cc.moeda=space(11) then 0.010000 else 0 end)	
+		 )as clienteBloqueado,
+		case when u_DTCONFCL <=@ate then nome else '___'+ltrim(rtrim(nome)) end as Nome,
+		'Até : '+ convert(varchar,convert(datetime,@ate,104),104) + '   Ordenação : '+ @tipo as ordenacao,
+		Molde,
+		nref,
+		PrazoPedCliente,
+		u_DTCONFCL, 
+		LocalEntrega,
+		ClienteEntrega,
+		case when pronto is null then '' else convert(char,pronto,104) end as pronto,
+		case when Verif is null then '' else convert(char,Verif,104) end as Verif,
+		HOLD,
+		ed,
+		pt,
+		inf,
+		Class,
+		atrasado,
+		entregarcom,
+		u_obsproc,
+		codprod,
+		CASE 
+			WHEN ClassData <  2 THEN '1'  
+			WHEN ClassData >= 2 and ClassData < 5 THEN '2'  
+			WHEN ClassData >= 5 and ClassData < 10 THEN '3'  
+			WHEN ClassData >= 10 THEN '4'       
+		end as ClassData,
+		dtembarque,
+        convert(varchar,cast(dtembarque as date),104) as dataembarqueVer,
+        estosck
+	from
+	(
+			--PROCESSOS
+			select 
+				bo.nome as Nome
+				,bo.no as NumCli,
+				bo2.u_RefCliMl as Molde,			
+				'E' + Ltrim(str(bo.obrano)) + '-' + bo3.u_familia + '-'+bo.tabela1  as nref
+				,bo.dataopen as PrazoPedCliente,
+				bo3.u_DTCONFCL as u_DTCONFCL, 
+				case when dateadd(day, 30, bo.dataopen) < getdate() then 1 else 0 end as atrasado,			
+				(case when 
+					(select count(*) FROM szadrs where ltrim(rtrim(szadrsdesc)) = ltrim(rtrim(bo2.descar))) > 0
+				then 
+					(select local FROM szadrs where szadrsdesc=bo2.descar)  
+				else 					
+					(case when 
+						(ltrim(rtrim(bo2.descar)) = 'Morada do Cliente' or ltrim(rtrim(bo2.descar)) = 'É definido nos parâmetros ') 
+					then 
+						bo2.local 
+					else 
+						bo2.descar 
+					end) 
+				end)
+				as LocalEntrega
+				,(					
+					(case when 
+						(ltrim(rtrim(bo2.descar)) = ltrim(rtrim(bo.nome)) or ltrim(rtrim(bo2.descar)) = 'Morada do Cliente' or ltrim(rtrim(bo2.descar)) = 'É definido nos parâmetros ')  
+					then 
+						''
+					else 
+						bo2.descar 
+					end) 
+				)
+				as ClienteEntrega
+				
+				,(case when (trf65.no is not null or trf65.no=65) then 
+					(select max(trfvrf.Datafim) from u_tarefas as trfvrf where trfvrf.no=80 and trfvrf.fechada=1 and trfvrf.oristamp=bo.bostamp and trfvrf.repeticao=trf95.repeticao)
+				else
+					(select max(trfvrf.dataini) from u_tarefas as trfvrf where trfvrf.no=80 and trfvrf.fechada=0 and trfvrf.oristamp=bo.bostamp and trfvrf.repeticao=trf95.repeticao)
+				end)
+				as pronto,
+				(case when (trf65.no is not null or trf65.no=65) then 
+					(select max(trfrec.Datafim) from u_tarefas as trfrec where trfrec.no=70 and trfrec.fechada=1 and trfrec.oristamp=bo.bostamp and trfrec.repeticao=trf95.repeticao) 
+				else
+					(select max(trfvrf.datafim) from u_tarefas as trfvrf where trfvrf.no=80 and trfvrf.fechada=1 and trfvrf.oristamp=bo.bostamp and trfvrf.repeticao=trf95.repeticao)
+				end)
+				as Verif,
+				(case when exists(select bi.u_direta from bi where bi.bostamp = bo.bostamp and bi.u_direta = 1) then 1 else 0 end) as ed,
+				(case when exists(select * from u_tarefas where u_tarefas.no=900 and u_tarefas.oristamp=bo.bostamp and u_tarefas.fechada=0) then 1 else 0 end) as HOLD,				
+				
+				(case when 1 >= (select count(*) from u_tarefas as trfP where trfP.no=65 and trfP.oristamp=bo.bostamp ) then 'T' else (case when trf65.repeticao = (select max(trfP.repeticao) from u_tarefas as trfP where trfP.no=65 and trfP.oristamp=bo.bostamp ) then 'T' else 'P' end) end) as PT,
+				
+				(case when exists(select * from u_tarefas as trfinf where trfinf.no=81 and trfinf.oristamp=bo.bostamp and trfinf.fechada=1 and trfinf.repeticao=trf95.repeticao) then 1 else 0 end) as inf,
+				SUBSTRING(cl.tipo,0, CHARINDEX('-',cl.tipo)) as Class,
+				BO3.U_ENTRCOM as entregarcom,
+				bo.marca as codprod,
+				bo3.u_obsproc,
+				DATEDIFF(day,getdate(),BO.dataopen) as ClassData,				
+				isnull((case when ltrim(rtrim(trf65.resposta))=''
+				     then convert(varchar,ltrim(rtrim(trf65.datafim)),112) 
+					 else right(ltrim(rtrim(trf65.resposta)),4)+substring(ltrim(rtrim(trf65.resposta)),4,2)+left(ltrim(rtrim(trf65.resposta)),2) 
+					 end),  isnull(convert(varchar,trf80.dataini,112),convert(varchar,trf95.dataini,112))
+				 ) as dtembarque,
+				 (case when (trf65.no is not null or trf65.no=65) then 0 else 1 end) as estosck
+			from 
+				bo(nolock) 
+				left join bo2(nolock) on bo.bostamp=bo2.bo2stamp 
+				left join bo3(nolock) on bo.bostamp=bo3.bo3stamp 
+				left join cl(nolock) on bo.no=cl.no and cl.estab=0 
+				left join u_tarefas(nolock) as trf95 on bo.bostamp=trf95.oristamp and trf95.no=(case when bo.no=619 then 80 else 95 end) 
+				left join u_tarefas(nolock)  as trf65 on bo.bostamp=trf65.oristamp and trf65.no=65 and trf65.repeticao=(case when trf95.repeticao is null then 0 else trf95.repeticao end)
+				left join u_tarefas(nolock)  as trf80 on bo.bostamp=trf80.oristamp and trf80.no=80 and trf80.repeticao=(case when trf95.repeticao is null then 0 else trf95.repeticao end)
+				
+			where 
+				bo.ndos=11 and (select count(tarefas2.trfstamp) from u_tarefas(nolock) as tarefas2 where tarefas2.oristamp=bo.bostamp and tarefas2.fechada=0)>0 and
+				bo3.u_familia=(case when @marca <> '' then @marca else bo3.u_familia end) 
+				and 0=(case when trf95.no is null then 0 else trf95.fechada end)
+				
+				and 1=(case when trf65.no is null then (case when (trf80.no is null or (trf80.no is not null)) then 1 else 0 end)  else trf65.fechada end) 
+				and
+				(
+					bo.dataopen <= @ate
+					or
+					(bo.dataopen >= @ate
+						and 
+						(
+								select 
+									count(booutro.bostamp)
+								from
+									bo as booutro(nolock) 
+									left join u_tarefas(nolock) as trf952 on booutro.bostamp=trf952.oristamp and trf952.no=(case when booutro.no=619 then 80 else 95 end)
+									left join u_tarefas(nolock)  as trf652 on booutro.bostamp=trf652.oristamp and trf652.no=65 and trf652.repeticao=(case when trf952.repeticao is null then 0 else trf952.repeticao end)	
+									left join u_tarefas(nolock)  as trf802 on bo.bostamp=trf802.oristamp and trf802.no=80 and trf802.repeticao=(case when trf952.repeticao is null then 0 else trf952.repeticao end)
+								where
+									booutro.ndos=11 and (select count(tarefas2.trfstamp) from u_tarefas(nolock) as tarefas2 where tarefas2.oristamp=booutro.bostamp and tarefas2.fechada=0)>0 and
+									booutro.no=bo.no and 
+									
+								    0=(case when trf952.no is null then 0 else trf952.fechada end) 
+									
+									and 1=(case when trf652.no is null then (case when (trf802.no is null or (trf802.no is not null)) then 1 else 0 end)  else trf652.fechada end)  
+					                and booutro.dataopen <= @ate
+						)>0
+					)
+				)
+
+				union all
+
+				--PATS
+				select 
+				pa.nome as Nome
+				,pa.no as NumCli,
+				pa.serie2 as Molde,			
+				'R' + Ltrim(str(pa.nopat)) + '-' + pa.u_marca + '-'+pa.u_refprod  as nref
+				,pa.u_dtfimcl as PrazoPedCliente,
+				pa.u_dtfimcl as u_DTCONFCL,				
+                0 as atrasado,
+				'' as LocalEntrega,
+				'' as ClienteEntrega				
+				,trf57.datafim as pronto,				
+				trf57.datafim  as Verif,
+				0 as ed,
+				--tarefa 900 processos -HOLD  
+				(case when exists(select * from u_tarefas where u_tarefas.no=900 and u_tarefas.oristamp=pa.pastamp and u_tarefas.fechada=0) then 1 else 0 end) as HOLD,					
+				'T' as PT,
+				--tarefa 81 processos -Informar o cliente
+				--tarefa 80 pats - Informar cliente da reparação concluída  
+				(case when exists(select * from u_tarefas as trfinf where trfinf.no=80 and trfinf.oristamp=pa.pastamp and trfinf.fechada=1 and trfinf.repeticao=0) then 1 else 0 end) as inf,
+				SUBSTRING(cl.tipo,0, CHARINDEX('-',cl.tipo)) as Class,
+				'' as entregarcom,
+				'' as codprod,
+				'TAREFA '
+				+(case when trf40.no is null then '' else ltrim(str(trf40.no))+' '+ltrim(trf40.descricao) end)
+				+(case when trf57.no is null then '' else ltrim(str(trf57.no))+' '+ltrim(trf57.descricao) end)
+				+(case when trf79.no is null then '' else ltrim(str(trf79.no))+' '+ltrim(trf79.descricao) end)
+				+(case when trf150.no is null then '' else ltrim(str(trf150.no))+' '+ltrim(trf150.descricao) end)
+				+' OBS:'+cast(pa.solucao as varchar(200))
+				as u_obsproc, 
+				DATEDIFF(day,getdate(),pa.u_dtfimcl) as ClassData,
+				--tarefa 65 processos -Confirmação da data de embarque 				
+				 @ate as dtembarque,				 
+				 0 as estosck
+			from 
+				pa(nolock) 
+				left join cl(nolock) on pa.no=cl.no and cl.estab=0 
+				--tarefa 40 pats - Envio para o fornecedor
+				left join u_tarefas(nolock)  as trf40 on pa.pastamp=trf40.oristamp and trf40.no=40 and trf40.repeticao=0 and trf40.fechada=0
+				--tarefa 79 pats - Envio de equipamento reparado ao cliente | tarefa 74 pats - Envio de equipamento não reparado ao cliente 
+				left join u_tarefas(nolock)  as trf79 on pa.pastamp=trf79.oristamp and (trf79.no=79 or trf79.no=74)  and trf79.repeticao=0 and trf79.fechada=0
+				--tarefa 57 pats - Receção de equipamento reparado do fornecedor | tarefa 59 pats - Receção de equipamento não reparado no fornecedor      
+				left join u_tarefas(nolock)  as trf57 on pa.pastamp=trf57.oristamp and (trf57.no=57 or trf57.no=59) and trf57.repeticao=0 and trf57.fechada=0
+				--tarefa 150 pats - Envio de material para testes 
+				left join u_tarefas(nolock)  as trf150 on pa.pastamp=trf150.oristamp and (trf150.no=150) and trf150.repeticao=0 and trf150.fechada=0
+				
+			where 
+				(select count(tarefas2.trfstamp) from u_tarefas(nolock) as tarefas2 where tarefas2.oristamp=pa.pastamp and tarefas2.no in (40,57,59,74,79,150) and tarefas2.fechada=0)>0 and
+				pa.U_MARCA=(case when @marca <> '' then @marca else pa.U_MARCA end) 				
+				and (
+				    0=(case when trf40.no is null then 1 else trf40.fechada end) 
+					or
+					0=(case when trf79.no is null then 1 else trf79.fechada end) 
+					or 
+					0=(case when trf57.no is null then 1 else trf57.fechada end) 
+					or 
+					0=(case when trf150.no is null then 1 else trf150.fechada end) 
+					)
+				and
+				(
+					pa.u_dtfimcl <= @ate
+					or
+					(pa.u_dtfimcl >= @ate
+						and 
+						(
+								select 
+									count(paoutro.pastamp)
+								from
+									pa as paoutro(nolock) 									
+									--tarefa 40 pats - Envio para o fornecedor
+									left join u_tarefas(nolock)  as trf402 on paoutro.pastamp=trf402.oristamp and trf402.no=40 and trf402.repeticao=0 and trf402.fechada=0
+									--tarefa 79 pats - Envio de equipamento reparado ao cliente | tarefa 74 pats - Envio de equipamento não reparado ao cliente 
+									left join u_tarefas(nolock)  as trf792 on paoutro.pastamp=trf792.oristamp and (trf792.no=79 or trf792.no=74)  and trf792.repeticao=0 and trf792.fechada=0
+									--tarefa 57 pats - Receção de equipamento reparado do fornecedor | tarefa 59 pats - Receção de equipamento não reparado no fornecedor      
+									left join u_tarefas(nolock)  as trf572 on paoutro.pastamp=trf572.oristamp and (trf572.no=57 or trf572.no=59) and trf572.repeticao=0 and trf572.fechada=0
+									--tarefa 150 pats - Envio de material para testes 
+									left join u_tarefas(nolock)  as trf1502 on paoutro.pastamp=trf1502.oristamp and (trf1502.no=57 or trf1502.no=59) and trf1502.repeticao=0 and trf1502.fechada=0
+								where
+									(select count(tarefas2.trfstamp) from u_tarefas(nolock) as tarefas2 where tarefas2.oristamp=paoutro.pastamp and tarefas2.no in (40,57,59,74,79,150) and tarefas2.fechada=0)>0 and
+									paoutro.no=pa.no 
+									
+								    and
+									(
+									0=(case when trf402.no is null then 1 else trf402.fechada end) 
+									or 
+									0=(case when trf792.no is null then 1 else trf792.fechada end) 
+									or
+									0=(case when trf572.no is null then 1 else trf572.fechada end) 
+									or
+									0=(case when trf1502.no is null then 1 else trf1502.fechada end) 
+									)
+									
+					                and paoutro.u_dtfimcl <= @ate
+						)>0
+					)
+				)
+				--order by pa.nopat
+		) as tabela1
+	where
+
+tabela1.dtembarque is not null and tabela1.dtembarque<>'19000101' 
+order by 
+	tabela1.nome,
+	tabela1.u_DTCONFCL,
+    tabela1.dtembarque,
+	tabela1.nref`
+
+            params.id = 'selecttojson'
+            params.select = varMyQuery
+
+            var rawResponse = await fetch('../api/code/run', {
+                method: 'POST',
+                body: JSON.stringify(params),
+                headers: new Headers({ 'content-type': 'application/json' }),
+            })
+                .catch((error) => {
+                    alert("Erro na API (funcao)")
+                })
+
+            var data = await rawResponse.json()
+            data = data.replaceAll('\n', ' ').replaceAll('\t', ' ').replaceAll('\r', ' ')
+            var varjson = JSON.parse(data);
+            document.getElementById("mainTabela").style.display = "block"
+            document.getElementById("modal_mainFiltro").style.display = "none"
+            console.log(varjson)
+            var arDados = varjson.Dados
+
+            dadosTabela = []
+
+            for (var i = 0; i < arDados.length; ++i) {
+
+                var classe = $.trim(arDados[i].Class)
+                var classData = $.trim(arDados[i].ClassData)
+                var clienteEntrega = $.trim(arDados[i].ClienteEntrega)
+                var varHOLD = $.trim(arDados[i].HOLD)
+                var localEntrega = $.trim(arDados[i].LocalEntrega)
+                var molde = $.trim(arDados[i].Molde)
+                var nome = $.trim(arDados[i].Nome)
+
+                var prazoPedCliente = $.trim(arDados[i].PrazoPedCliente)
+                var verif = $.trim(arDados[i].Verif)
+                var atrasado = $.trim(arDados[i].atrasado)
+                var clienteBloqueado = $.trim(arDados[i].clienteBloqueado)
+                var codprod = $.trim(arDados[i].codprod)
+
+                var dataembarqueVer = $.trim(arDados[i].dataembarqueVer)
+                var ed = $.trim(arDados[i].ed)
+                var dtembarque = $.trim(arDados[i].dtembarque)
+                var entregarCom = $.trim(arDados[i].entregarcom)
+                var estosck = $.trim(arDados[i].estosck)
+                var inf = $.trim(arDados[i].inf)
+                var nref = $.trim(arDados[i].nref)
+                var ordenacao = $.trim(arDados[i].ordenacao)
+                var pronto = $.trim(arDados[i].pronto)
+                var pt = $.trim(arDados[i].pt)
+                var u_DTCONFCL = $.trim(arDados[i].u_DTCONFCL)
+                var u_obsproc = $.trim(arDados[i].u_obsproc)
+
+                // var objeto = new Object();
+                // objeto.bistamp = arDados[i].bistamp
+                // objeto.comprimento = arDados[i].comprimento
+                // objeto.conversao = conversao
+                // objeto.desenho = arDados[i].desenho
+                // objeto.design = arDados[i].design
+                // objeto.encomenda = arDados[i].encomenda //
+                // objeto.especie = arDados[i].especie
+                // objeto.espessura = arDados[i].espessura
+                // objeto.fator = arDados[i].fator
+                // objeto.largura = arDados[i].largura
+                // objeto.linha = arDados[i].linha
+                // objeto.no = arDados[i].no //
+                // objeto.nome = arDados[i].nome
+                // objeto.obrano = arDados[i].obrano //
+                // objeto.ref = arDados[i].ref
+                // objeto.tabuasnecessarias = arDados[i].tabuasnecessarias
+                // objeto.tabuasproduzidas = arDados[i].tabuasproduzidas
+                // objeto.valor = arDados[i].valor
+
+                // dadosTabela.push(objeto)
+
+                let row = ""
+                row += "<tr style=\"background:" + (varHOLD == '0' ? 'white' : 'rgb(255,66,66)') + "\"> "
+                row += "<td style=\"border-bottom:0.7px solid #999; border-collapse: collapse; width:30%\"><span style=\"font-weight:bolder;\">" + nome + "</span><br>" + clienteEntrega + "</td>"
+                row += "<td style=\"border-bottom:0.7px solid #999; border-collapse: collapse;text-align:center; width:2%\"><span style=\"color:" + (clienteBloqueado == '0' ? 'black' : 'red') + "; font-weight:bolder\";>" + (clienteBloqueado > 0 ? 'B' : '') + "</span></td>"
+                row += "<td style=\"border-bottom:0.7px solid #999; border-collapse: collapse;text-align:center; width:15%\"><span style=\"font-weight:bolder;\">" + nref + "</span><br>" + molde + "<br>" + codprod + "</td>"
+                row += "<td style=\"border-bottom:0.7px solid #999; border-collapse: collapse;text-align:center; width:20%\">" + u_DTCONFCL.slice(0, 10) + "<br>" + prazoPedCliente.slice(0, 10) + "<br>" + localEntrega + "</td>"
+                row += "<td style=\"border-bottom:0.7px solid #999; border-collapse: collapse;text-align:center; width:18%\">" + (estosck == 1 ? 'STOCK' : dataembarqueVer) + "<br>" + pronto + "<br>" + verif + "<br>" + entregarCom + "</td>"
+                row += "<td style=\"border-bottom:0.7px solid #999; border-collapse: collapse;text-align:center; width:6%\">" + pt + "<br>" + (ed != 0 ? "ED" : "") + "<br>" + classe + "<br>" + (inf != 0 ? '<i class=\"fa fa-check\" style=\"color: green;\"></i>' : "") + "</td>"
+                row += `<td><button class=\"btn_azul\" type=\"button\" onclick=\"openModalChecks()\">Ações</button></td>`
+                // row += `<td style=\"border-bottom:0.7px solid #999; border-collapse: collapse;text-align:center; width:9%\">
+                // 		<div class="dropdown">
+                // 			<button style="width: 9rem;" class="btn_azul" type="button" data-toggle="dropdown">Ações
+                // 			<span class="caret"></span></button>
+                // 			<ul class="dropdown-menu">
+                // 			<li><a href="#">HTML</a></li>
+                // 			<li><a href="#">CSS</a></li>
+                // 			<li><a href="#">JavaScript</a></li>
+                // 			</ul>
+                // 		</div>
+                // 		</td>`
+                row += "</tr>"
+                tBody.innerHTML += row
+
+
+            }
+            loading()
+
+        })();
+    }
+
+
+    function apagarConjuntoOF(linhaid) {
+        var link = "../programs/gensel.aspx?cscript=deleteOfs&ref=" + linhaid
+        // $.ajax({
+        //     type: "GET",
+        //     url: link,
+        //     data: JSON.stringify({}),
+        //     async: false,
+        //     cache: false,
+        //     contentType: 'application/json'
+        // })
+        // .done(function (result, textStatus, jqXHR) {
+        //     getDados()
+        // })
+    }
+
+</script>

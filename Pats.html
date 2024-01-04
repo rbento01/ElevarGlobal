@@ -1,0 +1,2986 @@
+<link href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.4/jquery-confirm.min.css" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.4/jquery-confirm.min.js"></script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<link href="https://cdn.jsdelivr.net/gh/bbbootstrap/libraries@main/choices.min.css" rel="stylesheet" />
+<link href="https://cdn.jsdelivr.net/npm/tom-select@2.0.0-rc.4/dist/css/tom-select.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/tom-select@2.0.0-rc.4/dist/js/tom-select.complete.min.js"></script>
+<style type="text/css">
+    .tabDiarioTecnicoEPats {
+        overflow: hidden;
+        border: 1px solid #ccc;
+        background-color: #e5e5e5;
+    }
+
+    .tabDiarioTecnicoEPats a {
+        background-color: inherit;
+        float: left;
+        border: none;
+        outline: none;
+        cursor: pointer;
+        padding: 14px 16px;
+        transition: 0.3s;
+    }
+
+    .tabDiarioTecnicoEPats a:hover {
+        background-color: #ddd;
+    }
+
+    .tabDiarioTecnicoEPats a.active {
+        background-color: #ccc;
+    }
+
+    .tabContentDiarioTecnicoEPats {
+        background-color: #f5f5f5;
+        display: none;
+        padding: 6px 12px;
+        border: 1px solid #ccc;
+        border-top: none;
+    }
+
+    .tabDiarioTecnicoEPats>.tabContentDiarioTecnicoEPats:not(.active) {
+        display: block;
+        height: 0;
+        overflow-y: hidden;
+    }
+
+    .filter-group {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+        padding: 0.5rem 0;
+    }
+
+    .input-group {
+        flex: 1 1 auto;
+        margin-right: 2rem;
+    }
+
+    .same-row-parent {
+        display: table;
+    }
+
+    .same-row-child {
+        display: table-cell;
+    }
+
+    a.link-underline {
+        color: black;
+        text-decoration: none;
+    }
+
+    a.link-underline:hover {
+        text-decoration: underline !important;
+    }
+
+    a.link,
+    a.link i {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    #tabelaMonitorPats {
+        border-collapse: separate;
+        border-spacing: 0 10px;
+    }
+
+    #tabelaMonitorPats tr td {
+        border: 0px;
+        padding: 2rem;
+    }
+
+    #tabelaMonitorPats tr td:first-child {
+        border-top-left-radius: 15px;
+        border-bottom-left-radius: 15px;
+    }
+
+    #tabelaMonitorPats tr td:last-child {
+        border-top-right-radius: 15px;
+        border-bottom-right-radius: 15px;
+    }
+
+    #tabelaMonitorPats tr td .status {
+        display: inline-block;
+    }
+
+    #tabelaMonitorPats tr td .number {
+        padding-top: 2px;
+        margin-left: 1rem;
+        display: inline-block;
+        vertical-align: middle;
+    }
+
+    #tabelaMonitorPats tr td .date {
+        padding-top: 4px;
+        float: right;
+        color: gray;
+        vertical-align: middle;
+    }
+
+    #tabelaMonitorPats tr td .actions {
+        margin-left: 1rem;
+        float: right;
+        color: gray;
+    }
+
+    #tabelaMonitorPats tr td .resume {
+        display: block;
+        margin-top: 3rem;
+    }
+
+    #tabelaMonitorPats tr td .resume h2 {
+        max-width: 80%;
+        height: 1.2em;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        font-size: 22px;
+        font-weight: bold;
+    }
+
+    #tabelaMonitorPats tr td .description {
+        display: block;
+        color: #555;
+        margin-bottom: 3rem;
+    }
+
+    #tabelaMonitorPats tr td .bottom {
+        position: relative;
+    }
+
+    .bottom-right {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+    }
+
+    .flex-bottom-center {
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+    }
+
+    #tabelaMonitorPats tr td .user {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        color: #333;
+        font-weight: 600;
+    }
+
+    #tabelaMonitorPats tr td .attachments {
+        display: inline-block;
+        color: gray;
+        margin-left: 3rem;
+    }
+
+    #tabelaMonitorPats tr td .dataagenda {
+        display: inline-block;
+        color: red;
+        margin-left: 3rem;
+    }
+
+    #tabelaMonitorPats tr td .vref {
+        display: inline-block;
+        color: gray;
+        margin-left: 3rem;
+    }
+
+    #tabelaMonitorPats tr td .database {
+        display: inline-block;
+        color: gray;
+        margin-left: 3rem;
+    }
+
+    #tabelaMonitorPats tr td .tasks {
+        display: inline-block;
+        color: gray;
+        margin-left: 3rem;
+    }
+
+    .btn {
+        border-radius: 5px;
+    }
+
+    .circle-icon {
+        font-size: 15px;
+        border-radius: 50%;
+        width: 30px;
+        height: 30px;
+        text-align: center;
+        line-height: 30px;
+        vertical-align: middle;
+    }
+
+    .tooltip-div {
+        position: relative;
+        display: inline-block;
+    }
+
+    .tooltip-div::after,
+    .tooltip-div::before {
+        --scale: 0;
+        position: absolute;
+        top: -.25rem;
+        left: 100%;
+        transform: translateX(-50%) translateY(-100%) scale(var(--scale));
+        transform-origin: bottom center;
+        transition: 50ms transform ease-in-out;
+    }
+
+    .tooltip-div::before {
+        content: attr(data-tooltip);
+        color: white;
+        padding: .5rem;
+        border-radius: .3rem;
+        text-align: center;
+        width: max-content;
+        background: #555;
+    }
+
+    .tooltip-div:hover::before {
+        --scale: 1;
+    }
+
+    .status {
+        position: relative;
+    }
+
+    .status ul {
+        position: absolute;
+        z-index: 2;
+        background: rgb(250, 250, 250);
+        top: 0px;
+        border: 1px solid #ddd;
+        padding: 0px;
+        width: 200px;
+        overflow: auto;
+        justify-content: space-around;
+        flex-direction: column;
+        list-style: none;
+        border-radius: 5px;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-10px);
+        transition: all 0.4s ease;
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
+
+    .status ul::-webkit-scrollbar {
+        display: none;
+    }
+
+    .status li {
+        background: rgb(250, 250, 250);
+        width: 100%;
+        height: 60px;
+        display: flex;
+        align-items: center;
+        padding: 5px;
+        cursor: pointer;
+    }
+
+    .status li:hover {
+        background: rgb(240, 240, 240);
+    }
+
+    .status button {
+        background: none;
+        border: none;
+        cursor: pointer;
+    }
+
+    .status button:hover {
+        color: black;
+    }
+
+    .status button:focus+ul {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0px);
+    }
+
+    .tecnicos {
+        position: relative;
+    }
+
+    .tecnicos ul {
+        position: absolute;
+        z-index: 2;
+        background: rgb(250, 250, 250);
+        top: 0px;
+        border: 1px solid #ddd;
+        padding: 0px;
+        width: 300px;
+        height: 300px;
+        overflow: auto;
+        justify-content: space-around;
+        flex-direction: column;
+        list-style: none;
+        border-radius: 5px;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-10px);
+        transition: all 0.4s ease;
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
+
+    .tecnicos ul::-webkit-scrollbar {
+        display: none;
+    }
+
+    .tecnicos li {
+        background: rgb(250, 250, 250);
+        width: 100%;
+        height: 60px;
+        display: flex;
+        align-items: center;
+        padding: 5px;
+        cursor: pointer;
+    }
+
+    .tecnicos li:hover {
+        background: rgb(240, 240, 240);
+    }
+
+    .tecnicos button,
+    .hoverImg {
+        background: none;
+        border: none;
+        cursor: pointer;
+    }
+
+    .tecnicos button:hover,
+    .hoverImg:hover {
+        color: black;
+    }
+
+    .tecnicos button:focus+ul {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0px);
+    }
+
+    .accordion .contentBx .content {
+        height: 0;
+        overflow: hidden;
+        transition: 0.5s;
+        overflow-y: auto;
+    }
+
+    .accordion .contentBx.active .content {
+        height: 335px;
+    }
+
+    .advanced-search-box {
+        margin-top: 10px;
+        padding: 10px;
+        border: 1px solid #ddd;
+    }
+
+    .hidden {
+        display: none;
+    }
+
+    .visuallyhidden {
+        opacity: 0;
+    }
+
+
+
+    .modal-content {
+        background-color: #fefefe;
+        margin: auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%;
+        height: 90%;
+    }
+
+    .close {
+        color: #aaaaaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+    }
+
+    .close:hover,
+    .close:focus {
+        color: #000;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    .column {
+        float: left;
+    }
+
+    .row:after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+
+
+    ul {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .lista-anexos {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    #download-email-div {
+        width: 100%;
+        height: 90%;
+    }
+
+    .center {
+        width: 100%;
+        height: 100%;
+        margin: auto;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    .inline {
+        display: inline-block;
+        margin-right: 3em;
+    }
+
+
+
+
+    .btn_verde {
+        background: #47cf73;
+        border: 1px solid #47cf73;
+        border-radius: 6px;
+        box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
+        box-sizing: border-box;
+        color: #FFFFFF;
+        cursor: pointer;
+        display: inline-block;
+        font-family: nunito, roboto, proxima-nova, "proxima nova", sans-serif;
+        font-size: 16px;
+        font-weight: 800;
+        line-height: 16px;
+        min-height: 40px;
+        outline: 0;
+        padding: 12px 14px;
+        text-align: center;
+        text-rendering: geometricprecision;
+        text-transform: none;
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+        vertical-align: middle;
+    }
+
+    .btn_verde:hover {
+        background-color: initial;
+        background-position: 0 0;
+        color: #47cf73;
+    }
+
+    .btn_vermelho {
+        background: #ff3c41;
+        border: 1px solid #ff3c41;
+        border-radius: 6px;
+        box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
+        box-sizing: border-box;
+        color: #FFFFFF;
+        cursor: pointer;
+        display: inline-block;
+        font-family: nunito, roboto, proxima-nova, "proxima nova", sans-serif;
+        font-size: 16px;
+        font-weight: 800;
+        line-height: 16px;
+        min-height: 40px;
+        outline: 0;
+        padding: 12px 14px;
+        text-align: center;
+        text-rendering: geometricprecision;
+        text-transform: none;
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+        vertical-align: middle;
+
+    }
+
+    .btn_vermelho:hover {
+        background-color: initial;
+        background-position: 0 0;
+        color: #ff3c41;
+    }
+
+    .modal_adicionar {
+        display: none;
+        position: fixed;
+        z-index: 1;
+        padding-top: 65px;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        overflow-y: initial;
+        background-color: rgb(0, 0, 0);
+        background-color: rgba(0, 0, 0, 0.6);
+    }
+
+    #modal-anexos {
+        display: none;
+        position: fixed;
+        z-index: 1;
+        padding-top: 65px;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        overflow-y: initial;
+        background-color: rgb(0, 0, 0);
+        background-color: rgba(0, 0, 0, 0.6);
+    }
+
+    .modal_content_dialogo {
+
+        background-color: #fefefe;
+        margin: auto;
+        padding: 10px;
+        border: 1px solid #888;
+        width: 30%;
+        height: 35%;
+        overflow-y: auto;
+        border-radius: 10px;
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    }
+
+    .modaldialogo {
+        background-color: #fefefe;
+        margin: auto;
+        padding: 2rem;
+        border: 1px solid #888;
+        width: 65%;
+        overflow-y: auto;
+        border-radius: 10px;
+        box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+        margin-top: 15px;
+    }
+
+    .modalpats {
+        background-color: #fefefe;
+        margin: auto;
+        padding: 2rem;
+        border: 1px solid #888;
+        width: 65%;
+        overflow-y: auto;
+        border-radius: 10px;
+        box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+        margin-top: 15px;
+    }
+
+
+    .close1 {
+        color: rgb(122, 122, 122);
+        float: right;
+        font-size: 20px;
+        cursor: pointer;
+    }
+
+    .input {
+        width: 100%;
+        height: 5rem;
+        border-radius: 8px;
+        box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+        border: none;
+        outline-color: #4086d1;
+        margin-bottom: 2rem;
+    }
+
+    .btns {
+        display: flex;
+        justify-content: flex-start;
+        padding-left: 1.5rem;
+    }
+
+    .box {
+        display: flex;
+        justify-content: space-around;
+        padding-top: 2rem;
+        padding-left: 2rem;
+        padding-right: 2rem;
+        margin-top: 2rem;
+    }
+
+    .box2 {
+        padding-bottom: 2rem;
+        padding-left: 2rem;
+        padding-right: 2rem;
+    }
+
+    .parte1 {
+        width: 100%;
+    }
+
+    .parte2 {
+        width: 45%;
+        display: flex;
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .horas {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        width: 100%;
+
+    }
+
+    .titulo {
+        margin: 2rem;
+        font-size: 30px;
+        color: #1e2d84;
+        font-weight: bold;
+    }
+
+    .um {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .fecharT {
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+        width: 50%;
+
+    }
+
+    .pat_data {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        width: 100%;
+
+    }
+
+    .email_chk {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+
+    }
+
+    .pat {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .data {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .email {
+        width: 45%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .botoes {
+        display: flex;
+        justify-content: center;
+    }
+
+    .modalAdicionarDialogo {
+        position: fixed;
+        z-index: 1;
+        padding-top: 100px;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgb(0, 0, 0);
+        background-color: rgba(0, 0, 0, 0.6);
+        transition: all 0.2s linear;
+    }
+</style>
+<div class="tabDiarioTecnicoEPats"><a class="tablinksDiarioTecnicoEPats" id="botaoTabPats"
+        onclick="openTab(event, 'PATS')">PATS</a> <a class="tablinksDiarioTecnicoEPats"
+        onclick="openTab(event, 'DiarioTecnico')">Di&aacute;rio T&eacute;cnico</a> <a class="tablinksDiarioTecnicoEPats"
+        onclick="openTab(event, 'Gantt')">Gantt</a></div>
+
+<div class="tabContentDiarioTecnicoEPats" id="PATS">
+    <div>
+        <div style="display:inline-block; max-width: 250px; padding-top: 10px; padding-bottom: 10px;"><label
+                for="nopat">PAT n&ordm;</label> <input class="form-control" id="nopat" name="nopat" type="text" /></div>
+
+        <div
+            style="display:inline-block; max-width: 250px; margin-left: 50px; padding-top: 10px; padding-bottom: 10px;">
+            <label for="Cliente">Cliente</label> <input class="form-control" id="cliente" name="cliente" type="text" />
+        </div>
+
+        <div
+            style="display:inline-block; max-width: 250px; margin-left: 50px; padding-top: 10px; padding-bottom: 10px;">
+            <label for="tecnico">T&eacute;cnico</label> <select class="form-control" id="selTecnicos"
+                name="selTecnicos"></select>
+        </div>
+
+        <div
+            style="display:inline-block; max-width: 250px; margin-left: 50px; padding-top: 10px; padding-bottom: 10px;">
+            <button class="btn btn-primary"
+                onclick="document.getElementById(&quot;selTecnicos&quot;).selectedIndex=0;getPatsDoTecnico()"
+                type="button">Limpar Nome</button>
+            <button class="btn btn-primary" onclick="openModalPatsNovo()" type="button">Novo PAT</button>
+        </div>
+    </div>
+
+    <div class="accordion" style="margin-top: 10px;">
+        <div class="contentBx"><a class="link" href="#" id="btAdvancedSearch" onclick="toggleAccordion()"
+                style="font-size: 14px;"><i aria-hidden="true" class="fa fa-search-plus"></i>&nbsp;Pesquisa
+                avan&ccedil;ada </a>
+
+            <div class="content">
+                <div class="advanced-search-box">
+                    <div class="filter-group">
+                        <div class="input-group" style="max-width: 250px;"><label for="selEstados">Estado </label>
+                            <select class="form-control" id="selEstados" name="selEstados"></select>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div style="display: inline-block;"><label
+                                style="margin-top: 20px; margin-bottom: 0px;">Tipo</label>
+
+                            <div class="filter-group" style="padding-top: 0x;">
+                                <div class="input-group" style="max-width: 250px;"><input checked="checked"
+                                        id="patAberto" name="patAberto" style="margin-right: 0.5em;" type="checkbox" />
+                                    <label for="patAberto" style="font-weight: normal;"> Aberto</label> &nbsp;&nbsp;
+                                    <input id="patFechado" name="patFechado" style="margin-right: 0.5em;"
+                                        type="checkbox" /> <label for="patFechado" style="font-weight: normal;">
+                                        Fechado</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="display: inline-block; margin-left: 50px"><label
+                                style="margin-top: 20px; margin-bottom: 0px;">Departamento</label>
+
+                            <div class="filter-group" style="padding-top: 0x;">
+                                <div class="input-group" style="max-width: 250px;"><input checked="checked"
+                                        id="depSoftware" name="depSoftware" style="margin-right: 0.5em;"
+                                        type="checkbox" /> <label for="depSoftware" style="font-weight: normal;">
+                                        Software</label> &nbsp;&nbsp; <input checked="checked" id="depHardware"
+                                        name="depHardware" style="margin-right: 0.5em;" type="checkbox" /> <label
+                                        for="depHardware" style="font-weight: normal;"> Hardware</label></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div style="display: inline-block;"><label style="margin-top: 20px; margin-bottom: 0px;">Data de
+                                abertura</label>
+
+                            <div class="filter-group">
+                                <div class="same-row-parent"><input class="form-control same-row-child" id="patdataini"
+                                        type="date" /> <label class="same-row-child"
+                                        style="font-weight: normal;">&nbsp;&nbsp;at&eacute;&nbsp;&nbsp;</label> <input
+                                        class="form-control same-row-child" id="patdatafim" type="date" /></div>
+                            </div>
+                        </div>
+
+                        <div style="display: inline-block; margin-left: 50px"><label
+                                style="margin-top: 10px; margin-bottom: 0px;">Datas de
+                                Interven&ccedil;&otilde;es</label>
+
+                            <div class="filter-group">
+                                <div class="same-row-parent"><input class="form-control same-row-child" id="mhdataini"
+                                        type="date" /> <label class="same-row-child"
+                                        style="font-weight: normal;">&nbsp;&nbsp;at&eacute;&nbsp;&nbsp;</label> <input
+                                        class="form-control same-row-child" id="mhdatafim" type="date" /></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 20px;"><button class="btn btn-primary" id="btSearch"
+                            onclick="getPatsDoTecnico()" type="button">Pesquisar</button></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <table class="table table-striped" id="tabelaMonitorPats" style="margin-top:20px">
+        <tbody id="tbodyMonitorPats">
+        </tbody>
+    </table>
+
+    <div id="divSearching" style="display: none;">
+        <div class="alert alert-info" role="alert"><i class="fa fa-spinner fa-spin"></i>&nbsp;A procurar resultados...
+        </div>
+    </div>
+
+    <div id="divNoResults" style="display: none;">
+        <div class="alert alert-info" role="alert"><i class="fa fa-info-circle"></i>&nbsp;Nenhum resultado encontrado.
+        </div>
+    </div>
+</div>
+
+<div class="tabContentDiarioTecnicoEPats" id="DiarioTecnico">
+    <div>
+        <p><b> Data: </b></p>
+        <input class="form-control input-group-sm" data-language="pt" data-obrigatorio="true"
+            data-original-title="Data Inicial" data-tooltip="true" id="data" maxlength="10" name="data"
+            style="max-width:300px" type="date" />
+    </div>
+
+    <table class="table table-striped" id="tabelaDiarioTecnico" style="margin-top:10px">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">In&iacute;cio</th>
+                <th scope="col">Fim</th>
+                <th scope="col">Relat&oacute;rio</th>
+                <th scope="col">A&ccedil;&otilde;es</th>
+            </tr>
+        </thead>
+        <tbody id="tbodyDiarioTecnico">
+        </tbody>
+    </table>
+</div>
+
+<div class="tabContentDiarioTecnicoEPats" id="Gantt">
+    <div>
+        <p><b> Data: </b></p>
+        <input class="form-control input-group-sm" data-language="pt" data-obrigatorio="true" data-original-title="Data"
+            data-tooltip="true" id="dataGantt" maxlength="10" name="dataGantt" style="max-width:300px" type="date" />
+    </div>
+
+    <hr class="my-4" />
+    <div id="timeline" style="height:700px">&nbsp;</div>
+</div>
+<!-- Anexos Modal -->
+
+<div class="modal-input-container hidden visuallyhidden" id="modal-anexos" style="z-index: 10;">
+    <div class="modal-content"><span class="close1" id=""
+            onclick="document.getElementById('modal-anexos').style.display = 'none'">&times;</span>
+
+        <p style="margin-bottom: 0px; font-size: 20px; color:dimgray; font-weight: normal;"><label
+                id="label-titulo">Anexos</label></p>
+
+        <hr style="margin-top: 0px" />
+        <div class="row" style="height: 100%; padding-left: 15px;">
+            <div class="column" style="width: 15%; height: 85%;">
+                <ul class="list-group .list-group-flush" id="fileList"
+                    style="padding-right: 20px; overflow: auto; height: 100%;">
+                </ul>
+            </div>
+
+            <div class="column" id="filePreview" style="width: 85%; height: 100%;"><iframe height="90%" id="blob" src=""
+                    style="overflow: auto;" type="application/pdf" width="100%"></iframe>
+
+                <div id="download-email-div">
+                    <div class="center">
+                        <h2>Este anexo n&atilde;o pode ser previsualizado</h2>
+                        &nbsp;
+
+                        <h3>Clique no bot&atilde;o abaixo para fazer o Download do ficheiro para o seu computador</h3>
+                        <button class="btn btn-default" id="download" type="button">Download</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Intervencoes Modal -->
+
+<div class="modal-input-container hidden visuallyhidden" id="modal-intervencoes" style="z-index: 10;">
+    <div class="modal-content"><span class="close" id="close-modal-button-intervencoes">&times;</span>
+
+        <p style="margin-bottom: 0px; font-size: 20px; color:dimgray; font-weight: normal;"><label
+                id="label-titulo">Interven&ccedil;&atilde;o</label></p>
+
+        <hr style="margin-top: 0px" />
+        <div class="row" style="height: 100%; ">
+            <div class="input-group mb-3" style="width: 100%; margin-bottom: 1em;">
+                <div class="form-group mainformfg inline" id="ctl00_conteudo_patno"><span
+                        class="control-label mainformcampotitulo" id="ctl00_conteudo_patno_tLabel1">N&ordm; de
+                        PAT</span> <span class="mainformcampolabel" data-original-title="Nopat" data-tooltip="true"
+                        id="ctl00_conteudo_patno_mLabel1">25474</span></div>
+
+                <div class="form-group mainformfg inline" id="ctl00_conteudo_nome"><span
+                        class="control-label mainformcampotitulo" id="ctl00_conteudo_nome_tLabel1">Cliente</span> <span
+                        class="mainformcampolabel" data-original-title="Cliente" data-tooltip="true"
+                        id="ctl00_conteudo_nome_mLabel1">ELEVAR GLOBAL - ENGENHARIA, CONSULTORIA E
+                        FORMA&Ccedil;&Atilde;O, LDA</span></div>
+            </div>
+
+            <div class="input-group mb-3" style="width: 100%; margin-bottom: 2em;">
+                <div class="form-group mainformfg inline" id="ctl00_conteudo_data" style="max-width: 15ch;"><span
+                        class="control-label mainformcampotitulo " id="ctl00_conteudo_data_tLabel1">Data</span> <input
+                        class="form-control input-group-sm" data-language="pt" data-obrigatorio="true"
+                        data-original-title="Data" data-tooltip="true" id="dataIntervencao" maxlength="10"
+                        name="dataIntervencao" style="max-width:300px" type="date" /></div>
+
+                <div class="form-group mainformfg inline" id="ctl00_conteudo_hora"
+                    style="max-width:10ch; margin-right: 1em;"><span class="control-label mainformcampotitulo"
+                        id="ctl00_conteudo_hora_tLabel1">Hora Inicial</span>
+
+                    <div class="input-group-left input-group fullWidth searchbox"><input
+                            class="form-control input-group-sm" data-language="pt" data-obrigatorio="true"
+                            data-original-title="Hora-inicial" data-tooltip="true" id="horaInicialIntervencao"
+                            maxlength="5" name="horaInicialIntervencao" style="max-width:300px" type="time" /></div>
+                </div>
+
+                <div class="form-group mainformfg inline" id="ctl00_conteudo_horaf" style="max-width:10ch;"><span
+                        class="control-label mainformcampotitulo " id="ctl00_conteudo_horaf_tLabel1">Hora Final</span>
+
+                    <div class="input-group-left input-group fullWidth searchbox"><input
+                            class="form-control input-group-sm" data-language="pt" data-obrigatorio="true"
+                            data-original-title="Hora-final" data-tooltip="true" id="horaFinalIntervencao" maxlength="5"
+                            name="horaFinalIntervencao" style="max-width:300px" type="time" /></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal Lancar Intervencoes  -->
+
+<div class="modal-input-container hidden visuallyhidden" id="modal-intervencoes" style="z-index: 10;">
+    <div class="modal-content"><span class="close" id="close-modal-button-intervencoes">&times;</span>
+
+        <p style="margin-bottom: 0px; font-size: 20px; color:dimgray; font-weight: normal;"><label
+                id="label-titulo">Interven&ccedil;&atilde;o</label></p>
+
+        <hr style="margin-top: 0px" />
+        <div class="row" style="height: 100%; ">
+            <div class="input-group mb-3" style="width: 100%; margin-bottom: 1em;">
+                <div class="form-group mainformfg inline" id="ctl00_conteudo_patno"><span
+                        class="control-label mainformcampotitulo" id="ctl00_conteudo_patno_tLabel1">N&ordm; de
+                        PAT</span> <span class="mainformcampolabel" data-original-title="Nopat" data-tooltip="true"
+                        id="ctl00_conteudo_patno_mLabel1">25474</span></div>
+
+                <div class="form-group mainformfg inline" id="ctl00_conteudo_nome"><span
+                        class="control-label mainformcampotitulo" id="ctl00_conteudo_nome_tLabel1">Cliente</span> <span
+                        class="mainformcampolabel" data-original-title="Cliente" data-tooltip="true"
+                        id="ctl00_conteudo_nome_mLabel1">ELEVAR GLOBAL - ENGENHARIA, CONSULTORIA E
+                        FORMA&Ccedil;&Atilde;O, LDA</span></div>
+            </div>
+
+            <div class="input-group mb-3" style="width: 100%; margin-bottom: 2em;">
+                <div class="form-group mainformfg inline" id="ctl00_conteudo_data" style="max-width: 15ch;"><span
+                        class="control-label mainformcampotitulo " id="ctl00_conteudo_data_tLabel1">Data</span> <input
+                        class="form-control input-group-sm" data-language="pt" data-obrigatorio="true"
+                        data-original-title="Data" data-tooltip="true" id="dataIntervencao" maxlength="10"
+                        name="dataIntervencao" style="max-width:300px" type="date" /></div>
+
+                <div class="form-group mainformfg inline" id="ctl00_conteudo_hora"
+                    style="max-width:10ch; margin-right: 1em;"><span class="control-label mainformcampotitulo"
+                        id="ctl00_conteudo_hora_tLabel1">Hora Inicial</span>
+
+                    <div class="input-group-left input-group fullWidth searchbox"><input
+                            class="form-control input-group-sm" data-language="pt" data-obrigatorio="true"
+                            data-original-title="Hora-inicial" data-tooltip="true" id="horaInicialIntervencao"
+                            maxlength="5" name="horaInicialIntervencao" style="max-width:300px" type="time" /></div>
+                </div>
+
+                <div class="form-group mainformfg inline" id="ctl00_conteudo_horaf" style="max-width:10ch;"><span
+                        class="control-label mainformcampotitulo " id="ctl00_conteudo_horaf_tLabel1">Hora Final</span>
+
+                    <div class="input-group-left input-group fullWidth searchbox"><input
+                            class="form-control input-group-sm" data-language="pt" data-obrigatorio="true"
+                            data-original-title="Hora-final" data-tooltip="true" id="horaFinalIntervencao" maxlength="5"
+                            name="horaFinalIntervencao" style="max-width:300px" type="time" /></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal_adicionar" id="modal_novo_pat">
+    <div class="modalpats"><span class="close1" id="" onclick="closeModalPats()">&times;</span>
+
+        <h4 class="titulo">Lan&ccedil;amento de Interven&ccedil;&otilde;es</h4>
+
+        <div class="box">
+            <div class="pat_data">
+                <div class="pat"><label>N&ordm; de PAT</label> <input class="input" id="inp_num_pat" name="fname"
+                        placeholder="" type="text" /></div>
+
+                <div class="data"><label>Data</label> <input class="input" id="inp_data" placeholder="Data"
+                        type="date" /></div>
+
+                <div class="um"><label>Tipo de Interven&ccedil;&atilde;o</label> <select class="input" id="inp_tipo">
+                    </select></div>
+
+                <div class="um"><label>Hora Incial</label> <input class="input" id="inp_hora_ini" type="time" /></div>
+
+                <div class="um"><label>Hora Final</label> <input class="input" id="inp_hora_fin" type="time" /></div>
+            </div>
+        </div>
+
+        <div class="box2"><label>Cliente</label> <input class="input" id="inp_cliente" name="fname" placeholder=""
+                type="text" /> <label>Relat&oacute;rio</label><br />
+            <textarea class="input" cols="50" id="inp_relatorio" name="fname" rows="5"
+                style="height: 8rem;"> </textarea>
+
+            <div class="email_chk">
+                <div class="email"><label>Email Adicional</label> <input class="input" id="inp_email" name="fname"
+                        placeholder="" type="text" /></div>
+
+                <div class="fecharT">
+                    <div class="ftempo" style="display: flex; align-items: flex-start;"><input id="chk_fechar"
+                            name="fecharTempo" type="checkbox" /> <label style="margin-left: 8px;">Fechar Tempo</label>
+                    </div>
+
+                    <div class="nemail" style="display: flex; align-items: flex-start;"><input id="chk_n_email"
+                            name="naoEmail" type="checkbox" /> <label style="margin-left: 8px;">N&atilde;o enviar email
+                            da interven&ccedil;&atilde;o</label></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="btns" style="margin-bottom: 2rem;"><button class="btn_verde" id="buttonGuardar"
+                onclick="inserirDados()" style="margin-left: 8px;" type="button"><i
+                    class="fa fa-check"></i>&nbsp;Guardar</button>&nbsp;<button class="btn_vermelho" id="buttonCancelar"
+                onclick="closeModalPats()" type="button"><i class="fa fa-times"></i>&nbsp;Cancelar</button></div>
+    </div>
+</div>
+<!-- Modal dialogo  -->
+
+<div class="modal_adicionar" id="modal-pats">
+    <div class="modalpats"><span class="close1" id="" onclick="closeModalPatsNovo()">&times;</span>
+
+        <p style="margin-bottom: 0px; font-size: 20px; color:dimgray; font-weight: normal;">
+            <label id="label-titulo">Pats</label>
+        </p>
+        <div id="campos">
+            <label>Nome do Cliente</label>
+            <div id="div_cliente">
+            </div>
+            <label>Tipo</label>
+            <select id="tipo_input" class="input">
+                <option value="SPHC">S.PHC</option>
+                <option value="HASSIS">H.Assistência</option>
+            </select>
+            <br />
+            <label>Quem pediu?</label>
+            <input id="inp_pediu" type="text" class="input" />
+            <label>V/ Referência</label>
+            <input id="inp_vref" type="text" class="input" />
+            <label>Base Dados</label>
+            <input id="inp_basedados" type="text" class="input" />
+            <br />
+            <label>Resumo</label>
+            <textarea id="inp_resumo" class="input"></textarea>
+            <label>Problema</label>
+            <textarea id="inp_problema" class="input"></textarea>
+            <br />
+            <label for="tecnico">T&eacute;cnico</label>
+            <select class="input" id="selTecnicosPat" name="selTecnicosPat"></select>
+
+            <!-- <input id="nometec" type="text" class="input" /> -->
+            <label>Status</label>
+            <select id="inp_status" class="input">
+                <option value="urgente">11 - Urgente</option>
+                <option value="desenvolvimento">12 - Desenvolvimento</option>
+                <option value="testes">13 - Testes</option>
+                <option value="backlog">16 - Backlog</option>
+                <option value="analise">18 - Em Análise</option>
+            </select>
+            <label>É help desk?</label>
+            <input id="helpdesk" type="checkbox" />
+            <label>Iniciar intervenção</label>
+            <input id="interv" type="checkbox" />
+        </div>
+        <button class="btn_verde" onclick="guardarPAT()" type="button">Guardar</button>
+    </div>
+</div>
+
+<section class="alertify-logs" id="alertify-logs">&nbsp;</section>
+<script type="text/javascript">
+
+    /*function copiarPAT() {
+
+        const dadospat = localStorage.getItem('diarioTecnico')
+        let newDadosPat = JSON.parse(dadospat)
+        console.log(newDadosPat);
+        var copiar = document.getElementById("")
+
+
+
+    }*/
+
+    var tempoCopiado = ""
+
+
+    var fTempo = document.getElementById("chk_fechar")
+
+    fTempo.addEventListener('change', function () {
+        if (this.checked && document.getElementById("inp_hora_fin").value == "" && tempoCopiado == "") {
+            var date = new Date();
+            var currentTime = date.toString().substring(16, 21);
+            document.getElementById('inp_hora_fin').value = currentTime;
+
+
+            function isNumberKey(evt) {
+                var charCode = (evt.which) ? evt.which : event.keyCode
+                if (charCode > 31 && (charCode < 48 || charCode > 57))
+                    return false;
+                return true;
+            }
+        } else if (document.getElementById("inp_hora_fin").value != "" && this.checked == false) {
+            //  block of code to be executed if the condition1 is false and condition2 is true
+            this.checked == false
+        }
+    })
+
+
+    var stampGlobal = ""
+
+    function openModalPatsNovo() {
+        document.getElementById("modal-pats").style.display = "block";
+    }
+
+    function closeModalPatsNovo() {
+        document.getElementById("modal-pats").style.display = "none";
+    }
+
+    function guardarPAT() {
+        var e = document.getElementById("inp_clientes");
+        var nomecliente = e.options[e.selectedIndex].text;
+        var numcliente = e.options[e.selectedIndex].value;
+        e = document.getElementById("tipo_input");
+        var tipo = e.options[e.selectedIndex].text;
+        var inp_pediu = document.getElementById("inp_pediu").value;
+        var inp_vref = document.getElementById("inp_vref").value;
+        inp_vref = inp_vref.replace(/\"/g, "'");
+        var inp_problema = document.getElementById("inp_problema").value;
+        inp_problema = inp_problema.replace(/\"/g, "'");
+        var inp_basedados = document.getElementById("inp_basedados").value;
+        var inp_resumo = document.getElementById("inp_resumo").value;
+        e = document.getElementById("selTecnicosPat");
+        var nometec = e.options[e.selectedIndex].text;
+        var numtec = e.options[e.selectedIndex].value;
+        
+        e = document.getElementById("inp_status");
+        var status = e.options[e.selectedIndex].text;
+        var helpdesk = document.getElementById("helpdesk").checked;
+        if (helpdesk == true) {
+            helpdesk = 1
+        } else {
+            helpdesk = 0
+        }
+        var interv = document.getElementById("interv").checked;
+        if (interv == true) {
+            interv = 1
+        } else {
+            interv = 0
+        }
+        var params = {};
+        console.log("../programs/gensel.aspx?cscript=insereRecCampos&numcliente=" + numcliente +
+                "&nomecliente=" + nomecliente +
+                "&tipo=" + tipo +
+                "&quempediu=" + inp_pediu +
+                "&status=" + status +
+                "&resumo=" + encodeURIComponent(inp_resumo).replaceAll("'","''") +
+                "&problema=" + encodeURIComponent(inp_problema).replaceAll("'","''") +
+                "&nometecnico=" + nometec +
+                "&numtecnico=" + numtec)
+        $.ajax({
+            type: "GET",
+            url:
+                "../programs/gensel.aspx?cscript=insertPAT&numcliente=" + numcliente +
+                "&nomecliente=" + nomecliente +
+                "&tipo=" + tipo +
+                "&quempediu=" + inp_pediu +
+                "&status=" + status +
+                "&resumo=" + inp_resumo +
+                "&problema=" + inp_problema +
+                "&nometecnico=" + nometec +
+                "&numtecnico=" + numtec,
+            data: JSON.stringify(params),
+            contentType: "application/json",
+            success: function (response) { },
+            error: function (response) {
+                alert("Erro a encontrar arVend por favor tente de novo!");
+            },
+        });
+    }
+
+    function getClientes() {
+        var seccoesEscolhas = document.getElementById("div_cliente");
+        seccoesEscolhas.innerHTML = "";
+        var params = {};
+        var omeuselect = `Select no, nome from cl`;
+        params.id = 'SELECTtoJSON';
+        params.select = omeuselect;
+        $.ajax({
+            type: 'POST',
+            url: '../api/code/run',
+            async: false,
+            data: JSON.stringify(params),
+            contentType: 'application/json'
+        }).done(function (result, textStatus, jqXHR) {
+			var string = result.replace(/\n/g, "\\n").replace(/\r/g, "\\r").replace(/\t/g, "\\t")
+            try {
+                var resposta = JSON.parse(string);
+            } catch {
+                resposta = JSON.parse("{\"Dados\":[]}");
+            }
+            var DadosJSON = resposta.Dados
+            let escolhas = "";
+            escolhas += "<option value=\"\"></option>"
+            for (var i = 0; i < DadosJSON.length; ++i) {
+                var no = $.trim(DadosJSON[i].no);
+                var nome = $.trim(DadosJSON[i].nome);
+                var stringInic = "<select class=\"input\" id=\"inp_clientes\" placeholder=\"Selecione o cliente\" value=\"\">";
+                escolhas += "<option value=" + no + ">" + nome + "</option>"
+            }
+            seccoesEscolhas.innerHTML += stringInic + escolhas + "</select>";
+            new TomSelect("#inp_clientes", {
+                create: false,
+                sortField: {
+                    field: "text",
+                    direction: "asc"
+                },
+                maxItems: 1,
+                closeAfterSelect: true
+            });
+        }).error(function (response) {
+            alert("Erro a encontrar DadosJSON por favor tente de novo!")
+            console.log(response);
+            console.log(response.error);
+        })
+    }
+
+    function getTecnicosNomeENum() {
+        const tecnico = $("#selTecnicosPat").val()
+        $.ajax({
+            type: 'GET',
+            url: '../programs/gensel.aspx?cscript=getTodosOsTecnicos',
+            data: JSON.stringify({}),
+            async: false,
+            contentType: 'application/json',
+            success: function (response) {
+                var tecnicos = response.tecnicos
+                for (var i = 0; i < tecnicos.length; ++i) {
+                    var tecnico = new Option(tecnicos[i].nome, tecnicos[i].notec);
+                    $(tecnico).html(tecnicos[i].nome);
+                    $("#selTecnicosPat").append(tecnico);
+                }
+                const userLogado = function () {
+                    var loggedUser = []
+                    $.ajax({
+                        type: 'GET',
+                        url: '../programs/gensel.aspx?cscript=getLoggedUser',
+                        data: JSON.stringify({}),
+                        contentType: 'application/json',
+                        async: false,
+                        success: function (response) {
+                            loggedUser = response.loggedUser[0].loggedUser
+                        }
+                    });
+                    return loggedUser
+                }();
+                $("#selTecnicosPat option[value='" + userLogado + "']").prop('selected', true)
+            },
+            error: function (response) {
+                gestorAlertasComErro("Erro", "Não foi possível obter os técnicos, por favor tente de novo!")
+            }
+        });
+    }
+
+    function openModalPats(nopat, mhstamp, horafinal) {
+        console.log(mhstamp);
+        concorrencia = 1
+
+        if (tempoCopiado == '') {
+            tempoCopiado = horafinal
+        }
+        document.getElementById('inp_hora_fin').value = tempoCopiado
+
+        $("#inp_tipo").empty();
+        document.getElementById("inp_num_pat").value = ''
+        document.getElementById("inp_cliente").value = ''
+        document.getElementById("inp_data").value = ''
+        document.getElementById("inp_hora_ini").value = ''
+        document.getElementById("inp_relatorio").value = ''
+        document.getElementById("inp_email").value = ''
+
+        stampGlobal = mhstamp
+        params = {};
+
+        varMyQuery = " select campo from dytable where entityname='A_MHTIPO' and campo <>'acerto' order by case when campo = 'Remota' then 1 else case when campo in ('Correcção', 'Externa', 'Interna', 'Por telefone', 'Reparação') then 2 else 3 end end, 1"
+
+        params.id = 'SELECTtoJSON'
+        params.select = varMyQuery
+
+        $.ajax({
+            type: 'POST',
+            url: '../api/code/run',
+            async: true,
+            data: JSON.stringify(params),
+            contentType: 'application/json',
+
+        })
+            .done(function (result, textStatus, jqXHR) {
+
+                if (result !== null) {
+
+                    if (result.length > 0) {
+                        try {
+                            var varjson = JSON.parse(result);
+
+                        } catch (err) {
+
+                            varjson = JSON.parse("{\"Dados\":[]}")
+                        }
+                        var arDados = varjson.Dados
+                        console.log(arDados);
+
+
+
+                        for (var i = 0; i < arDados.length; ++i) {
+
+                            var option = document.createElement("option");
+                            option.textContent = arDados[i].campo
+                            option.value = arDados[i].campo
+
+                            var select = document.getElementById("inp_tipo");
+                            select.appendChild(option);
+
+                            var tipo = select.options[select.selectedIndex].value
+
+                        }
+                        if (mhstamp == "") {
+                            document.getElementById("inp_tipo").value = "Remota"
+                        }
+                        if (concorrencia != 1) {
+                            document.getElementById("inp_tipo").value = concorrencia
+                        }
+
+                        concorrencia = 0
+                    }
+                }
+            })
+
+            .error(function (jqXHR, error, errorThrown, response) {
+                if (jqXHR.status && jqXHR.status == 400) {
+                    alert(jqXHR.responseText + " |||" + error + "|||" + errorThrown);
+                } else {
+                    alert(jqXHR.responseText + " |||" + error + "|||" + errorThrown + "|||");
+                }
+            })
+
+
+        document.getElementById("modal_novo_pat").style.display = "block"
+        document.getElementById("inp_num_pat").disabled = true;
+        document.getElementById("inp_cliente").disabled = true;
+        if (horafinal == '') {
+            document.getElementById("chk_fechar").checked = false;
+        } else {
+            document.getElementById("chk_fechar").checked = true;
+        }
+        const dados = localStorage.getItem('dadosNovos')
+        let newDados = JSON.parse(dados)
+        console.log(newDados);
+
+        if (mhstamp == "") {
+
+            if (tempoCopiado == "") {
+                //hora de agora
+                var date = new Date();
+                var currentTime = date.toString().substring(16, 21);
+                document.getElementById('inp_hora_ini').value = currentTime;
+            }
+
+
+
+            function isNumberKey(evt) {
+                var charCode = (evt.which) ? evt.which : event.keyCode
+                if (charCode > 31 && (charCode < 48 || charCode > 57))
+                    return false;
+                return true;
+            }
+
+            //data de hoje
+            const dateInput = document.getElementById('inp_data');
+            dateInput.value = formatDate();
+
+
+            function padTo2Digits(num) {
+                return num.toString().padStart(2, '0');
+            }
+
+            function formatDate(date = new Date()) {
+                return [
+                    date.getFullYear(),
+                    padTo2Digits(date.getMonth() + 1),
+                    padTo2Digits(date.getDate()),
+                ].join('-');
+            }
+            document.getElementById("inp_relatorio").value = ""
+            document.getElementById("inp_tipo").value = ""
+
+            document.getElementById("inp_email").value = ""
+
+            document.getElementById("chk_n_email").checked = false;
+
+            for (var i = 0; i < newDados.length; ++i) {
+                var nopatNewDados = $.trim(newDados[i].nopat)
+                if (nopat == nopatNewDados) {
+                    var nomeCliente = $.trim(newDados[i].nomeCliente)
+                    document.getElementById("inp_num_pat").value = nopatNewDados
+                    document.getElementById("inp_cliente").value = nomeCliente
+                }
+            }
+        } else {
+            let params = {};
+            let varMyQuery = "select no, nome, hora, relatorio, mhtipo, u_nenvmail, u_emailad, cast(data AS date) as data from mh where mhstamp='" + mhstamp + "'"
+
+            params.id = 'SELECTtoJSON'
+            params.select = varMyQuery
+            $.ajax({
+                type: 'POST',
+                url: '../api/code/run',
+                async: true,
+                data: JSON.stringify(params),
+                contentType: 'application/json'
+            })
+                .done(function (resultado, textStatus, jqXHR) {
+                    result = resultado.replaceAll("\n", "\\n")
+
+                    setTimeout(() => {
+                        console.log(result);
+                    }, 1000);
+                    console.log("antes do try");
+                    try {
+                        var resposta = JSON.parse(result);
+                        console.log(resposta);
+
+                        var data = resposta.Dados[0].data
+                        //data no formato dd/mm/yyyy
+                        var nova_data = data.slice(0, 10);
+
+                        //data no formato dd-mm-yyyy
+                        nova_data = nova_data.replaceAll("/", "-")
+
+                        // Data no formato 2019-04-04T00:00:00.000Z
+                        const stringToDate = function (data) {
+                            const [dd, mm, yyyy] = nova_data.split("-");
+                            return new Date(`${yyyy}-${mm}-${dd}`);
+                        };
+
+                        //data no formato yyyy-mm-dd
+                        var currentdate = stringToDate(nova_data)
+                        var tempo = currentdate.getFullYear() + "-"
+                            + ("0" + (currentdate.getMonth() + 1)).slice(-2) + "-"
+                            + ("0" + currentdate.getDate()).slice(-2) + "T"
+                            + ("0" + (currentdate.getHours())).slice(-2) + ":"
+                            + ("0" + (currentdate.getMinutes())).slice(-2)
+                        var data_final = tempo.slice(0, 10);
+                        console.log(data_final);
+
+
+                        var hora = resposta.Dados[0].hora
+                        var cliente = resposta.Dados[0].nome
+                        var tipo = resposta.Dados[0].mhtipo
+                        var relatorio = resposta.Dados[0].relatorio
+                        var email = resposta.Dados[0].u_emailad
+                        var nemail = resposta.Dados[0].u_nenvmail
+                        //var pat = resposta.Dados[i].nopat
+
+                        document.getElementById("inp_num_pat").value = nopat
+                        document.getElementById("inp_cliente").value = cliente
+                        document.getElementById("inp_data").value = data_final
+                        document.getElementById("inp_hora_ini").value = hora
+
+                        for (var i = 0; i < document.getElementById("inp_tipo").options.length; i++) {
+
+                            if (document.getElementById("inp_tipo")[i].value.toLowerCase() == tipo.toLowerCase()) {
+
+                                document.getElementById("inp_tipo").value = document.getElementById("inp_tipo")[i].value
+
+                            }
+
+                        }
+
+                        if (concorrencia == 1) {
+                            console.log("Algo de errado não está certo! Erro de concorrência"); //concorencia, este ajax foi realizado antes do de cima
+                            concorrencia = tipo
+                        }
+                        document.getElementById("inp_relatorio").value = relatorio
+                        document.getElementById("inp_email").value = email
+                        if (nemail == "True") {
+                            document.getElementById("chk_n_email").checked = true
+                        } else {
+                            document.getElementById("chk_n_email").checked = false
+                        }
+
+
+                    } catch (e) {
+                        alert(e);
+                    }
+                })
+
+        }
+    }
+
+
+    function closeModalPats() {
+
+        document.getElementById("modal_novo_pat").style.display = "none"
+        stampGlobal = ""
+        tempoCopiado = ""
+        document.getElementById("inp_hora_fin").value = ""
+        document.getElementById("inp_hora_ini").value = ""
+    }
+
+
+    function inserirDados() {
+
+        var tecnico
+        var oristamp
+        var tecnum
+        const dados = localStorage.getItem('dadosNovos')
+        let newDados = JSON.parse(dados)
+
+        if (tempoCopiado == "") {
+            for (var i = 0; i < newDados.length; ++i) {
+                var stampNewDados = $.trim(newDados[i].oristamp)
+                if (stampGlobal == stampNewDados) {
+
+                    tecnico = $.trim(newDados[i].TECNICO)
+                    oristamp = $.trim(newDados[i].oristamp)
+                    tecnum = $.trim(newDados[i].tecnum)
+                }
+            }
+        } else {
+            oristamp = stampGlobal
+        }
+        var nopat = document.getElementById("inp_num_pat").value
+        var hora_ini = document.getElementById("inp_hora_ini").value
+        var hora_fi = document.getElementById("inp_hora_fin").value
+        var data = document.getElementById("inp_data").value
+        var tipo = document.getElementById("inp_tipo").value
+        var relatorio = document.getElementById("inp_relatorio").value
+        var ademail = document.getElementById("inp_email").value
+        var fTempo = document.getElementById("chk_fechar")
+        var nEmail = document.getElementById("chk_n_email")
+
+        if (fTempo.checked || hora_fi != '') {
+            fTempo = 1
+
+        } else {
+            fTempo = 0
+        }
+
+        if (nEmail.checked) {
+            nEmail = 1
+
+        } else {
+            nEmail = 0
+        }
+
+
+        var numtecnico
+        var nometecnico
+
+        params = {};
+        varMyQuery = "usertecnico"
+
+        params.id = 'phcvartoJSON'
+        params.variavel = varMyQuery
+        $.ajax({
+            type: 'POST',
+            url: '../api/code/run',
+            async: true,
+            data: JSON.stringify(params),
+            contentType: 'application/json'
+        })
+            .done(function (result, textStatus, jqXHR) {
+
+                var resposta = JSON.parse(result);
+
+                numtecnico = resposta.resposta
+
+                params = {};
+                let varMyQuery = "select cmdesc from cm4 where cm=" + numtecnico
+
+                params.id = 'SELECTtoJSON'
+                params.select = varMyQuery
+                $.ajax({
+                    type: 'POST',
+                    url: '../api/code/run',
+                    async: true,
+                    data: JSON.stringify(params),
+                    contentType: 'application/json'
+                })
+                    .done(function (result, textStatus, jqXHR) {
+
+                        var resposta = JSON.parse(result);
+                        nometecnico = resposta.Dados[0].cmdesc
+                        var xml = `<intervencao nopat='` + nopat + `' data='` + data + `' hora='` + hora_ini + `' horaf='` + hora_fi + `'`
+                        xml += ` realizada='` + fTempo + `' relatorio='` + relatorio.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '`').replace(/'/g, '`').replace(/'/g, '&apos;') + `' tecnnm='` + nometecnico + `' tecnico='` + numtecnico + `'`
+                        xml += ` mhtipo='` + tipo + `' emailad='` + ademail + `' nenvmail='` + nEmail + `' mhstamp='` + oristamp + `'>`
+                        xml += `</intervencao>`
+                        var params = {};
+
+                        params.id = 'inserirIntervencao2'
+                        params.xml = xml
+                        $.ajax({
+                            type: 'POST',
+                            url: '../api/code/run',
+                            async: true,
+                            data: JSON.stringify(params),
+                            contentType: 'application/json',
+                            success: function (response) {
+                                closeModalPats()
+                                //getPatsDoTecnico()
+                                getDiarioTecnico()
+                                //getTodosOsTecnicos()
+                                getTodosOsEstados()
+
+
+                            },
+                            error: function (xhr, status, error) {
+                                console.log("xhr -> " + xhr.responseText + " | status -> " + status + " | " + error);
+                                alert("Não existem artigos desta pesquisa!")
+                                localStorage.setItem("contadorPessoasNovas", 0)
+
+                            }
+                        })
+
+                    })
+
+            })
+    }
+
+    function openModalDialogo(stamp) {
+        document.getElementById("modal_dialogo").style.display = "block"
+        document.getElementById("modal_adicionar_dialogo").style.display = "none";
+        document.getElementById("modal_dialogo").value = stamp
+        getDadosTabela()
+    }
+
+    function closeModalDialogo() {
+        document.getElementById("modal_dialogo").style.display = "none"
+        var tabela = document.getElementById("tbodyDialogos")
+        tabela.textContent = ''
+    }
+
+    function openModalAdiDialogo() {
+        document.getElementById('modal_adicionar_dialogo').style.display = "block"
+        document.getElementById("dialbox").value = ""
+
+    }
+
+
+    function closeModalAdiDialogo() {
+        document.getElementById("modal_adicionar_dialogo").style.display = "none";
+
+    }
+
+
+    function getDadosTabela() {
+
+        var params = {};
+
+        var stamp = document.getElementById("modal_dialogo").value
+        var omeuselect =
+            `SELECT *
+        FROM U_DIALOGOS where oristamp ='`+ stamp + `'`
+
+        params.id = 'SELECTtoJSON'
+        params.select = omeuselect
+        $.ajax({
+            type: 'POST',
+            url: '../api/code/run',
+            async: false,
+            data: JSON.stringify(params),
+            contentType: 'application/json'
+        }).done(function (result, textStatus, jqXHR) {
+
+            //console.log("string sem tratamento" + result)
+            var string = result.replace(/\n/g, "\\n").replace(/\r/g, "\\r").replace(/\t/g, "\\t")
+            var resposta = JSON.parse(string)
+
+
+            var DadosJSON = resposta.Dados
+            console.log(DadosJSON)
+            for (var i = 0; i < DadosJSON.length; ++i) {
+
+                var Data = $.trim(DadosJSON[i].data)
+                var Utilizador = $.trim(DadosJSON[i].ousrinis)
+                var Dialogo = $.trim(DadosJSON[i].dialogo)
+
+                var Coluna1 = '<td class="Data" >' + Data + '</td>'
+                var Coluna2 = '<td class="User" >' + Utilizador + '</td>'
+                var Coluna3 = '<td class="Dial" >' + Dialogo + '</td>'
+
+                $('#tabelaGetDialogos > tbody').append('<tr style="white-space:pre">' + Coluna1 + Coluna2 + Coluna3 + '</tr>');
+            }
+        }).error(function (response) {
+            alert("Erro a encontrar DadosJSON por favor tente de novo!")
+            console.log(response);
+            console.log(response.error);
+        })
+    }
+
+    function saveDialogo() {
+        var params = {};
+
+        var stamp = document.getElementById("modal_dialogo").value
+        var dialogo = document.getElementById("dialbox").value
+        dialogo = dialogo.replace(/\"/g, "'")
+        var oristamp = stamp
+        $.ajax({
+            type: 'GET',
+            url: '../programs/gensel.aspx?cscript=InsertDialogos&dialogo=' + encodeURIComponent(dialogo).replaceAll("'", "''") + "&ousrinis=" + "&oristamp=" + oristamp,
+            data: JSON.stringify(params),
+            contentType: 'application/json',
+            success: function (response) {
+                console.log("Guardou")
+            },
+            error: function (response) {
+                alert("Erro, por favor tente de novo!")
+                console.log(response);
+                console.log(response.error);
+            }
+        });
+
+        document.getElementById("modal_adicionar_dialogo").style.display = "none";
+        var tabela = document.getElementById("tbodyDialogos")
+        tabela.textContent = ''
+        getDadosTabela()
+    }
+
+
+
+
+    function toggleModal(modalName) {
+        var modal = document.getElementById("modal-" + modalName);
+        var closeButton = document.getElementById("close-modal-button-" + modalName);
+
+        modal.classList.remove('hidden');
+        setTimeout(function () {
+            modal.classList.remove('visuallyhidden');
+        }, 20);
+
+        closeButton.onclick = function () {
+
+            modal.classList.add('visuallyhidden');
+            modal.addEventListener('transitionend', function (e) {
+                modal.classList.add('hidden');
+            }, {
+                capture: false,
+                once: true,
+                passive: false
+            });
+        }
+    }
+
+    function toggleAccordion() {
+        const accordion = document.getElementsByClassName('contentBx')[0];
+        accordion.classList.toggle("active")
+    }
+
+    function getAnexos(title, pastamp) {
+        document.getElementById("modal-anexos").style.display = "block"
+        $.ajax({
+            type: 'GET',
+            url: '../programs/gensel.aspx?cscript=getAnexosPAT&pastamp=' + pastamp,
+            data: JSON.stringify({}),
+            async: false,
+            contentType: 'application/json',
+            success: function (response) {
+                const lista = document.querySelector('#fileList');
+                lista.innerHTML = "";
+                var blobImage = document.getElementById("blob");
+                blobImage.src = ""
+
+                var anexos = response.anexos
+                for (var i = 0; i < anexos.length; ++i) {
+                    var nome = $.trim(anexos[i].nome)
+                    var fileData = $.trim(anexos[i].blob)
+                    var fileExtension = $.trim(anexos[i].fileExtension)
+
+                    var fileType
+                    switch (fileExtension) {
+                        case "pdf":
+                            fileType = "application/pdf"
+                            break;
+                        case "doc":
+                            fileType = "application/msword"
+                            break;
+                        case "docx":
+                            fileType = "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+                            break;
+                        case "xls":
+                            fileType = "application/vnd.ms-excel"
+                            break;
+                        case "xlsx":
+                            fileType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+                            break;
+                        case "ppt":
+                            fileType = "application/vnd.ms-powerpoint"
+                            break;
+                        case "pptx":
+                            fileType = "application/vnd.openxmlformats-officedocument.presentationml.presentation"
+                            break;
+                        case "txt":
+                            fileType = "text/plain"
+                            break;
+                        case "jpg":
+                            fileType = "image/jpeg"
+                            break;
+                        case "png":
+                            fileType = "image/png"
+                            break;
+                        case "gif":
+                            fileType = "image/gif"
+                            break;
+                        case "bmp":
+                            fileType = "image/bmp"
+                            break;
+                        case "mp4":
+                            fileType = "video/mp4"
+                            break;
+                        case "avi":
+                            fileType = "video/avi"
+                            break;
+                        case "wmv":
+                            fileType = "video/wmv"
+                            break;
+                        case "mov":
+                            fileType = "video/mov"
+                            break;
+                        case "mp3":
+                            fileType = "audio/mp3"
+                            break;
+                        case "wav":
+                            fileType = "audio/wav"
+                            break;
+                        case "ogg":
+                            fileType = "audio/ogg"
+                            break;
+                        case "zip":
+                            fileType = "application/zip"
+                            break;
+                        case "msg":
+                            fileType = "application/vnd.ms-outlook"
+                            break;
+                    }
+
+                    if (i == 0) {
+                        lista.innerHTML += "<li class='list-group-item active' style='padding: 0px; width: 100%'><a class='list-group-item list-group-item-action active' style='padding: 20px; cursor:pointer;' onclick='preverAnexo(\"" + fileData + "\", \"" + fileType + "\")' data-toggle='list' role='tab'>" + nome + "</li>"
+                        preverAnexo(fileData, fileType);
+                    }
+                    else {
+                        lista.innerHTML += "<li class='list-group-item' style='padding: 0px; width: 100%'><a class='list-group-item list-group-item-action' style='padding: 20px; cursor:pointer;' onclick='preverAnexo(\"" + fileData + "\", \"" + fileType + "\")' data-toggle='list' role='tab'>" + nome + "</li>"
+                    }
+                }
+
+                //Alterar Título
+                var labelTitulo = document.getElementById("label-titulo");
+                labelTitulo.innerHTML = title
+
+                //Mostrar a Box
+                toggleModal('anexos');
+                setupFileButtonsTriggers();
+            },
+            error: function (response) {
+                console.log(response);
+                gestorAlertasComErro("Aviso", "Ocorreu um erro ao procurar os Anexos do PAT.");
+            }
+        });
+    }
+
+    function setupFileButtonsTriggers() {
+        $('#fileList > li').click(function () {
+            $('#fileList > li').removeClass('active');
+            $(this).addClass('active');
+        });
+        $('#fileList > li > a').click(function () {
+            $('#fileList > li >').removeClass('active');
+            $(this).addClass('active');
+        });
+    }
+
+    function preverAnexo(fileData, fileType) {
+        var blobImage = document.getElementById("blob");
+        var downloadDiv = document.getElementById("download-email-div");
+        var downloadButton = document.getElementById("download");
+        var file = b64toBlob(fileData, fileType)
+        var url = URL.createObjectURL(file);
+
+        if (fileType == "application/vnd.ms-outlook") {
+            downloadButton.addEventListener("click", function () {
+                var a = document.createElement('a');
+                a.style.display = 'none';
+                a.href = url;
+                a.download = 'outlooktemp.msg';
+                a.click();
+                URL.revokeObjectURL(url);
+            }, false);
+
+            downloadDiv.style.display = "block";
+            blobImage.style.display = "none";
+
+        } else {
+            blobImage.src = url
+            downloadDiv.style.display = "none";
+            blobImage.style.display = "block";
+        }
+    }
+
+    const b64toBlob = (b64Data, contentType = '', sliceSize = 512) => {
+        const byteCharacters = atob(b64Data);
+        const byteArrays = [];
+
+        for (let offset = 0; offset < byteCharacters.length; offset += sliceSize) {
+            const slice = byteCharacters.slice(offset, offset + sliceSize);
+
+            const byteNumbers = new Array(slice.length);
+            for (let i = 0; i < slice.length; i++) {
+                byteNumbers[i] = slice.charCodeAt(i);
+            }
+
+            const byteArray = new Uint8Array(byteNumbers);
+            byteArrays.push(byteArray);
+        }
+
+        const blob = new Blob(byteArrays, { type: contentType });
+        return blob;
+    }
+
+    window.onload = function () {
+
+        getTodosOsTecnicos()
+        getTodosOsEstados()
+        getDiarioTecnico()
+        getTecnicosNomeENum();
+        getClientes();
+
+        //Gantt
+        $('#timeline').css("display", "block");
+        google.charts.load("current", { packages: ["timeline"] });
+
+        window.localStorage.removeItem('diarioTecnico');
+        document.getElementById("botaoTabPats").click();
+
+        document.getElementById('data').valueAsDate = new Date();
+        document.getElementById('dataGantt').valueAsDate = new Date();
+
+        $('#nopat').keyup(function (e) {
+            if (e.keyCode == 13)
+                getPatsDoTecnico()
+        });
+
+        $('#cliente').keyup(function (e) {
+            if (e.keyCode == 13)
+                getPatsDoTecnico()
+        });
+
+        $('#selTecnicos').change(function (e) {
+            getPatsDoTecnico()
+        });
+
+        $('#data').on('load change', function (e) {
+            getDiarioTecnico()
+        });
+
+        $('#dataGantt').change(function () {
+            drawChart()
+        });
+
+    }
+
+    function openTab(evt, tab) {
+        const tabcontent = document.getElementsByClassName("tabContentDiarioTecnicoEPats");
+        for (var i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+        }
+
+        const tablinks = document.getElementsByClassName("tablinksDiarioTecnicoEPats");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" active", "");
+        }
+
+        document.getElementById(tab).style.display = "block";
+        evt.currentTarget.className += " active";
+
+
+        if (tab == 'Gantt') {
+            drawChart()
+        }
+    }
+
+    function drawChart() {
+        const data = $("#dataGantt").val()
+        $.ajax({
+            type: 'GET',
+            url: '../programs/gensel.aspx?cscript=dadosTecnicosGantt&data=' + data,
+            data: JSON.stringify({}),
+            contentType: 'application/json',
+            success: function (response) {
+                var dadosTecnicos = [];
+                var options = {
+                    timeline: {
+                        colorByRowLabel: true
+                    },
+                    width: '100%',
+                    height: '100%'
+                };
+                var container = document.getElementById('timeline');
+                var chart = new google.visualization.Timeline(container);
+                var dataTable = new google.visualization.DataTable();
+                dataTable.addColumn({ type: 'string', id: 'Room' });
+                dataTable.addColumn({ type: 'string', id: 'Name' });
+                dataTable.addColumn({ type: 'date', id: 'Start' });
+                dataTable.addColumn({ type: 'date', id: 'End' });
+
+                var dadosGantt = response.dadosGantt
+                for (var i = 0; i < dadosGantt.length; ++i) {
+                    dadosTecnicos.push([dadosGantt[i].tecnnm, dadosGantt[i].cliente, new Date(dadosGantt[i].ano, dadosGantt[i].mes, dadosGantt[i].dia, dadosGantt[i].hora.substr(0, 2), dadosGantt[i].hora.substr(3, 2), 0), new Date(dadosGantt[i].ano, dadosGantt[i].mes, dadosGantt[i].dia, dadosGantt[i].horaf.substr(0, 2), dadosGantt[i].horaf.substr(3, 2), 0)])
+                }
+                dataTable.addRows(dadosTecnicos)
+                chart.draw(dataTable, options);
+            },
+            error: function (response) {
+                gestorAlertasComErro("Erro", "Não foi possível obter os tempos dos outros técnicos, por favor tente de novo!")
+            }
+        });
+    }
+
+    function gestorAlertas(titulo, mensagem) {
+        $("#alertify-logs").removeClass(' alertify-log-hide');
+        var article = "<article id='article-logs' class='alertify-log alertify-log-success alertify-log-show'><b>" + titulo + "</b><br>" + mensagem + "</article>"
+        $("#alertify-logs").append(article)
+
+        window.setTimeout(function () {
+            $("#article-logs").remove()
+        }, 5000); //<-- Delay in milliseconds
+
+    }
+
+    function gestorAlertasComErro(titulo, mensagem) {
+        $("#alertify-logs").removeClass(' alertify-log-hide');
+        var article = "<article id='article-logs' class='alertify-log alertify-log-error alertify-log-show'><b>" + titulo + "</b><br>" + mensagem + "</article>"
+        $("#alertify-logs").append(article)
+
+        window.setTimeout(function () {
+            $("#article-logs").remove()
+        }, 5000); //<-- Delay in milliseconds
+    }
+
+    function getTodosOsTecnicos() {
+        const tecnico = $("#selTecnicos").val()
+        $.ajax({
+            type: 'GET',
+            url: '../programs/gensel.aspx?cscript=getTodosOsTecnicos',
+            data: JSON.stringify({}),
+            async: false,
+            contentType: 'application/json',
+            success: function (response) {
+                var tecnicos = response.tecnicos
+                for (var i = 0; i < tecnicos.length; ++i) {
+                    var tecnico = new Option(tecnicos[i].nome, tecnicos[i].no);
+                    $(tecnico).html(tecnicos[i].nome);
+                    $("#selTecnicos").append(tecnico);
+                }
+                const userLogado = function () {
+                    var loggedUser = []
+                    $.ajax({
+                        type: 'GET',
+                        url: '../programs/gensel.aspx?cscript=getLoggedUser',
+                        data: JSON.stringify({}),
+                        contentType: 'application/json',
+                        async: false,
+                        success: function (response) {
+                            loggedUser = response.loggedUser[0].loggedUser
+                        }
+                    });
+                    return loggedUser
+                }();
+                $("#selTecnicos option[value='" + userLogado + "']").prop('selected', true)
+            },
+            error: function (response) {
+                gestorAlertasComErro("Erro", "Não foi possível obter os técnicos, por favor tente de novo!")
+            }
+        });
+    }
+
+    function getTodosOsEstados() {
+        var estado = $("#selEstados").val()
+        $.ajax({
+            type: 'GET',
+            url: '../programs/gensel.aspx?cscript=getScrumStatus',
+            data: JSON.stringify({}),
+            async: false,
+            contentType: 'application/json',
+            success: function (response) {
+                var scrumStatus = response.scrumStatus
+                var estado = new Option('', '');
+                $(estado).html('');
+                $("#selEstados").append(estado);
+                for (var i = 0; i < scrumStatus.length; ++i) {
+                    var estado = new Option(scrumStatus[i].status, scrumStatus[i].status);
+                    $(estado).html(scrumStatus[i].status);
+                    $("#selEstados").append(estado);
+                }
+                getPatsDoTecnico()
+            },
+            error: function (response) {
+                gestorAlertasComErro("Erro", "Não foi possível obter os estados, por favor tente de novo!")
+            }
+        });
+    }
+
+    function alteraTec(tecAtual, ordem, nopat, pagina, tecnum) {
+        var tecnico = $("#tecnico_atribuido_" + nopat).val()
+        $.ajax({
+            type: 'GET',
+            url: '../programs/gensel.aspx?cscript=updTecAjax&ordem=' + ordem + '&no=' + nopat + '&tecnico_atribuido=' + tecnico,
+            data: JSON.stringify({}),
+            contentType: 'application/json',
+            async: false,
+            success: function (response) {
+                getPatsDoTecnico()
+            },
+            error: function (response) {
+                gestorAlertasComErro("Erro", "Não foi possível obter os técnicos, por favor tente de novo!")
+            }
+        });
+    }
+
+    function changeFunc(nopat, ordem, tecnico) {
+        $.ajax({
+            type: 'GET',
+            url: '../programs/gensel.aspx?cscript=updTecAjax&ordem=' + ordem + '&no=' + nopat + '&tecnico_atribuido=' + tecnico,
+            data: JSON.stringify({}),
+            contentType: 'application/json',
+            async: false,
+            success: function (response) {
+                getPatsDoTecnico()
+            },
+            error: function (response) {
+                gestorAlertasComErro("Erro", "Não foi possível obter os técnicos, por favor tente de novo!")
+            }
+        });
+    }
+
+    function changeStatus(ordem, nopat, status) {
+        $.ajax({
+            type: 'GET',
+            url: '../programs/gensel.aspx?cscript=updStatusAjax&ordem=' + ordem + '&no=' + nopat + '&status=' + status,
+            data: JSON.stringify({}),
+            contentType: 'application/json',
+            async: false,
+            success: function (response) {
+                getPatsDoTecnico()
+            },
+            error: function (response) {
+                gestorAlertasComErro("Erro", "Não foi possível obter os técnicos, por favor tente de novo!")
+            }
+        });
+    }
+
+    function alteraStatus(ordem, nopat) {
+        var status = $("#scrumStatus_" + nopat).val()
+        $.ajax({
+            type: 'GET',
+            url: '../programs/gensel.aspx?cscript=updStatusAjax&ordem=' + ordem + '&no=' + nopat + '&status=' + status,
+            data: JSON.stringify({}),
+            contentType: 'application/json',
+            async: false,
+            success: function (response) {
+                getPatsDoTecnico()
+            },
+            error: function (response) {
+                gestorAlertasComErro("Erro", "Não foi possível obter os técnicos, por favor tente de novo!")
+            }
+        });
+    }
+
+    function fechaPAT(nopat, ordem) {
+        // Handler para manter a posição de scroll da página
+        let scrollPos = $(window).scrollTop();
+        $('html, body').animate({ scrollTop: scrollPos }, 1);
+
+        let returnValue = false;
+        $.confirm({
+            animation: 'zoom',
+            closeAnimation: 'scale',
+            theme: 'material',
+            draggable: true,
+            icon: 'fa fa-warning',
+            title: 'Fechar PAT',
+            content: 'Deseja mesmo fechar o PAT nº ' + nopat + '?',
+            animateFromElement: false,
+            typeAnimated: true,
+            scrollToPreviousElement: false,
+            scrollToPreviousElementAnimate: false,
+            buttons: {
+                cancel: {
+                    text: 'Não',
+                    action: function () { }
+                },
+                confirm: {
+                    text: 'Sim',
+                    btnClass: 'btn-blue',
+                    action: function () {
+                        $.ajax({
+                            type: 'GET',
+                            url: '../programs/gensel.aspx?cscript=closePatAjax&pat=' + nopat + '&ordem=' + ordem,
+                            data: JSON.stringify({}),
+                            contentType: 'application/json',
+                            async: false,
+                            success: function (response) {
+                                getPatsDoTecnico()
+                            },
+                            error: function (response) {
+                                gestorAlertasComErro("Aviso", "Não foi possível obter os técnicos, por favor tente de novo!")
+                            }
+                        });
+                    }
+                }
+            }
+        });
+    }
+
+    function anulaPAT(nopat) {
+        // Handler para manter a posição de scroll da página
+        let scrollPos = $(window).scrollTop();
+        $('html, body').animate({ scrollTop: scrollPos }, 1);
+
+        let returnValue = false;
+        $.confirm({
+            animation: 'zoom',
+            closeAnimation: 'scale',
+            theme: 'material',
+            draggable: true,
+            icon: 'fa fa-warning',
+            title: 'Anular PAT',
+            content: 'Deseja mesmo anular o PAT nº ' + nopat + '?',
+            animateFromElement: false,
+            typeAnimated: true,
+            scrollToPreviousElement: false,
+            scrollToPreviousElementAnimate: false,
+            buttons: {
+                cancel: {
+                    text: 'Não',
+                    action: function () { }
+                },
+                confirm: {
+                    text: 'Sim',
+                    btnClass: 'btn-blue',
+                    action: function () {
+                        $.ajax({
+                            type: 'GET',
+                            url: '../programs/gensel.aspx?cscript=AnulaPatAjax&nopat=' + nopat,
+                            data: JSON.stringify({}),
+                            contentType: 'application/json',
+                            async: false,
+                            success: function (response) {
+                                getPatsDoTecnico()
+                            },
+                            error: function (response) {
+                                gestorAlertasComErro("Aviso", "Não foi possível obter os técnicos, por favor tente de novo!")
+                            }
+                        });
+                    }
+                }
+            }
+        });
+    }
+
+    function fechaTarefa(nopat) {
+        // Handler para manter a posição de scroll da página
+        let scrollPos = $(window).scrollTop();
+        $('html, body').animate({ scrollTop: scrollPos }, 1);
+
+        let returnValue = false;
+        $.confirm({
+            animation: 'zoom',
+            closeAnimation: 'scale',
+            theme: 'material',
+            draggable: true,
+            icon: 'fa fa-warning',
+            title: 'Fechar Tarefa',
+            content: 'Deseja mesmo fechar a Tarefa nº ' + nopat + '?',
+            animateFromElement: false,
+            typeAnimated: true,
+            scrollToPreviousElement: false,
+            scrollToPreviousElementAnimate: false,
+            buttons: {
+                cancel: {
+                    text: 'Não',
+                    action: function () { }
+                },
+                confirm: {
+                    text: 'Sim',
+                    btnClass: 'btn-blue',
+                    action: function () {
+                        $.ajax({
+                            type: 'GET',
+                            url: '../programs/gensel.aspx?cscript=closePatAjax&pat=' + nopat + '&ordem=999',
+                            data: JSON.stringify({}),
+                            contentType: 'application/json',
+                            async: false,
+                            success: function (response) {
+                                getPatsDoTecnico()
+                            },
+                            error: function (response) {
+                                gestorAlertasComErro("Aviso", "Não foi possível obter os técnicos, por favor tente de novo!")
+                            }
+                        });
+                    }
+                }
+            }
+        });
+    }
+
+    function storeNoPATLocalStorage(nopat, horaini, horafim, stamp, id) {
+        window.localStorage.removeItem('diarioTecnico');
+        var diarioTecnico = []
+        var data = $("#data").val()
+        diarioTecnico.push({ 'id': id, 'nopat': nopat, 'data': data, 'horaini': horaini, 'horafim': horafim, 'stamp': stamp })
+        window.localStorage.setItem('diarioTecnico', JSON.stringify(diarioTecnico));
+        console.log(diarioTecnico);
+        gestorAlertas("Registo Copiado.", "Dados copiados com sucesso.")
+
+        tempoCopiado = horafim
+
+        document.getElementById("inp_hora_ini").value = horaini
+        document.getElementById("inp_hora_fin").value = horafim
+    }
+
+    function getNoPATLocalStorage(nopat, acao, idPat) {
+        let url = '';
+
+        if (acao === '1') {
+            url = '../programs/gensel.aspx?cscript=encmh&mhid=' + idPat
+        }
+        else {
+            const diarioTecnico = JSON.parse(window.localStorage.getItem('diarioTecnico'))
+            if (diarioTecnico == null || diarioTecnico == undefined || diarioTecnico == '') {
+                url = '../programs/genform.aspx?codigo=intromh&fazer=introduzir&nopat=' + nopat + '&pagina=cindex.aspx?actat=s'
+            } else {
+                const id = diarioTecnico[0].id
+                const stamp = diarioTecnico[0].stamp
+                const horaini = diarioTecnico[0].horaini
+                const horafim = diarioTecnico[0].horafim
+                const nopatStorage = diarioTecnico[0].nopat
+                const data = diarioTecnico[0].data
+
+                if (stamp != '') {
+                    url = '../programs/gensel.aspx?cscript=encmh&mhid=' + id + '&horaf=' + horafim + '&nopat=' + nopat
+                } else {
+                    url = '../programs/genform.aspx?codigo=intromh&fazer=introduzir&nopat=' + nopat + '&data=' + data + '&hora=' + horaini + '&horaf=' + horafim + '&pagina=cindex.aspx?actat=s'
+                }
+            }
+        }
+
+        window.open(url, '_blank').focus();
+
+        // const modalIframe = document.getElementById('modal-iframe');
+        // const iframe = document.getElementById('iframe');
+        // iframe.src = url;
+        // modalIframe.style.display = 'block';
+    }
+
+    function lancarIntervencao(nopat) {
+        //Get intervenção aberta do mesmo utilizador
+
+        //
+
+        //Mostrar a Box
+        toggleModal('intervencoes');
+    }
+
+    function eliminaIntervencao(mhstamp) {
+        // Handler para manter a posição de scroll da página
+        let scrollPos = $(window).scrollTop();
+        $('html, body').animate({ scrollTop: scrollPos }, 1);
+
+        let returnValue = false;
+        $.confirm({
+            animation: 'zoom',
+            closeAnimation: 'scale',
+            theme: 'material',
+            draggable: true,
+            icon: 'fa fa-warning',
+            title: 'Eliminar intervenção',
+            content: 'Deseja mesmo eliminar a intervenção?',
+            animateFromElement: false,
+            typeAnimated: true,
+            scrollToPreviousElement: false,
+            scrollToPreviousElementAnimate: false,
+            buttons: {
+                cancel: {
+                    text: 'Não',
+                    action: function () { }
+                },
+                confirm: {
+                    text: 'Sim',
+                    btnClass: 'btn-blue',
+                    action: function () {
+                        $.ajax({
+                            type: 'GET',
+                            url: '../programs/gensel.aspx?cscript=eliminaIntervencao&mhstamp=' + mhstamp,
+                            data: JSON.stringify({}),
+                            contentType: 'application/json',
+                            async: false,
+                            success: function (response) {
+                                getDiarioTecnico()
+                                getPatsDoTecnico()
+                            },
+                            error: function (response) {
+                                gestorAlertasComErro("Aviso", "Não foi possível obter os técnicos, por favor tente de novo!")
+                            }
+                        });
+                    }
+                }
+            }
+        });
+    }
+
+    function getPatsDoTecnico() {
+        const monitorPats = document.getElementById("tbodyMonitorPats");
+        while (monitorPats.hasChildNodes())
+            monitorPats.removeChild(monitorPats.firstChild);
+
+        const divSearching = document.getElementById("divSearching");
+        divSearching.style.display = "block";
+
+        const divNoResults = document.getElementById("divNoResults");
+        divNoResults.style.display = "none";
+
+        const accordion = document.getElementsByClassName('contentBx')[0];
+        const advancedSearch = accordion.classList.contains('active');
+
+
+        var tecnico = $("#selTecnicos").val()
+        var cliente = $("#cliente").val()
+        var nopat = $("#nopat").val()
+        nopat = encodeURIComponent(nopat);
+
+        if (advancedSearch) {
+            var estado = $("#selEstados").val()
+            var patAberto = $("#patAberto").prop('checked') ? "1" : "0"
+            var patFechado = $("#patFechado").prop('checked') ? "1" : "0"
+            var software = $("#depSoftware").prop('checked') ? "1" : "0"
+            var hardware = $("#depHardware").prop('checked') ? "1" : "0"
+            var patdataini = $("#patdataini").val()
+            var patdatafim = $("#patdatafim").val()
+            var mhdataini = $("#mhdataini").val()
+            var mhdatafim = $("#mhdatafim").val()
+        }
+        else {
+            var estado = ""
+            var patAberto = "1"
+            var patFechado = "0"
+            var software = "1"
+            var hardware = "1"
+            var patdataini = ""
+            var patdatafim = ""
+            var mhdataini = ""
+            var mhdatafim = ""
+        }
+
+
+        $.ajax({
+            type: 'GET',
+            url: '../programs/gensel.aspx?cscript=getPatsTecnicov2&tecnico=' + tecnico + '&cliente=' + cliente + '&estado=' + estado + '&hardware=' + hardware + '&software=' + software + '&nopat=' + nopat + '&patAberto=' + patAberto + '&patFechado=' + patFechado + '&patdataini=' + patdataini + '&patdatafim=' + patdatafim + '&mhdataini=' + mhdataini + '&mhdatafim=' + mhdatafim,
+            data: JSON.stringify({}),
+            contentType: 'application/json',
+            //Prevenir carregar as PATS todas caso não exista nenhum filtro seleccionado
+            beforeSend(jqXHR, settings) {
+                if (tecnico == "" && cliente == "" && nopat == "") {
+                    console.log("Introduza um valor no campo técnico, cliente ou Nº pat");
+                    const divSearching = document.getElementById("divSearching");
+                    divSearching.style.display = "none";
+
+                    const divNoResults = document.getElementById("divNoResults");
+                    divNoResults.style.display = "block";
+                    jqXHR.abort();
+                }
+            },
+            success: function (response) {
+                // Get tecnicos
+                const tecnicos = [];
+                $.ajax({
+                    type: 'GET',
+                    url: '../programs/gensel.aspx?cscript=getTecnicosPic',
+                    data: JSON.stringify({}),
+                    contentType: 'application/json',
+                    async: false,
+                    success: function (response) {
+                        var tecs = response.tecs
+                        for (var i = 0; i < tecs.length; ++i) {
+                            let tecnicoObj = {}
+                            tecnicoObj.no = tecs[i].no
+                            tecnicoObj.userno = tecs[i].userno
+                            tecnicoObj.nome = tecs[i].nome
+                            tecnicoObj.imagem = tecs[i].imagem
+
+
+
+                            let imagetype = tecnicoObj.imagem.charAt(0)
+
+                            switch (imagetype) {
+                                case '/':
+                                    tecnicoObj.type = 'jpg'
+                                    break;
+                                case 'i':
+                                    tecnicoObj.type = 'png'
+                                    break;
+                                case 'R':
+                                    tecnicoObj.type = 'gif'
+                                    break;
+                                case 'U':
+                                    tecnicoObj.type = 'webp'
+                                    break;
+                                default:
+                                    tecnicoObj.type = 'jpg'
+                                    break;
+                            }
+                            tecnicos.push(tecnicoObj);
+                        }
+                    }
+                });
+
+                const selectScrumStatus = function () {
+                    var options = []
+                    $.ajax({
+                        type: 'GET',
+                        url: '../programs/gensel.aspx?cscript=getScrumStatus',
+                        data: JSON.stringify({}),
+                        contentType: 'application/json',
+                        async: false,
+                        success: function (response) {
+                            var scrumStatus = response.scrumStatus
+                            for (var i = 0; i < scrumStatus.length; ++i) {
+                                options[scrumStatus[i].status] = scrumStatus[i].status
+                            }
+                        }
+                    });
+                    return options
+                }();
+
+                const pats = response.pats
+                localStorage.setItem('dadosNovos', JSON.stringify(pats))
+                //console.log(pats);
+                const userphotosList = [];
+                var htmlAppendTotal
+                let imageSource
+                console.time()
+                for (var i = 0; i < pats.length; ++i) {
+
+
+                    var tipo = $.trim(pats[i].tipo)
+                    var fechado = $.trim(pats[i].fechado)
+                    var nopat = $.trim(pats[i].nopat)
+                    var vref = $.trim(pats[i].vref)
+                    var basedados = $.trim(pats[i].basedados)
+                    var data = $.trim(pats[i].data)
+                    var nome = $.trim(pats[i].nome)
+                    var problema = tipo === "PAT" ? $.trim(pats[i].problema).replace('\n', '<br>') : $.trim(pats[i].descricao)
+                    var resumo = tipo === "PAT" ? $.trim(pats[i].resumo) : $.trim(pats[i].problema).replace('\n', '<br>')
+                    var u_ordem = $.trim(pats[i].u_ordem)
+                    var id = $.trim(pats[i].id)
+                    var acao = $.trim(pats[i].acao)
+                    var pastamp = $.trim(pats[i].pastamp)
+                    var tecni = $.trim(pats[i].TECNICO)
+                    var usstamp = $.trim(pats[i].usstamp)
+                    var numTec = $.trim(pats[i].tecnum)
+                    var fototecnico = $.trim(pats[i].fototecnico)
+                    var totalHoras = $.trim(pats[i].totalHoras)
+                    var noCliente = $.trim(pats[i].noCliente)
+                    var status = $.trim(pats[i].status)
+                    var userno = $.trim(pats[i].userno)
+                    var emRealizacao = $.trim(pats[i].emRealizacao) == "1" ? true : false
+                    var countAnexos = $.trim(pats[i].anexos)
+                    var nomeCliente = $.trim(pats[i].nomeCliente)
+                    var dtagenda = $.trim(pats[i].dtagenda)
+                    var estadoAtual = ""
+                    var sinalizadorLinha = ""
+                    var mhstamp = $.trim(pats[i].oristamp)
+
+                    var userObj = { usstamp: usstamp, photo: fototecnico }
+                    var userphotosListIndex = userphotosList.findIndex(function (userObj) {
+                        return userObj.usstamp == usstamp
+                    })
+                    if (userphotosListIndex == -1) {
+                        userphotosList.push(userObj)
+                    }
+                    else {
+                        fototecnico = userphotosList[userphotosListIndex].photo
+                    }
+
+
+                    // Row color & Status
+                    let color_inprogress = "#DBF7E6";
+                    let color_urgent = "#DD3333"
+                    let color_backlog = "#9B9CA4"
+                    let color_development = "#1E73BE"
+                    let color_testing = "#A01497"
+                    let color_analysis = "#DD9933"
+
+                    let development = '<div class="tooltip-div" data-tooltip="Em desenvolvimento"><span class="glyphicon glyphicon-play circle-icon" style="background: ' + color_development + '22; color: ' + color_development + ';"/></div>'
+                    let backlog = '<div class="tooltip-div" data-tooltip="Em backlog"><span class="glyphicon glyphicon-tasks circle-icon" style="background: ' + color_backlog + '22; color: ' + color_backlog + ';"/></div>'
+                    let tests = '<div class="tooltip-div" data-tooltip="Em testes"><span class="glyphicon glyphicon-cd circle-icon" style="background: ' + color_testing + '22; color: ' + color_testing + ';"/></div>'
+                    let analysis = '<div class="tooltip-div" data-tooltip="Em análise"><span class="glyphicon glyphicon-time circle-icon" style="background: ' + color_analysis + '22; color: ' + color_analysis + ';"/></div>'
+                    let urgent = '<div class="tooltip-div" data-tooltip="Urgente"><span class="glyphicon glyphicon-alert circle-icon" style="background: ' + color_urgent + '22; color: ' + color_urgent + ';"/></div>'
+
+                    let colorstatus = ""
+                    let statusColumn = ""
+                    let inProgress = emRealizacao ? 'style="background-color: ' + color_inprogress + '"' : ''
+                    let otherStatus = [];
+                    let otherStatusIcon = [];
+                    let otherStatusColors = [];
+                    switch (status) {
+                        case '11 - Urgente':
+                            statusColumn = urgent
+                            colorstatus = color_urgent
+                            otherStatus = ['12 - Desenvolvimento', '13 - Testes', '18 - Em análise', '16 - Backlog']
+                            otherStatusIcon = ['glyphicon-play', 'glyphicon-cd', 'glyphicon-time', 'glyphicon-tasks']
+                            otherStatusColors = [color_development, color_testing, color_analysis, color_backlog]
+                            break;
+                        case '12 - Desenvolvimento':
+                            statusColumn = development
+                            colorstatus = color_development
+                            otherStatus = ['11 - Urgente', '13 - Testes', '18 - Em análise', '16 - Backlog']
+                            otherStatusIcon = ['glyphicon-alert', 'glyphicon-cd', 'glyphicon-time', 'glyphicon-tasks']
+                            otherStatusColors = [color_urgent, color_testing, color_analysis, color_backlog]
+                            break;
+                        case '13 - Testes':
+                            statusColumn = tests
+                            colorstatus = color_testing
+                            otherStatus = ['11 - Urgente', '12 - Desenvolvimento', '18 - Em análise', '16 - Backlog']
+                            otherStatusIcon = ['glyphicon-alert', 'glyphicon-play', 'glyphicon-time', 'glyphicon-tasks']
+                            otherStatusColors = [color_urgent, color_development, color_analysis, color_backlog]
+                            break;
+                        case '16 - Backlog':
+                            statusColumn = backlog
+                            colorstatus = color_backlog
+                            otherStatus = ['11 - Urgente', '12 - Desenvolvimento', '13 - Testes', '18 - Em análise']
+                            otherStatusIcon = ['glyphicon-alert', 'glyphicon-play', 'glyphicon-cd', 'glyphicon-time']
+                            otherStatusColors = [color_urgent, color_development, color_testing, color_analysis]
+                            break;
+                        case '18 - Em análise':
+                            statusColumn = analysis
+                            colorstatus = color_analysis
+                            otherStatus = ['11 - Urgente', '12 - Desenvolvimento', '13 - Testes', '16 - Backlog']
+                            otherStatusIcon = ['glyphicon-alert', 'glyphicon-play', 'glyphicon-cd', 'glyphicon-tasks']
+                            otherStatusColors = [color_urgent, color_development, color_testing, color_backlog]
+                            break;
+                        default:
+                            statusColumn = development
+                            colorstatus = color_development
+                            otherStatus = ['11 - Urgente', '12 - Desenvolvimento', '13 - Testes', '18 - Em análise', '16 - Backlog']
+                            otherStatusIcon = ['glyphicon-alert', 'glyphicon-play', 'glyphicon-cd', 'glyphicon-time', 'glyphicon-tasks']
+                            otherStatusColors = [color_urgent, color_development, color_testing, color_analysis, color_backlog]
+                            break;
+                    }
+
+                    //DropDown Status
+                    if (fechado === '0') {
+                        statusColumn = '<button type="button" style="padding: 0px">' + statusColumn + '</button>'
+                        statusColumn += '<ul>'
+                        for (let i = 0; i < otherStatus.length; i++) {
+                            statusColumn += '<li onclick="changeStatus(\'' + u_ordem + '\', \'' + nopat + '\', \'' + otherStatus[i] + '\')"><span class="glyphicon ' + otherStatusIcon[i] + ' circle-icon" style="background: ' + otherStatusColors[i] + '22; color: ' + otherStatusColors[i] + ';"/>&nbsp&nbsp' + otherStatus[i].split(' - ')[1] + '</li>'
+                        }
+                        statusColumn += '</ul>'
+                    }
+
+
+                    //Numero + Cliente
+                    let tipoString = tipo === "PAT" ? "Pedido" : "Tarefa"
+                    let tipoLink = tipo === "PAT" ? "encpat&nopat" : "encTTA&ttaid"
+                    let numberContent = '<a class="link-underline" href="../programs/gensel.aspx?cscript=' + tipoLink + '=' + nopat + '" target="_blank">' + tipoString + ' #' + nopat + '</a>  -  '
+                    numberContent += '<a  class="link-underline" href="../programs/ewpview.aspx?codigo=dados_clientes&cliente=' + encodeURIComponent(nomeCliente) + '" target="_blank"><b>' + nome + '</b></a>'
+
+                    //Ações
+                    let fecharPatTarefa = tipo === 'PAT' ? 'fechaPAT(\'' + nopat + '\',\'' + u_ordem + '\')' : 'fechaTarefa(\'' + nopat + '\')'
+                    let actionsContent = '<div class="btn-group">'
+                    actionsContent += '	<button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="height: 30px; width: 50px;">'
+                    actionsContent += '		<span class="glyphicon glyphicon-cog"></span>'
+                    actionsContent += '		<span class="caret"></span>'
+                    actionsContent += '	</button>'
+                    actionsContent += '	<ul class="dropdown-menu dropdown-menu-right">'
+
+                    //Ações - Fechar PAT ou Tarefa
+                    if (fechado === '0') {
+                        actionsContent += '		<li><a href="#" onclick="' + fecharPatTarefa + '" style="margin: 0px; padding: 8px 10px"><span class="fa fa-archive" style="width: 25px"></span>Fechar</a></li>'
+                    }
+
+                    //Ações - Anular PAT
+                    if (tipo === "PAT") {
+                        actionsContent += '		<li><a href="#" onclick="anulaPAT(\'' + nopat + '\')" style="margin: 0px; padding: 8px 10px"><span class="fa fa-close" style="width: 25px"></span>Anular</a></li>'
+                    }
+                    actionsContent += '		<li role="separator" class="divider"></li>'
+
+                    //Ações - Enviar E-mail + Agendar
+                    if (tipo === "PAT") {
+                        actionsContent += '		<li><a href="../programs/gensel.aspx?cscript=eusqlid104_email&myID=' + pastamp + '" style="margin: 0px; padding: 8px 10px"><span class="fa fa-envelope-o" style="width: 25px"></span>Enviar e-mail</a></li>'
+
+                        if (fechado === '0') {
+                            actionsContent += '		<li><a href="../programs/gensel.aspx?cscript=criaMX&pastamp=' + pastamp + '&clno=' + noCliente + '" style="margin: 0px; padding: 8px 10px"><span class="fa fa-calendar-plus-o" style="width: 25px"></span>Agendar</a></li>'
+                        }
+                    }
+                    else {
+                        if (fechado === '0') {
+                            actionsContent += '		<li><a href="../programs/gensel.aspx?cscript=criaMX&ttaid=' + nopat + '&clno=' + noCliente + '" style="margin: 0px; padding: 8px 10px"><span class="fa fa-calendar-plus-o" style="width: 25px"></span>Agendar</a></li>'
+                        }
+                    }
+
+                    //Ações - Ver Agenda
+                    if (userno != "") {
+                        actionsContent += '		<li><a href="../pim/mxagen.aspx?userno=' + userno + '" style="margin: 0px; padding: 8px 10px"><span class="fa fa-calendar" style="width: 25px"></span>Ver agenda</a></li>'
+                    }
+                    actionsContent += '	</ul>'
+                    actionsContent += '</div>'
+
+                    //Data
+                    let dataContent = '<p>' + data + '</p>'
+
+                    //Resumo 
+                    let headerContent = '<h2>' + (resumo === "" ? problema : resumo) + '</h2>'
+
+                    //Descrição
+                    let textContent = '<p>' + problema + '</p>'
+
+                    //Técnicos - Técnico Atribuído
+                    let currentTecnico = tecnicos.find(tec => tec.no === numTec)
+
+                    //Handler para PATs sem técnico atribuído
+                    if (currentTecnico === undefined) {
+                        currentTecnico = {
+                            no: 0,
+                            nome: "(Nenhum técnico atribuído)",
+                            email: "",
+                            imagem: "",
+                        }
+                    }
+
+                    imageSource = /*currentTecnico.imagem !== "" ? 'data:image/' + currentTecnico.type + ';base64, ' + currentTecnico.imagem :*/ '../images/ccuser.jpg'
+                    let userObject = '<img style="cursor:default; height: 64; width: 64; object-fit: cover" max-width="64" max-height="64" src="' + imageSource + '" class="hoverImg lazyImage img-user-top loaded">&nbsp&nbsp' + currentTecnico.nome
+                    let userContent = ''
+                    if (fechado === '0') {
+                        userContent = '<div class="tecnicos"><button type="button">' + userObject + '</button>'
+                        //Técnicos - DropDown Técnicos
+                        userContent += '<ul>'
+                        tecnicos.forEach(function (tecn) {
+                            if (numTec != tecn.no) {
+                                if (tecn.userno !== "0" || tipo !== "TAREFA") {
+                                    let tecNumber = tipo == "PAT" ? tecn.no : tecn.userno
+                                    //if(i==0){
+                                    //imageSource = tecn.imagem !== "" ? 'data:image/' + tecn.type + ';base64, ' + tecn.imagem : '../images/ccuser.jpg'
+                                    imageSource = '../images/ccuser.jpg'
+                                    //}						
+                                    userContent += '<li onclick="changeFunc(\'' + nopat + '\', \'' + u_ordem + '\', \'' + tecNumber + '\');"><img style="cursor:default; height: 64; width: 64; object-fit: cover" max-width="64" max-height="64" src="' + imageSource + '" class="lazyImage img-user-top loaded">&nbsp&nbsp' + tecn.nome + '</li>'
+                                }
+                            }
+                        })
+                        userContent += '</ul></div>'
+                    }
+                    else {
+                        userContent = '<div class="tecnicos"><p>' + userObject + '</p></div>'
+                    }
+
+
+                    //Anexos
+                    let attachmentsContent = ''
+                    if (countAnexos != '0') {
+                        attachmentsContent = '<div class="tooltip-div" data-tooltip="Anexos"><a href="#" onclick="getAnexos(\'' + tipoString + ' #' + nopat + '\',\'' + pastamp + '\')" style="color: gray"><span style="font-size: 10pt; cursor:pointer" class="glyphicon glyphicon-paperclip" aria-hidden="true"></span><p style="display: inline-block; cursor:pointer; margin-left: 0.2em">' + countAnexos + '</p></a></div>'
+                    }
+
+                    //Agendamento
+                    let agendamentoContent = dtagenda === '' ? '' : '<div class="tooltip-div" data-tooltip="Agendamento"><span style="font-size: 10pt;" class="glyphicon glyphicon-calendar" aria-hidden="true"></span><p style="display: inline-block; margin-left: 0.2em">' + dtagenda + '</p></div>'
+
+                    //Vossa Ref
+                    let vrefContent = vref === '' ? '' : '<div class="tooltip-div" data-tooltip="V/ referência"><span style="font-size: 10pt;" class="glyphicon glyphicon-tag" aria-hidden="true"></span><p style="display: inline-block; margin-left: 0.2em">' + vref + '</p></div>'
+
+                    //Base de dados
+                    let databaseContent = basedados === '' ? '' : '<div class="tooltip-div" data-tooltip="Base de dados"><span style="font-size: 10pt;" class="glyphicon glyphicon-hdd" aria-hidden="true"></span><p style="display: inline-block; margin-left: 0.2em">' + basedados + '</p></div>'
+
+                    //Intervenções - REMOVER OLDTASKLINK e substituir por TaskLink
+                    let oldTaskLink = 'onclick="getNoPATLocalStorage(\'' + nopat + '\',\'' + acao + '\',\'' + id + '\')"'
+
+                    let taskLink = 'onclick="lancarIntervencao(\'' + nopat + '\')"'
+
+
+
+                    let tasksContent = '<div class="tooltip-div" data-tooltip="Intervenções"><a style="color:  gray; margin-right: 3rem;" onclick= \"openModalDialogo(\'' + pastamp + '\')\"><span style="font-size: 10pt; cursor:pointer" class="glyphicon glyphicon-comment" aria-hidden="true"><a style="color: gray" target="_blank" href="../programs/gensel.aspx?eusql=124&nopat=' + nopat + '"><span style="font-size: 10pt; cursor:pointer" class="glyphicon glyphicon-time" aria-hidden="true"></span><p style="display: inline-block; cursor:pointer; margin-left: 0.2em">' + totalHoras + '</p></a></div>'
+
+
+                    if (fechado === '0') {
+                        //tasksContent += '<a ' + oldTaskLink + ' class="btn_verde" style="margin-left: 2rem;" onclick= \"openModalPats()\">Lançar</a>'
+                        //tasksContent += '<a   class="glyphicon glyphicon-tag"  style="margin-left: 1rem; onclick= \"openModalPats(\'' + nopat + '\', \'' + mhstamp + '\', \'\')\"></a>'
+                        tasksContent += '<a class="btn_verde" style="margin-left: 2rem;"  onclick= \"openModalPats(\'' + nopat + '\', \'' + mhstamp + '\', \'\')\">Lançar</a>'
+
+                    }
+
+
+                    //Final
+                    htmlAppend = ''
+                    htmlAppend += '<tr + ' + inProgress + '>'
+                    htmlAppend += ' <td>'
+                    htmlAppend += ' 		<div class="status">' + statusColumn + '</div>'
+                    htmlAppend += ' 		<div class="number">' + numberContent + '</div>'
+                    htmlAppend += ' 		<div class="actions">' + actionsContent + '</div>'
+                    htmlAppend += ' 		<div class="date">' + dataContent + '</div>'
+                    htmlAppend += ' 	<div class="resume">' + headerContent + '</div>'
+                    htmlAppend += ' 	<div class="description">' + textContent + '</div><br><br>'
+                    htmlAppend += '   <div class="bottom">'
+                    htmlAppend += ' 		<div class="user">' + userContent + '</div>'
+                    htmlAppend += '			<div class="bottom-right">'
+
+                    if (agendamentoContent !== '') {
+                        htmlAppend += '				<div class="dataagenda">' + agendamentoContent + '</div>'
+                    }
+                    if (vrefContent !== '') {
+                        htmlAppend += '				<div class="vref">' + vrefContent + '</div>'
+                    }
+                    if (databaseContent !== '') {
+                        htmlAppend += '				<div class="database">' + databaseContent + '</div>'
+                    }
+
+                    if (attachmentsContent !== '') {
+                        htmlAppend += '				<div class="attachments">' + attachmentsContent + '</div>'
+                    }
+                    if (tipo === "PAT") {
+                        htmlAppend += ' 			<div class="tasks">' + tasksContent + '</div>'
+                    }
+                    htmlAppend += ' 		</div>'
+                    htmlAppend += '		</div>'
+                    htmlAppend += ' </td>'
+                    htmlAppend += '</tr>'
+                    htmlAppendTotal += htmlAppend
+
+                    divSearching.style.display = "none";
+                }
+                $('#tabelaMonitorPats > tbody').append(htmlAppendTotal);
+                console.timeEnd()
+            },
+            error: function (response) {
+                divSearching.style.display = "none";
+                divNoResults.style.display = "block";
+            }
+        });
+    }
+
+    function getDiarioTecnico() {
+        var data = $("#data").val()
+        console.log(data);
+        if (data == "") {
+            data = new Date().toJSON().slice(0, 10);
+        }
+        const diarioTecnicoBody = document.getElementById("tbodyDiarioTecnico");
+        while (diarioTecnicoBody.hasChildNodes())
+            diarioTecnicoBody.removeChild(diarioTecnicoBody.firstChild);
+
+        $.ajax({
+            type: 'GET',
+            url: '../programs/gensel.aspx?cscript=getDiarioTecnico&data=' + data,
+            data: JSON.stringify({}),
+            contentType: 'application/json',
+            success: function (response) {
+                const diarioTecnico = response.diarioTecnico
+                console.log(diarioTecnico);
+                for (var i = 0; i < diarioTecnico.length; ++i) {
+                    var horaini = $.trim(diarioTecnico[i].horaini)
+                    var horafim = $.trim(diarioTecnico[i].horafim)
+                    var nome = $.trim(diarioTecnico[i].nome)
+                    var nopat = $.trim(diarioTecnico[i].nopat)
+                    var relatorio = $.trim(diarioTecnico[i].relatorio).replace('\n', '<br>')
+                    var moh = $.trim(diarioTecnico[i].moh)
+                    var tecnico = $.trim(diarioTecnico[i].tecnico)
+                    var horavalor = $.trim(diarioTecnico[i].horavalor)
+                    var mhstamp = $.trim(diarioTecnico[i].mhstamp)
+                    var id = $.trim(diarioTecnico[i].id)
+
+                    //definicao do conteudo das colunas da tabela
+                    var colunaHoraini = '<td class="horaini">' + horaini + '</td>'
+                    var colunaHorafim = '<td class="horafim">' + horafim + '</td>'
+                    var colunaRelatorio = '<td class="relatorio">' + relatorio + '</td>'
+                    var copiarNoPAT = '<p><a id="copiarPat" onclick="storeNoPATLocalStorage(\'' + nopat + '\',\'' + horaini + '\',\'' + horafim + '\',\'' + mhstamp + '\',\'' + id + '\')"> <input type="button" value="COPIAR" style="border: 1px solid #c0c0c0; border-radius: 4px;"></a></p>'
+                    var alteraIntervencao = '<p> <input type="button"   onclick= \"openModalPats(\'' + nopat + '\', \'' + mhstamp + '\',\'' + horafim + '\')\"value="ALTERAR" style="border: 1px solid #c0c0c0; border-radius: 4px;"></input></p>'
+                    var eliminarIntervencao = '<p><a onclick="eliminaIntervencao(\'' + mhstamp + '\')"> <input type="button" value="ELIMINAR" style="border: 1px solid #c0c0c0; border-radius: 4px;"></a></p>'
+
+                    //definir cor da sinalizadorLinha
+                    var backgroundcolor = ''
+                    if (nopat == 0 && relatorio == '') {
+                        backgroundcolor = '#99ff99'
+                        alteraIntervencao = ''
+                        eliminarIntervencao = ''
+                    } else {
+                        if (nopat == 0 && relatorio != '') {
+                            backgroundcolor = '#ff8080'
+                            alteraIntervencao = ''
+                        } else {
+                            backgroundcolor = '#ffffff'
+                            copiarNoPAT = ''
+                        }
+                    }
+
+                    var colunaAcoes = '<td class="acoes">' + copiarNoPAT + alteraIntervencao + eliminarIntervencao + '</td>'
+                    $('#tabelaDiarioTecnico > tbody').append('<tr style="background-color: ' + backgroundcolor + '">' + colunaHoraini + colunaHorafim + colunaRelatorio + colunaAcoes + '</tr>');
+                }
+            },
+            error: function (response) {
+                gestorAlertasComErro("Aviso", "Não foi possível obter dados do diário técnico por favor tente de novo!")
+            }
+        });
+    }
+
+    function pergunta(icon, titulo, nota) {
+        // Handler para manter a posição de scroll da página
+        let scrollPos = $(window).scrollTop();
+        $('html, body').animate({ scrollTop: scrollPos }, 1);
+
+        let returnValue = false;
+        $.confirm({
+            animation: 'zoom',
+            closeAnimation: 'scale',
+            theme: 'material',
+            draggable: true,
+            icon: icon,
+            title: titulo,
+            content: nota,
+            animateFromElement: false,
+            typeAnimated: true,
+            scrollToPreviousElement: false,
+            scrollToPreviousElementAnimate: false,
+            buttons: {
+                cancel: {
+                    text: 'Não',
+                    action: function () { }
+                },
+                confirm: {
+                    text: 'Sim',
+                    btnClass: 'btn-blue',
+                    action: function () {
+                        returnValue = true
+                    }
+                }
+            }
+        });
+
+        return returnValue;
+    }
+</script>
