@@ -1052,11 +1052,7 @@ width: 100%!important;
                 }
             }
         }
-        console.log("AUX: " + aux);
 
-
-        // Aqui você pode fazer algo com os valores selecionados, como enviar para o servidor, etc.
-        console.log('Filtros selecionados:', valoresFiltros);
         const Entregas = [];
         let params = {};
         const queryString = window.location.search;
@@ -1361,7 +1357,6 @@ width: 100%!important;
             end )in  (` + aux + `) and
 	tabela1.dtembarque is not null and tabela1.dtembarque<>'19000101'
 	ORDER BY ` + orderColumn + ` ` + orderType + ``;
-        console.log(varMyQuery);
         params.id = "selecttojson";
         params.select = varMyQuery;
         $.ajax({
@@ -1372,7 +1367,6 @@ width: 100%!important;
             contentType: "application/json",
         }).done(function (result, textStatus, jqXHR) {
             try {
-                //console.log(result);
                 result = result.replaceAll('\n', ' ').replaceAll('\t', ' ').replaceAll('\r', ' ')
                 resposta = JSON.parse(result);
             } catch {
@@ -1381,7 +1375,6 @@ width: 100%!important;
             for (var i = 0; i < resposta.Dados.length; ++i) {
                 Entregas.push(resposta.Dados[i]);
             }
-            console.log(Entregas);
             buildEntregas(Entregas);
             loading();
         });

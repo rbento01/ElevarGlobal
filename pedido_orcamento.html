@@ -1199,15 +1199,15 @@ width: 100%!important;
 		let row = "";
 		for (var i = 0; i < data.length; i++) {
 			row += "<tr>";
-			row += '<td style=" font-size:16px; padding:8px; width: 100px; text-align:center;">' + data[i].codigo + "</td>";
-			row += '<td style=" font-size:16px; padding:8px; background-color:' + data[i].u_cor + '; font-weight: bold; text-align: center; width: 150px;"><a style="cursor: pointer; color: black;" onclick="openVendedorEdit(\'' + data[i].novend + '\', \'' + data[i].ngstamp + '\', \'' + data[i].vistamp + '\', \'' + data[i].nocontacto + '\')">' + data[i].vendedor + "</td>";
-			row += '<td style=" font-size:16px; padding:8px; width: 100px;text-align:center;">' + ((data[i].dataaber).split(' '))[0] + "</td>";
+			row += '<td style=" font-size:16px; padding:8px; width: 100px; text-align:center;vertical-align: middle;">' + data[i].codigo + "</td>";
+			row += '<td style=" font-size:16px; padding:8px; background-color:' + data[i].u_cor + '; font-weight: bold; text-align: center; width: 150px;vertical-align: middle;"><a style="cursor: pointer; color: black;" onclick="openVendedorEdit(\'' + data[i].novend + '\', \'' + data[i].ngstamp + '\', \'' + data[i].vistamp + '\', \'' + data[i].nocontacto + '\')">' + data[i].vendedor + "</td>";
+			row += '<td style=" font-size:16px; padding:8px; width: 100px;text-align:center;vertical-align: middle;">' + ((data[i].dataaber).split(' '))[0] + "</td>";
 			row += '<td style=" font-size:16px; padding:8px;text-align:center;vertical-align: middle;">' + data[i].contacto + "</td>";
 			row += '<td style=" font-size:16px; padding:8px;text-align:center;vertical-align: middle;">' + data[i].zonaReal + "</td>";
 			row += '<td style=" font-size:16px; padding:8px;text-align:center;vertical-align: middle;">' + data[i].u_respcl + "</td>";
 			row += '<td style=" font-size:16px; padding:8px;text-align:center;vertical-align: middle;">' + data[i].u_respcltl + "</td>";
 			row += '<td style=" font-size:16px; padding:8px;text-align:center;vertical-align: middle;">' + data[i].u_respclem + "</td>";
-			row += '<td style=" font-size:16px; padding:8px;text-align:center;"><a style="cursor: pointer;" onclick=openModalAbreResumo(\'' + data[i].ngstamp + '\')>' + data[i].resumo.substring(0, 20) + "</a></td>";
+			row += '<td style=" font-size:16px; padding:8px;text-align:center;vertical-align: middle;"><a style="cursor: pointer;" onclick=openModalAbreResumo(\'' + data[i].ngstamp + '\')>' + data[i].resumo.substring(0, 20) + "</a></td>";
 			row += buildStatusColor(data[i].statusUltimaVisita, data[i].dataUltimaVisita);
 			row += '<td style="font-size: 16px;  text-align: center;">'
 				+ '<button type="button" onclick="openModalCriarVisita(\'' + data[i].ngstamp + '\', \'' + data[i].codigo + '\', \'' + data[i].vendedor + '\')" class="btn_azul" style="text-align: center;"><i class="fa fa-plus"></i></button>'
@@ -1256,7 +1256,7 @@ width: 100%!important;
 				colorClass = 'white';
 		}
 
-		return `<td style=" font-size:16px; padding:8px; background-color: ${colorClass}; font-weight: bold; text-align: center; width: 150px;">${status}</td>
+		return `<td style=" font-size:16px; padding:8px; background-color: ${colorClass}; font-weight: bold; text-align: center; width: 150px;vertical-align: middle;">${status}</td>
 				<td style=" font-size:16px; padding:8px">` + (date.split(' '))[0] + ` </td>`;
 	}
 
