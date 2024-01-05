@@ -3,4 +3,4 @@ SQL Servers
 192.168.100.6 - saelevartec - ElevarGlobal
 192.168.20.4 - saT3c2016_15389 - Clever
 192.168.0.2 - saferrus2017#tec - Ferrus
-192.168.1.11 - saT3C - Deltaplás
+192.168.1.11 - saT3c - Deltaplás
