@@ -1166,6 +1166,7 @@ width: 100%!important;
 		}).done(function (result, textStatus, jqXHR) {
 			try {
 				//console.log(result);
+                result = result.replaceAll('\n', ' ').replaceAll('\t', ' ').replaceAll('\r', ' ')
 				resposta = JSON.parse(result);
 			} catch {
 				resposta = JSON.parse('{"Dados":[]}');
