@@ -334,6 +334,36 @@
         color: #47cf73;
     }
 
+    .btn_cor {
+
+        border-radius: 6px;
+        box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
+        box-sizing: border-box;
+        color: #ffffff;
+        cursor: pointer;
+        display: inline-block;
+        font-family: nunito, roboto, proxima-nova, "proxima nova", sans-serif;
+        font-size: 16px;
+        font-weight: 800;
+        line-height: 16px;
+        min-height: 40px;
+        outline: 0;
+        padding: 12px 14px;
+        text-align: center;
+        text-rendering: geometricprecision;
+        text-transform: none;
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+        vertical-align: middle;
+    }
+
+    .btn_cor:hover {
+        background-color: white;
+        background-position: 0 0;
+        color: #ffffff;
+    }
+
     .btn_azul {
         background: #506ce8;
         border: 1px solid #506ce8;
@@ -736,65 +766,66 @@ width: 100%!important;
             transform: scale(1);
         }
     }
+
+    .table.table-striped>tbody>tr:nth-of-type(even):not(.defgridheader):not(.gpagination):not(.selected-row)>td,
+    table.table-striped>tbody>tr:nth-of-type(even):not(.defgridheader):not(.gpagination):not(.selected-row)>td {
+        border-bottom: 1.5px solid #999;
+    }
+
+    .table.table-striped>tbody>tr:nth-of-type(odd):not(.defgridheader):not(.gpagination):not(.selected-row)>td,
+    table.table-striped>tbody>tr:nth-of-type(odd):not(.defgridheader):not(.gpagination):not(.selected-row)>td {
+        /* border-top: 2px solid #242424; */
+        border-bottom: 1.5px solid #999;
+    }
 </style>
 <div>
-    <h1 style="text-align: center; font-weight: bold; margin-bottom: 3rem; color: black;">Plano de Entregas
-    </h1>
+    <h1 style="text-align: center; font-weight: bold; margin-bottom: 3rem; color: black;">Plano de Entregas</h1>
 
-    <button class="btn_azul" onclick="openModalMainFiltro()" type="button">
-        <i class="fa fa-filter"></i>&nbsp;Filtro
-    </button>
-    <div>
-        <form id="filtroForm">
-            <label>
-                <input type="checkbox" name="filtro" value="Receber Material"> Receber Material
-            </label>
-            <label>
-                <input type="checkbox" name="filtro" value="Verificar Material"> Verificar Material
-            </label>
-            <label>
-                <input type="checkbox" name="filtro" value="Informar Cliente"> Informar Cliente
-            </label>
-            <label>
-                <input type="checkbox" name="filtro" value="Enviar Material"> Enviar Material
-            </label>
-            <button class="btn_verde" type="button" onclick="getEntregas()">Aplicar Filtros</button>
-        </form>
+    <div style="display: flex; align-items: center; justify-content: space-between;margin-bottom: 1.5rem;"><button
+            class="btn_azul" onclick="openModalMainFiltro()" type="button"><i
+                class="fa fa-filter"></i>&nbsp;Filtro</button><button class="btn_vermelho"
+            onclick="openModal('modalInfo')" title="Informação Adicional" type="button"><i aria-hidden="true"
+                class="fa fa-info-circle"></i></button></div>
+
+    <div style="margin-bottom: 1.5rem;">
+        <form id="filtroForm"><label style="margin-right: 1.5rem;"> <input name="filtro" type="checkbox"
+                    value="Receber Material" /> Receber Material </label> <label style="margin-right: 1.5rem;"> <input
+                    name="filtro" type="checkbox" value="Verificar Material" /> Verificar Material </label> <label
+                style="margin-right: 1.5rem;"> <input name="filtro" type="checkbox" value="Informar Cliente" /> Informar
+                Cliente </label> <label style="margin-right: 1.5rem;"> <input name="filtro" type="checkbox"
+                    value="Enviar Material" /> Enviar Material </label><button class="btn_verde" onclick="getEntregas()"
+                type="button">Aplicar Filtros</button></form>
     </div>
+
     <div id="grid-container" style="display: block;
 		overflow-x: auto;">
         <table class="table table-striped" data-currentpage="1" data-ordercolumn="" data-ordertype="asc"
             data-pagesize="50" data-totalpages="1" data-totalrecords="20" id="DataGridEntregas" style="width: 100%;">
             <thead>
                 <tr id="tableHeaderEntregas">
-                    <th data-column="tabela1.nome" data-order="desc" scope="col" style="font-size: 16px;">
-                        <b>Cliente</b><span></span>
-                    </th>
-                    <th data-column="tabela1.nref" data-order="desc" scope="col" style="font-size: 16px;">
-                        <b>Processo</b><span></span>
-                    </th>
-                    <th data-column="tabela1.u_DTCONFCL" data-order="desc" scope="col" style="font-size: 16px;">
-                        <b>Datas Cliente</b><span></span>
-                    </th>
-                    <th data-column="tabela1.dataembarqueVer" data-order="desc" scope="col" style="font-size: 16px;">
-                        <b>Datas Forn.</b><span></span>
-                    </th>
-                    <th data-column="tabela1.PT" data-order="desc" scope="col" style="font-size: 16px;">
-                        <b>P/T</b><span></span>
-                    </th>
-                    <th>&nbsp;</th>
+                    <th data-column="tabela1.nome" data-order="desc" scope="col" style="font-size: 16px;width: 18%;">
+                        <b>Cliente</b><span></span></th>
+                    <th data-column="tabela1.nref" data-order="desc" scope="col" style="font-size: 16px; width: 18%;">
+                        <b>Processo</b><span></span></th>
+                    <th data-column="tabela1.u_DTCONFCL" data-order="desc" scope="col"
+                        style="font-size: 16px;width:20%;"><b>Datas Cliente</b><span></span></th>
+                    <th data-column="tabela1.dataembarqueVer" data-order="desc" scope="col"
+                        style="font-size: 16px;width:15%;"><b>Datas Forn.</b><span></span></th>
+                    <th data-column="tabela1.PT" data-order="desc" scope="col" style="font-size: 16px;width:8%">
+                        <b>P/T</b><span></span></th>
+                    <th style="width:5%">&nbsp;</th>
                 </tr>
                 <tr id="filtrosEntregas" onkeypress="handleEnterKey(event)">
                     <th><input class="column-filterEntregas" oninput="checkCharsEntregas(this)" placeholder="Filtrar..."
-                            type="text" /></th>
+                            style="background: #fff;" type="text" /></th>
                     <th><input class="column-filterEntregas" oninput="checkCharsEntregas(this)" placeholder="Filtrar..."
-                            type="text" /></th>
+                            style="background: #fff;" type="text" /></th>
                     <th><input class="column-filterEntregas" oninput="checkCharsEntregas(this)" placeholder="Filtrar..."
-                            type="text" /></th>
+                            style="background: #fff;" type="text" /></th>
                     <th><input class="column-filterEntregas" oninput="checkCharsEntregas(this)" placeholder="Filtrar..."
-                            type="text" /></th>
+                            style="background: #fff;" type="text" /></th>
                     <th><input class="column-filterEntregas" oninput="getEntregas()" placeholder="Filtrar..."
-                            type="text" /></th>
+                            style="background: #fff;" type="text" /></th>
                     <th>&nbsp;</th>
                 </tr>
             </thead>
@@ -803,9 +834,11 @@ width: 100%!important;
         </table>
     </div>
 </div>
+
 <div class="modal-input-container" id="modal-Filtros">
     <div class="modal-content" style="width: 500px;"><span class="close" id="close"
             onclick="closeModalMainFiltro()">&times;</span>
+
         <div style="display: flex;flex-direction: column; padding: 2rem;"><label>At&eacute;(Conf.Cliente):</label>
             <input class="input" id="inp_ate" style="margin-bottom: 1rem;" type="date" />
             <label>Ordena&ccedil;&atilde;o:</label> <select class="select" id="inp_ordenacao"
@@ -821,15 +854,14 @@ width: 100%!important;
                 <option>VEGA</option>
                 <option>US</option>
                 <option>WR</option>
-            </select>
-        </div>
-        <div style="display: flex;align-items: center;justify-content: end;margin-top: 1rem;">
-            <button class="btn_verde" id="novoStic" onclick="getEntregas()" type="button"><i aria-hidden="true"
-                    class="fa fa-check"></i>&nbsp;Guardar
-            </button>
-        </div>
+            </select></div>
+
+        <div style="display: flex;align-items: center;justify-content: end;margin-top: 1rem;"><button class="btn_verde"
+                id="novoStic" onclick="getEntregas()" type="button"><i aria-hidden="true"
+                    class="fa fa-check"></i>&nbsp;Guardar</button></div>
     </div>
 </div>
+
 <div class="fundoPreto_modalGeral" id="loading" style="display: none;">
     <div class="modalTamanho" style="height: fit-content;width: 15%;">
         <div class="loader3" style="margin:auto">
@@ -856,6 +888,39 @@ width: 100%!important;
     </div>
 </div>
 
+<div class="fundoPreto_modalGeral" id="modalInfo">
+    <div class="modalTamanho" style="width: 70%; height: fit-content;"><span class="close" id="close"
+            onclick="closeModal('modalInfo')">&times;</span>
+
+        <h1 style="text-align: center; font-weight: bold; margin-bottom: 2rem; color: black; font-size: 2.5rem;">Titulo
+        </h1>
+        <!-- duplicar a div, se precisares mais caixas  -->
+
+        <div style="display: flex; align-items: stretch;justify-content: space-between;">
+            <div
+                style="box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px; padding: 1rem;margin-bottom: 1rem; width: 40%; display: flex;align-items: center;">
+                <p style="margin-bottom: 1rem; font-weight: bold; font-size: 1.8rem;">Subtitulo</p>
+            </div>
+
+            <div style="box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px; padding: 1rem;margin-bottom: 1rem;width: 58%;">
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
+                    et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p>
+            </div>
+        </div>
+
+        <div style="display: flex; align-items: stretch;justify-content: space-between;">
+            <div
+                style="box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px; padding: 1rem;margin-bottom: 1rem; width: 40%; display: flex;align-items: center;">
+                <p style="margin-bottom: 1rem; font-weight: bold; font-size: 1.8rem;">Subtitulo</p>
+            </div>
+
+            <div style="box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px; padding: 1rem;margin-bottom: 1rem;width: 58%;">
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
+                    et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p>
+            </div>
+        </div>
+    </div>
+</div>
 <script type="text/javascript">
     //limpa cache
     if (!location.hash) {
@@ -871,7 +936,9 @@ width: 100%!important;
         $("#OptionsRecordDropDown").hide();
         $(".navbar").hide();
     };
+    function openModal(modal) { document.getElementById(modal).style.display = "block"; }
 
+    function closeModal(modal) { document.getElementById(modal).style.display = "none"; }
     //Order the table
     let tableHeaderEntregas = document.getElementById("tableHeaderEntregas");
     let headersEntregas = tableHeaderEntregas.getElementsByTagName("th");
@@ -974,19 +1041,19 @@ width: 100%!important;
         // Obter os valores selecionados
         const valoresFiltros = Array.from(checkboxes).map(checkbox => checkbox.value);
         let aux = '';
-        if(valoresFiltros.length == 0){
+        if (valoresFiltros.length == 0) {
             aux = `'Receber Material', 'Verificar Material', 'Informar Cliente', 'Enviar Material'`;
-        }else{
-            for(let i = 0; i < valoresFiltros.length; i++){
-                if(i == 0){
+        } else {
+            for (let i = 0; i < valoresFiltros.length; i++) {
+                if (i == 0) {
                     aux = `'${valoresFiltros[i]}'`;
-                }else{
+                } else {
                     aux += `, '${valoresFiltros[i]}'`;
                 }
             }
         }
         console.log("AUX: " + aux);
-        
+
 
         // Aqui você pode fazer algo com os valores selecionados, como enviar para o servidor, etc.
         console.log('Filtros selecionados:', valoresFiltros);
@@ -1016,15 +1083,31 @@ width: 100%!important;
 					and  (case when cc.moeda='PTE OU EURO' or cc.moeda=space(11) then (cc.edeb-cc.edebf)-(cc.ecred-cc.ecredf) else (cc.debm-cc.debfm)-(cc.credm-cc.credfm) end) > (case when cc.moeda='PTE OU EURO' or cc.moeda=space(11) then 0.010000 else 0 end)	
 			    ),
 			'Até : '+ convert(varchar,convert(datetime,@ate,104),104) + '   Ordenação : '+ @tipo as ordenacao,
-            (case when ltrim(rtrim(convert(varchar,cast(dtembarque as date),104)))='' then '--' else
-                (Case when ltrim(rtrim((case when verif is null then '' else convert(char,verif,104) end)))='' then 'Receber Material' else
-                    (case when ltrim(rtrim((case when pronto is null then '' else convert(char,pronto,104) end) ))='' then  'Verificar Material' else
-                        (case when inf=0 then  'Informar Cliente' else
-                            'Enviar Material'
+            --(case when ltrim(rtrim(convert(varchar,cast(dtembarque as date),104)))='' then '--' else
+            --    (Case when ltrim(rtrim((case when verif is null then '' else convert(char,verif,104) end)))='' then 'Receber Material' else
+            --        (case when ltrim(rtrim((case when pronto is null then '' else convert(char,pronto,104) end) ))='' then  'Verificar Material' else
+            --            (case when inf=0 then  'Informar Cliente' else
+            --                'Enviar Material'
+            --            end)
+            --        end)
+            --    end)
+            --end )as Estado,
+            (case when inf=1 then 
+                    'Enviar Material'
+                else 
+                        (case when inf=0 and ltrim(rtrim((case when Verif is null then '' else convert(char,Verif,104) end)))<>'' and ltrim(rtrim(convert(char,pronto,104)))<>'' then 
+                            (case when infexiste=0 then 'Enviar Material' else 'Informar Cliente' end)
+                        else 
+                            (case when ((ltrim(rtrim(convert(varchar,cast(dtembarque as date),104)))<>'' and ltrim(rtrim((case when Verif is null then '' else convert(char,Verif,104) end)))<>'')
+                                        or
+                                        (ltrim(rtrim((case when Verif is null then '' else convert(char,Verif,104) end)))='' and estosck=1))
+                                then
+                                    'Verificar Material'
+                                else                                                                                                                      
+                                    'Receber Material'                                                                                                                         
+                                end)
                         end)
-                    end)
-                end)
-            end )as Estado,
+                 end) as Estado,
 			case when u_DTCONFCL <=@ate then nome else '___'+ltrim(rtrim(nome)) end as Nome,
 			Molde,
 			nref,
@@ -1038,6 +1121,7 @@ width: 100%!important;
 			ed,
 			pt,
 			inf,
+            infexiste,
 			Class,
 			atrasado,
 			entregarcom,
@@ -1087,12 +1171,16 @@ width: 100%!important;
 						)
 						as ClienteEntrega,
 
-						(case when (trf65.no is not null or trf65.no=65) then 
-							(select max(trfvrf.Datafim) from u_tarefas as trfvrf where trfvrf.no=80 and trfvrf.fechada=1 and trfvrf.oristamp=bo.bostamp and trfvrf.repeticao=trf95.repeticao)
-						else
-							(select max(trfvrf.dataini) from u_tarefas as trfvrf where trfvrf.no=80 and trfvrf.fechada=0 and trfvrf.oristamp=bo.bostamp and trfvrf.repeticao=trf95.repeticao)
-						end)
-						as pronto,
+						--(case when (trf65.no is not null or trf65.no=65) then 
+						--	(select max(trfvrf.Datafim) from u_tarefas as trfvrf where trfvrf.no=80 and trfvrf.fechada=1 and trfvrf.oristamp=bo.bostamp and trfvrf.repeticao=trf95.repeticao)
+						--else
+						--	(select max(trfvrf.dataini) from u_tarefas as trfvrf where trfvrf.no=80 and trfvrf.fechada=0 and trfvrf.oristamp=bo.bostamp and trfvrf.repeticao=trf95.repeticao)
+						--end)
+						--as pronto,
+                        (
+                            (select max(trfvrf.Datafim) from u_tarefas as trfvrf where trfvrf.no=80 and trfvrf.fechada=1 and trfvrf.oristamp=bo.bostamp and trfvrf.repeticao=trf95.repeticao)
+                        )
+                        as pronto,
 						(case when (trf65.no is not null or trf65.no=65) then 
 							(select max(trfrec.Datafim) from u_tarefas as trfrec where trfrec.no=70 and trfrec.fechada=1 and trfrec.oristamp=bo.bostamp and trfrec.repeticao=trf95.repeticao) 
 						else
@@ -1105,6 +1193,7 @@ width: 100%!important;
 						(case when 1 >= (select count(*) from u_tarefas as trfP where trfP.no=65 and trfP.oristamp=bo.bostamp ) then 'T' else (case when trf65.repeticao = (select max(trfP.repeticao) from u_tarefas as trfP where trfP.no=65 and trfP.oristamp=bo.bostamp ) then 'T' else 'P' end) end) as PT,
 				
 						(case when exists(select * from u_tarefas as trfinf where trfinf.no=81 and trfinf.oristamp=bo.bostamp and trfinf.fechada=1 and trfinf.repeticao=trf95.repeticao) then 1 else 0 end) as inf,
+                        (case when exists(select * from u_tarefas as trfinf where trfinf.no=81 and trfinf.oristamp=bo.bostamp and trfinf.repeticao=trf95.repeticao) then 1 else 0 end) as infexiste,
 						SUBSTRING(cl.tipo,0, CHARINDEX('-',cl.tipo)) as Class,
 						BO3.U_ENTRCOM as entregarcom,
 						bo.marca as codprod,
@@ -1179,6 +1268,7 @@ width: 100%!important;
 					--tarefa 81 processos -Informar o cliente
 					--tarefa 80 pats - Informar cliente da reparação concluída  
 					(case when exists(select * from u_tarefas as trfinf where trfinf.no=80 and trfinf.oristamp=pa.pastamp and trfinf.fechada=1 and trfinf.repeticao=0) then 1 else 0 end) as inf,
+                    (case when exists(select * from u_tarefas as trfinf where trfinf.no=80 and trfinf.oristamp=pa.pastamp  and trfinf.repeticao=0) then 1 else 0 end) as infexiste,
 					SUBSTRING(cl.tipo,0, CHARINDEX('-',cl.tipo)) as Class,
 					'' as entregarcom,
 					'' as codprod,
@@ -1330,22 +1420,61 @@ width: 100%!important;
             var u_obsproc = $.trim(data[i].u_obsproc)
             var Estado = $.trim(data[i].Estado)
             row += "<tr style=\"background:" + (varHOLD == '0' ? 'white' : 'rgb(255,66,66)') + "\"> "
-            row += "<td style=\"border-bottom:0.7px solid #999; border-collapse: collapse; width:30%\"><span style=\"font-weight:bolder;\">Cliente: " + nome + "</span><br>Cliente Entrega: " + clienteEntrega + "<span style=\" float:right; color:" + (clienteBloqueado == '0' ? 'black' : 'red') + "; font-weight:bolder\";>" + (clienteBloqueado > 0 ? 'B' : '') + "</span>" + getStatusCor(Estado) + "</td>"
-            row += `<td style=\"border-bottom:0.7px solid #999; border-collapse: collapse;text-align:center; width:15%\">
-                        <span style=\"font-weight:bolder; float:right;\">NREF: <span style="float:right; font-weight: 400;">` + nref + `</span></span><br />
-                        <span style=\"font-weight:bolder; float:right;\">Molde: <span style=" float:right; font-weight: 400;">` + molde + `</span></span><br />
-                        <span style=\"font-weight:bolder; float:right;\">Cod. Prod.: <span style="float:right;font-weight: 400;">` + codprod + `</span></span>
+            row += "<td style=\"border-bottom:0.7px solid #999; border-collapse: collapse;\"><span style=\"font-weight:bolder;\">Cliente: " + nome + "</span><br>Cliente Entrega: " + clienteEntrega + "<span style=\" float:right; color:" + (clienteBloqueado == '0' ? 'black' : 'red') + "; font-weight:bolder\";>" + (clienteBloqueado > 0 ? 'B' : '') + "</span>" + getStatusCor(Estado) + "</td>"
+            row += `<td style=\"border-bottom:0.7px solid #999; border-collapse: collapse;text-align:center;\"><table style=\"border-collapse: collapse;border:none;\">
+                        <tr style=\"border-collapse: collapse;border:none;\"><td style=\"font-weight:bolder; text-align:right;border-collapse: collapse;border:none;width: 40%;\">NREF:&nbsp;</td><td style="text-align:left; font-weight: 400;border-collapse: collapse;border:none;">` + nref + `</td></tr>
+                        <tr style=\"border-collapse: collapse;border:none;\"><td style=\"font-weight:bolder; text-align:right;border-collapse: collapse;border:none;width: 40%;\">Molde:&nbsp; </td><td style=" text-align:left; font-weight: 400;border-collapse: collapse;border:none;">` + molde + `</td></tr>
+                        <tr style=\"border-collapse: collapse;border:none;\"><td style=\"font-weight:bolder; text-align:right;border-collapse: collapse;border:none;width: 40%;\">Cod.Prod.:&nbsp; </td><td style="text-align:left;font-weight: 400;border-collapse: collapse;border:none;">` + codprod + `</td></tr></table>
                     </td>`;
-            row += "<td style=\"border-bottom:0.7px solid #999; border-collapse: collapse;text-align:center; width:20%\">Data Conf.: " + u_DTCONFCL.slice(0, 10) + "<br>Ped. Cliente: " + prazoPedCliente.slice(0, 10) + "<br>Local: " + localEntrega + "</td>"
-            row += "<td style=\"border-bottom:0.7px solid #999; border-collapse: collapse;text-align:center; width:18%\">Data Emb.: " + (estosck == 1 ? 'STOCK' : dataembarqueVer) + "<br>Pronto: " + pronto + "<br>Verif: " + verif + "<br>Entregar Com.: " + entregarCom + "</td>"
-            row += "<td style=\"border-bottom:0.7px solid #999; border-collapse: collapse;text-align:center; width:6%\">P/T: " + pt + "<br>E.D: " + (ed != 0 ? "ED" : "") + "<br>Class.: " + classe + "<br>Inf: " + (inf != 0 ? '<i class=\"fa fa-check\" style=\"color: green;\"></i>' : "") + "</td>"
-            row += `<td style=\"width: 5%;\"><button class=\"btn_azul\" type=\"button\" onclick=\"openModalChecks()\">Ação</button></td>`
+            row += `<td style=\"border-bottom:0.7px solid #999; border-collapse: collapse;text-align:center;\"><table style=\"border-collapse: collapse;border:none;\">
+                        <tr style=\"border-collapse: collapse;border:none;\"><td style=\"font-weight:bolder; text-align:right;border-collapse: collapse;border:none;width: 40%;\">Data Conf.:&nbsp;</td><td style="text-align:left; font-weight: 400;border-collapse: collapse;border:none;">`  + u_DTCONFCL.slice(0, 10) + `</td></tr>
+                        <tr style=\"border-collapse: collapse;border:none;\"><td style=\"font-weight:bolder; text-align:right;border-collapse: collapse;border:none;width: 40%;\">Ped.Cliente:&nbsp; </td><td style=" text-align:left; font-weight: 400;border-collapse: collapse;border:none;">` + prazoPedCliente.slice(0, 10) + `</td></tr>
+                        <tr style=\"border-collapse: collapse;border:none;\"><td style=\"font-weight:bolder; text-align:right;border-collapse: collapse;border:none;width: 40%;\">Local:&nbsp; </td><td style="text-align:left;font-weight: 400;border-collapse: collapse;border:none;">` + localEntrega + `</td></tr></table>
+                    </td>`;
+            row += `<td style=\"border-bottom:0.7px solid #999; border-collapse: collapse;text-align:center;\">
+                <table style=\"border-collapse: collapse;border:none;\">
+                        <tr style=\"border-collapse: collapse;border:none;\"><td style=\"font-weight:bolder; text-align:right;border-collapse: collapse;border:none;width: 50%;\">Data Emb.:&nbsp;</td><td style="text-align:left; font-weight: 400;border-collapse: collapse;border:none;">` + (estosck == 1 ? 'STOCK' : dataembarqueVer) + `</td></tr>
+                        <tr style=\"border-collapse: collapse;border:none;\"><td style=\"font-weight:bolder; text-align:right;border-collapse: collapse;border:none;width: 50%;\">Verif:&nbsp; </td><td style=" text-align:left; font-weight: 400;border-collapse: collapse;border:none;">`+ verif + `</td></tr>
+                        <tr style=\"border-collapse: collapse;border:none;\"><td style=\"font-weight:bolder; text-align:right;border-collapse: collapse;border:none;width: 50%;\">Pronto:&nbsp; </td><td style="text-align:left;font-weight: 400;border-collapse: collapse;border:none;">`  + pronto + `</td></tr>
+                        <tr style=\"border-collapse: collapse;border:none;\"><td style=\"font-weight:bolder; text-align:right;border-collapse: collapse;border:none;width: 50%;\">Entregar Com.:&nbsp; </td><td style="text-align:left;font-weight: 400;border-collapse: collapse;border:none;">` + entregarCom + `</td></tr>
+                </table>
+            </td>`;
+            row += `<td style=\"border-bottom:0.7px solid #999; border-collapse: collapse;text-align:center;\">
+                <table style=\"border-collapse: collapse;border:none;\">
+                        <tr style=\"border-collapse: collapse;border:none;\"><td style=\"font-weight:bolder; text-align:right;border-collapse: collapse;border:none;width: 60%;\">P/T:&nbsp;</td><td style="text-align:left; font-weight: 400;border-collapse: collapse;border:none;">` + pt + `</td></tr>
+                        <tr style=\"border-collapse: collapse;border:none;\"><td style=\"font-weight:bolder; text-align:right;border-collapse: collapse;border:none;width: 60%;\">E.D:&nbsp; </td><td style=" text-align:left; font-weight: 400;border-collapse: collapse;border:none;">`+ (ed != 0 ? "ED" : "") + `</td></tr>
+                        <tr style=\"border-collapse: collapse;border:none;\"><td style=\"font-weight:bolder; text-align:right;border-collapse: collapse;border:none;width: 60%;\">Class.:&nbsp; </td><td style="text-align:left;font-weight: 400;border-collapse: collapse;border:none;">`  + classe + `</td></tr>
+                        <tr style=\"border-collapse: collapse;border:none;\"><td style=\"font-weight:bolder; text-align:right;border-collapse: collapse;border:none;width: 60%;\">Inf:&nbsp; </td><td style="text-align:left;font-weight: 400;border-collapse: collapse;border:none;">`  + (inf != 0 ? '<i class=\"fa fa-check\" style=\"color: green;\"></i>' : "") + `</td></tr>
+                </table>
+            </td>`;
+            // row += "<td style=\"border-bottom:0.7px solid #999; border-collapse: collapse;text-align:center; width:20%\"><div style=\"display:flex;align-items: center;justify-content: center;\"><div style=\"display:flex;flex-direction: column;align-items: flex-end;\"><b>Data Conf.:&nbsp;</b><b>Ped.Cliente:&nbsp</b><b>Local:&nbsp</b></div><div  style=\"display:flex;flex-direction: column;align-items: flex-start;\"><span>" + u_DTCONFCL.slice(0, 10) + "</span><span>" + prazoPedCliente.slice(0, 10) + "</span><span>" + localEntrega + "</span></div></div></td>"
+            //row += "<td style=\"border-bottom:0.7px solid #999; border-collapse: collapse;text-align:center;\">Data Emb.:" + (estosck == 1 ? 'STOCK' : dataembarqueVer) + "<br>Pronto: " + pronto + "<br>Verif: " + verif + "<br>Entregar Com.: " + entregarCom + "</td>"
+            // row += "<td style=\"border-bottom:0.7px solid #999; border-collapse: collapse;text-align:center; \">P/T: " + pt + "<br>E.D: " + (ed != 0 ? "ED" : "") + "<br>Class.: " + classe + "<br>Inf: " + (inf != 0 ? '<i class=\"fa fa-check\" style=\"color: green;\"></i>' : "") + "</td>"
+            switch (Estado) {
+                case 'Receber Material':
+                    cor = 'red';
+                    break;
+                case 'Verificar Material':
+                    cor = 'orange';
+                    break;
+                case 'Informar Cliente':
+                    cor = 'blue';
+                    break;
+                case 'Enviar Material':
+                    cor = 'green';
+                    break;
+                default:
+                    cor = 'black';
+                    break;
+            }
+
+            row += `<td style=\"text-align: center;\"><button class=\"btn_cor\" type=\"button\" style=\"padding: 0px 10px;font-size: 24px;background:` + cor + `;border: 1px solid ` + cor + ` \" onclick=\"openModalChecks()\"><i class="fa fa-caret-square-o-right" aria-hidden="true"></i></button></td>`
             row += "</tr>"
         }
         tBody.innerHTML += row;
     }
 
-    function getStatusCor(estado){
+    function getStatusCor(estado) {
         //estado = Receber Material vermelho
         //estado = Verficar Material laranja
         //estado = Informar Cliente azul
@@ -1368,7 +1497,7 @@ width: 100%!important;
                 cor = 'black';
                 break;
         }
-        string = "<br /><span style=\" float:left; font-weight:bold;\">Estado:&nbsp;</span><span style=\" float:left; color:" + cor + "; font-weight:bold;\">" + estado  + "</span>";
+        string = "<br /><span style=\" float:left; font-weight:bold;\">Estado:&nbsp;</span><span style=\" float:left; color:" + cor + "; font-weight:bold;\">" + estado + "</span>";
         return string;
     }
 
