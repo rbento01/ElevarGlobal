@@ -640,10 +640,16 @@ width: 100%!important;
 
 	<div id="Negocios">
 		<div style="margin-bottom: 2rem;margin-top: 1rem;"><button class="btn_verde" onclick="openModalCriarNegocio()"
-				type="button">&nbsp;Criar Neg&oacute;cio</button></div>
+				type="button">&nbsp;Criar Neg&oacute;cio</button>
+		</div>
 
-		<div style="margin-bottom: 2rem;margin-top: 1rem;"><button class="btn_verde" onclick="openModalResumo()"
-				type="button">&nbsp;Abrir Resumo</button></div>
+		<div style="margin-bottom: 2rem;margin-top: 1rem;"><button class="btn_azul" onclick="openModalResumo()"
+				type="button">&nbsp;Abrir Resumo</button>
+		</div>
+
+		<div style="margin-bottom: 2rem;margin-top: 1rem;"><button class="btn_vermelho" onclick="openModalLixo()"
+				type="button">&nbsp;Abrir Lixo</button>
+		</div>
 
 		<div id="grid-container" style="display: block;
 		overflow-x: auto;">
@@ -653,24 +659,31 @@ width: 100%!important;
 				<thead>
 					<tr id="tableHeaderNegocios">
 						<th data-column="ng.codigo" data-order="desc" scope="col" style="font-size: 16px;">
-							<b>Neg&oacute;cio</b><span></span></th>
+							<b>Neg&oacute;cio</b><span></span>
+						</th>
 						<th data-column="ng.vendedor" data-order="desc" scope="col" style="font-size: 16px;">
-							<b>Vendedor</b><span></span></th>
+							<b>Vendedor</b><span></span>
+						</th>
 						<th data-column="ng.usrdata" data-order="desc" scope="col" style="font-size: 16px;"><b>Data de
 								cria&ccedil;&atilde;o</b><span></span></th>
 						<th data-column="ng.contacto" data-order="desc" scope="col" style="font-size: 16px;">
-							<b>Empresa</b><span></span></th>
+							<b>Empresa</b><span></span>
+						</th>
 						<th data-column="(SELECT TOP 1 [zona] FROM [vi] WHERE [ngstamp] = ng.[ngstamp] ORDER BY [data] DESC)"
 							data-order="desc" scope="col" style="font-size: 16px; width: 110px; text-align: center;">
-							<b>Zona</b><span></span></th>
+							<b>Zona</b><span></span>
+						</th>
 						<th data-column="e.u_respcl" data-order="desc" scope="col" style="font-size: 16px;">
-							<b>Contacto</b><span></span></th>
+							<b>Contacto</b><span></span>
+						</th>
 						<th data-column="e.u_respcltl" data-order="desc" scope="col"
 							style="font-size: 16px; width: 160px;"><b>Telefone</b><span></span></th>
 						<th data-column="e.u_respclem" data-order="desc" scope="col" style="font-size: 16px;">
-							<b>E-Mail</b><span></span></th>
+							<b>E-Mail</b><span></span>
+						</th>
 						<th data-column="ng.resumo" data-order="desc" scope="col" style="font-size: 16px;">
-							<b>Resumo</b><span></span></th>
+							<b>Resumo</b><span></span>
+						</th>
 						<th data-column="(SELECT TOP 1 [NGSTATUS] FROM [vi] WHERE [ngstamp] = ng.[ngstamp] ORDER BY [data] DESC)"
 							data-order="desc" scope="col" style="font-size: 16px;"><b>&Uacute;ltimo
 								Status</b><span></span></th>
@@ -743,35 +756,36 @@ width: 100%!important;
 			<p style="margin-bottom: 1rem; margin-top: 1rem; font-size: 25px; color: #1e2d84; font-weight: bold;"><label
 					id="label-titulo">Criar Neg&oacute;cio</label></p>
 
-			<div style="display:flex; flex-direction: column;"><label>Vendedor</label>
+			<div style="display:flex; flex-direction: column; margin-bottom: 20px;"><label>Vendedor</label>
 
 				<div id="selectVendedor">&nbsp;</div>
 			</div>
 
-			<div style="display:flex; flex-direction: column;"><label>Data de Cria&ccedil;&atilde;o</label> <input
-					class="input" id="dataCriacaoNegocio" style="margin-bottom: 1.5rem;" type="date" /></div>
+			<div style="display:flex; flex-direction: column; margin-bottom: 20px;"><label>Data de
+					Cria&ccedil;&atilde;o</label> <input class="input" id="dataCriacaoNegocio"
+					style="margin-bottom: 1.5rem;" type="date" /></div>
 
-			<div style="display:flex; flex-direction: column;"><label>Empresa</label>
+			<div style="display:flex; flex-direction: column; margin-bottom: 20px;"><label>Empresa</label>
 
 				<div id="selectEmpresa">&nbsp;</div>
 			</div>
 
-			<div style="display:flex; flex-direction: column;"><label>Zona</label>
+			<div style="display:flex; flex-direction: column; margin-bottom: 20px;"><label>Zona</label>
 
 				<div id="selectZona">&nbsp;</div>
 			</div>
 
-			<div style="display:flex; flex-direction: column;"><label>Contacto</label> <input class="input"
-					id="contactoNegocio" style="margin-bottom: 1.5rem;" type="text" /></div>
+			<div style="display:flex; flex-direction: column; margin-bottom: 20px;"><label>Contacto</label> <input
+					class="input" id="contactoNegocio" style="margin-bottom: 1.5rem;" type="text" /></div>
 
-			<div style="display:flex; flex-direction: column;"><label>Telefone</label> <input class="input"
-					id="telefoneNegocio" style="margin-bottom: 1.5rem;" type="text" /></div>
+			<div style="display:flex; flex-direction: column; margin-bottom: 20px;"><label>Telefone</label> <input
+					class="input" id="telefoneNegocio" style="margin-bottom: 1.5rem;" type="text" /></div>
 
-			<div style="display:flex; flex-direction: column;"><label>E-Mail</label> <input class="input"
-					id="emailNegocio" style="margin-bottom: 1.5rem;" type="text" /></div>
+			<div style="display:flex; flex-direction: column; margin-bottom: 20px;"><label>E-Mail</label> <input
+					class="input" id="emailNegocio" style="margin-bottom: 1.5rem;" type="text" /></div>
 
-			<div style="display:flex; flex-direction: column;"><label>Resumo</label> <input class="input"
-					id="resumoNegocio" style="margin-bottom: 1.5rem;" type="text" /></div>
+			<div style="display:flex; flex-direction: column; margin-bottom: 20px;"><label>Resumo</label> <input
+					class="input" id="resumoNegocio" style="margin-bottom: 1.5rem;" type="text" /></div>
 			<br />
 			<button class="btn_azul" id="buttonAlterarMovimEqp" onclick="insereNegocio()"
 				style="margin-left: auto; text-align: center; float: right; margin-bottom: 1rem;" type="button"
@@ -804,7 +818,8 @@ width: 100%!important;
 				</div>
 
 				<div style="display:flex;flex-direction: column;margin-bottom: 1rem;">
-					<label>Relat&oacute;rio</label><textarea class="input" id="relatorioVisita"></textarea></div>
+					<label>Relat&oacute;rio</label><textarea class="input" id="relatorioVisita"></textarea>
+				</div>
 				<button class="btn_azul" onclick="insereVisita()"
 					style="margin-left: auto; text-align: center; float: right; margin-bottom: 1rem;" type="button"
 					value="">Adicionar</button>
@@ -873,7 +888,8 @@ width: 100%!important;
 		<div style="display:flex; flex-direction: column;"><label>Contacto</label> <input class="input"
 				id="editContacto" type="text" /> <label>Telefone</label> <input class="input" id="editTelefone"
 				type="text" /> <label>E-Mail</label> <input class="input" id="editEmail" type="text" />
-			<label>Resumo</label><textarea class="input" id="editResumo" type="text"></textarea></div>
+			<label>Resumo</label><textarea class="input" id="editResumo" type="text"></textarea>
+		</div>
 		<button class="btn_azul" onclick="editNegocio()"
 			style="margin-left: auto; text-align: center; float: right; margin-bottom: 1rem; margin-top: 10px;"
 			type="button" value="">Editar</button>
@@ -925,6 +941,33 @@ width: 100%!important;
 		</div>
 	</div>
 </div>
+<!-- Modal -->
+<!-- Create a modal for the deleted negocios -->
+<div class="modal-input-container" id="modal-lixo">
+	<div class="modal-content" style="width: 750px; height: 600px;"><span class="close" id="close"
+			onclick="fechaBoxLixo()">&times;</span>
+
+		<h1>Lixo</h1>
+
+		<div id="grid-container" style="display: block; overflow-x: auto;">
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th style="font-size: 16px;text-align:center;"><b>Negócio</b></th>
+						<th style="font-size: 16px;text-align:center;"><b>Vendedor</b></th>
+						<th style="font-size: 16px;text-align:center;"><b>Empresa</b></th>
+						<th style="font-size: 16px;text-align:center;"><b>Resumo</b></th>
+						<th style="font-size: 16px;text-align:center;">&nbsp;</th>
+						<th style="font-size: 16px;text-align:center;">&nbsp;</th>
+
+					</tr>
+				</thead>
+				<tbody id="tableBodyLixo">
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
 <script type="text/javascript">
 	//limpa cache
 	if (!location.hash) {
@@ -942,8 +985,6 @@ width: 100%!important;
 		caches.keys().then((list) => list.map((key) => caches.delete(key)));
 		getNegocios();
 	};
-
-
 
 	//Add event listener for the filter inputs
 	document.addEventListener("DOMContentLoaded", function () {
@@ -1153,6 +1194,7 @@ width: 100%!important;
 				AND ng.codigo LIKE '%` + codigoFilter + `%'
 				AND ng.resumo LIKE '%` + resumoFilter + `%'
 				AND (SELECT TOP 1 [zona] FROM [vi] WHERE [ngstamp] = ng.[ngstamp] ORDER BY [data] DESC) LIKE '%` + zonaFilter + `%'
+				AND ng.lixo = 0
 			ORDER BY ` + orderColumn + ` ` + orderType + paginacao + ``;
 		//AND nproposta LIKE '%` + npropostaFilter + `%'
 		params.id = "xmltoquery";
@@ -1166,7 +1208,7 @@ width: 100%!important;
 		}).done(function (result, textStatus, jqXHR) {
 			try {
 				//console.log(result);
-                result = result.replaceAll('\n', ' ').replaceAll('\t', ' ').replaceAll('\r', ' ')
+				result = result.replaceAll('\n', ' ').replaceAll('\t', ' ').replaceAll('\r', ' ')
 				resposta = JSON.parse(result);
 			} catch {
 				resposta = JSON.parse('{"Dados":[]}');
@@ -1220,13 +1262,21 @@ width: 100%!important;
 				+ '<button type="button" onclick="openVendedorEdit(\'' + data[i].novend + '\', \'' + data[i].ngstamp + '\', \'' + data[i].vistamp + '\', \'' + data[i].nocontacto + '\')" class="btn_azul" style="text-align: center;"><i class="fa fa-pencil"></i></button>'
 				+ '</td>';
 			row += '<td style="font-size: 16px;  text-align: center;">'
-				+ '<button type="button" onclick="deleteNegocio(\'' + data[i].ngstamp + '\')" class="btn_vermelho" style="text-align: center;"><i class="fa fa-trash"></i></button>'
+				+ '<button type="button" onclick="confirmDelete(\'' + data[i].ngstamp + '\')" class="btn_vermelho" style="text-align: center;"><i class="fa fa-trash"></i></button>'
 				+ '</td>';
 
 
 			row += "</tr>";
 		}
 		tBody.innerHTML += row;
+	}
+
+	function confirmDelete(ngstamp) {
+		const isConfirmed = window.confirm("Tem certeza que deseja excluir este Negocio?");
+
+		if (isConfirmed) {
+			deleteNegocio(ngstamp);
+		}
 	}
 
 	function buildStatusColor(status, date) {
@@ -1277,6 +1327,103 @@ width: 100%!important;
 				alert("Erro a eliminar por favor tente de novo!");
 			},
 		});
+	}
+
+	function openModalLixo() {
+		document.getElementById("modal-lixo").style.display = "block";
+		getLixo();
+	}
+
+	function fechaBoxLixo() {
+		document.getElementById("modal-lixo").style.display = "none";
+	}
+
+	function getLixo() {
+		let params = {};
+		const varMyQuery =
+			`select codigo, u_cor, vendedor, contacto, ngstamp, resumo
+			from ng 
+			inner join cm3 on ng.vendedor = cm3.cmdesc
+			where ng.lixo = 1`;
+		params.id = "xmltoquery";
+		params.select = varMyQuery;
+		$.ajax({
+			type: "POST",
+			url: "../api/code/run",
+			async: true,
+			data: JSON.stringify(params),
+			contentType: "application/json",
+		}).done(function (result, textStatus, jqXHR) {
+			try {
+				//console.log(result);
+				resposta = JSON.parse(result);
+			} catch {
+				resposta = JSON.parse('{"Dados":[]}');
+			}
+			buildLixo(resposta.Dados);
+		});
+	}
+
+	function buildLixo(data) {
+		let tBody = document.getElementById("tableBodyLixo");
+		tBody.innerHTML = "";
+		let row = "";
+		for (var i = 0; i < data.length; i++) {
+			row += "<tr>";
+			row += '<td style=" font-size:16px; padding:8px; width: 100px; text-align:center;vertical-align: middle;">' + data[i].codigo + "</td>";
+			row += '<td style=" font-size:16px; padding:8px; background-color:' + data[i].u_cor + '; font-weight: bold; text-align: center; width: 150px;vertical-align: middle;">' + data[i].vendedor + "</td>";
+			row += '<td style=" font-size:16px; padding:8px;text-align:center;vertical-align: middle;">' + data[i].contacto + "</td>";
+			row += '<td style=" font-size:16px; padding:8px;text-align:center;vertical-align: middle;"><a style="cursor: pointer;" onclick=openModalAbreResumo(\'' + data[i].ngstamp + '\')>' + data[i].resumo.substring(0, 20) + "</a></td>";
+			row += '<td style="font-size: 16px;  text-align: center;">'
+				+ '<button type="button" onclick="confirmDeleteLixo(\'' + data[i].ngstamp + '\')" class="btn_vermelho" style="text-align: center;"><i class="fa fa-trash"></i></button>'
+				+ '</td>';
+			row += '<td style="font-size: 16px;  text-align: center;">'
+				+ '<button type="button" onclick="restoreNegocio(\'' + data[i].ngstamp + '\')" class="btn_azul" style="text-align: center;"><i class="fa fa-check"></i></button>'
+				+ '</td>';
+			row += "</tr>";
+		}
+		tBody.innerHTML += row;
+	}
+
+	function restoreNegocio(ngstamp) {
+		var params = {};
+		$.ajax({
+			type: "GET",
+			url:
+				"../programs/gensel.aspx?cscript=restaurarNegocio&ngstamp=" + ngstamp,
+			data: JSON.stringify(params),
+			async: false,
+			contentType: "application/json",
+			success: function (response) {
+				getLixo();
+				getNegocios();
+			},
+			error: function (response) {
+				alert("Erro a restaurar por favor tente de novo!");
+			},
+		});
+	}
+
+	function confirmDeleteLixo(ngstamp) {
+		const isConfirmed = window.confirm("Tem certeza que deseja excluir este Negocio?");
+
+		if (isConfirmed) {
+			var params = {};
+			$.ajax({
+				type: "GET",
+				url:
+					"../programs/gensel.aspx?cscript=confirmDeleteNegocio&ngstamp=" + ngstamp,
+				data: JSON.stringify(params),
+				async: false,
+				contentType: "application/json",
+				success: function (response) {
+					getLixo();
+				},
+				error: function (response) {
+					alert("Erro a eliminar por favor tente de novo!");
+				},
+			});
+		}
 	}
 
 	function openModalResumo() {
@@ -1412,7 +1559,6 @@ width: 100%!important;
 		let ngstamp = document.getElementById("ngstampVendedor").innerHTML;
 		let novendedor = document.getElementById("vendedorSelectEdit").value;
 		let vendedor = document.getElementById("vendedorSelectEdit").options[document.getElementById("vendedorSelectEdit").selectedIndex].text;
-		vendedor = vendedor.split(' - ')[0];
 		let nocontacto = document.getElementById("empresaSelectEdit").value;
 		let contacto = document.getElementById("empresaSelectEdit").options[document.getElementById("empresaSelectEdit").selectedIndex].text;
 		let u_respcl = document.getElementById("editContacto").value;
@@ -1826,10 +1972,10 @@ width: 100%!important;
 		document.getElementById("dataCriacaoNegocio").value = formattedDate;
 		fillSelectEmpresa();
 		fillSelectVendedor();
-		fillSelectZona();
+		fillSelectZona("");
 	}
 
-	function fillSelectZona() {
+	function fillSelectZona(zona) {
 		document.getElementById("selectZona").innerHTML = "";
 		let options = ""
 		options += "<option value=\"\"></option>"
@@ -1837,6 +1983,7 @@ width: 100%!important;
 		options += '<option value="Norte">Norte</option>'
 		options += '<option value="Centro">Centro</option>'
 		options += '<option value="Sul">Sul</option>'
+		options += '<option value="' + zona + '">' + zona + '</option>'; // Add an auxiliary option with a specific value
 		document.getElementById("selectZona").innerHTML = stringInic + options;
 		new TomSelect("#zonaSelectCreate", {
 			create: true,
@@ -1962,6 +2109,7 @@ width: 100%!important;
 				document.getElementById("telefoneNegocio").value = resposta.Dados[0].U_RESPCLTL;
 				document.getElementById("emailNegocio").value = resposta.Dados[0].U_RESPCLEM;
 				var userChoice = resposta.Dados[0].ZONA;
+				fillSelectZona(userChoice.trim());
 				var dropdown = document.getElementById("zonaSelectCreate");
 				let control = dropdown.tomselect;
 				control.setValue(userChoice.trim());
@@ -1978,7 +2126,6 @@ width: 100%!important;
 		var resumo = document.getElementById("resumoNegocio").value;
 		var vendedorNO = document.getElementById("vendedorSelectCreate").value;
 		var vendedorNome = document.getElementById("vendedorSelectCreate").options[document.getElementById("vendedorSelectCreate").selectedIndex].text;
-		vendedorNome = vendedorNome.split(' - ')[0];
 		var dataCriacao = document.getElementById("dataCriacaoNegocio").value;
 		var zona = document.getElementById("zonaSelectCreate").value;
 		let novo = 0;
