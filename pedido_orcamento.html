@@ -682,7 +682,10 @@ width: 100%!important;
 							<b>E-Mail</b><span></span>
 						</th>
 						<th data-column="ng.resumo" data-order="desc" scope="col" style="font-size: 16px;">
-							<b>Resumo</b><span></span>
+							<b>Assunto</b><span></span>
+						</th>
+						<th data-column="ng.representada" data-order="desc" scope="col" style="font-size: 16px;">
+							<b>Representada</b><span></span>
 						</th>
 						<th data-column="(SELECT TOP 1 [NGSTATUS] FROM [vi] WHERE [ngstamp] = ng.[ngstamp] ORDER BY [data] DESC)"
 							data-order="desc" scope="col" style="font-size: 16px;"><b>&Uacute;ltimo
@@ -696,6 +699,8 @@ width: 100%!important;
 						<th>&nbsp;</th>
 					</tr>
 					<tr id="filtrosNegocios" onkeypress="handleEnterKey(event)">
+						<th><input class="column-filterNegocios" oninput="checkCharsNegocios(this)"
+								placeholder="Filtrar..." type="text" /></th>
 						<th><input class="column-filterNegocios" oninput="checkCharsNegocios(this)"
 								placeholder="Filtrar..." type="text" /></th>
 						<th><input class="column-filterNegocios" oninput="checkCharsNegocios(this)"
@@ -771,7 +776,6 @@ width: 100%!important;
 			</div>
 
 			<div style="display:flex; flex-direction: column; margin-bottom: 20px;"><label>Zona</label>
-
 				<div id="selectZona">&nbsp;</div>
 			</div>
 
@@ -784,8 +788,11 @@ width: 100%!important;
 			<div style="display:flex; flex-direction: column; margin-bottom: 20px;"><label>E-Mail</label> <input
 					class="input" id="emailNegocio" style="margin-bottom: 1.5rem;" type="text" /></div>
 
-			<div style="display:flex; flex-direction: column; margin-bottom: 20px;"><label>Resumo</label> <input
+			<div style="display:flex; flex-direction: column; margin-bottom: 20px;"><label>Assunto</label> <input
 					class="input" id="resumoNegocio" style="margin-bottom: 1.5rem;" type="text" /></div>
+			<div style="display:flex; flex-direction: column; margin-bottom: 20px;"><label>Representada</label>
+				<div id="selectRepresentada">&nbsp;</div>
+			</div>
 			<br />
 			<button class="btn_azul" id="buttonAlterarMovimEqp" onclick="insereNegocio()"
 				style="margin-left: auto; text-align: center; float: right; margin-bottom: 1rem;" type="button"
@@ -885,10 +892,15 @@ width: 100%!important;
 			<div id="selectEditZona">&nbsp;</div>
 		</div>
 
-		<div style="display:flex; flex-direction: column;"><label>Contacto</label> <input class="input"
-				id="editContacto" type="text" /> <label>Telefone</label> <input class="input" id="editTelefone"
-				type="text" /> <label>E-Mail</label> <input class="input" id="editEmail" type="text" />
-			<label>Resumo</label><textarea class="input" id="editResumo" type="text"></textarea>
+		<div style="display:flex; flex-direction: column;"><label>Contacto</label>
+			<input class="input" id="editContacto" type="text" />
+			<label>Telefone</label>
+			<input class="input" id="editTelefone" type="text" /> <label>E-Mail</label>
+			<input class="input" id="editEmail" type="text" />
+			<label>Resumo</label>
+			<textarea class="input" id="editResumo" type="text"></textarea>
+			<label>Representadas</label>
+			<div id="selectEditRepresentada">&nbsp;</div>
 		</div>
 		<button class="btn_azul" onclick="editNegocio()"
 			style="margin-left: auto; text-align: center; float: right; margin-bottom: 1rem; margin-top: 10px;"
@@ -947,7 +959,7 @@ width: 100%!important;
 	<div class="modal-content" style="width: 750px; height: 600px;"><span class="close" id="close"
 			onclick="fechaBoxLixo()">&times;</span>
 
-		<h1>Reciclagem</h1>
+		<h1 style="text-align: center;">Reciclagem</h1>
 
 		<div id="grid-container" style="display: block; overflow-x: auto;">
 			<table class="table table-striped">
@@ -1078,38 +1090,6 @@ width: 100%!important;
 				rel = resposta.Dados[0].rel;
 			}
 		});
-		let lInsert = `INSERT INTO [dbo].[vi]
-                                    (
-                                        [data],
-                                        [resumo],
-                                        [NGSTATUS],
-                                        [ngstamp],
-                                        [negocio],
-                                        [vistamp],
-                                        [nome],
-                                        [vendnm],
-                                        [no],
-                                        [zona],
-                                        [vendedor],
-                                        [rel],
-                                        [hora]
-                                    )
-                                VALUES
-                                    (
-                                        '` + data + `',
-                                        '` + rel + `',
-                                        '` + status + `',
-                                        '` + ngstamp + `',
-                                        '` + ngcodigo + `',
-                                        left(newid(), 25),
-                                        '` + nome + `',
-                                        '` + vendnm + `',
-                                        '` + no + `',
-                                        '` + zona + `',
-                                        '` + vendedor + `',
-                                        '` + rel + `',
-                                        FORMAT(GETDATE(), 'HH:mm')
-                                    )`;
 		//insert the information on the table vi
 		params = {};
 		$.ajax({
@@ -1154,6 +1134,7 @@ width: 100%!important;
 		const u_respclemFilter = columnFilter[6].value;
 		const resumoFilter = columnFilter[7].value;
 		const zonaFilter = columnFilter[8].value;
+		const representadaFilter = columnFilter[9].value;
 
 
 		//Get order
@@ -1194,6 +1175,7 @@ width: 100%!important;
 				AND ng.codigo LIKE '%` + codigoFilter + `%'
 				AND ng.resumo LIKE '%` + resumoFilter + `%'
 				AND (SELECT TOP 1 [zona] FROM [vi] WHERE [ngstamp] = ng.[ngstamp] ORDER BY [data] DESC) LIKE '%` + zonaFilter + `%'
+				AND ng.representada LIKE '%` + representadaFilter + `%'
 				AND ng.lixo = 0
 			ORDER BY ` + orderColumn + ` ` + orderType + paginacao + ``;
 		//AND nproposta LIKE '%` + npropostaFilter + `%'
@@ -1241,7 +1223,11 @@ width: 100%!important;
 		tBody.innerHTML = "";
 		let row = "";
 		for (var i = 0; i < data.length; i++) {
-			row += "<tr>";
+			// Determine background color based on row index
+			var bgColor = i % 2 === 0 ? 'background-color: #A9A9A9;' : '';
+
+			// Apply background color to the row
+			row += '<tr style="' + bgColor + '">';
 			row += '<td style=" font-size:16px; padding:8px; width: 100px; text-align:center;vertical-align: middle;">' + data[i].codigo + "</td>";
 			row += '<td style=" font-size:16px; padding:8px; background-color:' + data[i].u_cor + '; font-weight: bold; text-align: center; width: 150px;vertical-align: middle;"><a style="cursor: pointer; color: black;" onclick="openVendedorEdit(\'' + data[i].novend + '\', \'' + data[i].ngstamp + '\', \'' + data[i].vistamp + '\', \'' + data[i].nocontacto + '\')">' + data[i].vendedor + "</td>";
 			row += '<td style=" font-size:16px; padding:8px; width: 100px;text-align:center;vertical-align: middle;">' + ((data[i].dataaber).split(' '))[0] + "</td>";
@@ -1251,6 +1237,7 @@ width: 100%!important;
 			row += '<td style=" font-size:16px; padding:8px;text-align:center;vertical-align: middle;">' + data[i].u_respcltl + "</td>";
 			row += '<td style=" font-size:16px; padding:8px;text-align:center;vertical-align: middle;">' + data[i].u_respclem + "</td>";
 			row += '<td style=" font-size:16px; padding:8px;text-align:center;vertical-align: middle;"><a style="cursor: pointer;" onclick=openModalAbreResumo(\'' + data[i].ngstamp + '\')>' + data[i].resumo.substring(0, 20) + "</a></td>";
+			row += '<td style=" font-size:16px; padding:8px;text-align:center;vertical-align: middle;">' + data[i].representada + "</td>";
 			row += buildStatusColor(data[i].statusUltimaVisita, data[i].dataUltimaVisita);
 			row += '<td style="font-size: 16px;  text-align: center;">'
 				+ '<button type="button" onclick="openModalCriarVisita(\'' + data[i].ngstamp + '\', \'' + data[i].codigo + '\', \'' + data[i].vendedor + '\')" class="btn_azul" style="text-align: center;"><i class="fa fa-plus"></i></button>'
@@ -1566,6 +1553,7 @@ width: 100%!important;
 		let telefone = document.getElementById("editTelefone").value;
 		let email = document.getElementById("editEmail").value;
 		let resumo = document.getElementById("editResumo").value;
+		let representada = document.getElementById("representadaSelectEdit").value;
 		var params = {};
 		$.ajax({
 			type: "GET",
@@ -1579,7 +1567,8 @@ width: 100%!important;
 				"&zona=" + zona +
 				"&telefone=" + telefone +
 				"&email=" + email +
-				"&resumo=" + resumo,
+				"&resumo=" + resumo + 
+				"&representada=" + representada,
 			data: JSON.stringify(params),
 			async: false,
 			contentType: "application/json",
@@ -1601,12 +1590,45 @@ width: 100%!important;
 		createSelects();
 		fillSelectEmpresaEdit(ngstamp);
 		fillSelectZonaEdit(ngstamp);
+		fillSelectRepresentadaEdit(ngstamp);
 		fillInformacoesNegocio(ngstamp, nocontacto);
 		var userChoice = novend;
 		var dropdown = document.getElementById("vendedorSelectEdit");
 		let control = dropdown.tomselect;
 		control.setValue(userChoice.trim());
 		document.getElementById("ngstampVendedor").innerHTML = ngstamp;
+	}
+
+	function fillSelectRepresentadaEdit(ngstamp) {
+		let params = {};
+		let varMyQuery =
+			`SELECT
+				representada
+			FROM
+				[ng] AS ng
+			WHERE
+				ngstamp = '` + ngstamp + `'`;
+		params.id = "xmltoquery";
+		params.select = varMyQuery;
+		$.ajax({
+			type: "POST",
+			url: "../api/code/run",
+			async: false,
+			data: JSON.stringify(params),
+			contentType: "application/json",
+		}).done(function (result, textStatus, jqXHR) {
+			try {
+				//console.log(result);
+				resposta = JSON.parse(result);
+			} catch {
+				resposta = JSON.parse('{"Dados":[]}');
+			}
+			var userChoice = resposta.Dados[0].representada;
+			var dropdown = document.getElementById("representadaSelectEdit");
+			let control = dropdown.tomselect;
+			control.setValue(userChoice.trim());
+		});
+
 	}
 
 	function fechaboxVendedorEditNg() {
@@ -1668,7 +1690,44 @@ width: 100%!important;
 			maxItems: 1,
 			closeAfterSelect: true
 		});
-
+		//create the representada edit select
+		params = {};
+		varMyQuery =
+			`SELECT
+				representada
+			FROM
+				ng`;
+		params.id = "xmltoquery";
+		params.select = varMyQuery;
+		$.ajax({
+			type: "POST",
+			url: "../api/code/run",
+			async: false,
+			data: JSON.stringify(params),
+			contentType: "application/json",
+		}).done(function (result, textStatus, jqXHR) {
+			try {
+				resposta = JSON.parse(result);
+			} catch {
+				resposta = JSON.parse('{"Dados":[]}');
+			}
+			options = ""
+			options += ""
+			var stringInic = "<select class=\"input\" id=\"representadaSelectEdit\"  value=\"\">"
+			for (let index = 0; index < resposta.Dados.length; index++) {
+				options += '<option value="' + resposta.Dados[index].representada + '">' + resposta.Dados[index].representada + '</option>'
+			}
+			document.getElementById("selectEditRepresentada").innerHTML = stringInic + options;
+			new TomSelect("#representadaSelectEdit", {
+				create: true,
+				sortField: {
+					field: "text",
+					direction: "asc"
+				},
+				maxItems: 1,
+				closeAfterSelect: true
+			});
+		});
 	}
 
 
@@ -1973,6 +2032,36 @@ width: 100%!important;
 		fillSelectEmpresa();
 		fillSelectVendedor();
 		fillSelectZona("");
+		fillSelectRepresentada();
+	}
+
+	function fillSelectRepresentada() {
+		document.getElementById("selectRepresentada").innerHTML = "";
+		let options = ""
+		options += "<option value=\"\"></option>"
+		var stringInic = "<select class=\"input\" id=\"representadaSelectCreate\" placeholder=\"Selecione a representada\" value=\"\">"
+		options += '<option value="Haitan">Haitan</option>'
+		options += '<option value="Zhafir">Zhafir</option>'
+		options += '<option value="Sepro">Sepro</option>'
+		options += '<option value="Moretto">Moretto</option>'
+		options += '<option value="Industrial Frigo">Industrial Frigo</option>'
+		options += '<option value="Genox">Genox</option>'
+		options += '<option value="Gimatic">Gimatic</option>'
+		options += '<option value="Promix">Promix</option>'
+		options += '<option value="Axelent">Axelent</option>'
+		options += '<option value="Shungxing">Shungxing</option>'
+		options += '<option value="Virg. Nastri">Virg. Nastri</option>'
+		options += '<option value="Shinim">Shinim</option>'
+		document.getElementById("selectRepresentada").innerHTML = stringInic + options;
+		new TomSelect("#representadaSelectCreate", {
+			create: true,
+			sortField: {
+				field: "text",
+				direction: "asc"
+			},
+			maxItems: 1,
+			closeAfterSelect: true
+		});
 	}
 
 	function fillSelectZona(zona) {
@@ -2128,6 +2217,7 @@ width: 100%!important;
 		var vendedorNome = document.getElementById("vendedorSelectCreate").options[document.getElementById("vendedorSelectCreate").selectedIndex].text;
 		var dataCriacao = document.getElementById("dataCriacaoNegocio").value;
 		var zona = document.getElementById("zonaSelectCreate").value;
+		var representada = document.getElementById("representadaSelectCreate").value;
 		let novo = 0;
 		if (checkEmpresaNova()) {
 			novo = 1;
@@ -2147,7 +2237,8 @@ width: 100%!important;
 				"&novo=" + novo +
 				"&resumo=" + resumo +
 				"&dataCriacao=" + dataCriacao +
-				"&zona=" + zona,
+				"&zona=" + zona +
+				"&representada=" + representada,
 			data: JSON.stringify(params),
 			async: false,
 			contentType: "application/json",
