@@ -664,7 +664,7 @@ width: 100%!important;
 						<th data-column="ng.vendedor" data-order="desc" scope="col" style="font-size: 16px;">
 							<b>Vendedor</b><span></span>
 						</th>
-						<th data-column="ng.usrdata" data-order="desc" scope="col" style="font-size: 16px;"><b>Data de
+						<th data-column="ng.dataaber" data-order="desc" scope="col" style="font-size: 16px;"><b>Data de
 								cria&ccedil;&atilde;o</b><span></span></th>
 						<th data-column="ng.contacto" data-order="desc" scope="col" style="font-size: 16px;">
 							<b>Empresa</b><span></span>
@@ -729,7 +729,7 @@ width: 100%!important;
 				</thead>
 				<tbody id="tableBodyNegocios">
 				</tbody>
-				<tfoot>
+				<!-- <tfoot>
 					<tr>
 						<td colspan="100">
 							<div class="footer" onkeypress="handleEnterKey(event)" style="margin-top: 1rem;"><span
@@ -748,7 +748,7 @@ width: 100%!important;
 											class="fa fa-step-forward fa-2xl"></i></button> </span></div>
 						</td>
 					</tr>
-				</tfoot>
+				</tfoot> -->
 			</table>
 		</div>
 	</div>
@@ -793,6 +793,16 @@ width: 100%!important;
 			<div style="display:flex; flex-direction: column; margin-bottom: 20px;"><label>Representada</label>
 				<div id="selectRepresentada">&nbsp;</div>
 			</div>
+			<div style="display:flex;flex-direction: column;margin-bottom: 1rem;"><label>Status</label> <select
+					class="input" id="statusNegocio">
+					<option value="Por Enviar">Por Enviar</option>
+					<option value="Enviado">Enviado</option>
+					<option value="Contactar">Contactar</option>
+					<option value="Contactado">Contactado</option>
+					<option value="Aguardar">Aguardar</option>
+					<option value="Adjudicado">Adjudicado</option>
+					<option value="Fechado">Fechado</option>
+				</select></div>
 			<br />
 			<button class="btn_azul" id="buttonAlterarMovimEqp" onclick="insereNegocio()"
 				style="margin-left: auto; text-align: center; float: right; margin-bottom: 1rem;" type="button"
@@ -953,8 +963,6 @@ width: 100%!important;
 		</div>
 	</div>
 </div>
-<!-- Modal -->
-<!-- Create a modal for the deleted negocios -->
 <div class="modal-input-container" id="modal-lixo">
 	<div class="modal-content" style="width: 750px; height: 600px;"><span class="close" id="close"
 			onclick="fechaBoxLixo()">&times;</span>
@@ -1135,30 +1143,28 @@ width: 100%!important;
 		const resumoFilter = columnFilter[7].value;
 		const zonaFilter = columnFilter[8].value;
 		const representadaFilter = columnFilter[9].value;
-
-
 		//Get order
 		const orderColumn = dataGrid.dataset.ordercolumn;
 		const orderType = dataGrid.dataset.ordertype;
 		//Get Grid Attributes
-		const currentPage = dataGrid.dataset.currentpage;
-		const pageSize = dataGrid.dataset.pagesize;
-		var offset = (currentPage - 1) * pageSize;
-		var paginacao = "";
-		if (buscarNegocios != 0) {
-			paginacao =
-				` OFFSET ` + offset.toString() +
-				` ROWS FETCH NEXT ` + pageSize.toString() + ` ROWS ONLY`;
-		}
+		// const currentPage = dataGrid.dataset.currentpage;
+		// const pageSize = dataGrid.dataset.pagesize;
+		// var offset = (currentPage - 1) * pageSize;
+		// var paginacao = "";
+		// if (buscarNegocios != 0) {
+		// 	paginacao =
+		// 		` OFFSET ` + offset.toString() +
+		// 		` ROWS FETCH NEXT ` + pageSize.toString() + ` ROWS ONLY`;
+		// }
 		const Negocios = [];
 		let params = {};
 		const varMyQuery =
 			`SELECT
 				*,
-				(SELECT TOP 1 [data] FROM [vi] WHERE [ngstamp] = ng.[ngstamp] ORDER BY [data] DESC) AS [dataUltimaVisita],
+				(SELECT TOP 1 [data] FROM [vi] WHERE [ngstamp] = ng.[ngstamp] ORDER BY [data] DESC, hora DESC) AS [dataUltimaVisita],
 				--este próximo select devia de ter a cláusula de [and vi.zona <> '']
-				(SELECT TOP 1 [NGSTATUS] FROM [vi] WHERE [ngstamp] = ng.[ngstamp] ORDER BY [data] DESC) AS [statusUltimaVisita],
-				(SELECT TOP 1 [zona] FROM [vi] WHERE [ngstamp] = ng.[ngstamp] ORDER BY [data] DESC) AS [zonaReal],
+				(SELECT TOP 1 [NGSTATUS] FROM [vi] WHERE [ngstamp] = ng.[ngstamp] ORDER BY [data] DESC, hora DESC) AS [statusUltimaVisita],
+				(SELECT TOP 1 [zona] FROM [vi] WHERE [ngstamp] = ng.[ngstamp] ORDER BY [data] DESC, hora DESC) AS [zonaReal],
 				e.u_respclem, 
 				e.u_respcltl, 
 				e.u_respcl
@@ -1177,7 +1183,7 @@ width: 100%!important;
 				AND (SELECT TOP 1 [zona] FROM [vi] WHERE [ngstamp] = ng.[ngstamp] ORDER BY [data] DESC) LIKE '%` + zonaFilter + `%'
 				AND ng.representada LIKE '%` + representadaFilter + `%'
 				AND ng.lixo = 0
-			ORDER BY ` + orderColumn + ` ` + orderType + paginacao + ``;
+			ORDER BY ` + orderColumn + ` ` + orderType + ``; // falta a paginacao mas cliente não quer meter páginas e quer mostrar tudo
 		//AND nproposta LIKE '%` + npropostaFilter + `%'
 		params.id = "xmltoquery";
 		params.select = varMyQuery;
@@ -1195,26 +1201,26 @@ width: 100%!important;
 			} catch {
 				resposta = JSON.parse('{"Dados":[]}');
 			}
-			if (buscarNegocios == 0 && resposta.Dados.length > 0) {
-				buscarNegocios = parseInt(resposta.Dados.length);
-				return getNegocios();
-			} else {
-				const totalRecords = buscarNegocios;
-				buscarNegocios = 0;
-				const totalPages = Math.ceil(totalRecords / pageSize);
-				if (totalRecords > 0) {
-					document.getElementById("totalPagesNegocios").innerHTML = totalPages;
-					for (var i = 0; i < resposta.Dados.length; ++i) {
-						Negocios.push(resposta.Dados[i]);
-					}
-				} else {
-					document.getElementById("totalPagesNegocios").innerHTML = 1;
-				}
-				dataGrid.dataset.totalrecords = totalRecords;
-				dataGrid.dataset.totalpages = totalPages;
-				buildNegocios(Negocios);
-
+			// if (buscarNegocios == 0 && resposta.Dados.length > 0) {
+			// 	buscarNegocios = parseInt(resposta.Dados.length);
+			// 	return getNegocios();
+			// } else {
+			// const totalRecords = buscarNegocios;
+			// buscarNegocios = 0;
+			// const totalPages = Math.ceil(totalRecords / pageSize);
+			// if (totalRecords > 0) {
+			//document.getElementById("totalPagesNegocios").innerHTML = totalPages;
+			for (var i = 0; i < resposta.Dados.length; ++i) {
+				Negocios.push(resposta.Dados[i]);
 			}
+			// } else {
+			// 	document.getElementById("totalPagesNegocios").innerHTML = 1;
+			// }
+			// dataGrid.dataset.totalrecords = totalRecords;
+			// dataGrid.dataset.totalpages = totalPages;
+			buildNegocios(Negocios);
+
+			//}
 		});
 	}
 
@@ -1567,7 +1573,7 @@ width: 100%!important;
 				"&zona=" + zona +
 				"&telefone=" + telefone +
 				"&email=" + email +
-				"&resumo=" + resumo + 
+				"&resumo=" + resumo +
 				"&representada=" + representada,
 			data: JSON.stringify(params),
 			async: false,
@@ -2218,6 +2224,7 @@ width: 100%!important;
 		var dataCriacao = document.getElementById("dataCriacaoNegocio").value;
 		var zona = document.getElementById("zonaSelectCreate").value;
 		var representada = document.getElementById("representadaSelectCreate").value;
+		var statusNegocio = document.getElementById("statusNegocio").value;
 		let novo = 0;
 		if (checkEmpresaNova()) {
 			novo = 1;
@@ -2238,7 +2245,8 @@ width: 100%!important;
 				"&resumo=" + resumo +
 				"&dataCriacao=" + dataCriacao +
 				"&zona=" + zona +
-				"&representada=" + representada,
+				"&representada=" + representada +
+				"&statusNegocio=" + statusNegocio,
 			data: JSON.stringify(params),
 			async: false,
 			contentType: "application/json",
