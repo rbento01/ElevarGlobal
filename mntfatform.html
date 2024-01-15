@@ -419,6 +419,7 @@
 					<th style="font-size: 16px;">Refer&ecirc;ncia</th>
 					<th style="font-size: 16px;">Designa&ccedil;&atilde;o</th>
 					<th style="font-size: 16px;">Total</th>
+					<th style="font-size: 16px;">Data Inicial</th>
 					<th style="font-size: 16px;">&Uacute;ltima</th>
 					<th style="font-size: 16px;">Peridiciodade</th>
 					<th style="font-size: 16px;">Pr&oacute;xima</th>
@@ -441,10 +442,10 @@
 <div class="modal-input-container" id="modalHistoricoAvenca">
 	<div class="modal-content" style="width: fit-content;"><span class="close" id="close"
 			onclick="fechaboxHistoricoAvenca()">&times;</span>
-
+		
 		<div style="margin: 2rem;">
 			<p style="margin-bottom: 1rem; margin-top: 1rem; font-size: 25px; color: #1e2d84; font-weight: bold;"><label
-					id="label-tituloDetalhesAvenca"></label></p>
+					id="label-tituloHistoricoAvenca"></label></p>
 		</div>
 
 		<table>
@@ -1492,22 +1493,43 @@
 		document.getElementById("modalDetalhesAvenca").style.display = "block";
 		document.getElementById("label-tituloDetalhesAvenca").textContent = "Avenças de " + nome;
 		var params = {};
-		var myQuery = `select *, case when cast(cast(year(ultima)+1 as varchar(4))+right('00'+cast(month(dedata) as varchar(2)), 2)+right('00'+cast(day(dedata) as varchar(2)), 2) as date) = '19000101' then dedata else cast(cast(year(ultima)+1 as varchar(4))+right('00'+cast(month(dedata) as varchar(2)), 2)+right('00'+cast(day(dedata) as varchar(2)), 2) as date) end as proxima  from (select  
-		   bi.ref
-		 , bi.design
-		 , bi.obrano
-		 , bi.no
-		 , isnull((select max(rdata) from fi where fi.u_avenca=bi.obrano and fi.ref=bi.ref), '19000101') as Ultima
-		 , bi.binum1
-		 , convert(varchar, convert(money, bi.ettdeb, 1), 1) + ' €' as Total
-		 , bi.qtt
-		 , bi.desconto
-		 , bi.desc2
-		 , bi.u_linha
-		 , bi.dedata
-         , bi.u_avenca
-		   from bi left join bo2 on bo2.bo2stamp=bi.bostamp
-		   where bi.ndos=33 and bo2.anulado=0 and bi.no=` + no + `) as tabela1`;
+		var myQuery = `SELECT *,
+							CASE
+								WHEN Cast(Cast(Year(ultima)+1 AS VARCHAR(4))
+										+ RIGHT('00'+Cast(Month(dedata) AS VARCHAR(2)), 2)
+										+ RIGHT('00'+Cast(Day(dedata) AS VARCHAR(2)), 2) AS DATE) =
+									'19000101' THEN dedata
+								ELSE Cast(Cast(Year(ultima)+1 AS VARCHAR(4))
+										+ RIGHT('00'+Cast(Month(dedata) AS VARCHAR(2)), 2)
+										+ RIGHT('00'+Cast(Day(dedata) AS VARCHAR(2)), 2) AS DATE)
+							END AS proxima
+						FROM   (SELECT bi.ref,
+									bi.design,
+									bi.obrano,
+									bi.no,
+									Isnull((SELECT Max(rdata)
+											FROM   fi
+											WHERE  fi.u_avenca = bi.obrano
+													AND fi.ref = bi.ref), '19000101') AS Ultima,
+									bi.binum1,
+									CONVERT(VARCHAR, CONVERT(MONEY, bi.ettdeb, 1), 1)
+									+ ' €'                                         AS Total,
+									bi.qtt,
+									bi.desconto,
+									bi.desc2,
+									bi.u_linha,
+									bi.dedata,
+									bi.u_avenca,
+									bo.dataobra
+								FROM   bi
+									LEFT JOIN bo2
+											ON bo2.bo2stamp = bi.bostamp
+									LEFT JOIN bo
+											ON bo.bostamp = bi.bostamp
+								WHERE  bi.ndos = 33
+									AND bo2.anulado = 0
+									AND bi.no=` + no + `
+									AND bo.logi1=0) AS tabela1`;
 		params.id = "SELECTtoJSON";
 		params.select = myQuery;
 		$.ajax({
@@ -1538,6 +1560,11 @@
 				escolhas += '<td style="font-size:16px;padding:8px;text-align:left;">' + $.trim(DadosJSON[i].ref); + "</td>";
 				escolhas += '<td style="font-size:16px;padding:8px;text-align:left;">' + $.trim(DadosJSON[i].design); + "</td>";
 				escolhas += '<td style="font-size:16px;padding:8px;text-align:left;">' + $.trim(DadosJSON[i].Total); + "</td>";
+				if (DadosJSON[i].dedata != "01/01/1900 00:00:00") {
+					escolhas += '<td style="font-size:16px;padding:8px;text-align:left;">' + $.trim(DadosJSON[i].dedata).split(" ")[0] + "</td>";
+				} else {
+					escolhas += '<td style="font-size:16px;padding:8px;text-align:left;">' + $.trim(DadosJSON[i].dataobra).split(" ")[0] + "</td>";
+				}
 				escolhas += '<td style="font-size:16px;padding:8px;text-align:left;">' + $.trim(DadosJSON[i].Ultima).split(" ")[0] + "</td>";
 				escolhas += '<td style="font-size:16px;padding:8px;text-align:left;">' + $.trim(DadosJSON[i].binum1).split(" ")[0] + "</td>";
 				escolhas += '<td style="font-size:16px;padding:8px;text-align:left;">' + $.trim(DadosJSON[i].proxima).split(" ")[0] + "</td>";
@@ -1556,6 +1583,7 @@
 
 	function abrirModalHistoricoAvenca(no, obrano, u_linha, hist) {
 		document.getElementById("modalHistoricoAvenca").style.display = "block";
+		document.getElementById("label-tituloHistoricoAvenca").textContent = "Histórico da Avença nº " + obrano;
 		var params = {};
 		var myQuery = ''
 		var myQuery = `select fi.fistamp, cast(ft.fdata as date) as Data, ft.nmdoc+' n.º '+cast(ft.fno as varchar(30)) as Fat_num, fi.ref, fi.design, fi.qtt, fi.epv, fi.etiliquido
