@@ -703,8 +703,8 @@ width: 100%!important;
 								type="text" /></th>
 						<th><input class="column-filterNegocios" oninput="checkCharsNegocios(this)"
 								placeholder="Filtrar..." type="text" /></th>
-						<th><input class="column-filterNegocios" oninput="getNegocios()"
-								placeholder="Filtrar..." type="text" /></th>
+						<th><input class="column-filterNegocios" oninput="getNegocios()" placeholder="Filtrar..."
+								type="text" /></th>
 						<th><input class="column-filterNegocios" oninput="checkCharsNegocios(this)"
 								placeholder="Filtrar..." type="text" /></th>
 						<th><input class="column-filterNegocios" oninput="getNegocios()" placeholder="Filtrar..."
@@ -855,7 +855,7 @@ width: 100%!important;
 	<div class="modal-content" style="width: 500px;"><span class="close" id="close"
 			onclick="fechaboxStatusNg()">&times;</span>
 
-		<h1>Datas dos estados</h1>
+		<h1 style="text-align: center;">Sumário dos estados</h1>
 
 		<div id="grid-container" style="display: block; overflow-x: auto;">
 			<table class="table table-striped">
@@ -864,6 +864,7 @@ width: 100%!important;
 						<th scope="col" style="font-size: 16px;"><b>Status</b></th>
 						<th scope="col" style="font-size: 16px;"><b>Data de Altera&ccedil;&atilde;o</b></th>
 						<th scope="col" style="font-size: 16px;"><b>Relat&oacute;rio</b></th>
+						<th scope="col" style="font-size: 16px;">&nbsp;</th>
 					</tr>
 				</thead>
 				<tbody id="tableBodyDetalhesStatus">
@@ -885,7 +886,7 @@ width: 100%!important;
 </div>
 
 <div class="modal-input-container" id="modal-editNegocio">
-	<div class="modal-content" style="width: 500px; height: 730px;"><span class="close" id="close"
+	<div class="modal-content" style="width: 600px; height: 800px;"><span class="close" id="close"
 			onclick="fechaboxVendedorEditNg()">&times;</span>
 
 		<h1>Editar Negócio</h1>
@@ -930,10 +931,10 @@ width: 100%!important;
 </div>
 
 <div class="modal-input-container" id="modal-ResumoDados">
-	<div class="modal-content" style="width: 750px; height: 600px;"><span class="close" id="close"
+	<div class="modal-content" style="width: 950px; height: 620px;"><span class="close" id="close"
 			onclick="fechaBoxResumoDados()">&times;</span>
 
-		<h1>Resumo de Dados</h1>
+		<h1 style="text-align: center;">Resumo de Dados</h1>
 
 		<div id="grid-container" style="display: block; overflow-x: auto;">
 			<table class="table table-striped">
@@ -999,6 +1000,17 @@ width: 100%!important;
 		</div>
 	</div>
 </div>
+<div class="modal-input-container" id="modal-detalhesResumoVisita">
+	<div class="modal-content" style="width: 500px;"><span class="close" id="close"
+			onclick="fechaboxResumoVisita()">&times;</span>
+
+		<h1 style="text-align: center;">Relatório da Visita</h1>
+
+		<div><textarea class="input" disabled="disabled" id="resumoVisitaDetalhes"
+				style="height: fit-content;"></textarea></div>
+	</div>
+</div>
+
 <script type="text/javascript">
 	//limpa cache
 	if (!location.hash) {
@@ -1182,7 +1194,7 @@ width: 100%!important;
 				(SELECT TOP 1 [zona] FROM [vi] WHERE [ngstamp] = ng.[ngstamp] ORDER BY [data] DESC, hora DESC) AS [zonaReal],
 				e.u_respclem, 
 				e.u_respcltl, 
-				e.u_respcl,
+				ng.u_respcl as contactoEmpresa,
 				convert(varchar, ng.dataaber, 104)
 			FROM
 				[ng] AS ng
@@ -1246,7 +1258,7 @@ width: 100%!important;
 		let row = "";
 		for (var i = 0; i < data.length; i++) {
 			// Determine background color based on row index
-			var bgColor = i % 2 === 0 ? 'background-color: #A9A9A9;' : '';
+			var bgColor = i % 2 === 0 ? 'background-color: #DDDDDD;' : '';
 
 			// Apply background color to the row
 			row += '<tr style="' + bgColor + '">';
@@ -1255,7 +1267,7 @@ width: 100%!important;
 			row += '<td style=" font-size:16px; padding:8px; width: 100px;text-align:center;vertical-align: middle;">' + ((data[i].dataaber).split(' '))[0] + "</td>";
 			row += '<td style=" font-size:16px; padding:8px;text-align:center;vertical-align: middle;">' + data[i].contacto + "</td>";
 			row += '<td style=" font-size:16px; padding:8px;text-align:center;vertical-align: middle;">' + data[i].zonaReal + "</td>";
-			row += '<td style=" font-size:16px; padding:8px;text-align:center;vertical-align: middle;">' + data[i].u_respcl + "</td>";
+			row += '<td style=" font-size:16px; padding:8px;text-align:center;vertical-align: middle;">' + data[i].contactoEmpresa + "</td>";
 			row += '<td style=" font-size:16px; padding:8px;text-align:center;vertical-align: middle;">' + data[i].u_respcltl + "</td>";
 			row += '<td style=" font-size:16px; padding:8px;text-align:center;vertical-align: middle;">' + data[i].u_respclem + "</td>";
 			row += '<td style=" font-size:16px; padding:8px;text-align:center;vertical-align: middle;"><a style="cursor: pointer;" onclick=openModalAbreResumo(\'' + data[i].ngstamp + '\')>' + data[i].resumo.substring(0, 20) + "</a></td>";
@@ -1313,7 +1325,7 @@ width: 100%!important;
 				colorClass = '#843951';
 				break;
 			case 'Visitar':
-				colorClass = '#ff5050';
+				colorClass = '#ff6699';
 				break;
 			case 'Visitado':
 				colorClass = '#3399ff';
@@ -1519,7 +1531,7 @@ width: 100%!important;
 		rowEstados += '<td style="text-align:center; font-size:16px; padding:8px; width: 100px; background-color: #ffc700">Aguardar</td>';
 		rowEstados += '<td style="text-align:center; font-size:16px; padding:8px; width: 100px; background-color: #92d050">Adjudicado</td>';
 		rowEstados += '<td style="text-align:center; font-size:16px; padding:8px; width: 100px; background-color: #843951">Fechado</td>';
-		rowEstados += '<td style="text-align:center; font-size:16px; padding:8px; width: 100px; background-color: #ff5050">Visitar</td>';
+		rowEstados += '<td style="text-align:center; font-size:16px; padding:8px; width: 100px; background-color: #ff6699">Visitar</td>';
 		rowEstados += '<td style="text-align:center; font-size:16px; padding:8px; width: 100px; background-color: #3399ff">Visitado</td>';
 		rowEstados += "</tr>";
 		rowEstados += "<tr>";
@@ -1575,15 +1587,17 @@ width: 100%!important;
 
 		// Iterate through each row
 		for (let i = 0; i < rows.length; i++) {
-			// Get the 11th cell in the current row
-			const cellValue = rows[i].getElementsByTagName("td")[4].innerText.trim();
+			//make it case insensitive
+			let cellValue = rows[i].getElementsByTagName("td")[4].innerText.trim().toLowerCase();
+			//make the first letter uppercase
+			cellValue = cellValue.charAt(0).toUpperCase() + cellValue.slice(1);
 
 			// Increment the count for the corresponding value
 			counts[cellValue]++;
+
 		}
 
 		return counts;
-
 
 	}
 
@@ -2028,30 +2042,39 @@ width: 100%!important;
 		'Por Enviar' AS vi_status1,
                     (SELECT MAX(data) FROM [vi] WHERE ngstamp = ng.ngstamp AND ngstatus = 'Por Enviar') AS vi_statusdate1,
                     (select top 1 resumo FROM [vi] WHERE ngstamp = ng.ngstamp AND ngstatus = 'Por Enviar' order by data asc) as resumo_statusdate1,
+					(select top 1 vistamp FROM [vi] WHERE ngstamp = ng.ngstamp AND ngstatus = 'Por Enviar' order by data asc) as vistamp1,
                     'Enviado' AS vi_status2,
                     (SELECT MAX(data) FROM [vi] WHERE ngstamp = ng.ngstamp AND ngstatus = 'Enviado') AS vi_statusdate2,
                     (select top 1 resumo FROM [vi] WHERE ngstamp = ng.ngstamp AND ngstatus = 'Enviado' order by data asc) as resumo_statusdate2,
+					(select top 1 vistamp FROM [vi] WHERE ngstamp = ng.ngstamp AND ngstatus = 'Enviado' order by data asc) as vistamp2,
                     'Contactar' AS vi_status3,
                     (SELECT MAX(data) FROM [vi] WHERE ngstamp = ng.ngstamp AND ngstatus = 'Contactar') AS vi_statusdate3,
                     (select top 1 resumo FROM [vi] WHERE ngstamp = ng.ngstamp AND ngstatus = 'Contactar' order by data asc) as resumo_statusdate3,
+					(select top 1 vistamp FROM [vi] WHERE ngstamp = ng.ngstamp AND ngstatus = 'Contactar' order by data asc) as vistamp3,
                     'Contactado' AS vi_status4,
                     (SELECT MAX(data) FROM [vi] WHERE ngstamp = ng.ngstamp AND ngstatus = 'Contactado') AS vi_statusdate4,
                     (select top 1 resumo FROM [vi] WHERE ngstamp = ng.ngstamp AND ngstatus = 'Contactado' order by data asc) as resumo_statusdate4,
+					(select top 1 vistamp FROM [vi] WHERE ngstamp = ng.ngstamp AND ngstatus = 'Contactado' order by data asc) as vistamp4,
                     'Aguardar' AS vi_status5,
                     (SELECT MAX(data) FROM [vi] WHERE ngstamp = ng.ngstamp AND ngstatus = 'Aguardar') AS vi_statusdate5,
                     (select top 1 resumo FROM [vi] WHERE ngstamp = ng.ngstamp AND ngstatus = 'Aguardar' order by data asc) as resumo_statusdate5,
+					(select top 1 vistamp FROM [vi] WHERE ngstamp = ng.ngstamp AND ngstatus = 'Aguardar' order by data asc) as vistamp5,
                     'Adjudicado' AS vi_status6,
                     (SELECT MAX(data) FROM [vi] WHERE ngstamp = ng.ngstamp AND ngstatus = 'Adjudicado') AS vi_statusdate6,
                     (select top 1 resumo FROM [vi] WHERE ngstamp = ng.ngstamp AND ngstatus = 'Adjudicado' order by data asc) as resumo_statusdate6,
+					(select top 1 vistamp FROM [vi] WHERE ngstamp = ng.ngstamp AND ngstatus = 'Adjudicado' order by data asc) as vistamp6,
                     'Fechado' AS vi_status7,
                     (SELECT MAX(data) FROM [vi] WHERE ngstamp = ng.ngstamp AND ngstatus = 'Fechado') AS vi_statusdate7,
                     (select top 1 resumo FROM [vi] WHERE ngstamp = ng.ngstamp AND ngstatus = 'Fechado' order by data asc) as resumo_statusdate7,
+					(select top 1 vistamp FROM [vi] WHERE ngstamp = ng.ngstamp AND ngstatus = 'Fechado' order by data asc) as vistamp7,
 					'Visitar' AS vi_status8,
                     (SELECT MAX(data) FROM [vi] WHERE ngstamp = ng.ngstamp AND ngstatus = 'Visitar') AS vi_statusdate8,
                     (select top 1 resumo FROM [vi] WHERE ngstamp = ng.ngstamp AND ngstatus = 'Visitar' order by data asc) as resumo_statusdate8,
+					(select top 1 vistamp FROM [vi] WHERE ngstamp = ng.ngstamp AND ngstatus = 'Visitar' order by data asc) as vistamp8,
 					'Visitado' AS vi_status9,
                     (SELECT MAX(data) FROM [vi] WHERE ngstamp = ng.ngstamp AND ngstatus = 'Visitado') AS vi_statusdate9,
-                    (select top 1 resumo FROM [vi] WHERE ngstamp = ng.ngstamp AND ngstatus = 'Visitado' order by data asc) as resumo_statusdate9
+                    (select top 1 resumo FROM [vi] WHERE ngstamp = ng.ngstamp AND ngstatus = 'Visitado' order by data asc) as resumo_statusdate9,
+					(select top 1 vistamp FROM [vi] WHERE ngstamp = ng.ngstamp AND ngstatus = 'Visitado' order by data asc) as vistamp9
                 FROM
                     [ng] 
                 WHERE
@@ -2076,14 +2099,15 @@ width: 100%!important;
 					const statusKey = `vi_status${i}`;
 					const dateKey = `vi_statusdate${i}`;
 					const relKey = `resumo_statusdate${i}`;
-					row += buildTableRow(resposta.Dados[index][statusKey], ((resposta.Dados[index][dateKey]).split(' '))[0], i, resposta.Dados[index][relKey]);
+					const vistampKey = `vistamp${i}`;
+					row += buildTableRow(resposta.Dados[index][statusKey], ((resposta.Dados[index][dateKey]).split(' '))[0], i, resposta.Dados[index][relKey], resposta.Dados[index][vistampKey]);
 				}
 			}
 			document.getElementById("tableBodyDetalhesStatus").innerHTML += row;
 		});
 	}
 
-	function buildTableRow(status, date, index, rel) {
+	function buildTableRow(status, date, index, rel, vistamp) {
 		let colorClass = '';
 		switch (status) {
 			case 'Por Enviar':
@@ -2108,7 +2132,7 @@ width: 100%!important;
 				colorClass = '#843951';
 				break;
 			case 'Visitar':
-				colorClass = '#ff5050';
+				colorClass = '#ff6699';
 				break;
 			case 'Visitado':
 				colorClass = '#3399ff';
@@ -2116,14 +2140,51 @@ width: 100%!important;
 			default:
 				colorClass = '';
 		}
-
-		return `<tr">
+		row = "";
+		row += `<tr">
             <td style="font-size:16px; padding:8px; font-weight: bold; background-color: ${colorClass}">${status}</td>
             <td style="font-size:16px; padding:8px; text-align: center;">${date}</td>
-			<td style="font-size:16px; padding:8px; text-align: center;">${rel}</td>
+			<td style="font-size:16px; padding:8px; text-align: center;"><a style="cursor: pointer;" onclick="openModalDetalhesStatus('`+ rel + `')">${rel.substring(0, 10)}</a></td>
+			`;
+
+		if (date != "") {
+			row += `<td style="font-size:16px; padding:8px; text-align: center;"><button type="button" onclick="deleteStatus('` + vistamp + `')" class="btn_vermelho" style="text-align: center;"><i class="fa fa-trash"></i></button></td>
         </tr>`;
+		} else {
+			row += `<td style="font-size:16px; padding:8px; text-align: center;"></td>
+		</tr>`;
+		}
+		return row;
 	}
 
+	function deleteStatus(vistamp) {
+		var params = {}
+		$.ajax({
+			type: "GET",
+			url:
+				"../programs/gensel.aspx?cscript=apagaStatus&vistamp=" + vistamp,
+			data: JSON.stringify(params),
+			async: false,
+			contentType: "application/json",
+			success: function (response) {
+				fechaboxStatusNg();
+				getNegocios();
+			},
+			error: function (response) {
+				//alert("Erro a encontrar arVend por favor tente de novo!");
+			},
+		});
+	}
+
+	function openModalDetalhesStatus(rel) {
+		document.getElementById("modal-detalhesResumoVisita").style.display = "block";
+		document.getElementById("resumoVisitaDetalhes").innerHTML = "";
+		document.getElementById("resumoVisitaDetalhes").innerHTML += rel;
+	}
+
+	function fechaboxResumoVisita() {
+		document.getElementById("modal-detalhesResumoVisita").style.display = "none";
+	}
 
 	function fechaboxStatusNg() {
 		document.getElementById("modal-detalhesStatusNg").style.display = "none";
