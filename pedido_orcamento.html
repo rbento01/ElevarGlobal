@@ -1951,8 +1951,8 @@ width: 100%!important;
 		var params = {};
 		let varMyQuery =
 			`SELECT U_RESPCL, U_RESPCLTL ,[U_RESPCLEM]
-		FROM [EM] 
-		WHERE NO = '` + nocontacto + `'`;
+		FROM [ng] 
+		WHERE ngstamp = '` + ngstamp  + `'`;
 		params.id = "xmltoquery";
 		params.select = varMyQuery;
 		$.ajax({
