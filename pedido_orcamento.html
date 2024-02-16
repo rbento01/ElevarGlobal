@@ -684,7 +684,7 @@ width: 100%!important;
 						<th data-column="ng.resumo" data-order="desc" scope="col" style="font-size: 16px;">
 							<b>Assunto</b><span></span>
 						</th>
-						<th data-column="ng.representada" data-order="desc" scope="col" style="font-size: 16px;">
+						<th data-column="ng.u_repres" data-order="desc" scope="col" style="font-size: 16px;">
 							<b>Representada</b><span></span>
 						</th>
 						<th data-column="(SELECT TOP 1 [NGSTATUS] FROM [vi] WHERE [ngstamp] = ng.[ngstamp] ORDER BY [data] DESC)"
@@ -1209,8 +1209,8 @@ width: 100%!important;
 				AND ng.codigo LIKE '%` + codigoFilter + `%'
 				AND ng.resumo LIKE '%` + resumoFilter + `%'
 				AND (SELECT TOP 1 [zona] FROM [vi] WHERE [ngstamp] = ng.[ngstamp] ORDER BY [data] DESC) LIKE '%` + zonaFilter + `%'
-				AND ng.representada LIKE '%` + representadaFilter + `%'
-				AND ng.lixo = 0
+				AND ng.u_repres LIKE '%` + representadaFilter + `%'
+				AND ng.u_lixo = 0
 			ORDER BY ` + orderColumn + ` ` + orderType + ``; // falta a paginacao mas cliente não quer meter páginas e quer mostrar tudo
 		//AND nproposta LIKE '%` + npropostaFilter + `%'
 		params.id = "xmltoquery";
@@ -1371,7 +1371,7 @@ width: 100%!important;
 			`select codigo, u_cor, vendedor, contacto, ngstamp, resumo
 			from ng 
 			inner join cm3 on ng.vendedor = cm3.cmdesc
-			where ng.lixo = 1`;
+			where ng.u_lixo = 1`;
 		params.id = "xmltoquery";
 		params.select = varMyQuery;
 		$.ajax({
@@ -1727,7 +1727,7 @@ width: 100%!important;
 		let params = {};
 		let varMyQuery =
 			`SELECT
-				representada
+				u_repres
 			FROM
 				[ng] AS ng
 			WHERE
@@ -1818,7 +1818,7 @@ width: 100%!important;
 		params = {};
 		varMyQuery =
 			`SELECT
-				representada
+				u_repres
 			FROM
 				ng`;
 		params.id = "xmltoquery";
