@@ -1271,7 +1271,7 @@ width: 100%!important;
 			row += '<td style=" font-size:16px; padding:8px;text-align:center;vertical-align: middle;">' + data[i].u_respcltl + "</td>";
 			row += '<td style=" font-size:16px; padding:8px;text-align:center;vertical-align: middle;">' + data[i].u_respclem + "</td>";
 			row += '<td style=" font-size:16px; padding:8px;text-align:center;vertical-align: middle;"><a style="cursor: pointer;" onclick=openModalAbreResumo(\'' + data[i].ngstamp + '\')>' + data[i].resumo.substring(0, 20) + "</a></td>";
-			row += '<td style=" font-size:16px; padding:8px;text-align:center;vertical-align: middle;">' + data[i].representada + "</td>";
+			row += '<td style=" font-size:16px; padding:8px;text-align:center;vertical-align: middle;">' + data[i].u_repres + "</td>";
 			row += buildStatusColor(data[i].statusUltimaVisita, data[i].dataUltimaVisita);
 			row += '<td style="font-size: 16px;  text-align: center;">'
 				+ '<button type="button" onclick="openModalCriarVisita(\'' + data[i].ngstamp + '\', \'' + data[i].codigo + '\', \'' + data[i].vendedor + '\')" class="btn_azul" style="text-align: center;"><i class="fa fa-plus"></i></button>'
