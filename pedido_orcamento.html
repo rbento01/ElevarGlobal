@@ -1747,7 +1747,7 @@ width: 100%!important;
 			} catch {
 				resposta = JSON.parse('{"Dados":[]}');
 			}
-			var userChoice = resposta.Dados[0].representada;
+			var userChoice = resposta.Dados[0].u_repres;
 			var dropdown = document.getElementById("representadaSelectEdit");
 			let control = dropdown.tomselect;
 			control.setValue(userChoice.trim());
@@ -1839,7 +1839,7 @@ width: 100%!important;
 			options += ""
 			var stringInic = "<select class=\"input\" id=\"representadaSelectEdit\"  value=\"\">"
 			for (let index = 0; index < resposta.Dados.length; index++) {
-				options += '<option value="' + resposta.Dados[index].representada + '">' + resposta.Dados[index].representada + '</option>'
+				options += '<option value="' + resposta.Dados[index].u_repres + '">' + resposta.Dados[index].u_repres + '</option>'
 			}
 			document.getElementById("selectEditRepresentada").innerHTML = stringInic + options;
 			new TomSelect("#representadaSelectEdit", {
