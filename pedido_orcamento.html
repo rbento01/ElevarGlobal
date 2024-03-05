@@ -661,6 +661,9 @@ width: 100%!important;
 						<th data-column="ng.codigo" data-order="desc" scope="col" style="font-size: 16px;">
 							<b>Neg&oacute;cio</b><span></span>
 						</th>
+						<th data-column="ng.u_processo" data-order="desc" scope="col" style="font-size: 16px;">
+							<b>Processo</b><span></span>
+						</th>
 						<th data-column="ng.vendedor" data-order="desc" scope="col" style="font-size: 16px;">
 							<b>Vendedor</b><span></span>
 						</th>
@@ -701,6 +704,8 @@ width: 100%!important;
 					<tr id="filtrosNegocios" onkeypress="handleEnterKey(event)">
 						<th><input class="column-filterNegocios" oninput="getNegocios()" placeholder="Filtrar..."
 								type="text" /></th>
+						<th><input class="column-filterNegocios" oninput="checkCharsNegocios(this)"
+								placeholder="Filtrar..." type="text" /></th>
 						<th><input class="column-filterNegocios" oninput="checkCharsNegocios(this)"
 								placeholder="Filtrar..." type="text" /></th>
 						<th><input class="column-filterNegocios" oninput="getNegocios()" placeholder="Filtrar..."
@@ -1157,19 +1162,20 @@ width: 100%!important;
 		const columnFilter = document.getElementsByClassName("column-filterNegocios");
 		const numberColumns = document.getElementById("DataGridNegocios").rows[0].cells.length;
 		const codigoFilter = columnFilter[0].value;
-		const vendedorFilter = columnFilter[1].value;
+		const processoFilter = columnFilter[1].value;
+		const vendedorFilter = columnFilter[2].value;
 		//if this value has a / then change it to a .
-		let dataaberFilter = columnFilter[2].value;
+		let dataaberFilter = columnFilter[3].value;
 		if (dataaberFilter.includes("/")) {
 			dataaberFilter = dataaberFilter.replaceAll("/", ".");
 		}
-		const contactoFilter = columnFilter[3].value;
-		const zonaFilter = columnFilter[4].value;
-		const u_respclFilter = columnFilter[5].value;
-		const u_respcltlFilter = columnFilter[6].value;
-		const u_respclemFilter = columnFilter[7].value;
-		const resumoFilter = columnFilter[8].value;
-		const representadaFilter = columnFilter[9].value;
+		const contactoFilter = columnFilter[4].value;
+		const zonaFilter = columnFilter[5].value;
+		const u_respclFilter = columnFilter[6].value;
+		const u_respcltlFilter = columnFilter[7].value;
+		const u_respclemFilter = columnFilter[8].value;
+		const resumoFilter = columnFilter[9].value;
+		const representadaFilter = columnFilter[10].value;
 		//Get order
 		const orderColumn = dataGrid.dataset.ordercolumn;
 		const orderType = dataGrid.dataset.ordertype;
@@ -1201,6 +1207,7 @@ width: 100%!important;
 			INNER JOIN [em] AS e ON ng.[nocontacto] = e.[no]
 			INNER JOIN [cm3] AS cm3 ON ng.[vendedor] = cm3.[cmdesc]
 			WHERE ng.vendedor LIKE '%` + vendedorFilter + `%'
+				AND ng.u_processo LIKE '%` + processoFilter + `%'
 				AND convert(varchar, ng.dataaber, 104) LIKE '%` + dataaberFilter + `%'
 				AND ng.contacto LIKE '%` + contactoFilter + `%'
 				AND e.u_respcl LIKE '%` + u_respclFilter + `%'
@@ -1263,6 +1270,7 @@ width: 100%!important;
 			// Apply background color to the row
 			row += '<tr style="' + bgColor + '">';
 			row += '<td style=" font-size:16px; padding:8px; width: 100px; text-align:center;vertical-align: middle;">' + data[i].codigo + "</td>";
+			row += '<td style=" font-size:16px; padding:8px; width: 100px; text-align:center;vertical-align: middle;">' + data[i].u_processo + "</td>";
 			row += '<td style=" font-size:16px; padding:8px; background-color:' + data[i].u_cor + '; font-weight: bold; text-align: center; width: 150px;vertical-align: middle;"><a style="cursor: pointer; color: black;" onclick="openVendedorEdit(\'' + data[i].novend + '\', \'' + data[i].ngstamp + '\', \'' + data[i].nocontacto + '\')">' + data[i].vendedor + "</td>";
 			row += '<td style=" font-size:16px; padding:8px; width: 100px;text-align:center;vertical-align: middle;">' + ((data[i].dataaber).split(' '))[0] + "</td>";
 			row += '<td style=" font-size:16px; padding:8px;text-align:center;vertical-align: middle;">' + data[i].contacto + "</td>";
@@ -1952,7 +1960,7 @@ width: 100%!important;
 		let varMyQuery =
 			`SELECT U_RESPCL, U_RESPCLTL ,[U_RESPCLEM]
 		FROM [ng] 
-		WHERE ngstamp = '` + ngstamp  + `'`;
+		WHERE ngstamp = '` + ngstamp + `'`;
 		params.id = "xmltoquery";
 		params.select = varMyQuery;
 		$.ajax({
