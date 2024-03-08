@@ -1566,14 +1566,25 @@ width: 100%!important;
 			"Paulo Matias": 0,
 			"Catarina Oliveira": 0
 		};
+		let aux = 0;
+		// Get all <th> elements within the table
+		const headers = document.getElementById("tableHeaderNegocios").getElementsByTagName('th');
+
+		// Iterate through each <th> element
+		for (var i = 0; i < headers.length; i++) {
+			// Compare the text content of <th> with the search text
+			if (headers[i].textContent.trim() === "Vendedor") {
+				// Return the index if found
+				aux = i;
+			}
+		}
 
 		// Get all the rows in the tbody with the id "tableBodyNegocios"
 		const rows = document.getElementById("tableBodyNegocios").getElementsByTagName("tr");
 
 		// Iterate through each row
 		for (let i = 0; i < rows.length; i++) {
-			// Get the 11th cell in the current row
-			const cellValue = rows[i].getElementsByTagName("td")[1].innerText.trim();
+			const cellValue = rows[i].getElementsByTagName("td")[aux].innerText.trim();
 
 			// Increment the count for the corresponding value
 			counts[cellValue]++;
@@ -1590,13 +1601,26 @@ width: 100%!important;
 			"Sul": 0
 		};
 
+		let aux = 0;
+		// Get all <th> elements within the table
+		const headers = document.getElementById("tableHeaderNegocios").getElementsByTagName('th');
+
+		// Iterate through each <th> element
+		for (var i = 0; i < headers.length; i++) {
+			// Compare the text content of <th> with the search text
+			if (headers[i].textContent.trim() === "Zona") {
+				// Return the index if found
+				aux = i;
+			}
+		}
+
 		// Get all the rows in the tbody with the id "tableBodyNegocios"
 		const rows = document.getElementById("tableBodyNegocios").getElementsByTagName("tr");
 
 		// Iterate through each row
 		for (let i = 0; i < rows.length; i++) {
 			//make it case insensitive
-			let cellValue = rows[i].getElementsByTagName("td")[4].innerText.trim().toLowerCase();
+			let cellValue = rows[i].getElementsByTagName("td")[aux].innerText.trim().toLowerCase();
 			//make the first letter uppercase
 			cellValue = cellValue.charAt(0).toUpperCase() + cellValue.slice(1);
 
@@ -1622,13 +1646,27 @@ width: 100%!important;
 			"Visitado": 0
 		};
 
+		let aux = 0;
+
+		// Get all <th> elements within the table
+		const headers = document.getElementById("tableHeaderNegocios").getElementsByTagName('th');
+
+		// Iterate through each <th> element
+		for (var i = 0; i < headers.length; i++) {
+			// Compare the text content of <th> with the search text
+			if (headers[i].textContent.replace(/\s+/g, '') === "ÚltimoStatus") {
+				// Return the index if found
+				aux = i;
+			}
+		}
+
 		// Get all the rows in the tbody with the id "tableBodyNegocios"
 		const rows = document.getElementById("tableBodyNegocios").getElementsByTagName("tr");
 
 		// Iterate through each row
 		for (let i = 0; i < rows.length; i++) {
 			// Get the 11th cell in the current row
-			const cellValue = rows[i].getElementsByTagName("td")[10].innerText.trim();
+			const cellValue = rows[i].getElementsByTagName("td")[aux].innerText.trim();
 
 			// Increment the count for the corresponding value
 			counts[cellValue]++;
